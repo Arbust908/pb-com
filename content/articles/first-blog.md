@@ -1,14 +1,14 @@
 ---
-title: My first Blog Post
-description: Learning how to use @nuxt/content to create a blog
+title: Hola Mundo
+description: Pruebas de @nuxt/content
 img_small: cosa1_small.jpg
 img: cosa1.jpg
-alt: my first blog post
+alt: Primer blog post
 ---
 
 Welcome to my first blog post using content module
 
-## This is a heading
+## El primer titulo
 
 This is some more info
 
