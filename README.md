@@ -1,20 +1,11 @@
-# pb-casita-digital
+<img src="./static/iconx2.png" />
 
-## Build Setup
+# panchoblanco.com
 
-```bash
-# install dependencies
-$ npm install
+## TO-DOs
 
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+- Projectos
+- About
+- Contacto
+- CTN en home
+- Mas...
