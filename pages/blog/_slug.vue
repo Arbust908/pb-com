@@ -1,12 +1,12 @@
 <template>
   <main class="grid md:grid-cols-2 md:relative">
     <figure
-      class="md:col-span-1 md:order-2 bg-gradient-to-tl from-rose-500 to-violet-500 md:h-screen md:sticky md:top-0"
+      class="md:col-span-1 md:order-2 bg-gradient-to-tl from-rose-500 to-violet-500 md:sticky w-full"
     >
       <picture>
         <source :srcset="mainImgSrc" media="(min-width:768px)" />
         <img
-          class="w-full h-full object-cover"
+          class="w-full h-full object-cover rounded-xl p-2"
           :src="smallImgSrc"
           :alt="article.alt"
         />
@@ -15,17 +15,19 @@
     </figure>
     <article class="md:col-span-1 p-4">
       <prev-next :prev="prev" :next="next" />
-      <header class="flex justify-between items-baseline">
+      <header
+        class="flex flex-col mb-3 lg:mb-1 lg:flex-row justify-between items-baseline"
+      >
         <h1
           class="text-4xl font-light bg-clip-text text-transparent bg-gradient-to-r dark:from-amber-400 dark:to-rose-600 from-cyan-400 to-violet-600"
         >
           {{ article.title }}
         </h1>
         <p class="text-blueGray-400 dark:text-blueGray-600">
-          Article last updated: {{ formatDate(article.updatedAt) }}
+          last updated: {{ formatDate(article.updatedAt) }}
         </p>
       </header>
-      <nav>
+      <!-- <nav>
         <ul>
           <li v-for="link of article.toc" :key="link.id">
             <NuxtLink
@@ -38,10 +40,8 @@
             >
           </li>
         </ul>
-      </nav>
-      <!-- <img :src="require(`~/assets/images/${article.img}`)" :alt="article.alt" /> -->
+      </nav> -->
       <nuxt-content :document="article" />
-      <!-- <author :author="article.author" /> -->
       <!-- <pre> {{ article }} </pre> -->
       <prev-next :prev="prev" :next="next" />
     </article>
@@ -86,18 +86,7 @@ export default {
 main.grid {
   grid-template-rows: 240px 1fr;
 }
-.nuxt-content h2 {
-  font-weight: bold;
-  font-size: 28px;
-}
-.nuxt-content h3 {
-  font-weight: bold;
-  font-size: 22px;
-}
-.nuxt-content p {
-  margin-bottom: 20px;
-}
-.nuxt-content-highlight > pre {
+/* .nuxt-content-highlight > pre {
   @apply max-w-xs overflow-auto;
 }
 
@@ -105,7 +94,7 @@ main.grid {
   .nuxt-content-highlight > pre {
     @apply max-w-none;
   }
-}
+} */
 @media screen and (min-width: 768px) {
   main.grid {
     grid-template-rows: 1fr;
@@ -114,6 +103,10 @@ main.grid {
   }
   .nuxt-content-highlight > pre {
     @apply max-w-none;
+  }
+  figure {
+    height: calc(100vh - 56px);
+    top: 56px;
   }
 }
 </style>

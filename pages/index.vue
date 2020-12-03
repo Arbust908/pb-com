@@ -1,20 +1,19 @@
 <template>
-  <main class="p-6">
-    <h1>Referencias</h1>
-    <AppSearchInput />
-    <div></div>
-    <div></div>
-    <div></div>
+  <main class="p-6 flex flex-col justify-center items-center">
+    <Logo class="fill-current w-1/2 md:w-1/4" />
+    <h1 class="text-4xl font-light">Pancho Blanco</h1>
+    <h2 class="text-xl font-bold">Desarrollador Creativo</h2>
+    <!-- <AppSearchInput /> -->
   </main>
 </template>
 
 <script>
-export default {}
+import Logo from '@/assets/icons/logo.svg'
+export default {
+  components: {
+    Logo,
+  },
+}
 </script>
 
-<style scoped>
-div {
-  height: 90vh;
-  @apply border-b-2 border-violet-600;
-}
-</style>
+<style scoped></style>

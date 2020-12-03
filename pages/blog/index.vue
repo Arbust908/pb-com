@@ -8,10 +8,13 @@
         v-for="article of articles"
         :key="article.slug"
         :to="{ name: 'blog-slug', params: { slug: article.slug } }"
-        class="rounded bg-blueGray-300 p-3 dark:bg-blueGray-700 hover:shadow-xl hover:bg-blueGray-400 dark:hover:bg-blueGray-600 transition transform hover:scale-105"
+        class="rounded bg-blueGray-300 dark:bg-blueGray-700 hover:shadow-xl hover:bg-blueGray-400 dark:hover:bg-blueGray-600 transition transform hover:scale-105"
       >
-        <img :src="article.img" />
-        <div>
+        <img
+          :src="smallImgSrc(article.img_small)"
+          class="h-24 w-full object-cover object-top rounded-t"
+        />
+        <div class="p-3">
           <h2 class="font-bold mb-2">{{ article.title }}</h2>
           <p class="leading-none">{{ article.description }}</p>
         </div>
@@ -24,13 +27,23 @@
 export default {
   async asyncData({ $content, params }) {
     const articles = await $content('articles', params.slug)
-      .only(['title', 'description', 'img', 'slug', 'author'])
+      .only(['title', 'description', 'img_small', 'slug'])
       .sortBy('createdAt', 'asc')
       .fetch()
 
     return {
       articles,
     }
+  },
+  // computed: {
+  //   smallImgSrc() {
+  //     return require(`~/assets/img/${this.article.img_small}`)
+  //   },
+  // },
+  methods: {
+    smallImgSrc(src) {
+      return require(`~/assets/img/${src}`)
+    },
   },
 }
 </script>

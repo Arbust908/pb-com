@@ -25,7 +25,7 @@
               @click="$colorMode.preference = 'light'"
             />
           </li>
-          <li>
+          <!-- <li>
             <nuxt-link
               class="px-2 py-1 rounded-lg hover:text-violet-500 hover:shadow"
               to="/reference"
@@ -40,10 +40,10 @@
             >
               Clases
             </nuxt-link>
-          </li>
+          </li> -->
           <li>
             <nuxt-link
-              class="px-2 py-1 rounded-lg bg-violet-400 text-blueGray-100 hover:text-violet-600 hover:shadow"
+              class="px-4 py-1 rounded-lg bg-violet-400 text-blueGray-900 dark:bg-violet-600 dark:text-blueGray-100 hover:text-violet-500 hover:shadow"
               to="/blog"
             >
               Blog
@@ -54,23 +54,25 @@
     </header>
     <Nuxt class="z-20" />
     <footer
-      class="px-6 bg-blueGray-200 dark:bg-blueGray-800 flex items-center justify-between"
+      class="px-6 bg-blueGray-200 dark:bg-blueGray-800 flex items-center justify-between text-sm"
     >
-      <a href="https://www.panchoblanco.com" class="px-2">by Pancho Blanco</a>
-      <a href="https://www.panchoblanco.com" class="px-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          class="w-4 h-4 inline"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-            clip-rule="evenodd"
-          />
-        </svg>
-        Banca el efuerzo independiente
+      <a
+        href="https://www.panchoblanco.com"
+        class="px-2 inline-flex items-center"
+      >
+        <Icon icon="sparkles" weight="solid" class="w-5 h-5 inline mr-2" />
+        <span> by Pancho Blanco </span>
+      </a>
+      <a
+        href="https://www.panchoblanco.com"
+        class="px-2 inline-flex items-center"
+      >
+        <Icon
+          icon="currency-dollar"
+          weight="solid"
+          class="w-5 h-5 inline mr-2"
+        />
+        <span> Banca el efuerzo independiente </span>
       </a>
     </footer>
   </div>
@@ -98,6 +100,38 @@ export default {
   .grid-layout {
     padding-top: 56px;
     grid-template-rows: 1fr 40px;
+  }
+  /* width */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    @apply bg-blueGray-200;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-blueGray-400 rounded-xl;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gradient-to-tr from-cyan-400 to-violet-600;
+  }
+  .dark ::-webkit-scrollbar-track {
+    @apply bg-blueGray-800;
+  }
+
+  /* Handle */
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-blueGray-600 rounded-xl;
+  }
+
+  /* Handle on hover */
+  .dark ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gradient-to-tr from-amber-400 to-rose-600;
   }
 }
 </style>

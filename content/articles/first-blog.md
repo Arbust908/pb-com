@@ -6,8 +6,6 @@ img: cosa1.jpg
 alt: my first blog post
 ---
 
-# My first blog post
-
 Welcome to my first blog post using content module
 
 ## This is a heading

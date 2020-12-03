@@ -5,17 +5,21 @@
       :to="{ name: 'blog-slug', params: { slug: prev.slug } }"
       class="text-primary font-bold hover:underline"
     >
-      {{ prev.title }}
+      <Icon icon="chevron-left" class="inline w-5 h-5" /> {{ prev.title }}
     </NuxtLink>
-    <span v-else>&nbsp;</span>
+    <span v-else>
+      <Icon icon="ban" weight="solid" class="inline w-5 h-5 opacity-50" />
+    </span>
     <NuxtLink
       v-if="next"
       :to="{ name: 'blog-slug', params: { slug: next.slug } }"
       class="font-bold hover:underline"
     >
-      {{ next.title }}
+      {{ next.title }} <Icon icon="chevron-right" class="inline w-5 h-5" />
     </NuxtLink>
-    <span v-else>&nbsp;</span>
+    <span v-else>
+      <Icon icon="ban" weight="solid" class="inline w-5 h-5 opacity-50" />
+    </span>
   </div>
 </template>
 <script>

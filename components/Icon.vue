@@ -1,5 +1,5 @@
 <template>
-  <Component :is="icon_component" class="icon__default fill-current" />
+  <Component :is="icon_component" />
 </template>
 
 <script>
@@ -8,13 +8,16 @@ export default {
   props: {
     icon: {
       type: String,
-      required: false,
-      default: 'Facebook',
+      default: 'shield-check',
+    },
+    weight: {
+      type: String,
+      default: 'outline',
     },
   },
   computed: {
     icon_component() {
-      return () => import('~/components/icons/Icon' + this.icon + '.vue')
+      return () => import(`@/assets/svg/${this.weight}/${this.icon}.svg`)
     },
   },
 }
