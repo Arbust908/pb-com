@@ -17,7 +17,7 @@
     "@nuxtjs/pwa": "^3.0.2",
     "@tailwindcss/typography": "^0.3.1",
     "core-js": "^3.6.5",
-    "nuxt": "^2.14.6",
+    "nuxt": "^2.14.9",
     "nuxt-i18n": "^6.15.4",
     "nuxt-start": "^2.14.9",
     "nuxt-svg-loader": "^1.2.0",
