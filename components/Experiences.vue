@@ -11,7 +11,7 @@
     >
       <h3 class="font-bold flex flex-col sm:flex-row mb-2">
         <span>{{ job.rol }}</span>
-        <span class="hidden sm:inline">/</span>
+        <span class="hidden sm:inline px-2"> / </span>
         <span> {{ job.company }} </span>
       </h3>
       <div class="text-sm mb-2">
