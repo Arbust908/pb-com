@@ -1,5 +1,5 @@
 <template>
-  <Component :is="icon_component" class="w-4 h-4 inline-block" />
+  <Component :is="icon_component" class="w-4 h-4 inline-block fill-current" />
 </template>
 
 <script>

@@ -62,26 +62,21 @@
     </header>
     <Nuxt class="z-20" />
     <footer
-      class="px-6 bg-blueGray-200 dark:bg-blueGray-800 flex flex-col md:flex-row justify-center items-center md:justify-between text-sm"
+      class="px-6 bg-blueGray-200 dark:bg-blueGray-800 flex items-center justify-between text-sm"
     >
       <a
         href="https://www.panchoblanco.com"
-        class="px-2 inline-flex items-center"
+        class="p-3 inline-flex items-center"
       >
         <Icon icon="sparkles" weight="solid" class="w-5 h-5 inline mr-2" />
         <span> by Pancho Blanco </span>
       </a>
       <div>
         <a
-          href="https://www.panchoblanco.com"
-          class="px-2 inline-flex items-center"
+          href="https://github.com/Arbust908"
+          class="p-3 inline-flex items-center"
         >
-          <Icon
-            icon="currency-dollar"
-            weight="solid"
-            class="w-5 h-5 inline mr-2"
-          />
-          <span> Banca el efuerzo independiente </span>
+          <Icon icon="github" weight="brand" class="w-6 h-6 inline" />
         </a>
       </div>
       <!-- <a

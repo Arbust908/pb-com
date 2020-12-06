@@ -5,7 +5,7 @@ module.exports = [
     start: '01/01/2020',
     end: null,
     description:
-      'Desarrollo de web apps con sistemas de gestion y panel de metricas para una variedad de clientes. Web Apps construidas en Nuxt para ofrecer SSR y optimizacion de SEO, componentizacion en Vue, manejo de estado interno con Vuex y la posibilidad de ser instaladas como PWA. Conexión con Api REST via AXIOS a servicios en Express con DB en SQL (via Sequelize). Prototipados y diseños en Adobe XD o Figma.',
+      'Desarrollo de web apps con sistemas de gestión y panel de métricas para una variedad de clientes. Web Apps construidas en Nuxt para ofrecer SSR y optimización de SEO, componentización en Vue, manejo de estado interno con Vuex y la posibilidad de ser instaladas como PWA. Conexión con Api REST vía AXIOS a servicios en Express con DB en SQL (vía Sequelize). Prototipados y diseños en Adobe XD o Figma.',
   },
   {
     rol: 'Desarrollador Front-End Principal',
@@ -13,7 +13,7 @@ module.exports = [
     start: '07/01/2020',
     end: null,
     description:
-      'Desarrollo de la web institucional y un dashboard con metricas internas que permite el control remoto de maquinas. Ambas construidas en Nuxt para ofrecer SSR y optimizacion de SEO, con libreria de componentes compartidas en Vue, conexion abierta en tiempo real via Sockets y mantención de estado interno via Vuex. Prototipados y diseños en Adobe XD.',
+      'Desarrollo de la web institucional y un dashboard con métricas internas que permite el control remoto de mineros. Ambas construidas en Nuxt para ofrecer SSR y optimización de SEO, con libreria de componentes compartidas en Vue, conexión abierta en tiempo real vía Sockets y persistencia de estado interno vía Vuex. Prototipados y diseños en Adobe XD.',
   },
   {
     rol: 'Desarrollo Full Stack SSr',
@@ -21,7 +21,7 @@ module.exports = [
     start: '01/01/2020',
     end: '07/01/2020',
     description:
-      'Desarrollo de una web con sistemas de edicion de contenido e interaccion con otros sistemas externos. Conexión con Api REST interna con CRUD. Laravel + SASS / Vue + Tailwind / Node + ORM (Propio). Prototipado y diseño en Adobe XD.',
+      'Desarrollo de una web con sistemas de edición de contenido e interacción con otros sistemas externos. Conexión con Api REST interna con CRUD. Laravel + SASS / Vue + Tailwind / Node + ORM (Propio). Prototipado y diseño en Adobe XD.',
   },
   {
     rol: 'Profesor de programación',
@@ -36,7 +36,7 @@ module.exports = [
     start: '01/01/2016',
     end: '07/01/2016',
     description:
-      'Edicion fotografica, trabajo cooperativo, capacitacion, carga de datos, interaccion con clientes internacionales.',
+      'Edición fotográfica, trabajo cooperativo, capacitación, carga de datos e interacción con clientes internacionales.',
   },
   {
     rol: 'Director de Arte Jr',
@@ -44,13 +44,13 @@ module.exports = [
     start: '05/01/2015',
     end: '01/01/2016',
     description:
-      'Diseño de logos, marketing digital, desarrollo de campañas, diseño de identidad, armado de stands, organizacion de eventos.',
+      'Diseño de logos, marketing digital, desarrollo de campañas, diseño de identidad, armado de stands y organización de eventos.',
   },
   {
     rol: 'Pasante',
     company: 'MindSet',
     start: '06/01/2009',
     end: '12/01/2009',
-    description: 'Animacion, nexo arte/programacion, diseño.',
+    description: 'Animación, nexo arte/programación y diseño.',
   },
 ]
