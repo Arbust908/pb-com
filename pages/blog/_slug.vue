@@ -1,6 +1,6 @@
 <template>
-  <main class="grid md:grid-cols-2 md:relative">
-    <figure
+  <main class="">
+    <!-- <figure
       class="md:col-span-1 md:order-2 bg-gradient-to-tl from-rose-500 to-violet-500 md:sticky w-full"
     >
       <picture>
@@ -12,8 +12,8 @@
         />
       </picture>
       <figcaption></figcaption>
-    </figure>
-    <article class="md:col-span-1 p-4">
+    </figure> -->
+    <article class="w-11/12 mx-auto">
       <prev-next :prev="prev" :next="next" />
       <header
         class="flex flex-col mb-3 lg:mb-1 lg:flex-row justify-between items-baseline"
@@ -23,8 +23,14 @@
         >
           {{ article.title }}
         </h1>
-        <p class="text-blueGray-400 dark:text-blueGray-600">
-          last updated: {{ formatDate(article.updatedAt) }}
+        <p
+          v-if="article.updatedAt !== article.createdAt"
+          class="text-blueGray-400 dark:text-blueGray-600"
+        >
+          Actualizado el {{ formatDate(article.updatedAt) }}
+        </p>
+        <p v-else class="text-blueGray-400 dark:text-blueGray-600">
+          Creado el {{ formatDate(article.createdAt) }}
         </p>
       </header>
       <!-- <nav>
@@ -76,37 +82,43 @@ export default {
   methods: {
     formatDate(date) {
       const options = { year: 'numeric', month: 'long', day: 'numeric' }
-      return new Date(date).toLocaleDateString('en', options)
+      return new Date(date).toLocaleDateString('es', options)
     },
   },
 }
 </script>
 
 <style>
-main.grid {
-  grid-template-rows: 240px 1fr;
+.nuxt-content h2 {
+  font-weight: bold;
+  font-size: 28px;
 }
-/* .nuxt-content-highlight > pre {
-  @apply max-w-xs overflow-auto;
+.nuxt-content h3 {
+  font-weight: bold;
+  font-size: 22px;
+}
+.nuxt-content p {
+  margin-bottom: 20px;
+}
+.nuxt-content-highlight > pre {
+  @apply p-4 rounded-lg bg-blueGray-800 text-sm grid;
+}
+.nuxt-content-highlight > pre > code {
+  @apply overflow-auto w-full pb-2;
 }
 
-@media screen and (min-width: 500px) {
-  .nuxt-content-highlight > pre {
-    @apply max-w-none;
-  }
-} */
 @media screen and (min-width: 768px) {
-  main.grid {
+  /* main.grid {
     grid-template-rows: 1fr;
     grid-template-columns: minmax(368px, 768px) minmax(400px, 1fr);
-    /* minmax(300px, 1fr) */
-  }
-  .nuxt-content-highlight > pre {
-    @apply max-w-none;
-  }
-  figure {
+    /* minmax(300px, 1fr)
+  } */
+  /* figure {
     height: calc(100vh - 56px);
     top: 56px;
+  } */
+  main > article {
+    max-width: 80ch;
   }
 }
 </style>

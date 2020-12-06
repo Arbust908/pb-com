@@ -8,15 +8,17 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
     "lint": "npm run lint:js"
   },
   "dependencies": {
-    "@nuxt/content": "^1.9.0",
+    "@nuxt/content": "^1.11.1",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/pwa": "^3.0.2",
     "@tailwindcss/typography": "^0.3.1",
     "core-js": "^3.6.5",
     "nuxt": "^2.14.6",
+    "nuxt-i18n": "^6.15.4",
     "nuxt-start": "^2.14.9",
     "nuxt-svg-loader": "^1.2.0",
     "prism-themes": "^1.5.0",

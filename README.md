@@ -1,4 +1,4 @@
-<img src="./static/iconx2.png" height="64" width="64" style="margin: 0 auto;" />
+<img src="./static/iconx2.png" height="64" width="64" />
 
 # panchoblanco.com
 

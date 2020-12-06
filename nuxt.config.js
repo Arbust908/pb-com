@@ -1,4 +1,11 @@
 export default {
+  // -
+  server: {
+    port: 3000,
+    host: '0.0.0.0',
+  },
+  // -
+  // modern: true,
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'Pancho Blanco',
@@ -8,7 +15,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: `Estas invitado! | Quiero Invitar`,
+        content: `Pancho Blanco :: Desarrollador Creativo`,
       },
       {
         hid: `og:title`,
@@ -18,17 +25,17 @@ export default {
       {
         hid: `og:description`,
         property: 'og:description',
-        content: `Estas invitado! | Quiero Invitar`,
+        content: `Pancho Blanco :: Desarrollador Creativo`,
       },
-      // {
-      //     hid: `og:image`,
-      //     property: 'og:image',
-      //     content: `${this.gringottsUrl}/invitations/${this.invitation.data_id}.png`
-      // },
+      {
+        hid: `og:image`,
+        property: 'og:image',
+        content: `/pm-meta.jpg`,
+      },
       {
         hid: `og:site_name`,
         property: 'og:site_name',
-        content: `Quiero Invitar`,
+        content: `Pancho Blanco`,
       },
       // {
       //     hid: `og:url`,
@@ -38,17 +45,17 @@ export default {
       {
         hid: 'twitter:title',
         property: 'twitter:title',
-        content: `Quiero Invitar`,
+        content: `Pancho Blanco`,
       },
       {
         hid: 'twitter:description',
         property: 'twitter:description',
-        content: `Estas invitado! | Quiero Invitar`,
+        content: `Pancho Blanco :: Desarrollador Creativo`,
       },
       {
         hid: 'twitter:image:src',
         property: 'twitter:image:src',
-        // content: `${this.gringottsUrl}/invitations/${this.invitation.data_id}.png`
+        content: `/pm-meta.jpg`,
       },
       {
         hid: 'twitter:card',
@@ -58,12 +65,12 @@ export default {
       {
         hid: 'twitter:creator',
         property: 'twitter:creator',
-        content: `@quieroinvitar`,
+        content: `@BlancoPancho`,
       },
       {
         hid: 'twitter:site',
         property: 'twitter:site',
-        content: `@quieroinvitar`,
+        content: `@BlancoPancho`,
       },
     ],
     link: [
@@ -134,10 +141,41 @@ export default {
     '@nuxt/content',
     // https://github.com/Developmint/nuxt-svg-loader
     'nuxt-svg-loader',
+    // -
+    'nuxt-i18n',
   ],
   // https://color-mode.nuxtjs.org/
   colorMode: {
     classSuffix: '',
+  },
+  /**
+   * La Internacionalizacion
+   */
+  i18n: {
+    vueI18nLoader: true,
+    locales: [
+      { name: 'Español', code: 'es', iso: 'es', file: 'es.js' },
+      { name: 'English', code: 'en', iso: 'en', file: 'en.js' },
+    ],
+    defaultLocale: process.env.APP_LANG || 'es',
+    lazy: true,
+    // langDir: 'lang/',
+    // strategy: 'no_prefix',
+    strategy: 'prefix_and_default',
+    detectBrowserLanguage: false,
+    baseUrl: 'https://panchoblanco.com',
+    vueI18n: {
+      fallbackLocale: 'es',
+      messages: require('./lang'),
+    },
+  },
+
+  // -
+  pwa: {
+    manifest: {
+      name: 'Quiero Invitar',
+      lang: 'es',
+    },
   },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -150,7 +188,6 @@ export default {
         theme: 'prism-themes/themes/prism-shades-of-purple.css',
       },
     },
-    nestedProperties: ['author.name'],
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

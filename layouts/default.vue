@@ -12,18 +12,26 @@
         </h1>
       </nuxt-link>
       <nav>
-        <ul class="flex space-x-3 items-center mr-4">
+        <ul class="flex space-x-3 items-center justify-between mr-4">
           <li class="flex w-8 h-8 items-center justify-center">
             <LightMode
               v-if="$colorMode.value === 'light'"
-              class="w-5 h-5 fill-current cursor-pointer hover:text-violet-500"
+              class="w-5 h-5 fill-current transition duration-150 ease-out cursor-pointer hover:text-violet-500"
               @click="$colorMode.preference = 'dark'"
             />
             <DarkMode
               v-if="$colorMode.value === 'dark'"
-              class="w-5 h-5 fill-current cursor-pointer hover:text-violet-500"
+              class="w-5 h-5 fill-current transition duration-150 ease-out cursor-pointer hover:text-violet-500"
               @click="$colorMode.preference = 'light'"
             />
+          </li>
+          <li>
+            <nuxt-link
+              class="px-2 py-1 rounded-lg transition duration-150 ease-out hover:text-violet-500 hover:underline"
+              to="/cv"
+            >
+              Curriculum Vitae
+            </nuxt-link>
           </li>
           <!-- <li>
             <nuxt-link
@@ -43,7 +51,7 @@
           </li> -->
           <li>
             <nuxt-link
-              class="px-4 py-1 rounded-lg bg-violet-400 text-blueGray-900 dark:bg-violet-600 dark:text-blueGray-100 hover:text-violet-500 hover:shadow"
+              class="px-4 py-1 rounded-lg bg-violet-400 text-blueGray-900 transition duration-150 ease-out dark:bg-violet-600 dark:text-blueGray-100 hover:text-violet-500 hover:shadow dark:hover:bg-violet-800"
               to="/blog"
             >
               Blog
@@ -54,7 +62,7 @@
     </header>
     <Nuxt class="z-20" />
     <footer
-      class="px-6 bg-blueGray-200 dark:bg-blueGray-800 flex items-center justify-between text-sm"
+      class="px-6 bg-blueGray-200 dark:bg-blueGray-800 flex flex-col md:flex-row justify-center items-center md:justify-between text-sm"
     >
       <a
         href="https://www.panchoblanco.com"
@@ -63,7 +71,8 @@
         <Icon icon="sparkles" weight="solid" class="w-5 h-5 inline mr-2" />
         <span> by Pancho Blanco </span>
       </a>
-      <a
+      <p></p>
+      <!-- <a
         href="https://www.panchoblanco.com"
         class="px-2 inline-flex items-center"
       >
@@ -73,7 +82,7 @@
           class="w-5 h-5 inline mr-2"
         />
         <span> Banca el efuerzo independiente </span>
-      </a>
+      </a> -->
     </footer>
   </div>
 </template>
