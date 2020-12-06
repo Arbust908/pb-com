@@ -7,13 +7,19 @@
       <nuxt-link
         v-for="article of articles"
         :key="article.slug"
-        :to="{ name: 'blog-slug', params: { slug: article.slug } }"
+        :to="{
+          name: 'blog-slug___es___default',
+          params: { slug: article.slug },
+        }"
         class="rounded bg-blueGray-300 dark:bg-blueGray-700 hover:shadow-xl hover:bg-blueGray-400 dark:hover:bg-blueGray-600 transition transform hover:scale-105"
       >
-        <img
+        <!-- <img
           :src="smallImgSrc(article.img_small)"
           class="h-24 w-full object-cover object-top rounded-t"
-        />
+        /> -->
+        <div
+          class="h-24 w-full bg-gradient-to-tl from-rose-500 to-violet-500 rounded-t"
+        ></div>
         <div class="p-3">
           <h2 class="font-bold mb-2">{{ article.title }}</h2>
           <p class="leading-none">{{ article.description }}</p>
