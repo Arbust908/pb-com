@@ -89,11 +89,11 @@ De esta manera generamos una memoria interna que guarda los valores la primera v
 
 Obviamente se puede hacer más resumido, pero creo que dificulta más la lectura.
 
-### Otros ejemplos
+<!-- ### Otros ejemplos
 
 {{ Spoiler }}
 
 Productoria
 Árbol utópico
 Fractal(?)
-Fibonacci
+Fibonacci -->

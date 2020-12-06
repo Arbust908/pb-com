@@ -1,7 +1,7 @@
 <template>
   <main class="p-6">
     <!-- <nav>{{ $t('lang') }}</nav> -->
-    <aside class="flex justify-end mb-6">
+    <aside class="flex justify-end mb-6 lang">
       <button
         class="hover:underline text-rigth flex items-center hover:text-violet-600 transition duration-200 ease-out"
         @click="changeLang()"
@@ -12,9 +12,9 @@
         </span>
       </button>
     </aside>
-    <Personal />
-    <Experiences />
-    <Studies />
+    <Personal class="personal" />
+    <Experiences class="exp" />
+    <Studies class="study" />
   </main>
 </template>
 
@@ -29,4 +29,30 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+@media screen and (min-width: 1024px) {
+  main {
+    display: grid;
+    grid-template-areas:
+      'lang .'
+      'personal exp'
+      '. exp'
+      '. study';
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: 64px 640px 1fr auto;
+    column-gap: 1.5rem;
+  }
+  .lang {
+    grid-area: lang;
+  }
+  .personal {
+    grid-area: personal;
+  }
+  .exp {
+    grid-area: exp;
+  }
+  .study {
+    grid-area: study;
+  }
+}
+</style>

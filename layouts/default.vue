@@ -71,7 +71,19 @@
         <Icon icon="sparkles" weight="solid" class="w-5 h-5 inline mr-2" />
         <span> by Pancho Blanco </span>
       </a>
-      <p></p>
+      <div>
+        <a
+          href="https://www.panchoblanco.com"
+          class="px-2 inline-flex items-center"
+        >
+          <Icon
+            icon="currency-dollar"
+            weight="solid"
+            class="w-5 h-5 inline mr-2"
+          />
+          <span> Banca el efuerzo independiente </span>
+        </a>
+      </div>
       <!-- <a
         href="https://www.panchoblanco.com"
         class="px-2 inline-flex items-center"
