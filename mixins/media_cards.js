@@ -1,14 +1,14 @@
 export default {
   methods: {
     titleProtocol({ title }) {
-      return `${title} | Quiero Invitar`
+      return `${title}`
     },
     descriptioner({ description }) {
       return [
         {
           hid: 'description',
           name: 'description',
-          content: `${description} | Quiero Invitar`,
+          content: `${description}`,
         },
       ]
     },
@@ -17,12 +17,12 @@ export default {
         {
           hid: `og:title`,
           property: 'og:title',
-          content: `${meta.title} | Quiero Invitar`,
+          content: `${meta.title}`,
         },
         {
           hid: `og:description`,
           property: 'og:description',
-          content: `${meta.description} | Quiero Invitar`,
+          content: `${meta.description}`,
         },
       ]
     },
@@ -31,12 +31,12 @@ export default {
         {
           hid: 'twitter:title',
           property: 'twitter:title',
-          content: `${meta.title} | Quiero Invitar`,
+          content: `${meta.title}`,
         },
         {
           hid: 'twitter:description',
           property: 'twitter:description',
-          content: `${meta.description} | Quiero Invitar`,
+          content: `${meta.description}`,
         },
         {
           hid: 'twitter:card',

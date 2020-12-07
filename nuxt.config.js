@@ -5,13 +5,33 @@ export default {
     host: '0.0.0.0',
   },
   // -
-  // modern: true,
+  modern: true,
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
+    htmlAttrs: {
+      lang: process.env.APP_LANG || 'es-AR',
+    },
     title: 'Pancho Blanco',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      /** HTTP-EQUIV */
+      {
+        hid: 'contentLanguage',
+        'http-equiv': 'content-language',
+        content: 'es',
+      },
+      {
+        hid: 'XUACompatible',
+        'http-equiv': 'X-UA-Compatible',
+        content: 'ie=edge',
+      },
+      { hid: 'cleartype', 'http-equiv': 'cleartype', content: 'on' },
+
+      /** UTILIDADES */
+      { hid: 'mobileOptimized', name: 'MobileOptimized', content: '320' },
+      { hid: 'themeColor', name: 'theme-color', content: '#1E293B' },
+      { hid: 'handheldFriendly', name: 'HandheldFriendly', content: 'True' },
       {
         hid: 'description',
         name: 'description',
@@ -20,7 +40,7 @@ export default {
       {
         hid: `og:title`,
         property: 'og:title',
-        content: `Quiero Invitar`,
+        content: `Pancho Blanco`,
       },
       {
         hid: `og:description`,

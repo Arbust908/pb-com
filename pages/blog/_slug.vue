@@ -54,7 +54,10 @@
   </main>
 </template>
 <script>
+import mediaCards from '@/mixins/media_cards'
+
 export default {
+  mixins: [mediaCards],
   // http://localhost:3000/_content/articles?only=title&only=description&only=img&only=slug&only=author
   async asyncData({ $content, params }) {
     const article = await $content('articles', params.slug).fetch()
@@ -71,6 +74,17 @@ export default {
       next,
     }
   },
+  data() {
+    return {
+      meta: {
+        url: `panchoblanco.com/blog/${this.article.slug}`,
+        title: `${this.article.title} | Blog :: Pancho Blanco`,
+        description: `${this.article.description} // ${this.formatDate(
+          this.article.updatedAt
+        )}`,
+      },
+    }
+  },
   computed: {
     mainImgSrc() {
       return require(`~/assets/img/${this.article.img}`)
@@ -84,6 +98,9 @@ export default {
       const options = { year: 'numeric', month: 'long', day: 'numeric' }
       return new Date(date).toLocaleDateString('es', options)
     },
+  },
+  head() {
+    return this.ultimateProtocol(this.meta)
   },
 }
 </script>

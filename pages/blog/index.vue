@@ -30,7 +30,10 @@
 </template>
 
 <script>
+import mediaCards from '@/mixins/media_cards'
+
 export default {
+  mixins: [mediaCards],
   async asyncData({ $content, params }) {
     const articles = await $content('articles', params.slug)
       .only(['title', 'description', 'img_small', 'slug'])
@@ -41,16 +44,29 @@ export default {
       articles,
     }
   },
-  // computed: {
-  //   smallImgSrc() {
-  //     return require(`~/assets/img/${this.article.img_small}`)
-  //   },
-  // },
+  data() {
+    return {
+      meta: {
+        url: 'panchoblanco.com/blog',
+        title: 'Blog :: Pancho Blanco',
+        description:
+          'Un blog donde busco descargar mis conocimientos para compartir con mi amigo Diego y todo aquel que lo encuentre util!',
+      },
+    }
+  },
   methods: {
     smallImgSrc(src) {
       return require(`~/assets/img/${src}`)
     },
   },
+  head() {
+    return this.ultimateProtocol(this.meta)
+  },
+  // computed: {
+  //   smallImgSrc() {
+  //     return require(`~/assets/img/${this.article.img_small}`)
+  //   },
+  // },
 }
 </script>
 

@@ -66,15 +66,22 @@
     >
       <a
         href="https://www.panchoblanco.com"
-        class="p-3 inline-flex items-center"
+        class="p-3 md:py-0 inline-flex items-center"
       >
-        <Icon icon="sparkles" weight="solid" class="w-5 h-5 inline mr-2" />
-        <span> by Pancho Blanco </span>
+        <Icon
+          icon="cube-transparent"
+          weight="solid"
+          class="w-5 h-5 inline mr-2"
+        />
+        <span>
+          {{ $i18n.locale === 'es' ? 'En progreso' : 'Work in progress' }}
+        </span>
       </a>
       <div>
         <a
           href="https://github.com/Arbust908"
-          class="p-3 inline-flex items-center"
+          class="p-3 md:py-0 inline-flex items-center"
+          title="Github profile"
         >
           <Icon icon="github" weight="brand" class="w-6 h-6 inline" />
         </a>

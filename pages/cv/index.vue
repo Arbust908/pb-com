@@ -19,12 +19,28 @@
 </template>
 
 <script>
+import mediaCards from '@/mixins/media_cards'
+
 export default {
+  mixins: [mediaCards],
+  data() {
+    return {
+      meta: {
+        url: 'panchoblanco.com/cv',
+        title: 'Curriculum Vitae :: Pancho Blanco',
+        description:
+          'Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Estas son mis habilidades y experiencias. Tengo mas de 4 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.',
+      },
+    }
+  },
   methods: {
     changeLang() {
       const newLang = this.$i18n.locale === 'es' ? 'en' : 'es'
       this.$i18n.locale = newLang
     },
+  },
+  head() {
+    return this.ultimateProtocol(this.meta)
   },
 }
 </script>
