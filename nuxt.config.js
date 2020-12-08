@@ -211,8 +211,10 @@ export default {
   // -
   pwa: {
     manifest: {
-      name: 'Quiero Invitar',
+      name: 'Pancho Blanco',
+      short_name: ' pb.com',
       lang: 'es',
+      author: 'Pancho Blanco || yo@panchoblanco.com',
     },
   },
 

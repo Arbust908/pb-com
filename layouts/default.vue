@@ -119,6 +119,11 @@ div.min-h-screen {
   min-height: 100vh;
   min-height: -webkit-fill-available;
 }
+@media screen and (min-width: 640px) {
+  div.min-h-screen {
+    min-height: 100vh;
+  }
+}
 .grid-layout {
   padding-top: 88px;
   grid-template-rows: 1fr 64px;
