@@ -9,7 +9,7 @@ tags:
   - Javascript
 ---
 
-Las ` funciones recursivas` son funciones que se llaman a si mismas en si ejecución.  
+Las `funciones recursivas` son funciones que se llaman a si mismas en si ejecución.  
 En general está solución hace que la función sea más concisa y elegante.
 
 ```javascript
@@ -33,16 +33,16 @@ function sumAll(num) {
 Entonces si pedimos `sumAll()` de 4 hay que calcular el `sumAll()` de 3, el de 2 y el de 1 _(el cual es el corte y nos devuelve 1)_
 
 ```javascript
-sumAll(4) = 4 + sumAll(3);.
-sumAll(3) = 3 + sumAll(2);.
-sumAll(2) = 2 + sumAll(1);.
-sumAll(1) = 1;.
+sumAll(4) = 4 + sumAll(3)
+sumAll(3) = 3 + sumAll(2)
+sumAll(2) = 2 + sumAll(1)
+sumAll(1) = 1
 ```
 
 Lo cual se traduce a un cálculo directo.
 
 ```javascript
-sumAll(4) = 4 + 3 + 2 + 1;.
+sumAll(4) = 4 + 3 + 2 + 1
 ```
 
 Habiéndolo logrado, podemos mejorarlo haciendo más directo el código.

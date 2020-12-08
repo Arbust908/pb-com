@@ -1,7 +1,7 @@
 module.exports = [
   {
     place: 'Digital House',
-    date: '2017',
+    date: '2016',
     description:
       'Full Stack Web Development! HTML 5, CSS 3, Scrum, Bootstrap, PHP, POO, GitHub, MySQL, UML',
   },

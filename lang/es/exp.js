@@ -18,7 +18,7 @@ module.exports = [
   {
     rol: 'Desarrollo Full Stack SSr',
     company: 'Digital House',
-    start: '01/01/2020',
+    start: '01/01/2017',
     end: '07/01/2020',
     description:
       'Desarrollo de una web con sistemas de edición de contenido e interacción con otros sistemas externos. Conexión con Api REST interna con CRUD. Laravel + SASS / Vue + Tailwind / Node + ORM (Propio). Prototipado y diseño en Adobe XD.',
@@ -26,8 +26,8 @@ module.exports = [
   {
     rol: 'Profesor de programación',
     company: 'Digital House',
-    start: '12/01/2018',
-    end: '07/01/2016',
+    start: '07/01/2016',
+    end: '12/01/2018',
     description: 'Dictar clases de programación. Html + CSS, PHP, Laravel y JS',
   },
   {

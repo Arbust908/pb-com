@@ -30,7 +30,7 @@ export default {
 
       /** UTILIDADES */
       { hid: 'mobileOptimized', name: 'MobileOptimized', content: '320' },
-      { hid: 'themeColor', name: 'theme-color', content: '#1E293B' },
+      { hid: 'themeColor', name: 'theme-color', content: '#64748B' },
       { hid: 'handheldFriendly', name: 'HandheldFriendly', content: 'True' },
       {
         hid: 'description',
@@ -121,16 +121,16 @@ export default {
       { rel: 'icon', href: '/favicon-96.png', sizes: '96x96' },
       { rel: 'icon', href: '/favicon-192.png', sizes: '192x192' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap',
-      },
+      // {
+      //   rel: 'stylesheet',
+      //   href:
+      //     'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap',
+      // },
     ],
   },
 
   // Customize the progress-bar color
-  loading: { color: '#E11D48' },
+  loading: { color: '#059669' },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [],
@@ -163,7 +163,25 @@ export default {
     'nuxt-svg-loader',
     // -
     'nuxt-i18n',
+    // https://www.npmjs.com/package/nuxt-webfontloader
+    'nuxt-webfontloader',
   ],
+
+  /**
+   * Carga de fuentes externas
+   */
+  webfontloader: {
+    google: {
+      families: ['Space+Grotesk:wght@300;400;500;600;700&display=swap'],
+    },
+    // custom: {
+    //   families: ['Rajdhani:n3,n4,n5,n6,n7', 'Open Sans:n3,n4,n5,n6,n7'],
+    //   urls: [
+    //     'https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700&display=swap',
+    //     'https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700&display=swap',
+    //   ],
+    // },
+  },
   // https://color-mode.nuxtjs.org/
   colorMode: {
     classSuffix: '',

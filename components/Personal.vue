@@ -2,11 +2,14 @@
   <section
     class="rounded shadow bg-blueGray-200 dark:bg-blueGray-800 p-4 mb-4 relative"
   >
-    <img
-      class="w-full mb-4 sm:w-32 h-32 md:w-40 sm:h-40 object-cover md:rounded sm:absolute top-0 right-0 sm:-m-2 border-2 border-blueGray-500"
-      src="@/assets/img/avatar.jpg"
-      alt=""
-    />
+    <picture>
+      <source type="image/webp" srcset="@/assets/img/avatar.webp" />
+      <img
+        class="w-full mb-4 sm:w-32 h-32 md:w-40 sm:h-40 object-cover md:rounded sm:absolute top-0 right-0 sm:-m-2 border-2 border-blueGray-500"
+        src="@/assets/img/avatar.jpg"
+        alt=""
+      />
+    </picture>
     <h2 class="text-3xl leading-none">Fran Blanco</h2>
     <h3 class="tracking-wider">
       {{ $t('rol') }}
@@ -61,7 +64,7 @@ export default {
   computed: {
     birthdate() {
       const options = { year: 'numeric', month: 'long', day: 'numeric' }
-      return new Date('06/14/1990').toLocaleDateString(
+      return new Date('06/14/1991').toLocaleDateString(
         this.$i18n.locale,
         options
       )

@@ -21,6 +21,7 @@
     "nuxt-i18n": "^6.15.4",
     "nuxt-start": "^2.14.9",
     "nuxt-svg-loader": "^1.2.0",
+    "nuxt-webfontloader": "^1.1.0",
     "prism-themes": "^1.5.0",
     "tailwindcss": "^1.9.6"
   },

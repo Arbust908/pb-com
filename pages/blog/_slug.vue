@@ -58,7 +58,6 @@ import mediaCards from '@/mixins/media_cards'
 
 export default {
   mixins: [mediaCards],
-  // http://localhost:3000/_content/articles?only=title&only=description&only=img&only=slug&only=author
   async asyncData({ $content, params }) {
     const article = await $content('articles', params.slug).fetch()
 
@@ -74,17 +73,15 @@ export default {
       next,
     }
   },
-  data() {
-    return {
-      meta: {
-        url: `panchoblanco.com/blog/${this.article.slug}`,
-        title: `${this.article.title} | Blog :: Pancho Blanco`,
-        description: `${this.article.description} // ${this.formatDate(
-          this.article.updatedAt
-        )}`,
-      },
-    }
-  },
+  // data() {
+  //   return {
+  //     meta: {
+  //       title: `${this.article.title} Blog :: Pancho Blanco`,
+  //       description:
+  //         'Un blog donde busco descargar mis conocimientos para compartir con mi amigo Diego y todo aquel que lo encuentre util!',
+  //     },
+  //   }
+  // },
   computed: {
     mainImgSrc() {
       return require(`~/assets/img/${this.article.img}`)
@@ -92,6 +89,15 @@ export default {
     smallImgSrc() {
       return require(`~/assets/img/${this.article.img_small}`)
     },
+    // timeCount() {
+    //   const text = this.post && this.post.content ? this.post.content : ' '
+    //   const WORDS_PER_MINUTES = 200
+    //   const wordCount = text.split(' ').length
+    //   let wordsInMin = wordCount / WORDS_PER_MINUTES
+    //   wordsInMin = Math.round(wordsInMin)
+    //   const formatWIM = wordsInMin <= 0 ? 'Menos de 1 ' : wordsInMin + ' '
+    //   return formatWIM
+    // },
   },
   methods: {
     formatDate(date) {
@@ -100,7 +106,12 @@ export default {
     },
   },
   head() {
-    return this.ultimateProtocol(this.meta)
+    return this.ultimateProtocol({
+      title: `${this.article.title} | Blog :: Pancho Blanco`,
+      description: `${this.article.description} // ${this.formatDate(
+        this.article.updatedAt
+      )}`,
+    })
   },
 }
 </script>

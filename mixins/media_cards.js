@@ -54,6 +54,11 @@ export default {
         },
       ]
     },
+    /**
+     * Ultimate Protocol Genera los metas generles, de OG y de twitter
+     *
+     * @param Object meta {title, description}
+     */
     ultimateProtocol(meta) {
       return {
         title: this.titleProtocol(meta),
