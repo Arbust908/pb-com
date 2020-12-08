@@ -5,5 +5,8 @@ module.exports = {
   skills: require('./skills'),
   study: require('./study'),
   rol: 'Creative Developer',
-  change_lang: 'Change Language',
+  change_lang: 'Cambiar Idioma',
+  exp_title: 'Experiences',
+  skills_title: 'Skills',
+  study_title: 'Studies',
 }

@@ -53,7 +53,7 @@ const sumAll = (num) => {
 }
 ```
 
-#### Cosas importantes a recordar
+## Cosas importantes a recordar
 
 - Un límite.
 

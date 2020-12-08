@@ -9,16 +9,18 @@
       "
       class="mb-4 p-4 shadow border rounded dark:border-blueGray-700"
     >
-      <h3 class="font-bold flex flex-col sm:flex-row mb-2">
+      <h3
+        class="font-bold flex flex-col sm:flex-row md:flex-col lg:flex-row mb-2"
+      >
         <span>{{ job.rol }}</span>
-        <span class="hidden sm:inline px-2"> / </span>
+        <span class="hidden sm:inline md:hidden lg:inline px-2"> / </span>
         <span> {{ job.company }} </span>
       </h3>
       <div class="text-sm mb-2">
         <span>{{ formatDate(job.start) }}</span> -
         <span
           v-if="job.end === null"
-          class="px-2 rounded bg-emerald-400 text-emerald-700 font-bold"
+          class="px-2 rounded font-bold bg-emerald-300 text-emerald-800"
           >Actual</span
         >
         <span v-else>{{ formatDate(job.end) }}</span>

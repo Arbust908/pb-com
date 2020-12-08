@@ -73,15 +73,6 @@ export default {
       next,
     }
   },
-  // data() {
-  //   return {
-  //     meta: {
-  //       title: `${this.article.title} Blog :: Pancho Blanco`,
-  //       description:
-  //         'Un blog donde busco descargar mis conocimientos para compartir con mi amigo Diego y todo aquel que lo encuentre util!',
-  //     },
-  //   }
-  // },
   computed: {
     mainImgSrc() {
       return require(`~/assets/img/${this.article.img}`)

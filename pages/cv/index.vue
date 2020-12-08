@@ -1,7 +1,23 @@
 <template>
-  <main class="p-6">
+  <main class="p-6 relative">
     <!-- <nav>{{ $t('lang') }}</nav> -->
-    <aside class="flex justify-end mb-6 lang">
+    <aside
+      class="flex flex-col sm:flex-row justify-between lg:justify-end mb-6 lang"
+    >
+      <div class="lg:hidden space-x-2">
+        <a
+          href="#exp"
+          class="hover:underline hover:text-violet-600"
+          @click.prevent="scrollToElement('exp')"
+          >{{ $t('exp_title') }}</a
+        >
+        <a
+          href="#study"
+          class="hover:underline hover:text-violet-600"
+          @click.prevent="scrollToElement('study')"
+          >{{ $t('study_title') }}</a
+        >
+      </div>
       <button
         class="hover:underline text-rigth flex items-center hover:text-violet-600 transition duration-200 ease-out"
         @click="changeLang()"
@@ -13,8 +29,14 @@
       </button>
     </aside>
     <Personal class="personal" />
-    <Experiences class="exp" />
-    <Studies class="study" />
+    <Experiences ref="exp" class="exp" />
+    <Studies ref="study" class="study" />
+    <button
+      class="absolute bottom-0 right-0 m-8 rounded transform transition duration-200 shadow hover:scale-105 hover:-translate-y-2 hover:bg-violet-200 dark:hover:bg-violet-800 hover:shadow-md"
+      @click="backToTop"
+    >
+      <Icon icon="upload" weight="solid" class="m-3" />
+    </button>
   </main>
 </template>
 
@@ -38,6 +60,16 @@ export default {
       const newLang = this.$i18n.locale === 'es' ? 'en' : 'es'
       this.$i18n.locale = newLang
     },
+    scrollToElement(ref, offset = 100) {
+      const element = this.$refs[ref]
+      this.$nextTick(() => {
+        const top = element.$el.offsetTop - offset
+        window.scrollTo(0, top)
+      })
+    },
+    backToTop() {
+      window.scrollTo(0, 0)
+    },
   },
   head() {
     return this.ultimateProtocol(this.meta)
@@ -46,7 +78,7 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   main {
     display: grid;
     grid-template-areas:

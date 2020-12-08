@@ -3,7 +3,7 @@
     class="font-main bg-blueGray-100 dark:bg-blueGray-900 text-blueGray-900 dark:text-blueGray-100 grid grid-layout min-h-screen"
   >
     <header
-      class="flex flex-col md:flex-row md:justify-between items-center p-2 fixed top-0 w-full bg-blueGray-200 dark:bg-blueGray-800 z-50"
+      class="flex flex-col sm:flex-row sm:justify-between items-center p-2 fixed top-0 w-full bg-blueGray-200 dark:bg-blueGray-800 z-50"
     >
       <nuxt-link to="/" class="rounded-lg px-2 py-1 hover:text-violet-500">
         <h1 class="text-lg font-bold flex items-center">
@@ -115,24 +115,19 @@ export default {
 </script>
 
 <style>
-div.min-h-screen {
+html {
+  scroll-behavior: smooth;
+}
+body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
 }
 @media screen and (min-width: 640px) {
-  div.min-h-screen {
+  body {
     min-height: 100vh;
   }
 }
-.grid-layout {
-  padding-top: 88px;
-  grid-template-rows: 1fr 64px;
-}
 @media screen and (min-width: 768px) {
-  .grid-layout {
-    padding-top: 56px;
-    grid-template-rows: 1fr 40px;
-  }
   /* width */
   ::-webkit-scrollbar {
     @apply w-2;
@@ -164,6 +159,18 @@ div.min-h-screen {
   /* Handle on hover */
   .dark ::-webkit-scrollbar-thumb:hover {
     @apply bg-gradient-to-tr from-amber-400 to-rose-600;
+  }
+}
+</style>
+<style scoped>
+.grid-layout {
+  padding-top: 88px;
+  grid-template-rows: 1fr 64px;
+}
+@media screen and (min-width: 768px) {
+  .grid-layout {
+    padding-top: 56px;
+    grid-template-rows: 1fr 40px;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <main class="px-8">
+  <main class="mx-auto sm:p-8 pt-0">
     <h1 class="text-4xl text-violet-700 dark:text-violet-300 py-4">
       Blog Posts
     </h1>
@@ -37,7 +37,7 @@ export default {
   async asyncData({ $content, params }) {
     const articles = await $content('articles', params.slug)
       .only(['title', 'description', 'img_small', 'slug'])
-      .sortBy('createdAt', 'asc')
+      .sortBy('createdAt', 'desc')
       .fetch()
 
     return {
@@ -62,11 +62,6 @@ export default {
   head() {
     return this.ultimateProtocol(this.meta)
   },
-  // computed: {
-  //   smallImgSrc() {
-  //     return require(`~/assets/img/${this.article.img_small}`)
-  //   },
-  // },
 }
 </script>
 
