@@ -115,6 +115,10 @@ export default {
 </script>
 
 <style>
+div.min-h-screen {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
 .grid-layout {
   padding-top: 88px;
   grid-template-rows: 1fr 64px;
