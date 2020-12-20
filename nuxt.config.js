@@ -1,8 +1,17 @@
+import getRoutes from './utils/getRoutes'
+
 export default {
   // -
   server: {
     port: 3000,
     host: '0.0.0.0',
+  },
+  // https://www.npmjs.com/package/@nuxtjs/sitemap
+  sitemap: {
+    hostname: 'https://www.panchoblanco.com',
+    routes() {
+      return getRoutes()
+    },
   },
   // -
   modern: true,
@@ -94,7 +103,7 @@ export default {
       },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
+      { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
       {
         rel: 'icon',
         type: 'image/png',

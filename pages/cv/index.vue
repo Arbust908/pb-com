@@ -7,13 +7,13 @@
       <div class="lg:hidden space-x-2">
         <a
           href="#exp"
-          class="hover:underline hover:text-violet-600"
+          class="py-3 sm:py-0 hover:underline hover:text-violet-600"
           @click.prevent="scrollToElement('exp')"
           >{{ $t('exp_title') }}</a
         >
         <a
           href="#study"
-          class="hover:underline hover:text-violet-600"
+          class="py-3 sm:py-0 hover:underline hover:text-violet-600"
           @click.prevent="scrollToElement('study')"
           >{{ $t('study_title') }}</a
         >
@@ -32,6 +32,7 @@
     <Experiences ref="exp" class="exp" />
     <Studies ref="study" class="study" />
     <button
+      title="back to top"
       class="absolute bottom-0 right-0 m-8 rounded transform transition duration-200 shadow hover:scale-105 hover:-translate-y-2 hover:bg-violet-200 dark:hover:bg-violet-800 hover:shadow-md"
       @click="backToTop"
     >
