@@ -8,7 +8,7 @@
       <Icon icon="chevron-left" class="inline w-5 h-5" /> {{ prev.title }}
     </NuxtLink>
     <span v-else>
-      <Icon icon="ban" weight="solid" class="inline w-5 h-5 opacity-50" />
+      <!-- <Icon icon="ban" weight="solid" class="inline w-5 h-5 opacity-50" /> -->
     </span>
     <NuxtLink
       v-if="next"
@@ -18,7 +18,7 @@
       {{ next.title }} <Icon icon="chevron-right" class="inline w-5 h-5" />
     </NuxtLink>
     <span v-else>
-      <Icon icon="ban" weight="solid" class="inline w-5 h-5 opacity-50" />
+      <!-- <Icon icon="ban" weight="solid" class="inline w-5 h-5 opacity-50" /> -->
     </span>
   </div>
 </template>

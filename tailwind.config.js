@@ -89,6 +89,10 @@ module.exports = {
       },
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+      width: ['hover'],
+    },
+  },
   plugins: [require('@tailwindcss/typography')],
 }

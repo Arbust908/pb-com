@@ -67,6 +67,6 @@ export default {
 
 <style scoped>
 section.grid {
-  grid-template-columns: repeat(auto-fill, 20rem);
+  grid-template-columns: repeat(auto-fit, 20rem);
 }
 </style>

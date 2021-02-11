@@ -9,4 +9,6 @@ module.exports = {
   exp_title: 'Experiencias',
   skills_title: 'Habilidades',
   study_title: 'Estudios',
+  see_more: 'ver mas',
+  see_less: 'ver menos',
 }

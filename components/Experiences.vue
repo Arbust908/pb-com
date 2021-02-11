@@ -26,17 +26,52 @@
         <span v-else>{{ formatDate(job.end) }}</span>
       </div>
       <p class="font-light">
-        {{ job.description }}
+        <span
+          v-if="detailShown.includes(job.rol + job.company)"
+          :key="`${job.company}-detail`"
+          v-html="job.more || ''"
+        />
+        <span v-else :key="`${job.company}-description`">
+          {{ job.description }}
+        </span>
       </p>
+      <aside class="mt-2 flex justify-end">
+        <button
+          v-if="job.more"
+          class="text-sm px-2 py-1 rounded transition duration-150 ease-out transform hover:bg-emerald-400 hover:text-emerald-700 hover:-translate-y-1"
+          @click="addDetail(job.rol + job.company)"
+        >
+          {{
+            detailShown.includes(job.rol + job.company)
+              ? $t('see_less')
+              : $t('see_more')
+          }}
+        </button>
+      </aside>
     </article>
   </section>
 </template>
 <script>
 export default {
+  data() {
+    return {
+      detailShown: [],
+    }
+  },
   methods: {
     formatDate(date) {
       const options = { year: 'numeric', month: 'short', day: '2-digit' }
       return new Date(date).toLocaleDateString(this.$i18n.locale, options)
+    },
+    addDetail(job) {
+      console.log(job)
+      const isInDetails = this.detailShown.includes(job)
+      console.log(isInDetails)
+      if (isInDetails) {
+        this.detailShown = this.detailShown.filter((title) => title !== job)
+      } else {
+        this.detailShown.push(job)
+      }
     },
   },
 }

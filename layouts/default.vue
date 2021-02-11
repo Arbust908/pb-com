@@ -62,7 +62,7 @@
     </header>
     <Nuxt class="z-20" />
     <footer
-      class="px-6 bg-blueGray-200 dark:bg-blueGray-800 flex items-center justify-between text-sm"
+      class="px-6 bg-blueGray-200 dark:bg-blueGray-800 flex items-center justify-between text-sm flex-wrap"
     >
       <a
         href="https://www.panchoblanco.com"
@@ -97,6 +97,9 @@
         />
         <span> Banca el efuerzo independiente </span>
       </a> -->
+      <div
+        class="w-full h-1 bg-gradient-to-r from-teal-600 to-indigo-500"
+      ></div>
     </footer>
   </div>
 </template>
