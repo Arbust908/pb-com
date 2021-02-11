@@ -175,7 +175,7 @@ export default {
     // https://www.npmjs.com/package/nuxt-webfontloader
     'nuxt-webfontloader',
     // https://github.com/vaso2/nuxt-fullpage.js
-    'nuxt-fullpage.js',
+    // 'nuxt-fullpage.js',
   ],
 
   /**
