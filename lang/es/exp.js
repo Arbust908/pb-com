@@ -1,5 +1,15 @@
 module.exports = [
   {
+    rol: 'Desarrollador Front End Sr',
+    company: 'Forian',
+    start: '05/03/2020',
+    end: null,
+    description:
+      'Desarrollar y mantener el Producto Biotrack en colaboracion abierta con el equipo de Backend. Usando Vue con Typscript, Vuetify, Vuex y Vue Router para completar los tickets de Jira entregados por los POs (Product Owners) de Estados Unidos.',
+    // more:
+    //   "Point More is an Agency I started with 3 other ex-Digital House developers. Even though we all are Full Stack developers I'm the main Front End dev. As a team, we take projects too large in scope for one dev. Usually, we build Complex eCommerce that need to have a pristine SEO ranking for that end I apply my knowledge to build PWA ready web apps that manage session information in Vuex states. For external data y connect to backend services via REST APIs using Axios. Depending on client demand we use an existing Component Library (like Vue-bootstrap), if not I usually build a custom component library with the help of TailwindCSS styling.<br> If our client doesn't have a design of their own I also take part in the Design phase using Adobe XD<br> From time to time we have taken projects that did have an existing codebase in other languages or frameworks which we work on top (Laravel, React, Angular, Plain HTML + CSS + Alpine)",
+  },
+  {
     rol: 'Desarrollo Full Stack Sr',
     company: 'PointMore',
     start: '01/01/2020',

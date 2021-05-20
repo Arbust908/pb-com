@@ -1,5 +1,5 @@
 <template>
-  <main class="mx-auto sm:p-8 pt-0">
+  <main class="mx-auto sm:p-8 pt-0 w-full">
     <h1 class="text-4xl text-violet-700 dark:text-violet-300 py-4">
       Blog Posts
     </h1>
@@ -67,6 +67,6 @@ export default {
 
 <style scoped>
 section.grid {
-  grid-template-columns: repeat(auto-fit, 20rem);
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
 }
 </style>

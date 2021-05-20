@@ -10,6 +10,7 @@
     <span v-else>
       <!-- <Icon icon="ban" weight="solid" class="inline w-5 h-5 opacity-50" /> -->
     </span>
+    <NuxtLink to="/blog" class="hover:underline"> Blog </NuxtLink>
     <NuxtLink
       v-if="next"
       :to="{ name: 'blog-slug___es___default', params: { slug: next.slug } }"
