@@ -9,6 +9,9 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
+// https://twitter.com/src_rip/status/1745407959562154230
+// https://twitter.com/souporserious/status/1746311121949356469
+
 export default defineConfig({
   shortcuts: [
     ['btn', 'px-4 py-1 rounded inline-block bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
@@ -93,9 +96,26 @@ export default defineConfig({
     presetTypography(),
     presetWebFonts({
       fonts: {
-        sans: 'DM Sans',
+        sans: [
+          {
+            name: 'Space Grotesk',
+            weights: [300, 400, 500, 600, 700],
+          },
+          {
+            name: 'sans-serif',
+            provider: 'none',
+          },
+        ],
         serif: 'DM Serif Display',
-        mono: 'DM Mono',
+        mono: [
+          {
+            name: 'Space Mono',
+          },
+          {
+            name: 'monospace',
+            provider: 'none',
+          },
+        ],
       },
     }),
   ],
@@ -103,4 +123,5 @@ export default defineConfig({
     transformerDirectives(),
     transformerVariantGroup(),
   ],
+  safelist: 'prose prose-sm m-auto text-left'.split(' '),
 })

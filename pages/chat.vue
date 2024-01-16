@@ -115,3 +115,10 @@ async function sendMessage() {
     </LazyUiModal>
   </section>
 </template>
+
+<style scoped>
+/* https://twitter.com/wesbos/status/1735729524069827044 */
+textarea {
+  field-sizing: content;
+}
+</style>
