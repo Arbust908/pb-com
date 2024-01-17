@@ -18,14 +18,14 @@ defineProps({
 
 defineEmits(['changeValue'])
 
-const isFirstOpt = (position: number) => {
+function isFirstOpt(position: number) {
   return position === 0
 }
-const isLastOpt = (position: number, maxLength: number) => {
+function isLastOpt(position: number, maxLength: number) {
   return position === maxLength
 }
 
-const positionClass = (position: number, maxLength: number) => {
+function positionClass(position: number, maxLength: number) {
   if (isFirstOpt(position))
     return 'first'
 
@@ -35,11 +35,12 @@ const positionClass = (position: number, maxLength: number) => {
 </script>
 
 <template>
-  <div class="options">
-    <span>{{ title }}</span>
+  <div class="options relative mt-4 p-2">
+    <span class="absolute text-sm font-bold opacity-75 -top-3">{{ title }}</span>
     <button
       v-for="(option, pos) in options"
       :key="option"
+      class="border-blue-600 bg-blue-100 px-4 py-2 text-gray-800"
       :class="[positionClass(pos, options.length - 1), value === option && 'selected']"
       @click="$emit('changeValue', option)"
     >
@@ -48,26 +49,19 @@ const positionClass = (position: number, maxLength: number) => {
   </div>
 </template>
 
-<style scoped lang='scss'>
+<style scoped>
     .options {
-        @apply p-2 relative mt-4;
-        & > span {
-            @apply text-sm font-bold absolute -top-3 opacity-75;
-        }
-        & > button {
-            @apply px-4 py-2 bg-blue-100 text-gray-800 border-blue-600;
-            &.selected {
-                @apply bg-blue-800 text-gray-200 cursor-not-allowed;
-            }
-            &.first {
-                @apply rounded-l-full border-r-2;
-            }
-            &.last {
-                @apply rounded-r-full border-l-2;
-            }
-            &:not(.first, .last) {
-                @apply border-x-2;
-            }
-        }
-    }
+  &.selected {
+    @apply bg-blue-800 text-gray-200 cursor-not-allowed;
+  }
+  &.first {
+    @apply rounded-l-full border-r-2;
+  }
+  &.last {
+    @apply rounded-r-full border-l-2;
+  }
+  &:not(.first, .last) {
+    @apply border-x-2;
+  }
+}
 </style>

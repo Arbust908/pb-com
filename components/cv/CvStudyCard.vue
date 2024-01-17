@@ -16,30 +16,15 @@ defineProps({
 </script>
 
 <template>
-  <article class="study-card">
-    <h3>
+  <article class="mb-4 border-l-2 border-violet-400 p-4 text-blueGray-700 dark:text-blueGray-300">
+    <h3 class="mb-2 flex flex-col font-bold sm:flex-row">
       {{ place }}
     </h3>
-    <div>
+    <div class="mb-2 text-sm">
       {{ date }}
     </div>
-    <p>
+    <p class="font-light">
       {{ description }}
     </p>
   </article>
 </template>
-
-<style scoped lang='scss'>
-    .study-card {
-        @apply mb-4 p-4 text-blueGray-700 dark:text-blueGray-300 border-l-2 border-violet-400;
-        & > h3 {
-            @apply font-bold flex flex-col sm:flex-row mb-2;
-        }
-        & > div {
-            @apply text-sm mb-2;
-        }
-        & > p {
-            @apply font-light;
-        }
-    }
-</style>

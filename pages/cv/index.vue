@@ -16,7 +16,7 @@ const { print_mode } = storeToRefs(general_store)
 </script>
 
 <template>
-  <div :class="print_mode && 'print'" class="p-6 relative">
+  <div :class="print_mode && 'print'" class="relative p-6">
     <CvSideNav v-if="!print_mode" class="lang" />
     <CvPersonal class="personal" />
     <CvExperiences ref="exp" class="exp" />

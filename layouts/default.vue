@@ -19,7 +19,7 @@ const { print_mode } = storeToRefs(general_store)
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped >
 .pb-layout {
   @apply font-main bg-blueGray-100 dark:bg-blueGray-900 text-blueGray-900 dark:text-blueGray-100 flex flex-col min-h-screen;
   & > main {
