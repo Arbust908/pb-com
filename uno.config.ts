@@ -17,8 +17,6 @@ export default defineConfig({
     ['btn', 'px-4 py-1 rounded inline-block bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
     ['icon-btn', 'inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600'],
     [/^size-(.+)$/, ([, size]: [any, any]) => `w-${size} h-${size}`],
-    ['text-balance', 'text-wrap: balance;'],
-    ['text-pretty', 'text-wrap: pretty;'],
     ['flex-middle', 'flex items-center justify-center'],
   ],
   rules: [
@@ -78,15 +76,16 @@ export default defineConfig({
         }`
       },
     ],
-    [/^h-([sld]{1})vh$/, ([, w]: [string, string]) => ({ height: `100${w}vh` })],
-    [/^min-h-([sld]{1})vh$/, ([, w]: [string, string]) => ({ 'min-height': `100${w}vh` })],
-    [/^max-h-([sld]{1})vh$/, ([, w]: [string, string]) => ({ 'max-height': `100${w}vh` })],
+    [/^h-([sld]{1})vh$/, ([u, w]: [string, string]) => ({ height: `100${w}vh` })],
+    [/^min-h-([sld]{1})vh$/, ([u, w]: [string, string]) => ({ 'min-height': `100${w}vh` })],
+    [/^max-h-([sld]{1})vh$/, ([u, w]: [string, string]) => ({ 'max-height': `100${w}vh` })],
     // https://twitter.com/ChromiumDev/status/1734742817812152796
-    ['break-normal', 'word-break: normal'],
-    ['break-phrase', 'word-break: auto-phrase'],
-    ['text-balance', 'text-wrap: balance;'],
-    ['text-pretty', 'text-wrap: pretty;'],
-    ['text-stable', 'text-wrap: stable;'],
+    ['break-normal', { 'word-break': 'normal' }],
+    ['break-phrase', { 'word-break': 'auto-phrase' }],
+    ['text-balance', { 'text-wrap': 'balance;' }],
+    ['text-pretty', { 'text-wrap': 'pretty;' }],
+    ['text-stable', { 'text-wrap': 'stable;' }],
+    ['grid-cols-subgrid',	{ 'grid-template-columns': 'subgrid;' }],
   ],
   presets: [
     presetUno(),

@@ -9,10 +9,10 @@ const { print_mode } = storeToRefs(general_store)
 <template>
   <div
     :class="print_mode ? 'print' : null"
-    class="min-h-screen flex flex-col bg-blueGray-100 text-blueGray-900 dark:bg-blueGray-900 dark:text-blueGray-100"
+    class="grid grid-rows-[52px_1fr_52px] h-full bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100"
   >
     <NavBar />
-    <main class="z-20 grow">
+    <main class="z-20 grow layout-grid">
       <slot />
     </main>
     <LayoutFooter />
