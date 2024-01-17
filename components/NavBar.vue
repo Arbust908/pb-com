@@ -11,7 +11,7 @@ const { print_mode } = storeToRefs(general_store)
 <template>
   <header
     v-if="!print_mode"
-    class="fixed top-0 z-50 w-full flex flex-col items-center bg-blueGray-200 p-2 sm:flex-row sm:justify-between dark:bg-blueGray-800"
+    class="w-full flex flex-col items-center bg-blueGray-200 p-2 sm:flex-row sm:justify-between dark:bg-blueGray-800"
   >
     <NuxtLink to="/" class="rounded-lg px-2 py-1 hover:text-violet-500">
       <h1 class="flex items-center text-lg font-bold">

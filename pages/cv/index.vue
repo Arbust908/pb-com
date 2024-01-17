@@ -16,7 +16,7 @@ const { print_mode } = storeToRefs(general_store)
 </script>
 
 <template>
-  <div :class="print_mode && 'print'" class="relative p-6">
+  <div :class="print_mode && 'print'" class="relative layout-grid-feature">
     <CvSideNav v-if="!print_mode" class="lang" />
     <CvPersonal class="personal" />
     <CvExperiences ref="exp" class="exp" />
@@ -34,7 +34,7 @@ const { print_mode } = storeToRefs(general_store)
       'personal exp'
       '. exp'
       '. study';
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 400px clamp(320px, 60%, 640px);
     grid-template-rows: 64px 640px 1fr auto;
     column-gap: 1.5rem;
   }
