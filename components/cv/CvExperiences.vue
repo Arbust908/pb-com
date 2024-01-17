@@ -9,10 +9,10 @@ const { print_mode } = storeToRefs(general_store)
 
 const exp_list = ['bitpatagonia', 'viafoura', 'forian', 'pointmore', 'digitalhouse_dev', 'digitalhouse', 'netdreams', 'musculocreativo', 'mindset']
 const detail_shown = ref([] as string[])
-const formatDate = (date: string) => {
+function formatDate(date: string) {
   return new Date(date).toLocaleDateString(locale.value, { year: 'numeric', month: 'short', day: '2-digit' })
 }
-const addDetail = (job: string) => {
+function addDetail(job: string) {
   const isInDetails = detail_shown.value.includes(job)
   if (isInDetails)
     detail_shown.value = detail_shown.value.filter(title => title !== job)
@@ -21,14 +21,14 @@ const addDetail = (job: string) => {
     detail_shown.value.push(job)
 }
 
-const hasTranslation = (key: string) => {
+function hasTranslation(key: string) {
   return t(key) !== key
 }
 </script>
 
 <template>
   <section>
-    <h2 id="exp" class="text-3xl mb-2 ml-4">
+    <h2 id="exp" class="mb-2 ml-4 text-3xl">
       {{ $t('exp_title') }}
     </h2>
     <article
@@ -37,20 +37,20 @@ const hasTranslation = (key: string) => {
       :class="
         !hasTranslation(`exp.${job}.end`) ? 'border-violet-700 dark:border-violet-300 shadow-violet-500' : 'dark:shadow-gray-800'
       "
-      class="mb-4 p-4 shadow dark:shadow-md  rounded dark:border-blueGray-700"
+      class="mb-4 rounded p-4 shadow dark:border-blueGray-700 dark:shadow-md"
     >
       <h3
-        class="font-bold flex flex-col sm:flex-row md:flex-col lg:flex-row mb-2"
+        class="mb-2 flex flex-col font-bold lg:flex-row sm:flex-row md:flex-col"
       >
         <span>{{ $t(`exp.${job}.rol`) }}</span>
-        <span class="hidden sm:inline md:hidden lg:inline px-2"> / </span>
+        <span class="hidden px-2 lg:inline sm:inline md:hidden"> / </span>
         <span class="text-emerald-500"> {{ $t(`exp.${job}.company`) }} </span>
       </h3>
-      <div class="text-sm mb-2 leading-relaxed">
+      <div class="mb-2 text-sm leading-relaxed">
         <span>{{ formatDate($t(`exp.${job}.start`)) }}</span> -
         <span
           v-if="!hasTranslation(`exp.${job}.end`)"
-          class="px-2 rounded font-bold bg-emerald-800 text-emerald-300 dark:bg-emerald-300 dark:text-emerald-800"
+          class="rounded bg-emerald-800 px-2 text-emerald-300 font-bold dark:bg-emerald-300 dark:text-emerald-800"
         >
           Actual
         </span>
@@ -75,7 +75,7 @@ const hasTranslation = (key: string) => {
         <button
           v-if="hasTranslation(`exp.${job}.more`)"
           :class="print_mode ? 'opacity-0' : null"
-          class="text-sm px-2 py-1 rounded transition duration-150 ease-out transform hover:bg-emerald-400 hover:text-emerald-700 hover:-translate-y-1"
+          class="transform rounded px-2 py-1 text-sm transition duration-150 ease-out hover:bg-emerald-400 hover:text-emerald-700 hover:-translate-y-1"
           @click="addDetail(job)"
         >
           {{

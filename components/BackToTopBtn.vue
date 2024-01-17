@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-const backToTop = () => {
+function backToTop() {
   window.scrollTo(0, 0)
 }
 </script>
@@ -7,14 +7,9 @@ const backToTop = () => {
 <template>
   <button
     title="back to top"
+    class="absolute bottom-0 right-0 m-8 transform rounded p-3 shadow transition duration-200 hover:scale-105 hover:bg-violet-200 hover:shadow-md hover:-translate-y-2 dark:hover:bg-violet-800"
     @click="backToTop"
   >
     <i class="i-ic:round-arrow-upward" />
   </button>
 </template>
-
-<style scoped lang='scss'>
-    button {
-        @apply absolute bottom-0 right-0 m-8 rounded transform transition duration-200 shadow hover:scale-105 hover:-translate-y-2 hover:bg-violet-200 dark:hover:bg-violet-800 hover:shadow-md p-3;
-    }
-</style>

@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useGeneralStore } from '~/composables'
+
 const avatar = ref<HTMLElement>()
 const { tilt, roll, source } = useParallax(avatar)
 
@@ -20,7 +21,7 @@ const { togglePrintMode } = general_store
 const skill_list = ['web', 'adobe', 'other']
 const lang_list = ['es', 'en']
 
-const birthday = () => {
+function birthday() {
   return new Date('06/14/1991').toLocaleDateString(
     locale.value,
     { dateStyle: 'medium' },
@@ -30,14 +31,14 @@ const birthday = () => {
 
 <template>
   <section
-    class="rounded shadow bg-blueGray-200 dark:bg-blueGray-800 p-4 mb-4 relative"
+    class="relative mb-4 rounded bg-blueGray-200 p-4 shadow dark:bg-blueGray-800"
   >
     <picture>
       <source type="image/webp" srcset="/img/avatar.webp">
       <img
         ref="avatar"
         :style="avatar_style"
-        class="w-full mb-4 sm:w-32 h-32 md:w-40 sm:h-40 object-cover rounded sm:absolute top-0 right-0 sm:-m-2 border-2 border-blueGray-500 shadow"
+        class="right-0 top-0 mb-4 h-32 w-full border-2 border-blueGray-500 rounded object-cover shadow sm:absolute md:w-40 sm:h-40 sm:w-32 sm:-m-2"
         src="/img/avatar.jpg"
         :alt="t('avatar.desc')"
       >
@@ -48,47 +49,47 @@ const birthday = () => {
     <h3 class="tracking-wider">
       {{ t('rol') }}
     </h3>
-    <article class="mt-2 mb-6">
+    <article class="mb-6 mt-2">
       <ul>
-        <li class="personal-info">
-          <i class="i-ic:round-mail" />
+        <li class="mb-2 flex items-center gap-2">
+          <i class="i-ic:round-mail h-6 w-6 text-violet-600 dark:text-violet-300" />
           <span>yo@panchoblanco.com</span>
         </li>
-        <li class="personal-info">
-          <i class="i-ic:round-cake" />
+        <li class="mb-2 flex items-center gap-2">
+          <i class="i-ic:round-cake h-6 w-6 text-violet-600 dark:text-violet-300" />
           <span>{{ birthday() }}</span>
         </li>
-        <li class="personal-info">
-          <i class="i-ic:round-house" />
+        <li class="mb-2 flex items-center gap-2">
+          <i class="i-ic:round-house h-6 w-6 text-violet-600 dark:text-violet-300" />
           <span>Buenos Aires, AR</span>
         </li>
       </ul>
     </article>
     <section class="mb-6">
-      <h3 class="text-xl flex items-center text-violet-600 dark:text-violet-400 mb-2">
-        <i class="w-6 h-6 mr-2 i-ic:round-code" />
+      <h3 class="mb-2 flex items-center text-xl text-violet-600 dark:text-violet-400">
+        <i class="i-ic:round-code mr-2 h-6 w-6" />
         <span> Skills </span>
       </h3>
       <article v-for="group in skill_list" :key="group" class="mb-2">
-        <h4 class="font-bold mb-1 opacity-75 underline">
+        <h4 class="mb-1 font-bold underline opacity-75">
           {{ t(`skills.${group}.title`) }}
         </h4>
-        <p class="text-blueGray-800 dark:text-blueGray-200 text-sm">
+        <p class="text-sm text-blueGray-800 dark:text-blueGray-200">
           {{ t(`skills.${group}.list`) }}
         </p>
       </article>
     </section>
     <section class="mb-2">
-      <h3 class="text-xl flex items-center">
-        <i class="w-6 h-6 mr-2 i-ic:round-travel-explore" />
+      <h3 class="flex items-center text-xl">
+        <i class="i-ic:round-travel-explore mr-2 h-6 w-6" />
         <span> {{ t('lang_title') }} </span>
       </h3>
       <article
         v-for="lang in lang_list"
         :key="lang"
-        class="flex justify-between mb-1"
+        class="mb-1 flex justify-between"
       >
-        <h4 class="font-bold mb-1">
+        <h4 class="mb-1 font-bold">
           {{ t(`tongues.${lang}.name`) }}
         </h4>
         <p class="text-blueGray-800 dark:text-blueGray-200">
@@ -98,14 +99,14 @@ const birthday = () => {
     </section>
     <footer class="my-2 flex items-center">
       <button
-        class="opacity-0 hover:opacity-75 transition duration-150 ease-in-out flex items-center"
+        class="flex items-center opacity-0 transition duration-150 ease-in-out hover:opacity-75"
         @click="togglePrintMode()"
       >
-        <i class="w-6 h-6 mr-2 inline-block i-ic:round-print" />
+        <i class="i-ic:round-print mr-2 inline-block h-6 w-6" />
         <span> {{ t('print') }} </span>
         ({{ print_mode }})
       </button>
-      <div v-if="print_mode" class="text-sm text-right opacity-75 w-full">
+      <div v-if="print_mode" class="w-full text-right text-sm opacity-75">
         {{ t('last_update') }}
         {{
           new Intl.DateTimeFormat(locale, {
@@ -116,12 +117,3 @@ const birthday = () => {
     </footer>
   </section>
 </template>
-
-<style lang="scss" scoped>
-.personal-info {
-  @apply flex items-center mb-2 gap-2;
-  & > i {
-    @apply w-6 h-6 text-violet-600 dark:text-violet-300;
-  }
-}
-</style>

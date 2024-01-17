@@ -1,9 +1,5 @@
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
-
 export default defineEventHandler(async () => {
-  const user = await prisma.user.create({
+  /* const user = await prisma.user.create({
     data: {
       name: 'Pancho',
       email: 'yo@panchoblanco.com',
@@ -67,7 +63,7 @@ export default defineEventHandler(async () => {
       tagId: tag.id,
       postId: post.id,
     },
-  })
+  }) */
 
-  return post
+  return 'post'
 })

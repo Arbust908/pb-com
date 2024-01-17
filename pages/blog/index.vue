@@ -22,8 +22,8 @@ const articles = [{ title: 'Nuevo Sitio', description: 'Nuevamente empezamos con
 </script>
 
 <template>
-  <main class="mx-auto sm:p-8 pt-0 w-full">
-    <h1 class="text-4xl text-violet-700 dark:text-violet-300 py-4">
+  <main class="mx-auto w-full pt-0 sm:p-8">
+    <h1 class="py-4 text-4xl text-violet-700 dark:text-violet-300">
       Blog Posts
     </h1>
     <section class="grid gap-4">
@@ -31,13 +31,13 @@ const articles = [{ title: 'Nuevo Sitio', description: 'Nuevamente empezamos con
         v-for="article of articles"
         :key="article.slug"
         to="/blog/"
-        class="rounded bg-blueGray-300 dark:bg-blueGray-700 hover:shadow-xl hover:bg-blueGray-400 dark:hover:bg-blueGray-600 transition transform hover:scale-105"
+        class="transform rounded bg-blueGray-300 transition hover:scale-105 dark:bg-blueGray-700 hover:bg-blueGray-400 hover:shadow-xl dark:hover:bg-blueGray-600"
       >
         <div
-          class="h-24 w-full bg-gradient-to-tl from-rose-500 to-violet-500 rounded-t"
+          class="h-24 w-full rounded-t from-rose-500 to-violet-500 bg-gradient-to-tl"
         />
         <div class="p-3">
-          <h2 class="font-bold mb-2">
+          <h2 class="mb-2 font-bold">
             {{ article.title }}
           </h2>
           <p class="leading-none">

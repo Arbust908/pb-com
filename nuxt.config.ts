@@ -2,7 +2,6 @@ import * as dotenv from 'dotenv'
 import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
-
 // https://twitter.com/iamandrewluca/status/1646464434963881985
 dotenv.config()
 
@@ -20,6 +19,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
     'nuxt-scheduler',
+    '@nuxtjs/i18n',
   ],
 
   experimental: {
@@ -29,10 +29,12 @@ export default defineNuxtConfig({
     inlineSSRStyles: false,
     renderJsonPayloads: true,
     typedPages: true,
+    componentIslands: true,
   },
 
   css: [
     '@unocss/reset/tailwind.css',
+    '@/assets/index.css',
   ],
 
   colorMode: {
@@ -72,5 +74,8 @@ export default defineNuxtConfig({
 
   devtools: {
     enabled: true,
+  },
+  i18n: {
+    vueI18n: './locales/i18n.config.ts',
   },
 })
