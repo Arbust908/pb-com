@@ -1,4 +1,4 @@
-import path from 'node:path'
+/* import path from 'node:path'
 import process from 'node:process'
 import dotenv from 'dotenv'
 
@@ -19,4 +19,4 @@ declare global {
   }
 }
 
-console.log(process.env.SOMETHING_COOL)
+console.log(process.env.SOMETHING_COOL) */

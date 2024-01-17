@@ -50,8 +50,8 @@ useHead({
 
 <template>
   <button
-    class="size-12 flex-middle rounded-xl bg-neutral-200"
-    :class="{ 'dark:bg-neutral-800': isDark }"
+    class="size-8 flex-middle rounded-xl bg-slate-800"
+    :class="{ 'dark:bg-slate-200': isDark }"
     @click="toggleTheme"
   >
     <i v-if="!isDark" class="i-ri:moon-fill size-5 text-slate-500" />

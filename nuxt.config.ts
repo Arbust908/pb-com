@@ -29,7 +29,8 @@ export default defineNuxtConfig({
     inlineSSRStyles: false,
     renderJsonPayloads: true,
     typedPages: true,
-    componentIslands: true,
+    /* componentIslands: true, */
+    
   },
 
   css: [
@@ -47,11 +48,11 @@ export default defineNuxtConfig({
         target: 'esnext',
       },
     },
-    prerender: {
+    /* prerender: {
       crawlLinks: false,
       routes: ['/'],
       ignore: ['/hi'],
-    },
+    }, */
   },
 
   app: {

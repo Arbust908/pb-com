@@ -82,8 +82,11 @@ export default defineConfig({
     [/^min-h-([sld]{1})vh$/, ([, w]: [string, string]) => ({ 'min-height': `100${w}vh` })],
     [/^max-h-([sld]{1})vh$/, ([, w]: [string, string]) => ({ 'max-height': `100${w}vh` })],
     // https://twitter.com/ChromiumDev/status/1734742817812152796
-    [/^break-normal$/, () => ({ 'word-break': 'normal' })],
-    [/^break-phrase$/, () => ({ 'word-break': 'auto-phrase' })],
+    ['break-normal', 'word-break: normal'],
+    ['break-phrase', 'word-break: auto-phrase'],
+    ['text-balance', 'text-wrap: balance;'],
+    ['text-pretty', 'text-wrap: pretty;'],
+    ['text-stable', 'text-wrap: stable;'],
   ],
   presets: [
     presetUno(),
