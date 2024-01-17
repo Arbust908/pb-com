@@ -22,4 +22,5 @@ export default {
   avatar: {
     desc: 'Foto blanco y negro de Pancho Blanco',
   },
+  current: 'actual',
 }

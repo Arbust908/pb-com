@@ -9,23 +9,17 @@ const { print_mode } = storeToRefs(general_store)
 <template>
   <div
     :class="print_mode ? 'print' : null"
-    class="pb-layout"
+    class="min-h-screen flex flex-col bg-blueGray-100 text-blueGray-900 dark:bg-blueGray-900 dark:text-blueGray-100"
   >
     <NavBar />
-    <main>
+    <main class="z-20 grow">
       <slot />
     </main>
-    <Footer />
+    <LayoutFooter />
   </div>
 </template>
 
-<style scoped >
-.pb-layout {
-  @apply font-main bg-blueGray-100 dark:bg-blueGray-900 text-blueGray-900 dark:text-blueGray-100 flex flex-col min-h-screen;
-  & > main {
-    @apply grow z-20;
-  }
-}
+<style scoped>
 .pb-layout {
   padding-top: 88px;
 }

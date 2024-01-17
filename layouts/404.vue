@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
+
 const router = useRouter()
 const { t } = useI18n()
 </script>
@@ -11,7 +12,7 @@ const { t } = useI18n()
     </div>
     <slot />
     <div>
-      <button btn text-sm m="3 t8" @click="router.back()">
+      <button text-sm btn m="3 t8" @click="router.back()">
         {{ t('button.back') }}
       </button>
     </div>
