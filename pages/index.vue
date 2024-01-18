@@ -9,6 +9,7 @@ const meta: MetaData = {
           'Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Tengo mas de 8 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.',
 }
 useHead(useUP(meta))
+// AI vue components https://www.vue0.dev/
 </script>
 
 <template>
