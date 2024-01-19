@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { ClientOnly } from '#build/components'
 import { useGeneralStore } from '~/composables'
 
 const general_store = useGeneralStore()
