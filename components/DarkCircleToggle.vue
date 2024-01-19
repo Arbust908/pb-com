@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 /* https://www.aang.dev/playground/view-transition-theme-switcher */
-const theme = useColorMode()
-const isDark = computed(() => theme.value === 'dark')
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 
 function toggleTheme(e) {
   const md = window.matchMedia('(max-width: 768px)').matches
@@ -10,12 +10,14 @@ function toggleTheme(e) {
   const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))
 
   if (!document?.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    theme.value = isDark.value ? 'light' : 'dark'
-    return
+    toggleDark()
+    const msg = 'View transitions are not supported in this browser or you have reduced motion enabled.'
+    window?.alert(msg)
+    return console.warn(msg)
   }
 
   const transition = document?.startViewTransition(() => {
-    theme.value = isDark.value ? 'light' : 'dark'
+    toggleDark()
   })
 
   transition.ready.then(() => {
@@ -35,15 +37,11 @@ function toggleTheme(e) {
   })
 }
 
-watch(theme, (newTheme, oldTheme) => {
-  // Handle theme change side effects here if needed
-})
-
 useHead({
   meta: [{
     id: 'theme-color',
     name: 'theme-color',
-    content: () => theme.value === 'dark' ? '#222222' : '#ffffff',
+    content: () => isDark.value ? '#222222' : '#ffffff',
   }],
 })
 </script>
