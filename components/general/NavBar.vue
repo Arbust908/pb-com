@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { ClientOnly } from '#build/components'
 import { useGeneralStore } from '~/composables'
 
 const general_store = useGeneralStore()
@@ -22,7 +23,9 @@ const { print_mode } = storeToRefs(general_store)
       </h1>
     </NuxtLink>
     <nav class="mr-4 flex items-center justify-between space-x-3">
-      <DarkCircleToggle />
+      <ClientOnly>
+        <DarkCircleToggle />
+      </ClientOnly>
       <NuxtLink
         class="rounded-lg px-2 py-1 transition duration-150 ease-out hover:text-violet-500 hover:underline"
         to="/cv"

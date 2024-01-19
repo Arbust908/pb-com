@@ -53,7 +53,3 @@ async function submitLogin(event) {
     </div>
   </div>
 </template>
-
-<style>
-/* Add your custom styles here */
-</style>
