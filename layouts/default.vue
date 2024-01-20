@@ -9,10 +9,10 @@ const { print_mode } = storeToRefs(general_store)
 <template>
   <div
     :class="print_mode ? 'print' : null"
-    class="grid grid-rows-[52px_1fr_52px] h-full bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100"
+    class="grid grid-rows-[auto_1fr_auto] h-full bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100"
   >
     <NavBar />
-    <main class="z-20 grow layout-grid">
+    <main class="z-20 layout-grid">
       <slot />
     </main>
     <LayoutFooter />
@@ -20,16 +20,7 @@ const { print_mode } = storeToRefs(general_store)
 </template>
 
 <style scoped>
-.pb-layout {
-  padding-top: 88px;
-}
-@media screen and (min-width: 768px) {
-  .pb-layout {
-    padding-top: 56px;
-  }
-}
-
-.pb-layout.print {
+.print {
   padding-top: 0;
 }
 </style>

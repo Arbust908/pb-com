@@ -15,10 +15,13 @@ useHead({
 
 <style>
 /* https://twitter.com/alirdev/status/1734136001671643465 for full height safe on device */
+
 html,
 body,
 #__nuxt {
-  @apply min-h-svh m-0 p-0;
+  color-scheme: light dark;
+  min-height: -webkit-fill-available;
+  @apply h-100svh m-0 p-0 scroll-smooth;
 }
 
 html.dark {
