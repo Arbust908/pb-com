@@ -11,9 +11,7 @@ function toggleTheme(e) {
 
   if (!document?.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     toggleDark()
-    const msg = 'View transitions are not supported in this browser or you have reduced motion enabled.'
-    window?.alert(msg)
-    return console.warn(msg)
+    return
   }
 
   const transition = document?.startViewTransition(() => {

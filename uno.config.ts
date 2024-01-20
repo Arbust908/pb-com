@@ -76,9 +76,6 @@ export default defineConfig({
         }`
       },
     ],
-    [/^h-([sld]{1})vh$/, ([u, w]: [string, string]) => ({ height: `100${w}vh` })],
-    [/^min-h-([sld]{1})vh$/, ([u, w]: [string, string]) => ({ 'min-height': `100${w}vh` })],
-    [/^max-h-([sld]{1})vh$/, ([u, w]: [string, string]) => ({ 'max-height': `100${w}vh` })],
     // https://twitter.com/ChromiumDev/status/1734742817812152796
     ['break-normal', { 'word-break': 'normal' }],
     ['break-phrase', { 'word-break': 'auto-phrase' }],

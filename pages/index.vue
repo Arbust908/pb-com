@@ -14,16 +14,16 @@ useHead(useUP(meta))
 
 <template>
   <section class="flex flex-col items-center p-6 text-center">
-    <Logo class="w-1/2 fill-current md:w-1/6" />
-    <h1 class="from-pink-500 to-violet-500 bg-gradient-to-r bg-clip-text text-4xl text-transparent font-light md:text-6xl md:-mt-4">
+    <Logo class="w-1/2 fill-current" />
+    <h1 class="from-pink-500 to-violet-500 bg-gradient-to-r bg-clip-text text-4xl text-transparent font-light md:(text-6xl -mt-4)">
       Pancho Blanco
     </h1>
     <h2 class="text-lg font-bold tracking-widest md:text-3xl">
       {{ $t('rol') }}
     </h2>
     <div>
-      <button>Resume</button>
       <button>Blog</button>
+      <button>Resume</button>
     </div>
   </section>
 </template>
