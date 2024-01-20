@@ -9,7 +9,6 @@ const { data } = useAsyncData('data', () => $fetch('/api/auth/getAll'))
 
 <template>
   <section>
-    <Logos mb-6 />
     <Suspense>
       <ClientOnly>
         <PageView v-if="online" />

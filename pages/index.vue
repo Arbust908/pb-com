@@ -21,5 +21,9 @@ useHead(useUP(meta))
     <h2 class="text-lg font-bold tracking-widest md:text-3xl">
       {{ $t('rol') }}
     </h2>
+    <div>
+      <button>Blog</button>
+      <button>Resume</button>
+    </div>
   </section>
 </template>
