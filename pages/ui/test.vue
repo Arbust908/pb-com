@@ -1,7 +1,3 @@
-<script lang="ts" setup>
-
-</script>
-
 <template>
   <section>
     <UiButton />
@@ -11,7 +7,3 @@
     <UiBadges /> -->
   </section>
 </template>
-
-<style>
-
-</style>
