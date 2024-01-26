@@ -29,8 +29,7 @@ async function sendMessage() {
       const data = await $fetch('/api/assistant', {
         method: 'POST',
         body: JSON.stringify(payload),
-      }) as AI_MODEL_RESPONSE
-
+      })
       messages.value.push({ id: data.id, text: getResponseMsg(data), role: 'model' })
       newMessage.value = ''
     }
