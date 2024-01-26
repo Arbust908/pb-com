@@ -1,11 +1,9 @@
-import { redisService } from '@/server/redis-service'
-
 export default defineEventHandler(async (event) => {
   try {
     const username = await readBody(event)
     console.info('User', username)
 
-    const result = await redisService.getUser(username)
+    const result = username === 'john'
     console.info(result)
     if (!result)
       return { error: 'User doesn`t exist' }
@@ -13,6 +11,6 @@ export default defineEventHandler(async (event) => {
     return { success: true, username }
   }
   catch (error) {
-    return { error: error.message }
+    return { error: error?.message }
   }
 })

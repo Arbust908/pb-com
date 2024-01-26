@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { User } from '~/types';
-
 const userStore = useUserStore()
-const { currentUser } = storeToRefs(userStore)
 
+const email = ref<string>('')
+const password = ref<string>('')
+const errorMsg = ref<string | null>(null)
 
 const fullActions = {
   LOGIN: '/api/auth/login',
@@ -18,21 +19,29 @@ const changeType = () => {
 };
 
 async function onSubmit(event: Event) {
+  errorMsg.value = null
   console.log(`onSubmit::${action.value}`)
   event.preventDefault()
 
-  console.log(currentUser.value)
   const actionUrl = fullActions[action.value];
+  const user = {
+    email: email.value,
+    password: password.value,
+  } as User;
 
   const result = await $fetch(actionUrl, {
     method: 'POST',
-    body: JSON.stringify(currentUser.value),
-  }) as { success: boolean, user: User }
+    body: JSON.stringify(user),
+  })
   console.log(result)
   if (result.success) {
-    userStore.currentUser = result.user
+    console.log(result)
+    userStore.currentUser = result.data
     userStore.isLoggedIn = true
+    console.log('userStore.currentUser', userStore.currentUser)
     await navigateTo('/profile')
+  } else if (result.error) {
+    errorMsg.value = result.error
   }
 }
 </script>
@@ -44,18 +53,19 @@ async function onSubmit(event: Event) {
         {{ action.toLowerCase() }}
       </h1>
       <form @submit="onSubmit" class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-4 items-baseline text-slate-700 dark:text-slate-200">
-          <label for="username">Username</label>
-          <input id="username" v-model="currentUser.username" type="text" class="rounded-lg px-3 py-2 bg-slate-200 dark:bg-slate-700">
+          <label for="email">Email</label>
+          <input id="email" v-model="email" type="text" class="rounded-lg px-3 py-2 bg-slate-200 dark:bg-slate-700">
           <label for="password">Password</label>
-          <input id="password" v-model="currentUser.password" type="password" class="rounded-lg px-3 py-2 bg-slate-200 dark:bg-slate-700">
+          <input id="password" v-model="password" type="password" class="rounded-lg px-3 py-2 bg-slate-200 dark:bg-slate-700">
         <button type="submit" class="capitalize rounded-lg bg-purple-700 px-4 py-2 text-slate-100 col-start-2">
           {{ action.toLowerCase() }}
         </button>
       </form>
-      <p class="mt-4">
-        Don't have an account? <NuxtLink href="/register" class="text-purple-500">
-          Register
-        </NuxtLink>
+      <p v-if="errorMsg" class="mt-4 text-red-600">
+        {{ errorMsg }}
+      </p>
+      <p v-if="userStore.currentUser" class="mt-4 text-pink-600">
+        {{ userStore.currentUser }}
       </p>
         <!-- <NuxtLink href="https://twitter.com/MasteringNuxt/status/1743321801755627994" class="text-purple-500" external>
           External

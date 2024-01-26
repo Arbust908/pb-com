@@ -25,5 +25,6 @@ useHead(useUP(meta))
       <button>Blog</button>
       <button>Resume</button>
     </div>
+    <DotHero />
   </section>
 </template>

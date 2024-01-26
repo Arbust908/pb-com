@@ -1,15 +1,15 @@
-import { createClient } from 'redis'
-import type { User } from '@/types'
+/* import { createClient } from 'redis'
+import type { User } from '@/types' */
 
 class RedisService {
-  private client
+  /* private client */
 
   constructor() {
-    this.client = createClient({ url: 'redis://localhost:6379' })
-    this.client.connect()
+    /* this.client = createClient({ url: 'redis://localhost:6379' })
+    this.client.connect() */
   }
 
-  async getUser(username: string): Promise<User | null> {
+  /* async getUser(username: string): Promise<User | null> {
     const userData = await this.client.get(username)
     return userData ? JSON.parse(userData) : null
   }
@@ -41,7 +41,7 @@ class RedisService {
       return user
     }))
     return users.filter(Boolean) as User[]
-  }
+  } */
 }
 // https://twitter.com/meijer_s/status/1745727753964462431
 export const redisService = new RedisService()

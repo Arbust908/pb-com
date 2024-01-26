@@ -19,6 +19,7 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     'nuxt-scheduler',
     '@nuxtjs/i18n',
+    '@nuxtjs/supabase',
   ],
 
   experimental: {
