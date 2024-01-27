@@ -27,6 +27,7 @@ const { print_mode } = storeToRefs(general_store)
 
 <style scoped>
 @media screen and (min-width: 768px) {
+  /* https://colorgradient.dev/ */
   div {
     display: grid;
     grid-template-areas:
