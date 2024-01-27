@@ -23,14 +23,10 @@ export default defineNuxtConfig({
   ],
 
   experimental: {
-    // when using generate, payload js assets included in sw precache manifest
-    // but missing on offline, disabling extraction it until fixed
     payloadExtraction: false,
-    inlineSSRStyles: false,
     renderJsonPayloads: true,
     typedPages: true,
-    /* componentIslands: true, */
-    
+    componentIslands: true,
   },
 
   css: [
@@ -83,4 +79,7 @@ export default defineNuxtConfig({
   i18n: {
     vueI18n: './locales/i18n.config.ts',
   },
+  supabase: {
+    redirect: false,
+  }
 })
