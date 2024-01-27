@@ -1,20 +1,19 @@
 import { defineEventHandler } from 'h3'
-import { redisService } from '@/server/redis-service'
-import { verifyPassword } from '@/server/hushHush'
+import { ToDoType } from '~/types'
 
 export default defineEventHandler(async (event) => {
   try {
     const { username, password } = await readBody(event)
-    const user = await redisService.getUser(username)
-
-    if (!user)
-      return { error: 'No user found' }
-    if (await verifyPassword(password, user.password))
+    if (!username || !password)
+      return { error: 'No data' }
+    if (username !== 'admin' || password !== 'admin')
       return { error: 'Invalid credentials' }
+
+    const user = { username, password, email: 'admin@email.com' }
 
     return { success: true, user }
   }
-  catch (error) {
+  catch (error: ToDoType) {
     return { error: error.message }
   }
 })
