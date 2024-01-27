@@ -1,16 +1,22 @@
+import { ToDoType } from "~/types"
+
+const getUser = async (username: string) => {
+  return { username, password: 'admin', email: 'admin@email.com' }
+}
+
 export default defineEventHandler(async (event) => {
   try {
     const username = await readBody(event)
     console.info('User', username)
 
-    const result = username === 'john'
+    const result = await getUser(username)
     console.info(result)
     if (!result)
       return { error: 'User doesn`t exist' }
 
     return { success: true, username }
   }
-  catch (error) {
-    return { error: error?.message }
+  catch (error: ToDoType) {
+    return { error: error.message }
   }
 })
