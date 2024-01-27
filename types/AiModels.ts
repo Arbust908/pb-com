@@ -78,3 +78,9 @@ export interface AI_MODEL_RESPONSE {
   created: number
   object: string
 }
+
+export interface ChatMessage {
+  id: string
+  text: string
+  role: 'user' | 'model'
+}

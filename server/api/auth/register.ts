@@ -1,5 +1,6 @@
 import { defineEventHandler } from 'h3'
 import { serverSupabaseClient } from '#supabase/server'
+import { ToDoType } from '~/types'
 
 /* import { z } from 'zod' */
 /* const userSchema = z.object({
@@ -28,7 +29,7 @@ export default defineEventHandler(async (event) => {
 
     return { success: true, data }
   }
-  catch (error) {
-    return { error: error?.message }
+  catch (error: ToDoType) {
+    return { error: error.message }
   }
 })

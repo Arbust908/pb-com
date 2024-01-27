@@ -1,19 +1,19 @@
+import { defineEventHandler } from 'h3'
+import { ToDoType } from '~/types'
+
 export default defineEventHandler(async (event) => {
   try {
-    const { email, password } = await readBody(event)
+    const { username, password } = await readBody(event)
+    if (!username || !password)
+      return { error: 'No data' }
+    if (username !== 'admin' || password !== 'admin')
+      return { error: 'Invalid credentials' }
 
-    if (!email || !password)
-      return { error: 'We need Email and Password to login' }
-
-    // Use serverSupabaseServiceRole to perform login logic
-    const loginResult = await serverSupabaseServiceRole.login(email, password)
-
-    if (loginResult.error)
-      return { error: loginResult.error }
+    const user = { username, password, email: 'admin@email.com' }
 
     return { success: true, user }
   }
-  catch (error) {
+  catch (error: ToDoType) {
     return { error: error.message }
   }
 })
