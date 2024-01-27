@@ -3,15 +3,6 @@ import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useGeneralStore } from '~/composables'
 
-const avatar = ref<HTMLElement>()
-const { tilt, roll, source } = useParallax(avatar)
-
-const avatar_style = computed(() => {
-  console.log(avatar.value)
-  return {
-    transform: `rotateX(${roll.value * 20}deg) rotateY(${tilt.value * 20}deg)`,
-  }
-})
 const { t, locale } = useI18n()
 
 const general_store = useGeneralStore()
@@ -31,14 +22,12 @@ function birthday() {
 
 <template>
   <section
-    class="relative mb-4 rounded bg-blueGray-200 p-4 shadow dark:bg-blueGray-800"
+    class="relative mb-4 rounded bg-slate-200 text-slate-800 p-4 shadow dark:(bg-slate-800 text-slate-200)"
   >
     <picture>
       <source type="image/webp" srcset="/img/avatar.webp">
       <img
-        ref="avatar"
-        :style="avatar_style"
-        class="right-0 top-0 mb-4 h-32 w-full border-2 border-blueGray-500 rounded object-cover shadow sm:absolute md:w-40 sm:h-40 sm:w-32 sm:-m-2"
+        class="right-0 top-0 mb-4 h-32 w-full border-2 border-slate-500 rounded object-cover shadow sm:absolute md:w-40 sm:h-40 sm:w-32 sm:-m-2"
         src="/img/avatar.jpg"
         :alt="t('avatar.desc')"
       >
@@ -74,7 +63,7 @@ function birthday() {
         <h4 class="mb-1 font-bold underline opacity-75">
           {{ t(`skills.${group}.title`) }}
         </h4>
-        <p class="text-sm text-blueGray-800 dark:text-blueGray-200">
+        <p class="text-sm text-slate-800 dark:text-slate-200">
           {{ t(`skills.${group}.list`) }}
         </p>
       </article>
@@ -92,7 +81,7 @@ function birthday() {
         <h4 class="mb-1 font-bold">
           {{ t(`tongues.${lang}.name`) }}
         </h4>
-        <p class="text-blueGray-800 dark:text-blueGray-200">
+        <p class="text-slate-800 dark:text-slate-200">
           {{ t(`tongues.${lang}.level`) }}
         </p>
       </article>

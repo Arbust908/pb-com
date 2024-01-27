@@ -35,9 +35,9 @@ function hasTranslation(key: string) {
       v-for="job in exp_list"
       :key="job"
       :class="
-        !hasTranslation(`exp.${job}.end`) ? 'border-violet-700 dark:border-violet-300 shadow-violet-500' : 'dark:shadow-gray-800'
+        !hasTranslation(`exp.${job}.end`) ? 'border-violet-700 dark:border-violet-300 shadow-violet-500' : 'dark:shadow-gray-800 dark:border-slate-700'
       "
-      class="mb-4 rounded p-4 shadow dark:border-blueGray-700 dark:shadow-md"
+      class="mb-4 rounded p-4 exp-card text-slate-800 dark:text-slate-200 shadow"
     >
       <h3
         class="mb-2 flex flex-col font-bold lg:flex-row sm:flex-row md:flex-col"
@@ -88,3 +88,15 @@ function hasTranslation(key: string) {
     </article>
   </section>
 </template>
+
+<style scoped>
+.exp-card {
+  background-color: transparent;
+  background-image: radial-gradient(rgba(0,0,0,0) 2px,theme('colors.slate.100') 2px);
+  background-size: 4px 4px;
+  backdrop-filter: brightness(100%) blur(3px);
+}
+.dark .exp-card {
+  background-image: radial-gradient(rgba(0,0,0,0) 2px,theme('colors.slate.700') 2px);
+}
+</style>
