@@ -75,6 +75,10 @@ export default defineNuxtConfig({
 
   devtools: {
     enabled: true,
+
+    timeline: {
+      enabled: true,
+    },
   },
   i18n: {
     vueI18n: './locales/i18n.config.ts',
