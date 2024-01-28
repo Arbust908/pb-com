@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { storeToRefs } from 'pinia'
-import { useGeneralStore } from '~/composables'
-
 const { t, locale } = useI18n()
 
 const general_store = useGeneralStore()
@@ -22,12 +18,12 @@ function birthday() {
 
 <template>
   <section
-    class="relative mb-4 rounded bg-slate-200 text-slate-800 p-4 shadow dark:(bg-slate-800 text-slate-200)"
+    class="relative mb-4 rounded bg-slate-200/60 text-slate-800 p-4 shadow backdrop-blur-xl dark:(bg-slate-800/60 text-slate-200)"
   >
     <picture>
       <source type="image/webp" srcset="/img/avatar.webp">
       <img
-        class="right-0 top-0 mb-4 h-32 w-full border-2 border-slate-500 rounded object-cover shadow sm:absolute md:w-40 sm:h-40 sm:w-32 sm:-m-2"
+        class="right-0 top-0 mb-4 h-32 w-full border-2 border-slate-500 rounded object-cover shadow sm:(absolute h-40 w-32 -m-2) md:w-40"
         src="/img/avatar.jpg"
         :alt="t('avatar.desc')"
       >

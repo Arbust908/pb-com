@@ -18,7 +18,7 @@ export default defineEventHandler(async () => {
     a: {
       '@aria-current': 'page',
       '@href': '/blog/',
-      '@class': 'router-link-active router-link-exact-active rounded bg-blueGray-300 dark:bg-blueGray-700 hover:shadow-xl hover:bg-blueGray-400 dark:hover:bg-blueGray-600 transition transform hover:scale-105',
+      '@class': 'router-link-active router-link-exact-active rounded bg-slate-300 dark:bg-slate-700 hover:shadow-xl hover:bg-slate-400 dark:hover:bg-slate-600 transition transform hover:scale-105',
       '@data-v-d75a0a44': '',
       'div': [
         {
