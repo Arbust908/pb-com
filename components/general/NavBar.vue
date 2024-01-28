@@ -11,7 +11,7 @@ const { print_mode } = storeToRefs(general_store)
 <template>
   <header
     v-if="!print_mode"
-    class="w-full flex flex-col items-center bg-blueGray-200 p-2 sm:flex-row sm:justify-between dark:bg-blueGray-800"
+    class="w-full flex flex-col items-center bg-slate-200 p-2 sm:flex-row sm:justify-between dark:bg-slate-800"
   >
     <NuxtLink to="/" class="rounded-lg px-2 py-1 hover:text-violet-500">
       <h1 class="flex items-center text-lg font-bold">
@@ -38,7 +38,7 @@ const { print_mode } = storeToRefs(general_store)
           Clases
         </NuxtLink> -->
       <NuxtLink
-        class="rounded-lg bg-violet-400 px-4 py-1 text-blueGray-900 transition duration-150 ease-out dark:bg-violet-600 dark:text-blueGray-100 hover:text-violet-500 hover:shadow dark:hover:bg-violet-800"
+        class="rounded-lg bg-violet-400 px-4 py-1 text-slate-900 transition duration-150 ease-out dark:bg-violet-600 dark:text-slate-100 hover:text-violet-500 hover:shadow dark:hover:bg-violet-800"
         to="/blog"
       >
         Blog

@@ -83,6 +83,31 @@ export default defineConfig({
     ['text-pretty', { 'text-wrap': 'pretty;' }],
     ['text-stable', { 'text-wrap': 'stable;' }],
     ['grid-cols-subgrid',	{ 'grid-template-columns': 'subgrid;' }],
+    [/^bg-checked$/, ([,], { rawSelector, currentSelector, variantHandlers, theme }) => {
+      const selector = `.${currentSelector}`
+      const mainColor = theme.colors.slate[200];
+      const darkColor = theme.colors.slate[700];
+
+      return `
+        ${selector} {
+            background-color: transparent;
+            background-image: 
+              radial-gradient(
+                rgba(0,0,0,0) 2px,
+                ${mainColor} 2px
+              );
+            background-size: 4px 4px;
+            backdrop-filter: brightness(100%) blur(3px);
+         }
+        .dark ${selector} {
+            background-image: 
+              radial-gradient(
+                rgba(0,0,0,0) 2px,
+                ${darkColor} 2px
+              );
+         }
+      `
+    }],
   ],
   presets: [
     presetUno(),

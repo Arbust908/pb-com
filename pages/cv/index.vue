@@ -16,17 +16,20 @@ const { print_mode } = storeToRefs(general_store)
 </script>
 
 <template>
-  <div :class="print_mode && 'print'" class="relative layout-grid-feature">
-    <CvSideNav v-if="!print_mode" class="lang" />
-    <CvPersonal class="personal" />
-    <CvExperiences ref="exp" class="exp" />
-    <CvStudies ref="study" class="study" />
-    <BackToTopBtn />
+  <div :class="print_mode && 'print'" class="layout-grid-feature relative">
+    <BlobyOne class="fixed z-0 -top-4 -right-8 w-90 filter-blur-2xl opacity-60" />
+    <BlobyTwo class="fixed z-0 -bottom-7 -left-6 w-100 filter-blur-2xl opacity-60" />
+    <CvSideNav v-if="!print_mode" class="lang relative z-10" />
+    <CvPersonal class="personal relative z-10" />
+    <CvExperiences ref="exp" class="exp relative z-10" />
+    <CvStudies ref="study" class="study relative z-10" />
+    <BackToTopBtn class="z-20" />
   </div>
 </template>
 
 <style scoped>
 @media screen and (min-width: 768px) {
+  /* https://colorgradient.dev/ */
   div {
     display: grid;
     grid-template-areas:
@@ -34,9 +37,9 @@ const { print_mode } = storeToRefs(general_store)
       'personal exp'
       '. exp'
       '. study';
-    grid-template-columns: 400px clamp(320px, 60%, 640px);
+    grid-template-columns: 360px 1fr;
     grid-template-rows: 64px 640px 1fr auto;
-    column-gap: 1.5rem;
+    @apply grid gap-x-4;
   }
   .lang {
     grid-area: lang;
@@ -52,6 +55,17 @@ const { print_mode } = storeToRefs(general_store)
   }
   div.print {
     grid-template-rows: 20px 640px 1fr auto;
+  }
+}
+@screen lg {
+  div {
+    grid-template-areas:
+      'lang .'
+      'personal exp'
+      '. exp'
+      '. study';
+    grid-template-columns: 400px clamp(320px, 60%, 640px);
+    grid-template-rows: 64px 640px 1fr auto;
   }
 }
 </style>
