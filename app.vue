@@ -18,7 +18,6 @@ useHead({
 html,
 body,
 #__nuxt {
-  
   min-height: -webkit-fill-available;
   @apply h-100svh m-0 p-0 scroll-smooth;
 }
