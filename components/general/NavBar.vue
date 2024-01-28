@@ -29,7 +29,7 @@ const { print_mode } = storeToRefs(general_store)
         class="rounded-lg px-2 py-1 transition duration-150 ease-out hover:text-violet-500 hover:underline"
         to="/cv"
       >
-        Curriculum Vitae
+        Resume
       </NuxtLink>
       <!-- <NuxtLink
           class="rounded-lg px-2 py-1 hover:text-violet-500 hover:shadow"
