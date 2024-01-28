@@ -8,7 +8,7 @@ const { print_mode } = storeToRefs(general_store)
 
 <template>
   <footer
-    class="flex flex-wrap items-center justify-between bg-blueGray-200 px-6 pb-1 pt-2 text-sm dark:bg-blueGray-800"
+    class="flex flex-wrap items-center justify-between bg-slate-200 px-6 pb-1 pt-2 text-sm dark:bg-slate-800"
   >
     <section>
       <a

@@ -31,7 +31,7 @@ const articles = [{ title: 'Nuevo Sitio', description: 'Nuevamente empezamos con
         v-for="article of articles"
         :key="article.slug"
         to="/blog/"
-        class="transform rounded bg-blueGray-300 transition hover:scale-105 dark:bg-blueGray-700 hover:bg-blueGray-400 hover:shadow-xl dark:hover:bg-blueGray-600"
+        class="transform rounded bg-slate-300 transition hover:scale-105 dark:bg-slate-700 hover:bg-slate-400 hover:shadow-xl dark:hover:bg-slate-600"
       >
         <div
           class="h-24 w-full rounded-t from-rose-500 to-violet-500 bg-gradient-to-tl"

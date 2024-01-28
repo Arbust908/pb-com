@@ -43,8 +43,12 @@
     "yaml"
   ],
   "cSpell.words": [
+    "Bloby",
+    "nuxtjs",
+    "ollama",
     "popout",
     "subgrid",
+    "Supabase",
     "Vite"
   ],
   "i18n-ally.localesPaths": [

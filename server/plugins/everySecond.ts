@@ -1,7 +1,7 @@
 import { useScheduler } from '#scheduler'
 
 export default defineNitroPlugin(() => {
-  startScheduler()
+  /* startScheduler() */
 })
 
 const mangaUrlList = [
@@ -16,7 +16,7 @@ function startScheduler() {
   const scheduler = useScheduler()
 
   scheduler.run(() => {
-    console.info('cool beans! I run once a second! 😀', new Date().toISOString())
+    console.info('cool beans! I run every Hour! 😀', new Date().toISOString())
   }).hourly()
 
   // create as many tasks as you want here
