@@ -1,9 +1,19 @@
 export default {
+  damandio: {
+    rol: 'Ingeniero Front-End',
+    company: 'Demand.io',
+    start: '10/18/2022',
+    end: null,
+    description:
+      'Como Ingeniero Front-End, colaboro con el equipo para desarrollar y mantener múltiples productos. Nuestro stack principal se basa en Vue, utilizando Nuxt 3, UnoCSS o TailwindCSS y TypeScript. Nuestra línea de productos incluye una aplicación desarrollada usando React Native, un proyecto en el que estoy activamente involucrado. Adicionalmente, participo en sesiones de brainstorming para nuevas funcionalidades en colaboración con los equipos de UX y Back-End. Lideré una iniciativa para migrar nuestro código legacy a nuestro stack actual.',
+    more: null,
+      /* 'As Front-end Lead I lead a team of 5 developers in the development of multiple web applications. Our main stack is based on Vue (Vite, Vue 3, UnoCSS or TailwindCSS, Pinia, Vue Router, and Typescript). Even so, we are now migrating our first proprietary product to Next.js. Beyond this product, we also have and maintain a management system for a logistics company in the form of a PWA, a management panel for our mining companies, and two institutional pages. All these products contain i18n to handle multiple languages ​​(usually English and Spanish).', */
+  },
   bitpatagonia: {
     rol: 'Front-End Sr',
     company: 'BitPatagonia',
     start: '07/01/2020',
-    end: null,
+    end: '10/18/2022',
     description:
     'Dirijo un equipo de 5 en el desarrollo de multiples aplicaciones web.   Actualmente estamos migrando nuestra SaaS de el stack actual (Vite, Vue 3, UnoCSS, Pinia y Typescript) a un estack mas popular en el mercado basado en React con Next. Tambien mantenemos un producto de gestion para una empresa de logistica nacional con Vue.  Todos estos y nuestos otros productos contienen i18n para manejar multiples idiomas (generalmente Ingles y Castellano).',
     more:
@@ -17,7 +27,6 @@ export default {
     description:
       'Desarrollar y mantener el Producto Biotrack en colaboracion abierta con el equipo de Backend. Usando Vue con Typscript, Vuetify (por Estándares de Accesibilidad, WCAG & ADA), Vuex y Vue Router para completar los tickets de Jira entregados por los POs (Product Owners) de Estados Unidos.',
     more: null,
-    //   "Point More is an Agency I started with 3 other ex-Digital House developers. Even though we all are Full Stack developers I'm the main Front End dev. As a team, we take projects too large in scope for one dev. Usually, we build Complex eCommerce that need to have a pristine SEO ranking for that end I apply my knowledge to build PWA ready web apps that manage session information in Vuex states. For external data y connect to backend services via REST APIs using Axios. Depending on client demand we use an existing Component Library (like Vue-bootstrap), if not I usually build a custom component library with the help of TailwindCSS styling.  If our client doesn't have a design of their own I also take part in the Design phase using Adobe XD  From time to time we have taken projects that did have an existing codebase in other languages or frameworks which we work on top (Laravel, React, Angular, Plain HTML + CSS + Alpine)",
   },
   forian: {
     rol: 'Desarrollador Front End Sr',
@@ -27,7 +36,6 @@ export default {
     description:
       'Desarrollar y mantener el Producto Biotrack en colaboracion abierta con el equipo de Backend. Usando Vue con Typscript, Vuetify (por Estándares de Accesibilidad, WCAG & ADA), Vuex y Vue Router para completar los tickets de Jira entregados por los POs (Product Owners) de Estados Unidos.',
     more: null,
-    //   "Point More is an Agency I started with 3 other ex-Digital House developers. Even though we all are Full Stack developers I'm the main Front End dev. As a team, we take projects too large in scope for one dev. Usually, we build Complex eCommerce that need to have a pristine SEO ranking for that end I apply my knowledge to build PWA ready web apps that manage session information in Vuex states. For external data y connect to backend services via REST APIs using Axios. Depending on client demand we use an existing Component Library (like Vue-bootstrap), if not I usually build a custom component library with the help of TailwindCSS styling.  If our client doesn't have a design of their own I also take part in the Design phase using Adobe XD  From time to time we have taken projects that did have an existing codebase in other languages or frameworks which we work on top (Laravel, React, Angular, Plain HTML + CSS + Alpine)",
   },
   pointmore: {
     rol: 'Desarrollo Full Stack Sr',
@@ -57,9 +65,9 @@ export default {
     description:
       'Dictar clases de programación. Html + CSS, PHP, SQL, Laravel y JS',
     more:
-      'Estuve a la cabeza del aula en varias comisiones durante 5 meses enseñando y capacitando a no desarrolladores en nuestras tecnologías Full-Stack (HTML, CSS, JS, SQL y PHP con Laravel). El plan de estudios comenzó con páginas web simples con HTML y CSS hasta un nivel avanzado con diseños receptivos para dispositivos móviles. Luego nos embarcamos en el backend con respuestas de servidor simples con PHP y páginas dinámicas renderizadas por el servidor. Aprendimos bases de datos SQL con MySQL e hicimos conexiones PDO con nuestros backends PHP.   Después de eso, expliqué las bases de OOP (Programación orientada a objetos), el patrón de diseño SOLID y ACID.   Después de una unidad de concepto pesado, comenzamos a construir una aplicación de pila completa con Laravel como marco. Finalmente, exploramos las páginas dinámicas del cliente agregando Javascript a las aplicaciones de Laravel.   Todos los estudiantes fueron evaluados en una aplicación que tuvieron que construir por su cuenta en el lapso de 1 mes que consta de uno o más CRUD, un inicio de sesión con un perfil de usuario y frontales dinámicos.   Como plus enseñé a través de talleres CSS Grid, animación con keyframes y SASS',
+      'Estuve a la cabeza del aula en varias comisiones durante 5 meses enseñando y capacitando a no desarrolladores en nuestras tecnologías Full-Stack (HTML, CSS, JS, SQL y PHP con Laravel). El plan de estudios comenzó con páginas web simples con HTML y CSS hasta un nivel avanzado con diseños receptivos para dispositivos móviles. Luego nos embarcamos en el backend con respuestas de servidor simples con PHP y páginas dinámicas renderizadas por el servidor. Aprendimos bases de datos SQL con MySQL e hicimos conexiones PDO con nuestros backends PHP.   Después de eso, expliqué las bases de OOP (Programación orientada a objetos), el patrón de diseño SOLID y ACID.   Después de una unidad de concepto pesado, comenzamos a construir una aplicación de pila completa con Laravel como marco. Finalmente, exploramos las páginas dinámicas del cliente agregando Javascript a las aplicaciones de Laravel.   Todos los estudiantes fueron evaluados en una aplicación que tuvieron que construir por su cuenta en el lapso de 1 mes que consta de uno o más CRUD, un inicio de sesión con un perfil de usuario y frontales dinámicos. Como plus enseñé a través de talleres CSS Grid, animación con keyframes y SASS',
   },
-  netdreams: {
+ /*  netdreams: {
     rol: 'Production Design',
     company: 'NetDreams',
     start: '01/01/2016',
@@ -84,5 +92,5 @@ export default {
     end: '12/01/2009',
     description: 'Animación, nexo arte/programación y diseño.',
     more: null,
-  },
+  }, */
 }
