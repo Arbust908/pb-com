@@ -1,7 +1,7 @@
 export default {
   es: {
     name: 'Spanish',
-    level: 'Mother Tounge',
+    level: 'Mother Tongue',
   },
   en: {
     name: 'English',
