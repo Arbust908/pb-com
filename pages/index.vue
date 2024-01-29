@@ -35,6 +35,6 @@ useHead(useUP(meta))
       Resume
       </NuxtLink>
     </div>
-    <DotHero />
+    <!-- <DotHero /> -->
   </section>
 </template>

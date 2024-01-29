@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import type { User } from '~/types';
+import type { ActionTypes, User } from '~/types';
+import { fullActions } from '~/types';
 const userStore = useUserStore()
 
 const email = ref<string>('')
 const password = ref<string>('')
 const errorMsg = ref<string | null>(null)
-
-const fullActions = {
-  LOGIN: '/api/auth/login',
-  REGISTER: '/api/auth/register',
-} as const;
-type ActionTypes = keyof typeof fullActions;
 
 const action = ref<ActionTypes>('LOGIN');
 
