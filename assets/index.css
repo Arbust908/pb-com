@@ -1,0 +1,11 @@
+/* https://www.stefanjudis.com/today-i-learned/how-to-align-the-text-of-the-last-paragraph-line/*/
+ /* p {
+  text-align: justify;
+  text-align-last: center;
+}
+p.left {
+  text-align-last: left;
+}
+p.right {
+  text-align-last: right;
+} */
