@@ -11,6 +11,7 @@ export interface Exercise extends BaseExercise {
   sets: number
   reps: number
   weight: number
+  time: number
 }
 
 export interface BaseWorkout {
@@ -20,4 +21,5 @@ export interface BaseWorkout {
 
 export interface Workout extends BaseWorkout {
   exercises: Exercise[]
+  totalTime: number
 }

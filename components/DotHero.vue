@@ -29,7 +29,7 @@ onMounted(() => {
             canvas.value.style.maskImage = "url('/perlin-noise.webp')";
 
             // Apply keyframes
-            canvas.value.style.webkitMaskPosition = '0px 0px';
+            canvas.value.style.maskPosition = '0px 0px';
         }
     }
 });

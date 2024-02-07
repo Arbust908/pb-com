@@ -12,5 +12,5 @@ watch(user, () => {
 
 </script>
 <template>
-  <div>Waiting for login...</div>
+  <div class="flex-middle text-2xl">Waiting for login...</div>
 </template>

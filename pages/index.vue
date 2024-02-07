@@ -14,7 +14,7 @@ useHead(useUP(meta))
 
 <template>
   <section class="flex flex-col items-center gap-4 p-6 text-center">
-    <Logo class="w-1/2 fill-current" />
+    <Logo class="w-1/2 fill-current logo" />
     <h1 class="from-pink-500 to-violet-500 bg-gradient-to-r bg-clip-text text-4xl text-transparent font-light md:(text-6xl -mt-4)">
       Pancho Blanco
     </h1>
@@ -38,3 +38,18 @@ useHead(useUP(meta))
     <!-- <DotHero /> -->
   </section>
 </template>
+
+<style scoped>
+.logo {
+  view-transition-name: logo;
+}
+h1 {
+  view-transition-name: h1
+}
+h2 {
+  view-transition-name: h2
+}
+div {
+  view-transition-name: content
+}
+</style>

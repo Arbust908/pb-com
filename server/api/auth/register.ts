@@ -14,12 +14,12 @@ export default defineEventHandler(async (event) => {
   const client = await serverSupabaseClient(event);
   try {
     const { email, password } = await readBody(event) as User
-    console.log({ email, password })
+
     if (!email || !password)
       return { error: 'No data' }
 
     const { data, error } = await client.auth.signUp({ email, password })
-    console.info(data, error)
+
     if (error)
       throw new Error(error.message)
 
