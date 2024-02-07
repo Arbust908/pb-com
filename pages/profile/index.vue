@@ -20,11 +20,11 @@ onMounted(() => {
       Profile Page
     </h1>
     <p class="mb-4">
-      Welcome to your profile page {{ currentUser.username }}!
+      Welcome to your profile!
     </p>
-    <p class="mb-4">
-      {{ currentUser.email }}!
-    </p>
+    <pre class="mb-4">
+      {{ currentUser }}!
+    </pre>
 
     <button v-if="isWebAuthNCompatible" class="rounded bg-blue-500 px-4 py-2 text-white font-bold hover:bg-blue-700">
       Register PassKey

@@ -105,3 +105,24 @@ type Props = {
         salary: number
       }
   )
+
+  export type Booleanish = boolean | 'true' | 'false';
+  export type Numberish = number | `${number}`;
+
+/* 
+type ServerData = {
+    status: "loading" | "success" | "error";
+    error?: Error
+    data?: { id: number, name: string }
+}
+*/
+
+type ServerData = {
+    status: "loading"
+} | {
+    status: "success",
+    data: { id: number, name: string }
+} | {
+    status: "error",
+    error: Error
+}

@@ -27,6 +27,12 @@ const { print_mode } = storeToRefs(general_store)
       </ClientOnly>
       <NuxtLink
         class="rounded-lg px-2 py-1 transition duration-150 ease-out hover:text-violet-500 hover:underline"
+        to="/about"
+      >
+        About
+      </NuxtLink>
+      <NuxtLink
+        class="rounded-lg px-2 py-1 transition duration-150 ease-out hover:text-violet-500 hover:underline"
         to="/cv"
       >
         Resume
