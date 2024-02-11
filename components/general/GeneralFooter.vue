@@ -11,14 +11,23 @@ const { print_mode } = storeToRefs(general_store)
     class="flex flex-wrap items-center justify-between bg-slate-200 px-6 pb-1 pt-2 text-sm dark:bg-slate-800"
   >
     <section>
-      <a
+      <NuxtLink
         href="https://github.com/Arbust908"
         class="inline-flex items-center p-3 md:py-0"
         title="Github profile"
+        external
       >
         <span v-if="print_mode" class="mr-2">https://github.com/Arbust908</span>
-        <i class="i-carbon:logo-github inline h-6 w-6" />
-      </a>
+        <i class="i-ri:github-fill inline h-6 w-6" />
+      </NuxtLink>
+    </section>
+    <section>
+      <NuxtLink 
+        to="/ask/ai"
+        class="inline-flex items-center p-3 md:py-0"
+      >
+        <i class="i-ri:chat-smile-3-fill inline h-6 w-6" />
+      </NuxtLink>
     </section>
     <div class="awesome-line" />
   </footer>

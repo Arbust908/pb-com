@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
 
   try {
       const response = await ollama.chat({
-        model: 'dolphin-mixtral',
+        model: model,
         messages: [{ role: 'user', content: message }],
       })
       console.log('response', response) 

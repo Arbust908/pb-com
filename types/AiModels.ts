@@ -80,7 +80,7 @@ export interface AI_MODEL_RESPONSE {
 }
 
 export interface ChatMessage {
-  id: string
+  id?: string
   text: string
-  role: 'user' | 'model'
+  role: 'user' | 'model' | 'error'
 }
