@@ -62,9 +62,6 @@ async function onSubmit(event: Event) {
       <p v-if="userStore.currentUser" class="mt-4 text-pink-600">
         {{ userStore.currentUser }}
       </p>
-        <!-- <NuxtLink href="https://twitter.com/MasteringNuxt/status/1743321801755627994" class="text-purple-500" external>
-          External
-        </NuxtLink> -->
         <button class="p-4 absolute bottom-1 right-1" @click="changeType">
           <p class="bg-slate-500 rounded-full h-1 w-1"/>
         </button>
