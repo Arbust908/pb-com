@@ -1,8 +1,8 @@
 <script setup lang='ts'>
-type Props = {
-    job: string
+interface Props {
+  job: string
 }
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
 const general_store = useGeneralStore()
 const { print_mode } = storeToRefs(general_store)
@@ -23,9 +23,8 @@ function onClick() {
 }
 
 watch(print_mode, (isPrint) => {
-    if (isPrint) {
-        isExpanded.value = true
-    }
+  if (isPrint)
+    isExpanded.value = true
 })
 
 onMounted(() => {
@@ -39,10 +38,10 @@ onMounted(() => {
       :class="
         !hasTranslation(`exp.${job}.end`) ? 'border-violet-700 dark:border-violet-300' : 'border-slate-300 dark:border-slate-600'
       "
-      class="mb-4 rounded p-4 bg-checked border text-slate-800 dark:text-slate-200 bg-checked grid grid-cols-1 gap-2"
+      class="grid grid-cols-1 mb-4 gap-2 border rounded p-4 text-slate-800 bg-checked bg-checked dark:text-slate-200"
     >
       <h3
-        class="flex flex-col font-bold lg:flex-row sm:flex-row md:flex-col cursor-pointer"
+        class="flex flex-col cursor-pointer font-bold lg:flex-row sm:flex-row md:flex-col"
         @click="onClick"
       >
         <span>{{ $t(`exp.${job}.rol`) }}</span>
@@ -87,6 +86,6 @@ onMounted(() => {
           }}
         </button>
       </aside>
-    </article> 
+    </article>
   </div>
 </template>

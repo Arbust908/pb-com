@@ -1,6 +1,63 @@
 <!--
   This example requires some changes to your config:
-  
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<script setup>
+</script>
+
+<!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<script setup>
+  import { EnvelopeIcon } from '@heroicons/vue/20/solid'
+  </script>
+
+<!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<script setup>
+import { QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
+</script>
+
+<script setup>
+import { BarsArrowUpIcon, UsersIcon } from '@heroicons/vue/20/solid'
+</script>
+
+  <!--
+  This example requires some changes to your config:
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -13,18 +70,17 @@
   ```
 -->
 <template>
-    <div>
-      <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
-      <div class="mt-2">
-        <input type="email" name="email" id="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="you@example.com" />
-      </div>
+  <div>
+    <label for="email" class="block text-sm text-gray-900 font-medium leading-6">Email</label>
+    <div class="mt-2">
+      <input id="email" type="email" name="email" class="block w-full border-0 rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset sm:text-sm placeholder:text-gray-400 sm:leading-6 focus:ring-2 focus:ring-indigo-600 focus:ring-inset" placeholder="you@example.com">
     </div>
-  </template>
-
+  </div>
+</template>
 
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -46,10 +102,9 @@
   </div>
 </template>
 
-
-<!--
+  <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -73,14 +128,10 @@
       <p class="mt-2 text-sm text-red-600" id="email-error">Not a valid email address.</p>
     </div>
   </template>
-  
-  <script setup>
-  import { ExclamationCircleIcon } from '@heroicons/vue/20/solid'
-  </script>
 
-  <!--
+<!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -101,32 +152,16 @@
   </div>
 </template>
 
-
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
-<template>
+  <template>
     <div>
       <label for="email" class="sr-only">Email</label>
       <input type="email" name="email" id="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="you@example.com" />
     </div>
   </template>
-  
 
   <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -150,21 +185,6 @@
   </div>
 </template>
 
-
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
     <div>
       <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
@@ -176,14 +196,10 @@
       </div>
     </div>
   </template>
-  
-  <script setup>
-  import { EnvelopeIcon } from '@heroicons/vue/20/solid'
-  </script>
 
-  <!--
+<!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -207,13 +223,9 @@
   </div>
 </template>
 
-<script setup>
-import { QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
-</script>
-
-<!--
+  <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -234,11 +246,10 @@ import { QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
       </div>
     </div>
   </template>
-  
 
-  <!--
+<!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -262,10 +273,9 @@ import { QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
   </div>
 </template>
 
-
-<!--
+  <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -291,11 +301,10 @@ import { QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
       </div>
     </div>
   </template>
-  
 
-  <!--
+<!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -324,10 +333,9 @@ import { QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
   </div>
 </template>
 
-
-<!--
+  <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -358,22 +366,7 @@ import { QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
       </div>
     </div>
   </template>
-  
 
-  <!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
   <div>
     <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Search candidates</label>
@@ -392,13 +385,9 @@ import { QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
   </div>
 </template>
 
-<script setup>
-import { BarsArrowUpIcon, UsersIcon } from '@heroicons/vue/20/solid'
-</script>
-
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -450,11 +439,10 @@ import { BarsArrowUpIcon, UsersIcon } from '@heroicons/vue/20/solid'
       </fieldset>
     </div>
   </template>
-  
 
   <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -473,10 +461,9 @@ import { BarsArrowUpIcon, UsersIcon } from '@heroicons/vue/20/solid'
   </div>
 </template>
 
-
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -500,11 +487,10 @@ import { BarsArrowUpIcon, UsersIcon } from '@heroicons/vue/20/solid'
       </div>
     </div>
   </template>
-  
 
   <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -523,10 +509,9 @@ import { BarsArrowUpIcon, UsersIcon } from '@heroicons/vue/20/solid'
   </div>
 </template>
 
-
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -546,11 +531,10 @@ import { BarsArrowUpIcon, UsersIcon } from '@heroicons/vue/20/solid'
       </div>
     </div>
   </template>
-  
 
   <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -574,7 +558,7 @@ import { BarsArrowUpIcon, UsersIcon } from '@heroicons/vue/20/solid'
 
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -597,4 +581,3 @@ import { BarsArrowUpIcon, UsersIcon } from '@heroicons/vue/20/solid'
       </div>
     </div>
   </template>
-  

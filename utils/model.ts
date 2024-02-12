@@ -18,6 +18,6 @@ export function getResponseMsg(resp: AI_MODEL_RESPONSE, structure: 'ollama' | 'o
 
 export function getNewId(msgs?: ChatMessage[]) {
   const lastId = msgs[msgs.length - 1]?.id || '0'
-  const newId = parseInt(lastId) + 1
+  const newId = Number.parseInt(lastId) + 1
   return newId.toString()
 }

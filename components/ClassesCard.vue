@@ -1,45 +1,3 @@
-<template>
-  <nuxt-link
-    :to="`/clases/${slug}`"
-    class="flex justify-center pt-10 m-auto lg:w-1/4 lg:mx-6 lg:my-8"
-    @mouseenter.native="isHover = true"
-    @mouseleave.native="isHover = false"
-  >
-    <div class="relative w-64 h-48">
-      <section
-        class="flex items-center mt-4 ml-4 border-8 border-gray-700 border-solid rounded-lg"
-      >
-        <div class="w-1/4 h-40"></div>
-        <div class="w-3/4 h-32 pr-2">
-          <h3 class="pt-1 text-xl font-semibold">{{ title }}</h3>
-          <p class="pt-1 text-sm opacity-75">
-            {{ description }}
-          </p>
-        </div>
-      </section>
-      <section
-        :class="[color, isHover ? 'rotate-45' : 'rotate-0']"
-        class="absolute top-0 left-0 z-10 p-2 font-bold text-center rounded-lg duration-150 transition transform ease-in-out"
-      >
-        <div
-          class="z-20 w-12 h-12 bg-white rounded-full flex justify-center items-center shadow-md"
-        >
-          <Icon
-            :class="[iconColor, isHover ? '-rotate-45' : 'rotate-0']"
-            class="fill-current w-8 h-8 duration-150 transition transform ease-in-out"
-            :icon="icon"
-            :weight="weight"
-          />
-        </div>
-      </section>
-      <aside
-        :class="[isHover ? 'w-24' : 'w-10', color]"
-        class="absolute bottom-0 right-0 z-30 h-3 transition-all duration-150 ease-out rounded-xl -mr-3 mb-2"
-      />
-    </div>
-  </nuxt-link>
-</template>
-
 <script>
 export default {
   props: {
@@ -80,3 +38,47 @@ export default {
   },
 }
 </script>
+
+<template>
+  <nuxt-link
+    :to="`/clases/${slug}`"
+    class="m-auto flex justify-center pt-10 lg:mx-6 lg:my-8 lg:w-1/4"
+    @mouseenter.native="isHover = true"
+    @mouseleave.native="isHover = false"
+  >
+    <div class="relative h-48 w-64">
+      <section
+        class="ml-4 mt-4 flex items-center border-8 border-gray-700 rounded-lg border-solid"
+      >
+        <div class="h-40 w-1/4" />
+        <div class="h-32 w-3/4 pr-2">
+          <h3 class="pt-1 text-xl font-semibold">
+            {{ title }}
+          </h3>
+          <p class="pt-1 text-sm opacity-75">
+            {{ description }}
+          </p>
+        </div>
+      </section>
+      <section
+        :class="[color, isHover ? 'rotate-45' : 'rotate-0']"
+        class="absolute left-0 top-0 z-10 transform rounded-lg p-2 text-center font-bold transition duration-150 ease-in-out"
+      >
+        <div
+          class="z-20 h-12 w-12 flex items-center justify-center rounded-full bg-white shadow-md"
+        >
+          <Icon
+            :class="[iconColor, isHover ? '-rotate-45' : 'rotate-0']"
+            class="h-8 w-8 transform fill-current transition duration-150 ease-in-out"
+            :icon="icon"
+            :weight="weight"
+          />
+        </div>
+      </section>
+      <aside
+        :class="[isHover ? 'w-24' : 'w-10', color]"
+        class="absolute bottom-0 right-0 z-30 mb-2 h-3 rounded-xl transition-all duration-150 ease-out -mr-3"
+      />
+    </div>
+  </nuxt-link>
+</template>

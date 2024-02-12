@@ -1,9 +1,9 @@
 import ollama from 'ollama'
 
 export default defineEventHandler(async (event) => {
-    console.log('event', event)
-    const config = useRuntimeConfig(event)
-    const body = await readBody(event) as { message: string, model?: string }
+  console.log('event', event)
+  const config = useRuntimeConfig(event)
+  const body = await readBody(event) as { message: string, model?: string }
 
   // const query = getQuery(event)
   // const cookies = parseCookies(event)
@@ -19,20 +19,17 @@ export default defineEventHandler(async (event) => {
 
   const { model = '', message } = body
   console.log('model', model, 'message', message)
-  
 
   try {
-      const response = await ollama.chat({
-        model: model,
-        messages: [{ role: 'user', content: message }],
-      })
-      console.log('response', response) 
-      return response
+    const response = await ollama.chat({
+      model,
+      messages: [{ role: 'user', content: message }],
+    })
+    console.log('response', response)
+    return response
   }
-    catch (error) {
-        console.error(error)
-        return { error: error?.message }
-    }
-    
- 
+  catch (error) {
+    console.error(error)
+    return { error: error?.message }
+  }
 })

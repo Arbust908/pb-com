@@ -10,7 +10,11 @@
     "start": "node .output/server/index.mjs",
     "start:generate": "npx serve .output/public",
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "ollama": "^0.4.6"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.4.4",
@@ -42,8 +46,5 @@
     "typescript": "^5.3.3",
     "valibot": "^0.25.0",
     "vue-tsc": "^1.8.25"
-  },
-  "dependencies": {
-    "ollama": "^0.4.3"
   }
 }

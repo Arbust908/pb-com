@@ -1,28 +1,29 @@
 <script setup lang="ts">
-import type { ActionTypes, User } from '~/types';
-import { fullActions } from '~/types';
+import type { ActionTypes, User } from '~/types'
+import { fullActions } from '~/types'
+
 const userStore = useUserStore()
 
 const email = ref<string>('')
 const password = ref<string>('')
 const errorMsg = ref<string | null>(null)
 
-const action = ref<ActionTypes>('LOGIN');
+const action = ref<ActionTypes>('LOGIN')
 
-const changeType = () => {
-  action.value = action.value === 'LOGIN' ? 'REGISTER' : 'LOGIN';
-};
+function changeType() {
+  action.value = action.value === 'LOGIN' ? 'REGISTER' : 'LOGIN'
+}
 
 async function onSubmit(event: Event) {
   errorMsg.value = null
   console.log(`onSubmit::${action.value}`)
   event.preventDefault()
 
-  const actionUrl = fullActions[action.value];
+  const actionUrl = fullActions[action.value]
   const user = {
     email: email.value,
     password: password.value,
-  } as User;
+  } as User
 
   const result = await $fetch(actionUrl, {
     method: 'POST',
@@ -35,7 +36,8 @@ async function onSubmit(event: Event) {
     userStore.isLoggedIn = true
     console.log('userStore.currentUser', userStore.currentUser)
     await navigateTo('/profile')
-  } else if (result.error) {
+  }
+  else if (result.error) {
     errorMsg.value = result.error
   }
 }
@@ -43,16 +45,16 @@ async function onSubmit(event: Event) {
 
 <template>
   <div class="flex items-start justify-center py-20">
-    <article class="rounded-lg bg-slate-100 dark:bg-slate-800 p-6 shadow-lg relative">
-      <h1 class="mb-4 text-2xl font-bold text-center capitalize">
+    <article class="relative rounded-lg bg-slate-100 p-6 shadow-lg dark:bg-slate-800">
+      <h1 class="mb-4 text-center text-2xl font-bold capitalize">
         {{ action.toLowerCase() }}
       </h1>
-      <form @submit="onSubmit" class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-4 items-baseline text-slate-700 dark:text-slate-200">
-          <label for="email">Email</label>
-          <input id="email" v-model="email" type="text" class="rounded-lg px-3 py-2 bg-slate-200 dark:bg-slate-700">
-          <label for="password">Password</label>
-          <input id="password" v-model="password" type="password" class="rounded-lg px-3 py-2 bg-slate-200 dark:bg-slate-700">
-        <button type="submit" class="capitalize rounded-lg bg-purple-700 px-4 py-2 text-slate-100 col-start-2">
+      <form class="grid grid-cols-[auto_1fr] items-baseline gap-x-2 gap-y-4 text-slate-700 dark:text-slate-200" @submit="onSubmit">
+        <label for="email">Email</label>
+        <input id="email" v-model="email" type="text" class="rounded-lg bg-slate-200 px-3 py-2 dark:bg-slate-700">
+        <label for="password">Password</label>
+        <input id="password" v-model="password" type="password" class="rounded-lg bg-slate-200 px-3 py-2 dark:bg-slate-700">
+        <button type="submit" class="col-start-2 rounded-lg bg-purple-700 px-4 py-2 text-slate-100 capitalize">
           {{ action.toLowerCase() }}
         </button>
       </form>
@@ -62,9 +64,9 @@ async function onSubmit(event: Event) {
       <p v-if="userStore.currentUser" class="mt-4 text-pink-600">
         {{ userStore.currentUser }}
       </p>
-        <button class="p-4 absolute bottom-1 right-1" @click="changeType">
-          <p class="bg-slate-500 rounded-full h-1 w-1"/>
-        </button>
+      <button class="absolute bottom-1 right-1 p-4" @click="changeType">
+        <p class="h-1 w-1 rounded-full bg-slate-500" />
+      </button>
     </article>
   </div>
 </template>

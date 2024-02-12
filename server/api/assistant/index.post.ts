@@ -1,5 +1,4 @@
 import type { AI_MODEL_REQUEST_SERVER } from '~/types/AiModels'
-import { allowedModels, getModelRepo, isModelType } from '~/types/AiModels'
 
 // https://twitter.com/BHolmesDev/status/1738757046290247956 for instanceOf validation
 
@@ -22,11 +21,8 @@ export default defineEventHandler(async (event) => {
   const { model = '', message } = body
   console.log('model', model, 'message', message)
 
-  const usedModel = isModelType(model) ? model : allowedModels.CAPYBARA
-
-  console.log('usedModel', usedModel)
   const payload = {
-    model: getModelRepo(usedModel), // Required
+    model, // Required
     messages: [
       { role: 'user', content: message },
     ],

@@ -18,7 +18,7 @@ function birthday() {
 
 <template>
   <section
-    class="relative mb-4 rounded bg-slate-200/60 text-slate-800 p-4 shadow backdrop-blur-xl dark:(bg-slate-800/60 text-slate-200)"
+    class="relative mb-4 rounded bg-slate-200/60 p-4 text-slate-800 shadow backdrop-blur-xl dark:(bg-slate-800/60 text-slate-200)"
   >
     <picture>
       <source type="image/webp" srcset="/img/avatar.webp">

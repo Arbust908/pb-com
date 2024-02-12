@@ -1,3 +1,3 @@
 <template>
-  <article class="h-10 rounded border shadow"></article>
+  <article class="h-10 border rounded shadow" />
 </template>

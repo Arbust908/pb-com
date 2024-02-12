@@ -1,4 +1,5 @@
-import type { ModelResponse } from "ollama"
+import type { ModelResponse } from 'ollama'
+
 const _BASE_MODEL: ModelResponse = {
   name: '',
   modified_at: new Date(),
@@ -16,35 +17,35 @@ const NOUS_CAPYBARA: ModelResponse = {
   family: 'capybara',
   families: ['capybara'],
   parameter_size: '8k',
-};
+}
 const MISTRAL: ModelResponse = {
   ..._BASE_MODEL,
   name: 'mistralai/mistral-7b-instruct:free',
   family: 'mistral',
   families: ['mistral'],
   parameter_size: '7b',
-};
+}
 const MYTHOMIST: ModelResponse = {
   ..._BASE_MODEL,
   name: 'gryphe/mythomist-7b:free',
   family: 'mythomist',
   families: ['mythomist'],
   parameter_size: '7b',
-};
+}
 const TOPPY_M: ModelResponse = {
   ..._BASE_MODEL,
   name: 'undi95/toppy-m-7b:free',
   family: 'toppy-m',
   families: ['toppy-m'],
   parameter_size: '7b',
-};
+}
 const CINEMATIKA: ModelResponse = {
   ..._BASE_MODEL,
   name: 'openrouter/cinematika-7b:free',
   family: 'cinematika',
   families: ['cinematika'],
   parameter_size: '7b',
-};
+}
 
 export const allowedModels = [
   NOUS_CAPYBARA,
@@ -61,7 +62,6 @@ export const allowedModels = [
   WORLD: 'world-3b',
   ZEPHYR: 'zephyr-7b', */
 ] satisfies ModelResponse[]
-
 
 export interface AI_MODEL_REQUEST_CLIENT {
   model: ModelResponse['name']

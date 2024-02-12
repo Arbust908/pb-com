@@ -1,7 +1,6 @@
 import { defineEventHandler } from 'h3'
-import { ToDoType } from '~/types'
 
-const getAllData = async () => {
+async function getAllData() {
   return [{ username: 'admin', password: 'admin', email: 'admin@email.com' }]
 }
 

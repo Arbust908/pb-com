@@ -1,13 +1,24 @@
+<script setup>
+</script>
+
+<script setup>
+import { PlusIcon } from '@heroicons/vue/20/solid'
+</script>
+
+<script setup>
+  import { ChatBubbleBottomCenterTextIcon, PaperClipIcon, PencilIcon, TrashIcon } from '@heroicons/vue/20/solid'
+  </script>
+
 <template>
-    <div class="relative">
-      <div class="absolute inset-0 flex items-center" aria-hidden="true">
-        <div class="w-full border-t border-gray-300" />
-      </div>
-      <div class="relative flex justify-center">
-        <span class="bg-white px-2 text-sm text-gray-500">Continue</span>
-      </div>
+  <div class="relative">
+    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+      <div class="w-full border-t border-gray-300" />
     </div>
-  </template>
+    <div class="relative flex justify-center">
+      <span class="bg-white px-2 text-sm text-gray-500">Continue</span>
+    </div>
+  </div>
+</template>
 
   <template>
   <div class="relative">
@@ -22,10 +33,6 @@
   </div>
 </template>
 
-<script setup>
-import { PlusIcon } from '@heroicons/vue/20/solid'
-</script>
-
 <template>
     <div class="relative">
       <div class="absolute inset-0 flex items-center" aria-hidden="true">
@@ -36,7 +43,6 @@ import { PlusIcon } from '@heroicons/vue/20/solid'
       </div>
     </div>
   </template>
-
 
   <template>
   <div class="relative">
@@ -49,7 +55,6 @@ import { PlusIcon } from '@heroicons/vue/20/solid'
   </div>
 </template>
 
-
 <template>
     <div class="relative">
       <div class="absolute inset-0 flex items-center" aria-hidden="true">
@@ -61,8 +66,7 @@ import { PlusIcon } from '@heroicons/vue/20/solid'
     </div>
   </template>
 
-
-  <template>
+<template>
   <div class="relative">
     <div class="absolute inset-0 flex items-center" aria-hidden="true">
       <div class="w-full border-t border-gray-300" />
@@ -76,11 +80,7 @@ import { PlusIcon } from '@heroicons/vue/20/solid'
   </div>
 </template>
 
-<script setup>
-import { PlusIcon } from '@heroicons/vue/20/solid'
-</script>
-
-<template>
+  <template>
     <div class="relative">
       <div class="absolute inset-0 flex items-center" aria-hidden="true">
         <div class="w-full border-t border-gray-300" />
@@ -107,7 +107,3 @@ import { PlusIcon } from '@heroicons/vue/20/solid'
       </div>
     </div>
   </template>
-  
-  <script setup>
-  import { ChatBubbleBottomCenterTextIcon, PaperClipIcon, PencilIcon, TrashIcon } from '@heroicons/vue/20/solid'
-  </script>

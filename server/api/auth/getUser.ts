@@ -1,6 +1,4 @@
-import { ToDoType } from "~/types"
-
-const getUser = async (username: string) => {
+async function getUser(username: string) {
   return { username, password: 'admin', email: 'admin@email.com' }
 }
 

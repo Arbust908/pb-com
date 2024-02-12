@@ -1,9 +1,9 @@
 import { defineEventHandler } from 'h3'
 import { serverSupabaseClient } from '#supabase/server'
-import { ToDoType, User } from '~/types'
+import type { User } from '~/types'
 
 export default defineEventHandler(async (event) => {
-  const client = await serverSupabaseClient(event);
+  const client = await serverSupabaseClient(event)
   try {
     const { email, password } = await readBody(event) as User
 
@@ -11,11 +11,11 @@ export default defineEventHandler(async (event) => {
       return { error: 'No data' }
 
     const { data, error } = await client.auth.signInWithPassword({ email, password })
-  
-    if (error)
-    throw new Error(error.message)
 
-  return { success: true, data }
+    if (error)
+      throw new Error(error.message)
+
+    return { success: true, data }
   }
   catch (error: ToDoType) {
     return { error: error.message }
