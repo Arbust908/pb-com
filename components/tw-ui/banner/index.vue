@@ -1,5 +1,4 @@
 <script setup>
-import { XMarkIcon } from '@heroicons/vue/20/solid'
 </script>
 
 <script setup>
@@ -30,7 +29,11 @@ import { XMarkIcon } from '@heroicons/vue/20/solid'
   import { XMarkIcon } from '@heroicons/vue/20/solid'
   </script>
 
-  <template>
+<script setup>
+import { XMarkIcon } from '@heroicons/vue/20/solid'
+</script>
+
+<template>
   <div class="fixed inset-x-0 bottom-0 flex flex-col justify-between gap-x-8 gap-y-4 bg-white p-6 ring-1 ring-gray-900/10 md:flex-row md:items-center lg:px-8">
     <p class="max-w-4xl text-sm text-gray-900 leading-6">
       This website uses cookies to supplement a balanced diet and provide a much deserved reward to the senses after consuming bland but nutritious meals. Accepting our cookies is optional but recommended, as they are delicious. See our <a href="#" class="text-indigo-600 font-semibold">cookie policy</a>.
@@ -46,7 +49,7 @@ import { XMarkIcon } from '@heroicons/vue/20/solid'
   </div>
 </template>
 
-  <template>
+<template>
   <!--
     Make sure you add some bottom padding to pages that include a sticky banner like this to prevent
     your content from being obscured when the user scrolls to the bottom of the page.
@@ -86,7 +89,7 @@ import { XMarkIcon } from '@heroicons/vue/20/solid'
     </div>
   </template>
 
-<template>
+  <template>
   <!--
     Make sure you add some bottom padding to pages that include a sticky banner like this to prevent
     your content from being obscured when the user scrolls to the bottom of the page.
@@ -122,7 +125,7 @@ import { XMarkIcon } from '@heroicons/vue/20/solid'
     </div>
   </template>
 
-  <template>
+<template>
   <div class="relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
     <div class="absolute left-[max(-7rem,calc(50%-52rem))] top-1/2 -z-10 -translate-y-1/2 transform-gpu blur-2xl" aria-hidden="true">
       <div class="aspect-[577/310] w-[36.0625rem] bg-gradient-to-r from-[#ff80b5] to-[#9089fc] opacity-30" style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)" />
@@ -164,7 +167,7 @@ import { XMarkIcon } from '@heroicons/vue/20/solid'
     </div>
   </template>
 
-<template>
+  <template>
   <div class="flex items-center gap-x-6 bg-indigo-600 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
     <p class="text-sm leading-6 text-white">
       <a href="#">
@@ -196,7 +199,7 @@ import { XMarkIcon } from '@heroicons/vue/20/solid'
     </div>
   </template>
 
-  <template>
+<template>
   <div class="relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
     <div class="absolute left-[max(-7rem,calc(50%-52rem))] top-1/2 -z-10 -translate-y-1/2 transform-gpu blur-2xl" aria-hidden="true">
       <div class="aspect-[577/310] w-[36.0625rem] bg-gradient-to-r from-[#ff80b5] to-[#9089fc] opacity-30" style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)" />
@@ -218,7 +221,3 @@ import { XMarkIcon } from '@heroicons/vue/20/solid'
     </div>
   </div>
 </template>
-
-<script setup>
-import { XMarkIcon } from '@heroicons/vue/20/solid'
-</script>

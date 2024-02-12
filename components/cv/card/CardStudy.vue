@@ -1,22 +1,23 @@
 <script setup lang='ts'>
-type Props = {
+interface Props {
   place: string
   date: string
   description: string
 }
 withDefaults(
-defineProps<Props>(),
+  defineProps<Props>(),
   {
-  place: 'Study Place',
-  date: '1991',
-  description: 'Study Description',
-});
+    place: 'Study Place',
+    date: '1991',
+    description: 'Study Description',
+  },
+)
 const isExtended = ref(false)
 </script>
 
 <template>
-  <article class="mb-4 border-l-2 border-violet-400 p-4 text-slate-700 dark:text-slate-300 cursor-pointer" @click="isExtended = !isExtended">
-    <h3 class="flex items-center gap-x-3 flex-row">
+  <article class="mb-4 cursor-pointer border-l-2 border-violet-400 p-4 text-slate-700 dark:text-slate-300" @click="isExtended = !isExtended">
+    <h3 class="flex flex-row items-center gap-x-3">
       <span class="font-bold">
         {{ place }}
       </span>
@@ -25,7 +26,7 @@ const isExtended = ref(false)
       </span>
     </h3>
     <template v-if="isExtended">
-      <p class="font-light mt-2">
+      <p class="mt-2 font-light">
         {{ description }}
       </p>
     </template>

@@ -20,19 +20,19 @@ useHead(useUP(meta))
       {{ $t('rol') }}
     </h2>
     <div class="flex gap-x-4">
-      <p></p>
+      <p />
     </div>
   </section>
 </template>
 
 <style scoped>
 h1 {
-  view-transition-name: h1
+  view-transition-name: h1;
 }
 h2 {
-  view-transition-name: h2
+  view-transition-name: h2;
 }
 div {
-  view-transition-name: content
+  view-transition-name: content;
 }
 </style>

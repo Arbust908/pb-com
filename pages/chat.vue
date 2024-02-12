@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
-import type { AI_MODEL_REQUEST_CLIENT, AI_MODEL_RESPONSE, MODEL_TYPES } from '@/types'
+import type { AI_MODEL_REQUEST_CLIENT, MODEL_TYPES } from '@/types'
 import { allowedModels } from '@/types'
 import { getResponseMsg } from '@/utils'
 

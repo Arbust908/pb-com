@@ -1,6 +1,6 @@
 import { defineEventHandler } from 'h3'
 import { serverSupabaseClient } from '#supabase/server'
-import { ToDoType, User } from '~/types'
+import type { User } from '~/types'
 
 /* import { z } from 'zod' */
 /* const userSchema = z.object({
@@ -9,9 +9,8 @@ import { ToDoType, User } from '~/types'
   password: z.string(),
 }) */
 
-
 export default defineEventHandler(async (event) => {
-  const client = await serverSupabaseClient(event);
+  const client = await serverSupabaseClient(event)
   try {
     const { email, password } = await readBody(event) as User
 

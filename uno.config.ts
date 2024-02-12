@@ -85,8 +85,8 @@ export default defineConfig({
     ['grid-cols-subgrid',	{ 'grid-template-columns': 'subgrid;' }],
     [/^bg-checked$/, ([,], { rawSelector, currentSelector, variantHandlers, theme }) => {
       const selector = `.${currentSelector}`
-      const mainColor = theme.colors.slate[200];
-      const darkColor = theme.colors.slate[700];
+      const mainColor = theme.colors.slate[200]
+      const darkColor = theme.colors.slate[700]
 
       return `
         ${selector} {

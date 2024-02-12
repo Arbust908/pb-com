@@ -1,5 +1,5 @@
 <template>
-  <section class="p-4 flex-middle">
+  <section class="flex-middle p-4">
     <!-- <UiButton />
     <UiButtonPopyBtn /> -->
     <UiPlumpButton />

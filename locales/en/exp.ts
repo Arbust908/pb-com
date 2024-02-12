@@ -8,7 +8,7 @@ export default
     description:
       'As a Front-End Engineer, I collaborate with the team to develop and maintain multiple products. Our main stack is based on Vue, utilizing Nuxt 3, UnoCSS or TailwindCSS, and TypeScript. Our product lineup includes an app developed using React Native, a project in which I am actively involved. Additionally, I engage in brainstorming new features in collaboration with the UI and Back-End teams. I spearheaded an initiative to migrate our legacy code to our current stack.',
     more: null,
-      /* 'As Front-end Lead I lead a team of 5 developers in the development of multiple web applications. Our main stack is based on Vue (Vite, Vue 3, UnoCSS or TailwindCSS, Pinia, Vue Router, and Typescript). Even so, we are now migrating our first proprietary product to Next.js. Beyond this product, we also have and maintain a management system for a logistics company in the form of a PWA, a management panel for our mining companies, and two institutional pages. All these products contain i18n to handle multiple languages ​​(usually English and Spanish).', */
+    /* 'As Front-end Lead I lead a team of 5 developers in the development of multiple web applications. Our main stack is based on Vue (Vite, Vue 3, UnoCSS or TailwindCSS, Pinia, Vue Router, and Typescript). Even so, we are now migrating our first proprietary product to Next.js. Beyond this product, we also have and maintain a management system for a logistics company in the form of a PWA, a management panel for our mining companies, and two institutional pages. All these products contain i18n to handle multiple languages ​​(usually English and Spanish).', */
   },
   bitpatagonia: {
     rol: 'Sr Front-End',
@@ -26,7 +26,7 @@ export default
     start: '03/06/2021',
     end: '12/30/2021',
     description:
-      "Maintain and evolve Viafoura's Product (a social engagement script) built in multiple technologies (Backbone in v1 and Vue, Vuex in v2). I also took part in the brainstorming of the v3 product and new features in coordination with the UI and Back-end teams.",
+      'Maintain and evolve Viafoura\'s Product (a social engagement script) built in multiple technologies (Backbone in v1 and Vue, Vuex in v2). I also took part in the brainstorming of the v3 product and new features in coordination with the UI and Back-end teams.',
     more: null,
   },
   forian: {

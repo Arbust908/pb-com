@@ -1,6 +1,6 @@
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -12,24 +12,48 @@
   }
   ```
 -->
-<template>
-  <div>
-    <div class="sm:hidden">
-      <label for="tabs" class="sr-only">Select a tab</label>
-      <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
-      <select id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-        <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">{{ tab.name }}</option>
-      </select>
-    </div>
-    <div class="hidden sm:block">
-      <div class="border-b border-gray-200">
-        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-          <a v-for="tab in tabs" :key="tab.name" :href="tab.href" :class="[tab.current ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700', 'whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium']" :aria-current="tab.current ? 'page' : undefined">{{ tab.name }}</a>
-        </nav>
-      </div>
-    </div>
-  </div>
-</template>
+<script setup>
+const tabs = [
+  { name: 'My Account', href: '#', current: false },
+  { name: 'Company', href: '#', current: false },
+  { name: 'Team Members', href: '#', current: true },
+  { name: 'Billing', href: '#', current: false },
+]
+</script>
+
+<script setup>
+import { BuildingOfficeIcon, CreditCardIcon, UserIcon, UsersIcon } from '@heroicons/vue/20/solid'
+
+const tabs = [
+  { name: 'My Account', href: '#', icon: UserIcon, current: false },
+  { name: 'Company', href: '#', icon: BuildingOfficeIcon, current: false },
+  { name: 'Team Members', href: '#', icon: UsersIcon, current: true },
+  { name: 'Billing', href: '#', icon: CreditCardIcon, current: false },
+]
+</script>
+
+<!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<script setup>
+const tabs = [
+  { name: 'My Account', href: '#', current: false },
+  { name: 'Company', href: '#', current: false },
+  { name: 'Team Members', href: '#', current: true },
+  { name: 'Billing', href: '#', current: false },
+]
+</script>
 
 <script setup>
 const tabs = [
@@ -42,7 +66,117 @@ const tabs = [
 
 <!--
   This example requires some changes to your config:
-  
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<script setup>
+const tabs = [
+  { name: 'My Account', href: '#', current: false },
+  { name: 'Company', href: '#', current: false },
+  { name: 'Team Members', href: '#', current: true },
+  { name: 'Billing', href: '#', current: false },
+]
+</script>
+
+<script setup>
+const tabs = [
+  { name: 'My Account', href: '#', current: false },
+  { name: 'Company', href: '#', current: false },
+  { name: 'Team Members', href: '#', current: true },
+  { name: 'Billing', href: '#', current: false },
+]
+</script>
+
+<!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<script setup>
+const tabs = [
+  { name: 'My Account', href: '#', current: true },
+  { name: 'Company', href: '#', current: false },
+  { name: 'Team Members', href: '#', current: false },
+  { name: 'Billing', href: '#', current: false },
+]
+</script>
+
+<script setup>
+const tabs = [
+  { name: 'Applied', href: '#', count: '52', current: false },
+  { name: 'Phone Screening', href: '#', count: '6', current: false },
+  { name: 'Interview', href: '#', count: '4', current: true },
+  { name: 'Offer', href: '#', current: false },
+  { name: 'Disqualified', href: '#', current: false },
+]
+</script>
+
+<!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<script setup>
+const tabs = [
+  { name: 'Overview', href: '#', current: true },
+  { name: 'Activity', href: '#', current: false },
+  { name: 'Settings', href: '#', current: false },
+  { name: 'Collaborators', href: '#', current: false },
+  { name: 'Notifications', href: '#', current: false },
+]
+</script>
+
+<template>
+  <div>
+    <div class="sm:hidden">
+      <label for="tabs" class="sr-only">Select a tab</label>
+      <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+      <select id="tabs" name="tabs" class="block w-full border-gray-300 rounded-md py-2 pl-3 pr-10 text-base focus:border-indigo-500 sm:text-sm focus:outline-none focus:ring-indigo-500">
+        <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">
+{{ tab.name }}
+</option>
+      </select>
+    </div>
+    <div class="hidden sm:block">
+      <div class="border-b border-gray-200">
+        <nav class="flex -mb-px space-x-8" aria-label="Tabs">
+          <a v-for="tab in tabs" :key="tab.name" :href="tab.href" class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium" :class="[tab.current ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700']" :aria-current="tab.current ? 'page' : undefined">{{ tab.name }}</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!--
+  This example requires some changes to your config:
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -76,31 +210,6 @@ const tabs = [
   </div>
 </template>
 
-<script setup>
-import { BuildingOfficeIcon, CreditCardIcon, UserIcon, UsersIcon } from '@heroicons/vue/20/solid'
-
-const tabs = [
-  { name: 'My Account', href: '#', icon: UserIcon, current: false },
-  { name: 'Company', href: '#', icon: BuildingOfficeIcon, current: false },
-  { name: 'Team Members', href: '#', icon: UsersIcon, current: true },
-  { name: 'Billing', href: '#', icon: CreditCardIcon, current: false },
-]
-</script>
-
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
   <div>
     <div class="sm:hidden">
@@ -118,18 +227,9 @@ const tabs = [
   </div>
 </template>
 
-<script setup>
-const tabs = [
-  { name: 'My Account', href: '#', current: false },
-  { name: 'Company', href: '#', current: false },
-  { name: 'Team Members', href: '#', current: true },
-  { name: 'Billing', href: '#', current: false },
-]
-</script>
-
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -158,29 +258,6 @@ const tabs = [
   </div>
 </template>
 
-<script setup>
-const tabs = [
-  { name: 'My Account', href: '#', current: false },
-  { name: 'Company', href: '#', current: false },
-  { name: 'Team Members', href: '#', current: true },
-  { name: 'Billing', href: '#', current: false },
-]
-</script>
-
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
   <div>
     <div class="sm:hidden">
@@ -198,18 +275,9 @@ const tabs = [
   </div>
 </template>
 
-<script setup>
-const tabs = [
-  { name: 'My Account', href: '#', current: false },
-  { name: 'Company', href: '#', current: false },
-  { name: 'Team Members', href: '#', current: true },
-  { name: 'Billing', href: '#', current: false },
-]
-</script>
-
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -240,29 +308,6 @@ const tabs = [
   </div>
 </template>
 
-<script setup>
-const tabs = [
-  { name: 'My Account', href: '#', current: false },
-  { name: 'Company', href: '#', current: false },
-  { name: 'Team Members', href: '#', current: true },
-  { name: 'Billing', href: '#', current: false },
-]
-</script>
-
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
   <div>
     <div class="sm:hidden">
@@ -283,18 +328,9 @@ const tabs = [
   </div>
 </template>
 
-<script setup>
-const tabs = [
-  { name: 'My Account', href: '#', current: true },
-  { name: 'Company', href: '#', current: false },
-  { name: 'Team Members', href: '#', current: false },
-  { name: 'Billing', href: '#', current: false },
-]
-</script>
-
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -328,30 +364,6 @@ const tabs = [
   </div>
 </template>
 
-<script setup>
-const tabs = [
-  { name: 'Applied', href: '#', count: '52', current: false },
-  { name: 'Phone Screening', href: '#', count: '6', current: false },
-  { name: 'Interview', href: '#', count: '4', current: true },
-  { name: 'Offer', href: '#', current: false },
-  { name: 'Disqualified', href: '#', current: false },
-]
-</script>
-
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
   <div class="bg-gray-900 px-4 py-6 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
@@ -374,13 +386,3 @@ const tabs = [
     </div>
   </div>
 </template>
-
-<script setup>
-const tabs = [
-  { name: 'Overview', href: '#', current: true },
-  { name: 'Activity', href: '#', current: false },
-  { name: 'Settings', href: '#', current: false },
-  { name: 'Collaborators', href: '#', current: false },
-  { name: 'Notifications', href: '#', current: false },
-]
-</script>

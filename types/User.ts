@@ -7,7 +7,7 @@ export interface User {
 // https://twitter.com/mattpocockuk/status/1744320298743108031
 // https://twitter.com/mattpocockuk/status/1745049856207368320
 // type safe fetch https://twitter.com/mattpocockuk/status/1746857014255403499
-/* 
+/*
  {
   "user": {
     "id": "d314b11c-99ba-48df-9c2f-64e04f71d8da",
@@ -94,7 +94,7 @@ export interface User {
   }
 }
 */
-export type SupaUser = {
+export interface SupaUser {
   id: string
   aud: string
   role: string
@@ -129,7 +129,7 @@ export type SupaUser = {
   updated_at: string
 }
 
-export type SupaSession = {
+export interface SupaSession {
   access_token: string
   token_type: string
   expires_in: number

@@ -1,48 +1,90 @@
-<template>
-    <TransitionRoot as="template" :show="open">
-      <Dialog as="div" class="relative z-10" @close="open = false">
-        <div class="fixed inset-0" />
-  
-        <div class="fixed inset-0 overflow-hidden">
-          <div class="absolute inset-0 overflow-hidden">
-            <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-              <TransitionChild as="template" enter="transform transition ease-in-out duration-500 sm:duration-700" enter-from="translate-x-full" enter-to="translate-x-0" leave="transform transition ease-in-out duration-500 sm:duration-700" leave-from="translate-x-0" leave-to="translate-x-full">
-                <DialogPanel class="pointer-events-auto w-screen max-w-md">
-                  <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                    <div class="px-4 sm:px-6">
-                      <div class="flex items-start justify-between">
-                        <DialogTitle class="text-base font-semibold leading-6 text-gray-900">Panel title</DialogTitle>
-                        <div class="ml-3 flex h-7 items-center">
-                          <button type="button" class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" @click="open = false">
-                            <span class="absolute -inset-2.5" />
-                            <span class="sr-only">Close panel</span>
-                            <XMarkIcon class="h-6 w-6" aria-hidden="true" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="relative mt-6 flex-1 px-4 sm:px-6">
-                      <!-- Your content -->
-                    </div>
-                  </div>
-                </DialogPanel>
-              </TransitionChild>
-            </div>
-          </div>
-        </div>
-      </Dialog>
-    </TransitionRoot>
-  </template>
-  
-  <script setup>
+<script setup>
+import { ref } from 'vue'
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { XMarkIcon } from '@heroicons/vue/24/outline'
+
+const open = ref(true)
+</script>
+
+<script setup>
+import { ref } from 'vue'
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { XMarkIcon } from '@heroicons/vue/24/outline'
+
+const open = ref(true)
+</script>
+
+<script setup>
   import { ref } from 'vue'
   import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
   import { XMarkIcon } from '@heroicons/vue/24/outline'
-  
+
   const open = ref(true)
   </script>
 
-  <template>
+<script setup>
+import { ref } from 'vue'
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { XMarkIcon } from '@heroicons/vue/24/outline'
+
+const open = ref(true)
+</script>
+
+<script setup>
+  import { ref } from 'vue'
+  import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+  import { XMarkIcon } from '@heroicons/vue/24/outline'
+
+  const open = ref(true)
+  </script>
+
+<script setup>
+import { ref } from 'vue'
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { XMarkIcon } from '@heroicons/vue/24/outline'
+
+const open = ref(true)
+</script>
+
+<template>
+  <TransitionRoot as="template" :show="open">
+    <Dialog as="div" class="relative z-10" @close="open = false">
+      <div class="fixed inset-0" />
+
+      <div class="fixed inset-0 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+          <div class="pointer-events-none fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <TransitionChild as="template" enter="transform transition ease-in-out duration-500 sm:duration-700" enter-from="translate-x-full" enter-to="translate-x-0" leave="transform transition ease-in-out duration-500 sm:duration-700" leave-from="translate-x-0" leave-to="translate-x-full">
+              <DialogPanel class="pointer-events-auto max-w-md w-screen">
+                <div class="h-full flex flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                  <div class="px-4 sm:px-6">
+                    <div class="flex items-start justify-between">
+                      <DialogTitle class="text-base text-gray-900 font-semibold leading-6">
+                        Panel title
+                      </DialogTitle>
+                      <div class="ml-3 h-7 flex items-center">
+                        <button type="button" class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="open = false">
+                          <span class="absolute -inset-2.5" />
+                          <span class="sr-only">Close panel</span>
+                          <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="relative mt-6 flex-1 px-4 sm:px-6">
+                    <!-- Your content -->
+                  </div>
+                </div>
+              </DialogPanel>
+            </TransitionChild>
+          </div>
+        </div>
+      </div>
+    </Dialog>
+  </TransitionRoot>
+</template>
+
+<template>
   <TransitionRoot as="template" :show="open">
     <Dialog as="div" class="relative z-10" @close="open = false">
       <div class="fixed inset-0" />
@@ -78,21 +120,13 @@
   </TransitionRoot>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { XMarkIcon } from '@heroicons/vue/24/outline'
-
-const open = ref(true)
-</script>
-
 <template>
     <TransitionRoot as="template" :show="open">
       <Dialog as="div" class="relative z-10" @close="open = false">
         <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-500" leave-from="opacity-100" leave-to="opacity-0">
           <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </TransitionChild>
-  
+
         <div class="fixed inset-0 overflow-hidden">
           <div class="absolute inset-0 overflow-hidden">
             <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
@@ -123,14 +157,6 @@ const open = ref(true)
       </Dialog>
     </TransitionRoot>
   </template>
-  
-  <script setup>
-  import { ref } from 'vue'
-  import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-  import { XMarkIcon } from '@heroicons/vue/24/outline'
-  
-  const open = ref(true)
-  </script>
 
   <template>
   <TransitionRoot as="template" :show="open">
@@ -170,19 +196,11 @@ const open = ref(true)
   </TransitionRoot>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { XMarkIcon } from '@heroicons/vue/24/outline'
-
-const open = ref(true)
-</script>
-
-<template>
+  <template>
     <TransitionRoot as="template" :show="open">
       <Dialog as="div" class="relative z-10" @close="open = false">
         <div class="fixed inset-0" />
-  
+
         <div class="fixed inset-0 overflow-hidden">
           <div class="absolute inset-0 overflow-hidden">
             <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
@@ -216,16 +234,8 @@ const open = ref(true)
       </Dialog>
     </TransitionRoot>
   </template>
-  
-  <script setup>
-  import { ref } from 'vue'
-  import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-  import { XMarkIcon } from '@heroicons/vue/24/outline'
-  
-  const open = ref(true)
-  </script>
 
-  <template>
+<template>
   <TransitionRoot as="template" :show="open">
     <Dialog as="div" class="relative z-10" @close="open = false">
       <div class="fixed inset-0" />
@@ -267,17 +277,9 @@ const open = ref(true)
   </TransitionRoot>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { XMarkIcon } from '@heroicons/vue/24/outline'
-
-const open = ref(true)
-</script>
-
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -293,7 +295,7 @@ const open = ref(true)
     <TransitionRoot as="template" :show="open">
       <Dialog as="div" class="relative z-10" @close="open = false">
         <div class="fixed inset-0" />
-  
+
         <div class="fixed inset-0 overflow-hidden">
           <div class="absolute inset-0 overflow-hidden">
             <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
@@ -413,13 +415,13 @@ const open = ref(true)
       </Dialog>
     </TransitionRoot>
   </template>
-  
+
   <script setup>
   import { ref } from 'vue'
   import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
   import { XMarkIcon } from '@heroicons/vue/24/outline'
   import { LinkIcon, PlusIcon, QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
-  
+
   const team = [
     {
       name: 'Tom Cook',
@@ -457,13 +459,13 @@ const open = ref(true)
         'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
   ]
-  
+
   const open = ref(true)
   </script>
 
   <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -666,7 +668,7 @@ const open = ref(true)
 
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -682,7 +684,7 @@ const open = ref(true)
     <TransitionRoot as="template" :show="open">
       <Dialog as="div" class="relative z-10" @close="open = false">
         <div class="fixed inset-0" />
-  
+
         <div class="fixed inset-0 overflow-hidden">
           <div class="absolute inset-0 overflow-hidden">
             <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
@@ -706,7 +708,7 @@ const open = ref(true)
                           </div>
                         </div>
                       </div>
-  
+
                       <!-- Divider container -->
                       <div class="space-y-6 py-6 sm:space-y-0 sm:divide-y sm:divide-gray-200 sm:py-0">
                         <!-- Project name -->
@@ -718,7 +720,7 @@ const open = ref(true)
                             <input type="text" name="project-name" id="project-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                           </div>
                         </div>
-  
+
                         <!-- Project description -->
                         <div class="space-y-2 px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:space-y-0 sm:px-6 sm:py-5">
                           <div>
@@ -728,7 +730,7 @@ const open = ref(true)
                             <textarea id="project-description" name="project-description" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                           </div>
                         </div>
-  
+
                         <!-- Team members -->
                         <div class="space-y-2 px-4 sm:grid sm:grid-cols-3 sm:items-center sm:gap-4 sm:space-y-0 sm:px-6 sm:py-5">
                           <div>
@@ -739,7 +741,7 @@ const open = ref(true)
                               <a v-for="person in team" :key="person.email" :href="person.href" class="flex-shrink-0 rounded-full hover:opacity-75">
                                 <img class="inline-block h-8 w-8 rounded-full" :src="person.imageUrl" :alt="person.name" />
                               </a>
-  
+
                               <button type="button" class="relative inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border-2 border-dashed border-gray-200 bg-white text-gray-400 hover:border-gray-300 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                 <span class="absolute -inset-2" />
                                 <span class="sr-only">Add team member</span>
@@ -748,7 +750,7 @@ const open = ref(true)
                             </div>
                           </div>
                         </div>
-  
+
                         <!-- Privacy -->
                         <fieldset class="space-y-2 px-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:space-y-0 sm:px-6 sm:py-5">
                           <legend class="sr-only">Privacy</legend>
@@ -802,7 +804,7 @@ const open = ref(true)
                         </fieldset>
                       </div>
                     </div>
-  
+
                     <!-- Action buttons -->
                     <div class="flex-shrink-0 border-t border-gray-200 px-4 py-5 sm:px-6">
                       <div class="flex justify-end space-x-3">
@@ -819,13 +821,13 @@ const open = ref(true)
       </Dialog>
     </TransitionRoot>
   </template>
-  
+
   <script setup>
   import { ref } from 'vue'
   import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
   import { XMarkIcon } from '@heroicons/vue/24/outline'
   import { LinkIcon, PlusIcon, QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
-  
+
   const team = [
     {
       name: 'Tom Cook',
@@ -863,7 +865,7 @@ const open = ref(true)
         'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
   ]
-  
+
   const open = ref(true)
   </script>
 
@@ -994,7 +996,7 @@ const open = ref(true)
     <TransitionRoot as="template" :show="open">
       <Dialog as="div" class="relative z-10" @close="open = false">
         <div class="fixed inset-0" />
-  
+
         <div class="fixed inset-0 overflow-hidden">
           <div class="absolute inset-0 overflow-hidden">
             <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
@@ -1097,7 +1099,7 @@ const open = ref(true)
       </Dialog>
     </TransitionRoot>
   </template>
-  
+
   <script setup>
   import { ref } from 'vue'
   import {
@@ -1113,7 +1115,7 @@ const open = ref(true)
   } from '@headlessui/vue'
   import { XMarkIcon } from '@heroicons/vue/24/outline'
   import { EllipsisVerticalIcon } from '@heroicons/vue/20/solid'
-  
+
   const open = ref(true)
   </script>
 
@@ -1159,7 +1161,7 @@ const open = ref(true)
                             </span>
                             <div class="ml-4 truncate">
                               <p class="truncate text-sm font-medium text-gray-900">{{ person.name }}</p>
-                              <p class="truncate text-sm text-gray-500">{{ '@' + person.handle }}</p>
+                              <p class="truncate text-sm text-gray-500">{{ `@${person.handle}` }}</p>
                             </div>
                           </div>
                         </a>
@@ -1235,7 +1237,7 @@ const open = ref(true)
 
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -1253,7 +1255,7 @@ const open = ref(true)
         <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-500" leave-from="opacity-100" leave-to="opacity-0">
           <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </TransitionChild>
-  
+
         <div class="fixed inset-0 overflow-hidden">
           <div class="absolute inset-0 overflow-hidden">
             <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
@@ -1363,14 +1365,12 @@ const open = ref(true)
       </Dialog>
     </TransitionRoot>
   </template>
-  
+
   <script setup>
   import { ref } from 'vue'
   import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
   import { HeartIcon, XMarkIcon } from '@heroicons/vue/24/outline'
   import { PencilIcon, PlusIcon } from '@heroicons/vue/20/solid'
-  
+
   const open = ref(true)
   </script>
-
-  

@@ -1,6 +1,6 @@
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -12,33 +12,131 @@
   }
   ```
 -->
-<template>
-    <div>
-      <label class="text-base font-semibold text-gray-900">Notifications</label>
-      <p class="text-sm text-gray-500">How do you prefer to receive notifications?</p>
-      <fieldset class="mt-4">
-        <legend class="sr-only">Notification method</legend>
-        <div class="space-y-4">
-          <div v-for="notificationMethod in notificationMethods" :key="notificationMethod.id" class="flex items-center">
-            <input :id="notificationMethod.id" name="notification-method" type="radio" :checked="notificationMethod.id === 'email'" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-            <label :for="notificationMethod.id" class="ml-3 block text-sm font-medium leading-6 text-gray-900">{{ notificationMethod.title }}</label>
-          </div>
-        </div>
-      </fieldset>
-    </div>
-  </template>
-  
-  <script setup>
-  const notificationMethods = [
-    { id: 'email', title: 'Email' },
-    { id: 'sms', title: 'Phone (SMS)' },
-    { id: 'push', title: 'Push notification' },
-  ]
-  </script>
+<script setup>
+const notificationMethods = [
+  { id: 'email', title: 'Email' },
+  { id: 'sms', title: 'Phone (SMS)' },
+  { id: 'push', title: 'Push notification' },
+]
+</script>
+
+<script setup>
+const notificationMethods = [
+  { id: 'email', title: 'Email' },
+  { id: 'sms', title: 'Phone (SMS)' },
+  { id: 'push', title: 'Push notification' },
+]
+</script>
 
   <!--
   This example requires some changes to your config:
-  
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<script setup>
+  const plans = [
+    { id: 'small', name: 'Small', description: '4 GB RAM / 2 CPUS / 80 GB SSD Storage' },
+    { id: 'medium', name: 'Medium', description: '8 GB RAM / 4 CPUS / 160 GB SSD Storage' },
+    { id: 'large', name: 'Large', description: '16 GB RAM / 8 CPUS / 320 GB SSD Storage' },
+  ]
+  </script>
+
+<script setup>
+const plans = [
+  { id: 'small', name: 'Small', description: '4 GB RAM / 2 CPUS / 80 GB SSD Storage' },
+  { id: 'medium', name: 'Medium', description: '8 GB RAM / 4 CPUS / 160 GB SSD Storage' },
+  { id: 'large', name: 'Large', description: '16 GB RAM / 8 CPUS / 320 GB SSD Storage' },
+]
+</script>
+
+<!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<script setup>
+  const accounts = [
+    { id: 'checking', name: 'Checking', description: 'CIBC ••••6610' },
+    { id: 'savings', name: 'Savings', description: 'Bank of America ••••0149' },
+    { id: 'mastercard', name: 'Mastercard', description: 'Capital One ••••7877' },
+  ]
+  </script>
+
+<script setup>
+const sides = [
+  { id: null, name: 'None' },
+  { id: 1, name: 'Baked beans' },
+  { id: 2, name: 'Coleslaw' },
+  { id: 3, name: 'French fries' },
+  { id: 4, name: 'Garden salad' },
+  { id: 5, name: 'Mashed potatoes' },
+]
+</script>
+
+  <!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<script setup>
+  import { ref } from 'vue'
+  import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
+
+  const colors = [
+    { name: 'Pink', bgColor: 'bg-pink-500', selectedColor: 'ring-pink-500' },
+    { name: 'Purple', bgColor: 'bg-purple-500', selectedColor: 'ring-purple-500' },
+    { name: 'Blue', bgColor: 'bg-blue-500', selectedColor: 'ring-blue-500' },
+    { name: 'Green', bgColor: 'bg-green-500', selectedColor: 'ring-green-500' },
+    { name: 'Yellow', bgColor: 'bg-yellow-500', selectedColor: 'ring-yellow-500' },
+  ]
+
+  const selectedColor = ref(colors[1])
+  </script>
+
+<script setup>
+import { ref } from 'vue'
+import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
+import { CheckCircleIcon } from '@heroicons/vue/20/solid'
+
+const mailingLists = [
+  { id: 1, title: 'Newsletter', description: 'Last message sent an hour ago', users: '621 users' },
+  { id: 2, title: 'Existing Customers', description: 'Last message sent 2 weeks ago', users: '1200 users' },
+  { id: 3, title: 'Trial Users', description: 'Last message sent 4 days ago', users: '2740 users' },
+]
+
+const selectedMailingLists = ref(mailingLists[0])
+</script>
+
+<!--
+  This example requires some changes to your config:
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -51,6 +149,26 @@
   ```
 -->
 <template>
+  <div>
+    <label class="text-base text-gray-900 font-semibold">Notifications</label>
+    <p class="text-sm text-gray-500">
+      How do you prefer to receive notifications?
+    </p>
+    <fieldset class="mt-4">
+      <legend class="sr-only">
+        Notification method
+      </legend>
+      <div class="space-y-4">
+        <div v-for="notificationMethod in notificationMethods" :key="notificationMethod.id" class="flex items-center">
+          <input :id="notificationMethod.id" name="notification-method" type="radio" :checked="notificationMethod.id === 'email'" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+          <label :for="notificationMethod.id" class="ml-3 block text-sm text-gray-900 font-medium leading-6">{{ notificationMethod.title }}</label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</template>
+
+  <template>
   <div>
     <label class="text-base font-semibold text-gray-900">Notifications</label>
     <p class="text-sm text-gray-500">How do you prefer to receive notifications?</p>
@@ -66,17 +184,9 @@
   </div>
 </template>
 
-<script setup>
-const notificationMethods = [
-  { id: 'email', title: 'Email' },
-  { id: 'sms', title: 'Phone (SMS)' },
-  { id: 'push', title: 'Push notification' },
-]
-</script>
-
-<!--
+  <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -104,29 +214,7 @@ const notificationMethods = [
       </div>
     </fieldset>
   </template>
-  
-  <script setup>
-  const plans = [
-    { id: 'small', name: 'Small', description: '4 GB RAM / 2 CPUS / 80 GB SSD Storage' },
-    { id: 'medium', name: 'Medium', description: '8 GB RAM / 4 CPUS / 160 GB SSD Storage' },
-    { id: 'large', name: 'Large', description: '16 GB RAM / 8 CPUS / 320 GB SSD Storage' },
-  ]
-  </script>
 
-  <!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
   <fieldset>
     <legend class="sr-only">Plan</legend>
@@ -145,28 +233,6 @@ const notificationMethods = [
   </fieldset>
 </template>
 
-<script setup>
-const plans = [
-  { id: 'small', name: 'Small', description: '4 GB RAM / 2 CPUS / 80 GB SSD Storage' },
-  { id: 'medium', name: 'Medium', description: '8 GB RAM / 4 CPUS / 160 GB SSD Storage' },
-  { id: 'large', name: 'Large', description: '16 GB RAM / 8 CPUS / 320 GB SSD Storage' },
-]
-</script>
-
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
     <div>
       <h2 class="text-base font-semibold text-gray-900">Transfer funds</h2>
@@ -187,30 +253,8 @@ const plans = [
       </fieldset>
     </div>
   </template>
-  
-  <script setup>
-  const accounts = [
-    { id: 'checking', name: 'Checking', description: 'CIBC ••••6610' },
-    { id: 'savings', name: 'Savings', description: 'Bank of America ••••0149' },
-    { id: 'mastercard', name: 'Mastercard', description: 'Capital One ••••7877' },
-  ]
-  </script>
 
-  <!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
-<template>
+  <template>
   <fieldset>
     <legend class="text-base font-semibold text-gray-900">Select a side</legend>
     <div class="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
@@ -226,18 +270,7 @@ const plans = [
   </fieldset>
 </template>
 
-<script setup>
-const sides = [
-  { id: null, name: 'None' },
-  { id: 1, name: 'Baked beans' },
-  { id: 2, name: 'Coleslaw' },
-  { id: 3, name: 'French fries' },
-  { id: 4, name: 'Garden salad' },
-  { id: 5, name: 'Mashed potatoes' },
-]
-</script>
-
-<template>
+  <template>
     <RadioGroup v-model="selectedColor">
       <RadioGroupLabel class="block text-sm font-medium leading-6 text-gray-900">Choose a label color</RadioGroupLabel>
       <div class="mt-4 flex items-center space-x-3">
@@ -250,23 +283,8 @@ const sides = [
       </div>
     </RadioGroup>
   </template>
-  
-  <script setup>
-  import { ref } from 'vue'
-  import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-  
-  const colors = [
-    { name: 'Pink', bgColor: 'bg-pink-500', selectedColor: 'ring-pink-500' },
-    { name: 'Purple', bgColor: 'bg-purple-500', selectedColor: 'ring-purple-500' },
-    { name: 'Blue', bgColor: 'bg-blue-500', selectedColor: 'ring-blue-500' },
-    { name: 'Green', bgColor: 'bg-green-500', selectedColor: 'ring-green-500' },
-    { name: 'Yellow', bgColor: 'bg-yellow-500', selectedColor: 'ring-yellow-500' },
-  ]
-  
-  const selectedColor = ref(colors[1])
-  </script>
 
-  <template>
+<template>
   <RadioGroup v-model="selectedMailingLists">
     <RadioGroupLabel class="text-base font-semibold leading-6 text-gray-900">Select a mailing list</RadioGroupLabel>
 
@@ -288,27 +306,13 @@ const sides = [
   </RadioGroup>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-import { CheckCircleIcon } from '@heroicons/vue/20/solid'
-
-const mailingLists = [
-  { id: 1, title: 'Newsletter', description: 'Last message sent an hour ago', users: '621 users' },
-  { id: 2, title: 'Existing Customers', description: 'Last message sent 2 weeks ago', users: '1200 users' },
-  { id: 3, title: 'Trial Users', description: 'Last message sent 4 days ago', users: '2740 users' },
-]
-
-const selectedMailingLists = ref(mailingLists[0])
-</script>
-
 <template>
     <div>
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-medium leading-6 text-gray-900">RAM</h2>
         <a href="#" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">See performance specs</a>
       </div>
-  
+
       <RadioGroup v-model="mem" class="mt-2">
         <RadioGroupLabel class="sr-only">Choose a memory option</RadioGroupLabel>
         <div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
@@ -321,11 +325,11 @@ const selectedMailingLists = ref(mailingLists[0])
       </RadioGroup>
     </div>
   </template>
-  
+
   <script setup>
   import { ref } from 'vue'
   import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-  
+
   const memoryOptions = [
     { name: '4 GB', inStock: true },
     { name: '8 GB', inStock: true },
@@ -334,7 +338,7 @@ const selectedMailingLists = ref(mailingLists[0])
     { name: '64 GB', inStock: true },
     { name: '128 GB', inStock: false },
   ]
-  
+
   const mem = ref(memoryOptions[2])
   </script>
 
@@ -383,7 +387,7 @@ const selected = ref(plans[0])
 
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -418,23 +422,23 @@ const selected = ref(plans[0])
       </div>
     </RadioGroup>
   </template>
-  
+
   <script setup>
   import { ref } from 'vue'
   import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-  
+
   const plans = [
     { name: 'Startup', priceMonthly: 29, priceYearly: 290, limit: 'Up to 5 active job postings' },
     { name: 'Business', priceMonthly: 99, priceYearly: 990, limit: 'Up to 25 active job postings' },
     { name: 'Enterprise', priceMonthly: 249, priceYearly: 2490, limit: 'Unlimited active job postings' },
   ]
-  
+
   const selected = ref(plans[0])
   </script>
 
   <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -477,4 +481,3 @@ const settings = [
 
 const selected = ref(settings[0])
 </script>
-

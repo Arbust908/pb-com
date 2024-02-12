@@ -1,13 +1,11 @@
 <script setup lang='ts'>
-  // A simple input that ask AI to generate a full todo list
+// A simple input that ask AI to generate a full todo list
 </script>
 
 <template>
-  <main>
-     
-  </main>
+  <main />
 </template>
 
 <style scoped>
-    
+
 </style>

@@ -6,12 +6,12 @@ const { print_mode } = storeToRefs(general_store)
 <template>
   <div
     :class="print_mode ? 'print pt-0' : null"
-    class="grid grid-rows-[auto_1fr_auto] grid-cols-[100%] min-h-full"
+    class="grid grid-cols-[100%] grid-rows-[auto_1fr_auto] min-h-full"
   >
-    <GeneralNavBar class="z-40 relative" />
-    <main class="z-20 layout-grid relative">
+    <GeneralNavBar class="relative z-40" />
+    <main class="relative z-20 layout-grid">
       <slot />
     </main>
-    <GeneralFooter class="z-40 relative"/>
+    <GeneralFooter class="relative z-40" />
   </div>
 </template>

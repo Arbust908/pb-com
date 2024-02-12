@@ -4,10 +4,10 @@ export interface MetaData {
   base_url: string
 }
 
-const titleProtocol = ({ title }: MetaData) => {
+function titleProtocol({ title }: MetaData) {
   return title === 'Pancho Blanco :: Desarrollador Creativo' ? `${title}` : `${title} :: Pancho Blanco`
 }
-const descriptioner = ({ description }: MetaData) => {
+function descriptioner({ description }: MetaData) {
   return [
     {
       hid: 'description',
@@ -16,7 +16,7 @@ const descriptioner = ({ description }: MetaData) => {
     },
   ]
 }
-const ogProtocol = (meta: MetaData) => {
+function ogProtocol(meta: MetaData) {
   return [
     {
       hid: 'og:title',
@@ -30,7 +30,7 @@ const ogProtocol = (meta: MetaData) => {
     },
   ]
 }
-const twitterProtocol = (meta: MetaData) => {
+function twitterProtocol(meta: MetaData) {
   return [
     {
       hid: 'twitter:title',
@@ -49,7 +49,7 @@ const twitterProtocol = (meta: MetaData) => {
     },
   ]
 }
-const urlProtocol = ({ base_url }: MetaData) => {
+function urlProtocol({ base_url }: MetaData) {
   const route = useRoute()
   return [
     {
@@ -60,7 +60,7 @@ const urlProtocol = ({ base_url }: MetaData) => {
   ]
 }
 
-export const useUltimateProtocol = (meta: MetaData) => {
+export function useUltimateProtocol(meta: MetaData) {
   return {
     title: titleProtocol(meta),
     meta: [
@@ -71,6 +71,6 @@ export const useUltimateProtocol = (meta: MetaData) => {
     ],
   }
 }
-export const useUP = (meta: MetaData) => {
+export function useUP(meta: MetaData) {
   return useUltimateProtocol(meta)
 }

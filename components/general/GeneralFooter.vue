@@ -22,7 +22,7 @@ const { print_mode } = storeToRefs(general_store)
       </NuxtLink>
     </section>
     <section>
-      <NuxtLink 
+      <NuxtLink
         to="/ask/ai"
         class="inline-flex items-center p-3 md:py-0"
       >
