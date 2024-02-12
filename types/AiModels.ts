@@ -1,52 +1,75 @@
-export const allowedModels = {
-  CAPYBARA: 'capybara-7b',
+import type { ModelResponse } from "ollama"
+const _BASE_MODEL: ModelResponse = {
+  name: '',
+  modified_at: new Date(),
+  size: 0,
+  digest: '',
+  format: '',
+  family: '',
+  families: [],
+  parameter_size: '',
+  quatization_level: 0,
+}
+const NOUS_CAPYBARA: ModelResponse = {
+  ..._BASE_MODEL,
+  name: 'nousresearch/nous-capybara-7b:free',
+  family: 'capybara',
+  families: ['capybara'],
+  parameter_size: '8k',
+};
+const MISTRAL: ModelResponse = {
+  ..._BASE_MODEL,
+  name: 'mistralai/mistral-7b-instruct:free',
+  family: 'mistral',
+  families: ['mistral'],
+  parameter_size: '7b',
+};
+const MYTHOMIST: ModelResponse = {
+  ..._BASE_MODEL,
+  name: 'gryphe/mythomist-7b:free',
+  family: 'mythomist',
+  families: ['mythomist'],
+  parameter_size: '7b',
+};
+const TOPPY_M: ModelResponse = {
+  ..._BASE_MODEL,
+  name: 'undi95/toppy-m-7b:free',
+  family: 'toppy-m',
+  families: ['toppy-m'],
+  parameter_size: '7b',
+};
+const CINEMATIKA: ModelResponse = {
+  ..._BASE_MODEL,
+  name: 'openrouter/cinematika-7b:free',
+  family: 'cinematika',
+  families: ['cinematika'],
+  parameter_size: '7b',
+};
+
+export const allowedModels = [
+  NOUS_CAPYBARA,
+  MISTRAL,
+  MYTHOMIST,
+  TOPPY_M,
+  CINEMATIKA,
+  /* CAPYBARA: 'capybara-7b',
   CINEMATIKA: 'cinematika-7b',
   MIXTRAL: 'mixtral-8x7b',
   MYTHOMIST: 'mythomist-7b',
   OPENCHAT: 'openchat-7b',
   PPLX: 'pplx-7b',
   WORLD: 'world-3b',
-  ZEPHYR: 'zephyr-7b',
-} as const
-export type MODEL_TYPES = typeof allowedModels[keyof typeof allowedModels]
-export const modelRepos = {
-  CAPYBARA: 'nousresearch/nous-capybara-7b',
-  CINEMATIKA: 'openrouter/cinematika-7b',
-  MIXTRAL: 'mistralai/mixtral-8x7b-instruct',
-  MYTHOMIST: 'gryphe/mythomist-7b',
-  OPENCHAT: 'openchat/openchat-7b',
-  PPLX: 'perplexity/pplx-7b-online',
-  WORLD: 'rwkv/rwkv-5-world-3b',
-  ZEPHYR: 'huggingfaceh4/zephyr-7b-beta',
-} as const
-export type MODEL_REPO_TYPES = typeof modelRepos[keyof typeof modelRepos]
-// Check that a string is a valid model type
-export function isModelType(str: string): str is MODEL_TYPES {
-  return Object.values(allowedModels).includes(str as MODEL_TYPES)
-}
+  ZEPHYR: 'zephyr-7b', */
+] satisfies ModelResponse[]
 
-export const modelRepoMap: Record<MODEL_TYPES, MODEL_REPO_TYPES> = {
-  [allowedModels.CAPYBARA]: modelRepos.CAPYBARA,
-  [allowedModels.CINEMATIKA]: modelRepos.CINEMATIKA,
-  [allowedModels.MIXTRAL]: modelRepos.MIXTRAL,
-  [allowedModels.MYTHOMIST]: modelRepos.MYTHOMIST,
-  [allowedModels.OPENCHAT]: modelRepos.OPENCHAT,
-  [allowedModels.PPLX]: modelRepos.PPLX,
-  [allowedModels.WORLD]: modelRepos.WORLD,
-  [allowedModels.ZEPHYR]: modelRepos.ZEPHYR,
-}
-// get the repo name from the model type
-export function getModelRepo(model: MODEL_TYPES) {
-  return modelRepoMap[model]
-}
 
 export interface AI_MODEL_REQUEST_CLIENT {
-  model: MODEL_TYPES
+  model: ModelResponse['name']
   message: string
 }
 
 export interface AI_MODEL_REQUEST_SERVER {
-  model: MODEL_REPO_TYPES
+  model: ModelResponse['name']
   messages: {
     role: string
     content: string
