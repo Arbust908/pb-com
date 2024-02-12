@@ -13,9 +13,6 @@
     "lint:fix": "eslint --fix .",
     "typecheck": "vue-tsc --noEmit"
   },
-  "dependencies": {
-    "ollama": "^0.4.6"
-  },
   "devDependencies": {
     "@antfu/eslint-config": "^2.4.4",
     "@headlessui/vue": "^1.7.16",
@@ -27,6 +24,7 @@
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/i18n": "^8.0.0",
     "@nuxtjs/supabase": "^1.1.6",
+  "ollama": "^0.4.6",
     "@pinia/nuxt": "^0.5.1",
     "@types/bcrypt": "^5.0.2",
     "@unocss/eslint-config": "^0.58.0",
