@@ -1,21 +1,32 @@
 <script lang="ts" setup>
-/* https://www.aang.dev/playground/view-transition-theme-switcher */
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
+const { locale, locales, setLocale } = useI18n()
 
-function toggleTheme(e) {
+function _toggleLang() {
+  /* console.log('toggleLang', locale.value, locales.value)
+  const indexLang = locales.value.indexOf(locale.value)
+  console.log('indexLang', indexLang)
+  const newLocale = locales.value[(indexLang + 1) % locales.value.length]
+  console.log('newLocale', newLocale) */
+  // setLocale(newLocale)
+  const newLang = locale.value === 'es' ? 'en' : 'es'
+  setLocale(newLang)
+  console.log('NewLang::', newLang)
+  document.documentElement.lang = newLang
+}
+
+function toggleLang(e) {
   const md = window.matchMedia('(max-width: 768px)').matches
   const x = e.clientX
   const y = e.clientY
   const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))
 
   if (!document?.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    toggleDark()
+    _toggleLang()
     return
   }
 
   const transition = document?.startViewTransition(() => {
-    toggleDark()
+    _toggleLang()
   })
 
   transition.ready.then(() => {
@@ -34,30 +45,19 @@ function toggleTheme(e) {
     )
   })
 }
-
-useHead({
-  meta: [{
-    id: 'theme-color',
-    name: 'theme-color',
-    content: () => isDark.value ? '#222222' : '#ffffff',
-  }],
-})
 </script>
 
 <template>
   <button
-    class="size-8 flex-middle rounded-xl bg-slate-800"
-    :class="{ 'dark:bg-slate-200': isDark }"
-    :title="`Toggle ${isDark ? 'to Light' : 'to Dark'} mode`"
-    @click="toggleTheme"
+    class="size-8 flex-middle rounded-xl bg-slate-800 dark:bg-slate-200"
+    title="Change language"
+    @click="toggleLang"
   >
-    <i v-if="!isDark" class="i-ri:moon-fill size-5 text-slate-500" />
-    <i v-else class="i-ri:sun-fill size-5 text-slate-500" />
+    <i class="i-ri:a-b size-5 text-slate-500" />
   </button>
 </template>
 
-  <style>
-  /* CSS to disable fade-in animation */
+<style>
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;

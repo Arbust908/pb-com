@@ -22,6 +22,7 @@ const { print_mode } = storeToRefs(general_store)
       </h1>
     </NuxtLink>
     <nav class="mr-4 flex items-center justify-between space-x-3">
+      <GeneralLangToggle />
       <ClientOnly>
         <DarkCircleToggle />
       </ClientOnly>

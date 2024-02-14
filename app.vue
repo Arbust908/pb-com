@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { appName } from '@/constants'
 
+const { locale } = useI18n()
+
 useHead({
   title: appName,
+  htmlAttrs: {
+    lang: 'en',
+  },
 })
 </script>
 
