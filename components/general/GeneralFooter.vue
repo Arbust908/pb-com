@@ -25,6 +25,7 @@ const { print_mode } = storeToRefs(general_store)
       <NuxtLink
         to="/ask/ai"
         class="inline-flex items-center p-3 md:py-0"
+        title="Chat with AI"
       >
         <i class="i-ri:chat-smile-3-fill inline h-6 w-6" />
       </NuxtLink>
