@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import posthog from 'posthog-js'
 import { storeToRefs } from 'pinia'
 import { useGeneralStore } from '~/composables'
 import { useUP } from '~/composables/ultimateProtocol'
@@ -13,6 +14,10 @@ const meta: MetaData = {
 useHead(useUP(meta))
 const general_store = useGeneralStore()
 const { print_mode } = storeToRefs(general_store)
+
+onMounted(() => {
+  posthog.capture('seen CV', { property: 'true' })
+});
 </script>
 
 <template>
