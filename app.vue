@@ -1,9 +1,14 @@
 <script setup lang="ts">
+import posthog from 'posthog-js'
 import { appName } from '@/constants'
 
 const { locale } = useI18n()
 const isDark = useDark()
 const isDev = import.meta.dev
+
+onMounted(() => {
+  posthog.init('phc_IWe7D2dsdy63sd80Puspwd4UqBWaoatzh42WSwehkqF', { api_host: 'https://app.posthog.com' })
+})
 
 useHead({
   title: appName,
