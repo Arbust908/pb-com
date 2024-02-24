@@ -18,7 +18,7 @@ useHead({
   link: [
     {
       rel: 'icon',
-      href: isDev ? '/public/pb-favicon-local.png' : isDark.value ? '/public/pb-favicon-dark.png' : '/public/pb-favicon-light.png',
+      href: isDev ? '/pb-favicon-local.png' : isDark.value ? '/pb-favicon-dark.png' : '/pb-favicon-light.png',
     }
   ]
 })
