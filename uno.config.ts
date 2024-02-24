@@ -122,8 +122,8 @@ export default defineConfig({
       fonts: {
         sans: [
           {
-            name: 'Space Grotesk',
-            weights: [300, 400, 500, 600, 700],
+            name: 'Afacad',
+            weights: [400, 500, 600, 700],
           },
           {
             name: 'sans-serif',

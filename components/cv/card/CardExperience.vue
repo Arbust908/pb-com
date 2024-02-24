@@ -39,6 +39,7 @@ onMounted(() => {
         !hasTranslation(`exp.${job}.end`) ? 'border-violet-700 dark:border-violet-300' : 'border-slate-300 dark:border-slate-600'
       "
       class="grid grid-cols-1 mb-4 gap-2 border rounded p-4 text-slate-800 bg-checked bg-checked dark:text-slate-200"
+      :key="locale"
     >
       <h3
         class="flex flex-col cursor-pointer font-bold lg:flex-row sm:flex-row md:flex-col"
