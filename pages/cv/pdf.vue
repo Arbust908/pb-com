@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import posthog from 'posthog-js'
 import { storeToRefs } from "pinia";
 import exp from "@/locales/en/exp";
 import { useGeneralStore } from "~/composables";
@@ -76,8 +77,10 @@ watch(print_mode, (newVal) => {
   }
 });
 onMounted(() => {
+  posthog.capture('seen PDF', { property: 'true' })
   toggleDark(false);
   print_mode.value = true;
+  posthog.capture('download PDF', { property: 'true' })
 });
 </script>
 
