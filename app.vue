@@ -32,15 +32,14 @@ html,
 body,
 #__nuxt {
   min-height: -webkit-fill-available;
-  @apply h-100svh m-0 p-0 scroll-smooth font-afacad;
+  color-scheme: light dark;
+  @apply h-100svh m-0 p-0 scroll-smooth font-sans;
 }
 
 body {
-  color-scheme: light;
   @apply bg-slate-100;
 }
 .dark body {
-  color-scheme: dark;
   @apply bg-slate-700 text-slate-100;
 }
 </style>

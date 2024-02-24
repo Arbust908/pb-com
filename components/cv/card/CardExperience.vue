@@ -9,7 +9,7 @@ const { print_mode } = storeToRefs(general_store)
 const { t, locale } = useI18n()
 
 const detailsShow = ref(false)
-const isExpanded = ref(false)
+const isExpanded = ref(true)
 
 function formatDate(date: string) {
   return new Date(date).toLocaleDateString(locale.value, { year: 'numeric', month: 'short', day: '2-digit' })
@@ -27,9 +27,9 @@ watch(print_mode, (isPrint) => {
     isExpanded.value = true
 })
 
-onMounted(() => {
+/* onMounted(() => {
   isExpanded.value = hasTranslation(`exp.${props.job}.isExpanded`)
-})
+}) */
 </script>
 
 <template>
