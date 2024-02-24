@@ -16,15 +16,15 @@ const { print_mode } = storeToRefs(general_store)
 </script>
 
 <template>
-  <div :class="print_mode && 'print'" class="relative layout-grid-feature">
-    <BlobyOne class="fixed z-0 w-90 opacity-60 filter-blur-2xl -right-8 -top-4" />
-    <BlobyTwo class="fixed z-0 w-100 opacity-60 filter-blur-2xl -bottom-7 -left-6" />
-    <CvSideNav v-if="!print_mode" class="lang relative z-10" />
-    <CvPersonal class="personal relative z-10" />
-    <CvExperiences ref="exp" class="exp relative z-10" />
-    <CvStudies ref="study" class="study relative z-10" />
-    <BackToTopBtn class="z-20" />
-  </div>
+    <div :class="print_mode && 'print'" class="relative layout-grid-feature">
+      <BlobyOne v-if="!print_mode" class="fixed z-0 w-90 opacity-60 filter-blur-2xl -right-8 -top-4" />
+      <BlobyTwo v-if="!print_mode" class="fixed z-0 w-100 opacity-60 filter-blur-2xl -bottom-7 -left-6" />
+      <CvSideNav v-if="!print_mode" class="lang relative z-10" />
+      <CvPersonal class="personal relative z-10" />
+      <CvExperiences ref="exp" class="exp relative z-10" />
+      <CvStudies ref="study" class="study relative z-10" />
+      <BackToTopBtn class="z-20" />
+    </div>
 </template>
 
 <style scoped>

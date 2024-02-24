@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     'nuxt-scheduler',
     '@nuxtjs/i18n',
     '@nuxtjs/supabase',
+    '@sidebase/nuxt-pdf',
   ],
 
   experimental: {
