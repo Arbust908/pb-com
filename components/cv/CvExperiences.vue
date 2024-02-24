@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const exp_list = ['bitpatagonia', 'viafoura', 'forian', 'pointmore', 'digitalhouse_dev', 'digitalhouse', 'netdreams', 'musculocreativo', 'mindset']
+import exp from '@/locales/en/exp';
+const exp_list = Object.keys(exp)
 </script>
 
 <template>

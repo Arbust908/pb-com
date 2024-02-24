@@ -1,6 +1,6 @@
 export default
 {
-  damandio: {
+  demandio: {
     rol: 'Front-End Engineer',
     company: 'Demand.io',
     start: '10/18/2022',

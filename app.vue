@@ -2,12 +2,20 @@
 import { appName } from '@/constants'
 
 const { locale } = useI18n()
+const isDark = useDark()
+const isDev = import.meta.dev
 
 useHead({
   title: appName,
   htmlAttrs: {
     lang: 'en',
   },
+  link: [
+    {
+      rel: 'icon',
+      href: isDev ? '/public/pb-favicon-local.png' : isDark.value ? '/public/pb-favicon-dark.png' : '/public/pb-favicon-light.png',
+    }
+  ]
 })
 </script>
 
@@ -24,7 +32,7 @@ html,
 body,
 #__nuxt {
   min-height: -webkit-fill-available;
-  @apply h-100svh m-0 p-0 scroll-smooth;
+  @apply h-100svh m-0 p-0 scroll-smooth font-afacad;
 }
 
 body {
