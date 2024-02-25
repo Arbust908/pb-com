@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import shuffleLetters from 'shuffle-letters';
 const { locale, locales, setLocale } = useI18n()
 
 function _toggleLang() {
@@ -31,7 +32,6 @@ function toggleLang(e) {
 
   transition.ready.then(() => {
     const duration = md ? 400 : 600
-
     document.documentElement.animate(
       {
         clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`],

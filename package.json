@@ -41,6 +41,7 @@
     "nuxt-scheduler": "^0.1.9",
     "ollama": "^0.4.6",
     "pinia": "^2.1.7",
+    "shuffle-letters": "^1.1.0",
     "tesseract.js": "^5.0.4",
     "typescript": "^5.3.3",
     "valibot": "^0.25.0",
