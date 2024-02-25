@@ -23,7 +23,7 @@ function birthday() {
     <picture>
       <source type="image/webp" srcset="/img/avatar.webp">
       <img
-        class="right-0 top-0 mb-4 h-32 w-full border-2 border-slate-500 rounded object-cover shadow sm:(absolute h-40 w-32 -m-2) md:w-40"
+        class="right-0 top-0 mb-4 border-2 border-slate-500 rounded object-cover shadow absolute h-40 w-40 m-2 md:-m-2 md:w-32 lg:w-40"
         src="/img/avatar.jpg"
         :alt="t('avatar.desc')"
       >

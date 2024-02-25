@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import shuffleLetters from 'shuffle-letters';
+// https://github.com/georapbox/shuffle-letters/tree/main
 import type { MetaData } from '@/composables/ultimateProtocol'
 import { useUP } from '@/composables/ultimateProtocol'
 
@@ -10,15 +12,18 @@ const meta: MetaData = {
 }
 useHead(useUP(meta))
 // AI vue components https://www.vue0.dev/
+onMounted(() => {
+  shuffleLetters(document.querySelector('h2'))
+});
 </script>
 
 <template>
   <section class="flex flex-col items-center gap-4 p-6 text-center">
-    <Logo class="logo w-1/2 fill-current" />
+    <Logo class="w-1/2 fill-current" />
     <h1 class="from-pink-500 to-violet-500 bg-gradient-to-r bg-clip-text text-4xl text-transparent font-light md:(text-6xl -mt-4)">
       Pancho Blanco
     </h1>
-    <h2 class="text-lg font-bold tracking-widest md:text-3xl">
+    <h2 class="text-lg font-bold tracking-widest md:text-3xl min-h-32px">
       {{ $t('rol') }}
     </h2>
     <div class="flex gap-x-4">
@@ -40,9 +45,6 @@ useHead(useUP(meta))
 </template>
 
 <style scoped>
-.logo {
-  view-transition-name: logo;
-}
 h1 {
   view-transition-name: h1;
 }
