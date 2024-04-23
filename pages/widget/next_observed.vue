@@ -31,8 +31,8 @@ definePageMeta({
 </script>
 
 <template>
-  <main class="grid content-start justify-items-center gap-4 py-4 min-h-full">
-
+  <main class="grid content-start justify-items-center gap-4 py-8 min-h-full">
+    <div class="grid content-start justify-items-center bg-gray-800/10 rounded w-400px aspect-ratio-square p-5">
     <WidgetBox v-slot="{ isLong }">
         <div class="h-full items-center" :class="isLong ? 'grid long-holiday justify-items-center' : 'flex flex-col justify-center '">
           <h1 class="text-xl font-bold" :class="{ 'nextHoly': isLong }">Next Holiday</h1>
@@ -42,6 +42,7 @@ definePageMeta({
           <p class="text-2xl font-bold" :class="{ 'date': isLong }">{{ nextHoliday?.date.toLocaleDateString() }}</p>
         </div>
     </WidgetBox>
+    </div>
     <NuxtLink to="/widget" class="text-xl md:text-sm font-bold rounded-md bg-purple-700 px-4 py-2 hover:(shadow bg-purple-800 text-gray-200)">go back</NuxtLink>
   </main>
 </template>
