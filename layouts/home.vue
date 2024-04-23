@@ -1,9 +1,11 @@
 <template>
-  <main class="px-10 py-20 text-center">
-    <slot />
-    <Footer />
-    <div class="mx-auto mt-5 text-center text-sm opacity-25">
-      [Home Layout]
-    </div>
-  </main>
+  <div
+    class="grid grid-cols-[100%] grid-rows-[1fr_auto_auto] min-h-full"
+  >
+    <main class="relative z-20 layout-grid">
+      <slot />
+    </main>
+    <GeneralNavBar class="relative z-40" />
+    <GeneralFooter class="relative z-40" />
+  </div>
 </template>
