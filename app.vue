@@ -7,7 +7,9 @@ const isDark = useDark()
 const isDev = import.meta.dev
 
 onMounted(() => {
-  posthog.init('phc_IWe7D2dsdy63sd80Puspwd4UqBWaoatzh42WSwehkqF', { api_host: 'https://app.posthog.com' })
+  if (!isDev) {
+    posthog.init('phc_IWe7D2dsdy63sd80Puspwd4UqBWaoatzh42WSwehkqF', { api_host: 'https://app.posthog.com' })
+  }
 })
 
 useHead({
