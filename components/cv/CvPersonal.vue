@@ -1,18 +1,17 @@
 <script setup lang="ts">
-const { t, locale } = useI18n()
+const { t, locale } = useI18n();
 
-const general_store = useGeneralStore()
-const { print_mode } = storeToRefs(general_store)
-const { togglePrintMode } = general_store
+const general_store = useGeneralStore();
+const { print_mode } = storeToRefs(general_store);
+const { togglePrintMode } = general_store;
 
-const skill_list = ['web', 'adobe', 'other']
-const lang_list = ['es', 'en']
+const skill_list = ["web", "adobe", "other"];
+const lang_list = ["es", "en"];
 
 function birthday() {
-  return new Date('06/14/1991').toLocaleDateString(
-    locale.value,
-    { dateStyle: 'medium' },
-  )
+ return new Date("06/14/1991").toLocaleDateString(locale.value, {
+  dateStyle: "medium",
+ });
 }
 </script>
 

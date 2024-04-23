@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { useGeneralStore } from '~/composables'
+import { storeToRefs } from "pinia";
+import { useGeneralStore } from "~/composables";
 
-const general_store = useGeneralStore()
-const { print_mode } = storeToRefs(general_store)
+const general_store = useGeneralStore();
+const { print_mode } = storeToRefs(general_store);
 </script>
 
 <template>

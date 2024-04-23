@@ -1,6 +1,6 @@
 <script setup lang='ts'>
-const route = useRoute()
-const monsterName = computed(() => route.params.monster)
+const route = useRoute();
+const monsterName = computed(() => route.params.monster);
 </script>
 
 <template>

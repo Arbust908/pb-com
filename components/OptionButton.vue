@@ -1,36 +1,34 @@
 <script setup lang='ts'>
-import type { PropType } from 'vue'
+import type { PropType } from "vue";
 
 defineProps({
-  options: {
-    type: Array as PropType<string[]>,
-    required: true,
-  },
-  title: {
-    type: String,
-    default: 'Option',
-  },
-  value: {
-    type: String,
-    default: 'none',
-  },
-})
+ options: {
+  type: Array as PropType<string[]>,
+  required: true,
+ },
+ title: {
+  type: String,
+  default: "Option",
+ },
+ value: {
+  type: String,
+  default: "none",
+ },
+});
 
-defineEmits(['changeValue'])
+defineEmits(["changeValue"]);
 
 function isFirstOpt(position: number) {
-  return position === 0
+ return position === 0;
 }
 function isLastOpt(position: number, maxLength: number) {
-  return position === maxLength
+ return position === maxLength;
 }
 
 function positionClass(position: number, maxLength: number) {
-  if (isFirstOpt(position))
-    return 'first'
+ if (isFirstOpt(position)) return "first";
 
-  if (isLastOpt(position, maxLength))
-    return 'last'
+ if (isLastOpt(position, maxLength)) return "last";
 }
 </script>
 

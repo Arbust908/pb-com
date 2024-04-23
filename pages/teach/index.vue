@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type { MetaData } from '@/composables/ultimateProtocol'
-import { useUP } from '@/composables/ultimateProtocol'
+import type { MetaData } from "@/composables/ultimateProtocol";
+import { useUP } from "@/composables/ultimateProtocol";
 
 const meta: MetaData = {
-  base_url: 'panchoblanco.com',
-  title: 'Sobre Pancho Blanco :: Desarrollador Creativo',
-  description:
-          'Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Tengo mas de 8 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.',
-}
-useHead(useUP(meta))
+ base_url: "panchoblanco.com",
+ title: "Sobre Pancho Blanco :: Desarrollador Creativo",
+ description:
+  "Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Tengo mas de 8 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.",
+};
+useHead(useUP(meta));
 </script>
 
 <template>

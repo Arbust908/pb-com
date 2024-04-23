@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import shuffleLetters from 'shuffle-letters';
+import shuffleLetters from "shuffle-letters";
 // https://github.com/georapbox/shuffle-letters/tree/main
-import type { MetaData } from '@/composables/ultimateProtocol'
-import { useUP } from '@/composables/ultimateProtocol'
+import type { MetaData } from "@/composables/ultimateProtocol";
+import { useUP } from "@/composables/ultimateProtocol";
 
 const meta: MetaData = {
-  base_url: 'panchoblanco.com',
-  title: 'Pancho Blanco :: Desarrollador Creativo',
-  description:
-          'Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Tengo mas de 8 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.',
-}
-useHead(useUP(meta))
+ base_url: "panchoblanco.com",
+ title: "Pancho Blanco :: Desarrollador Creativo",
+ description:
+  "Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Tengo mas de 8 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.",
+};
+useHead(useUP(meta));
 // AI vue components https://www.vue0.dev/
 onMounted(() => {
-  shuffleLetters(document.querySelector('h2'))
+ shuffleLetters(document.querySelector("h2"));
 });
 </script>
 

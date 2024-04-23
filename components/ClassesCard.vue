@@ -1,42 +1,41 @@
 <script>
 export default {
-  props: {
-    title: {
-      type: String,
-      default: 'Title',
-    },
-    slug: {
-      type: String,
-      default: 'title',
-    },
-    description: {
-      type: String,
-      default:
-        'Analyse the problem sets to find a better solution to the issue.',
-    },
-    color: {
-      type: String,
-      default: 'bg-red-600',
-    },
-    iconColor: {
-      type: String,
-      default: 'text-red-600',
-    },
-    icon: {
-      type: String,
-      default: 'variable',
-    },
-    weight: {
-      type: String,
-      default: 'solid',
-    },
+ props: {
+  title: {
+   type: String,
+   default: "Title",
   },
-  data() {
-    return {
-      isHover: false,
-    }
+  slug: {
+   type: String,
+   default: "title",
   },
-}
+  description: {
+   type: String,
+   default: "Analyse the problem sets to find a better solution to the issue.",
+  },
+  color: {
+   type: String,
+   default: "bg-red-600",
+  },
+  iconColor: {
+   type: String,
+   default: "text-red-600",
+  },
+  icon: {
+   type: String,
+   default: "variable",
+  },
+  weight: {
+   type: String,
+   default: "solid",
+  },
+ },
+ data() {
+  return {
+   isHover: false,
+  };
+ },
+};
 </script>
 
 <template>

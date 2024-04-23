@@ -1,12 +1,19 @@
 <script setup lang='ts'>
 const items = [
-  { name: '', dot: 3, damage: ['d6'], type: 'Improvised', image: '' },
-  { name: 'Stones', dot: 3, type: 'Ammunition', image: '' },
-  { name: 'Heavy Armor', dot: 4, defense: 1, cardType: 'long', image: '' },
-  { name: 'Light Armor', dot: 3, defense: 1, cardType: 'wide', image: '' },
-  { name: 'Sword', dot: 3, damage: ['d6', 'd8'], type: 'Medium', image: '' },
-  { name: 'Golden Bell', type: 'Medium', dot: 6, image: '', isRelique: true, cardType: 'big' },
-]
+ { name: "", dot: 3, damage: ["d6"], type: "Improvised", image: "" },
+ { name: "Stones", dot: 3, type: "Ammunition", image: "" },
+ { name: "Heavy Armor", dot: 4, defense: 1, cardType: "long", image: "" },
+ { name: "Light Armor", dot: 3, defense: 1, cardType: "wide", image: "" },
+ { name: "Sword", dot: 3, damage: ["d6", "d8"], type: "Medium", image: "" },
+ {
+  name: "Golden Bell",
+  type: "Medium",
+  dot: 6,
+  image: "",
+  isRelique: true,
+  cardType: "big",
+ },
+];
 </script>
 
 <template>

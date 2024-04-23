@@ -1,20 +1,27 @@
 <script setup lang="ts">
-import type { MetaData } from '~/composables/ultimateProtocol'
-import { useUP } from '~/composables/ultimateProtocol'
+import type { MetaData } from "~/composables/ultimateProtocol";
+import { useUP } from "~/composables/ultimateProtocol";
 
 const meta: MetaData = {
-  base_url: 'panchoblanco.com',
-  title: 'Blog :: Pancho Blanco',
-  description:
-          'Un blog donde busco descargar mis conocimientos para compartir con mi amigo Diego y todo aquel que lo encuentre util!',
-}
-useHead(useUP(meta))
+ base_url: "panchoblanco.com",
+ title: "Blog :: Pancho Blanco",
+ description:
+  "Un blog donde busco descargar mis conocimientos para compartir con mi amigo Diego y todo aquel que lo encuentre util!",
+};
+useHead(useUP(meta));
 interface ArticleCard {
-  title: string
-  description: string
-  slug: string
+ title: string;
+ description: string;
+ slug: string;
 }
-const articles = [{ title: 'Nuevo Sitio', description: 'Nuevamente empezamos con otro sitio con nueva tecnologia y mucha nuevas cosas', slug: 'nuevo_sitio' }] as ArticleCard[]
+const articles = [
+ {
+  title: "Nuevo Sitio",
+  description:
+   "Nuevamente empezamos con otro sitio con nueva tecnologia y mucha nuevas cosas",
+  slug: "nuevo_sitio",
+ },
+] as ArticleCard[];
 
 // https://twitter.com/nuxt_js/status/1645825181640785926
 // https://blog.webdevsimplified.com/2020-07/relative-time-format/ for blog times and time ago

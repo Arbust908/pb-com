@@ -1,35 +1,35 @@
 <script setup lang="ts">
 interface User {
-  id: number
-  name: string
-  role: string
-  email: string
+ id: number;
+ name: string;
+ role: string;
+ email: string;
 }
 
 const users = ref<User[]>([
-  { id: 1, name: 'John Doe', role: 'Admin', email: 'john@example.com' },
-  { id: 2, name: 'Jane Smith', role: 'User', email: 'jane@example.com' },
-  { id: 3, name: 'Bob Johnson', role: 'User', email: 'bob@example.com' },
-])
+ { id: 1, name: "John Doe", role: "Admin", email: "john@example.com" },
+ { id: 2, name: "Jane Smith", role: "User", email: "jane@example.com" },
+ { id: 3, name: "Bob Johnson", role: "User", email: "bob@example.com" },
+]);
 
 function editUser(user: User) {
-  // TODO: Implement edit user logic
+ // TODO: Implement edit user logic
 }
 
 function promoteUser(user: User) {
-  // TODO: Implement promote user logic
+ // TODO: Implement promote user logic
 }
 
 function demoteUser(user: User) {
-  // TODO: Implement demote user logic
+ // TODO: Implement demote user logic
 }
 
 function deleteUser(user: User) {
-  // TODO: Implement delete user logic
+ // TODO: Implement delete user logic
 }
 
 function banUser(user: User) {
-  // TODO: Implement ban user logic
+ // TODO: Implement ban user logic
 }
 </script>
 

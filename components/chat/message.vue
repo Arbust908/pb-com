@@ -1,16 +1,22 @@
 <script setup lang="ts">
-type Props = {} & ({
-  message: string
-  role: 'user'
-} | {
-  message?: string
-  role: 'model'
-  isResponding?: boolean
-})
-const props = defineProps<Props>()
+type Props = {} & (
+ | {
+    message: string;
+    role: "user";
+   }
+ | {
+    message?: string;
+    role: "model";
+    isResponding?: boolean;
+   }
+);
+const props = defineProps<Props>();
 
-const isUser = computed(() => props.role === 'user')
-const avatar = computed(() => `https://dummyimage.com/128x128/363536/ffffff&text=${props.role[0].toUpperCase()}`)
+const isUser = computed(() => props.role === "user");
+const avatar = computed(
+ () =>
+  `https://dummyimage.com/128x128/363536/ffffff&text=${props.role[0].toUpperCase()}`,
+);
 </script>
 
 <template>

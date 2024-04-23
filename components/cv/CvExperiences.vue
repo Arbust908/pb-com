@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import exp from '@/locales/en/exp';
-const exp_list = Object.keys(exp)
+import exp from "@/locales/en/exp";
+const exp_list = Object.keys(exp);
 </script>
 
 <template>

@@ -1,44 +1,55 @@
 <script lang="ts" setup>
-import type { AI_MODEL_REQUEST_CLIENT, AI_MODEL_RESPONSE, ChatMessage, MODEL_TYPES } from '@/types'
-import { allowedModels } from '@/types'
-import { getNewId, getResponseMsg } from '@/utils'
+import type {
+ AI_MODEL_REQUEST_CLIENT,
+ AI_MODEL_RESPONSE,
+ ChatMessage,
+ MODEL_TYPES,
+} from "@/types";
+import { allowedModels } from "@/types";
+import { getNewId, getResponseMsg } from "@/utils";
 
-const selectedModel = ref<MODEL_TYPES>(allowedModels.CAPYBARA)
+const selectedModel = ref<MODEL_TYPES>(allowedModels.CAPYBARA);
 
-const messages = ref<ChatMessage[]>([])
-const newMessage = ref('')
-const isResponding = ref(false)
-const openModal = ref(false)
+const messages = ref<ChatMessage[]>([]);
+const newMessage = ref("");
+const isResponding = ref(false);
+const openModal = ref(false);
 
 async function sendMessage() {
-  console.log('sendMessage')
-  isResponding.value = true
-  if (newMessage.value) {
-    const newMsg = { id: getNewId(messages.value), message: newMessage.value, role: 'user' }
-    console.log('newMessage', newMsg)
-    console.log(messages.value)
-    messages.value.push(newMsg)
-    const payload = {
-      message: newMessage.value,
-      model: selectedModel.value,
-    } satisfies AI_MODEL_REQUEST_CLIENT
-    try {
-      console.log('try')
-      const data = await $fetch<AI_MODEL_RESPONSE>('/api/assistant', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-      })
-      console.log('data', data)
-      messages.value.push({ id: data.id, message: getResponseMsg(data), role: 'model' })
-      newMessage.value = ''
-    }
-    catch (error) {
-      console.error(error)
-    }
-    finally {
-      isResponding.value = false
-    }
+ console.log("sendMessage");
+ isResponding.value = true;
+ if (newMessage.value) {
+  const newMsg = {
+   id: getNewId(messages.value),
+   message: newMessage.value,
+   role: "user",
+  };
+  console.log("newMessage", newMsg);
+  console.log(messages.value);
+  messages.value.push(newMsg);
+  const payload = {
+   message: newMessage.value,
+   model: selectedModel.value,
+  } satisfies AI_MODEL_REQUEST_CLIENT;
+  try {
+   console.log("try");
+   const data = await $fetch<AI_MODEL_RESPONSE>("/api/assistant", {
+    method: "POST",
+    body: JSON.stringify(payload),
+   });
+   console.log("data", data);
+   messages.value.push({
+    id: data.id,
+    message: getResponseMsg(data),
+    role: "model",
+   });
+   newMessage.value = "";
+  } catch (error) {
+   console.error(error);
+  } finally {
+   isResponding.value = false;
   }
+ }
 }
 </script>
 

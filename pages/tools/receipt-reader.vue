@@ -1,31 +1,30 @@
 <script lang="ts" setup>
-import { createWorker } from 'tesseract.js'
+import { createWorker } from "tesseract.js";
 
-const worker = ref<any>(null)
-const finalText = ref('')
-const reading = ref(false)
+const worker = ref<any>(null);
+const finalText = ref("");
+const reading = ref(false);
 
 async function recognizeText(event: Event) {
-  if (!worker.value)
-    return
-  const target = event.target as HTMLInputElement
-  const file = target.files?.[0]
-  if (!file)
-    return
-  console.info(file)
-  reading.value = true
+ if (!worker.value) return;
+ const target = event.target as HTMLInputElement;
+ const file = target.files?.[0];
+ if (!file) return;
+ console.info(file);
+ reading.value = true;
 
-  const { data: { text } } = await worker.value.recognize(file)
-  console.log(text)
-  finalText.value = text
-  reading.value = false
+ const {
+  data: { text },
+ } = await worker.value.recognize(file);
+ console.log(text);
+ finalText.value = text;
+ reading.value = false;
 }
 
 onMounted(async () => {
-  // is on the client side
-  if (typeof window !== 'undefined')
-    worker.value = await createWorker('spa')
-})
+ // is on the client side
+ if (typeof window !== "undefined") worker.value = await createWorker("spa");
+});
 </script>
 
 <template>

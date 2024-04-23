@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import posthog from 'posthog-js'
+import posthog from "posthog-js";
 import { storeToRefs } from "pinia";
 import exp from "@/locales/en/exp";
 import { useGeneralStore } from "~/composables";
 import { useUP } from "~/composables/ultimateProtocol";
 import type { MetaData } from "~/composables/ultimateProtocol";
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
+const isDark = useDark();
+const toggleDark = useToggle(isDark);
 const exp_list = Object.keys(exp);
 const { t, locale } = useI18n();
 const meta: MetaData = {
-  base_url: "panchoblanco.com",
-  title: "Curriculum Vitae :: Pancho Blanco",
-  description:
-    "Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Estas son mis habilidades y experiencias. Tengo mas de 4 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.",
+ base_url: "panchoblanco.com",
+ title: "Curriculum Vitae :: Pancho Blanco",
+ description:
+  "Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Estas son mis habilidades y experiencias. Tengo mas de 4 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.",
 };
 useHead(useUP(meta));
 const general_store = useGeneralStore();
@@ -25,62 +25,62 @@ const lang_list = ["es", "en"];
 const learn_list = ["dh", "up", "slc"];
 
 function birthday() {
-  return new Date("06/14/1991").toLocaleDateString(locale.value, {
-    dateStyle: "medium",
-  });
+ return new Date("06/14/1991").toLocaleDateString(locale.value, {
+  dateStyle: "medium",
+ });
 }
 const detailsShow = ref(false);
 const isExpanded = ref(true);
 
 function formatDate(date: string) {
-  return new Date(date).toLocaleDateString(locale.value, {
-    year: "numeric",
-    month: "short",
-    day: "2-digit",
-  });
+ return new Date(date).toLocaleDateString(locale.value, {
+  year: "numeric",
+  month: "short",
+  day: "2-digit",
+ });
 }
 function hasTranslation(key: string) {
-  return t(key) !== key;
+ return t(key) !== key;
 }
 
 function onClick() {
-  isExpanded.value = !isExpanded.value;
+ isExpanded.value = !isExpanded.value;
 }
 
 watch(print_mode, (isPrint) => {
-  if (isPrint) isExpanded.value = true;
+ if (isPrint) isExpanded.value = true;
 });
 
 const DOCUMENT_OPTIONS = {
-  format: "a4",
+ format: "a4",
 };
 const HTML_OPTIONS = {
-  autoPaging: true,
-  html2canvas: {
-    scale: 1,
-  },
+ autoPaging: true,
+ html2canvas: {
+  scale: 1,
+ },
 };
 const exportFilename = computed(() => {
-  return `FranBlanco-CV-${new Date().toLocaleDateString(locale.value, {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  })}-${locale.value}.pdf`;
+ return `FranBlanco-CV-${new Date().toLocaleDateString(locale.value, {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+ })}-${locale.value}.pdf`;
 });
 const resume = ref<HTMLElement | null>(null);
 watch(print_mode, (newVal) => {
-  if (newVal) {
-    const resumeEl = resume.value;
-    if (resumeEl) {
-      exportToPDF(exportFilename.value, resumeEl);
-    }
+ if (newVal) {
+  const resumeEl = resume.value;
+  if (resumeEl) {
+   exportToPDF(exportFilename.value, resumeEl);
   }
+ }
 });
 onMounted(() => {
-  posthog.capture('seen PDF', { property: 'true' })
-  toggleDark(false);
-  print_mode.value = true;
-  posthog.capture('download PDF', { property: 'true' })
+ posthog.capture("seen PDF", { property: "true" });
+ toggleDark(false);
+ print_mode.value = true;
+ posthog.capture("download PDF", { property: "true" });
 });
 </script>
 

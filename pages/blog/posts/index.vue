@@ -1,12 +1,12 @@
 <script setup lang="ts">
-const loading = ref(true)
-const posts = ref([])
+const loading = ref(true);
+const posts = ref([]);
 
 function editPost(postId: number) {
-  // TODO: Implement edit post logic
+ // TODO: Implement edit post logic
 }
 function deletePost(postId: number) {
-  // TODO: Implement delete post logic
+ // TODO: Implement delete post logic
 }
 </script>
 

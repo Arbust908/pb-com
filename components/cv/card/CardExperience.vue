@@ -1,31 +1,34 @@
 <script setup lang='ts'>
 interface Props {
-  job: string
+ job: string;
 }
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
-const general_store = useGeneralStore()
-const { print_mode } = storeToRefs(general_store)
-const { t, locale } = useI18n()
+const general_store = useGeneralStore();
+const { print_mode } = storeToRefs(general_store);
+const { t, locale } = useI18n();
 
-const detailsShow = ref(false)
-const isExpanded = ref(true)
+const detailsShow = ref(false);
+const isExpanded = ref(true);
 
 function formatDate(date: string) {
-  return new Date(date).toLocaleDateString(locale.value, { year: 'numeric', month: 'short', day: '2-digit' })
+ return new Date(date).toLocaleDateString(locale.value, {
+  year: "numeric",
+  month: "short",
+  day: "2-digit",
+ });
 }
 function hasTranslation(key: string) {
-  return t(key) !== key
+ return t(key) !== key;
 }
 
 function onClick() {
-  isExpanded.value = !isExpanded.value
+ isExpanded.value = !isExpanded.value;
 }
 
 watch(print_mode, (isPrint) => {
-  if (isPrint)
-    isExpanded.value = true
-})
+ if (isPrint) isExpanded.value = true;
+});
 
 /* onMounted(() => {
   isExpanded.value = hasTranslation(`exp.${props.job}.isExpanded`)

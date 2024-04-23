@@ -1,17 +1,16 @@
 <script setup>
-const isWebAuthNCompatible = ref(false)
-const userStore = useUserStore()
-const currentUser = computed(() => userStore.currentUser)
+const isWebAuthNCompatible = ref(false);
+const userStore = useUserStore();
+const currentUser = computed(() => userStore.currentUser);
 
 definePageMeta({
-  middleware: ['auth'],
-})
+ middleware: ["auth"],
+});
 
 onMounted(() => {
-  console.warn(userStore.currentUser)
-  if (window.PublicKeyCredential)
-    isWebAuthNCompatible.value = true
-})
+ console.warn(userStore.currentUser);
+ if (window.PublicKeyCredential) isWebAuthNCompatible.value = true;
+});
 </script>
 
 <template>

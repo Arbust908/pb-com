@@ -1,9 +1,9 @@
 <script setup>
-import { ref } from 'vue'
-import { CheckCircleIcon } from '@heroicons/vue/24/outline'
-import { XMarkIcon } from '@heroicons/vue/20/solid'
+import { ref } from "vue";
+import { CheckCircleIcon } from "@heroicons/vue/24/outline";
+import { XMarkIcon } from "@heroicons/vue/20/solid";
 
-const show = ref(true)
+const show = ref(true);
 </script>
 
 <script setup>

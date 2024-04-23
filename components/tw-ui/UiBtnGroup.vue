@@ -1,5 +1,5 @@
 <script setup>
-import { BookmarkIcon } from '@heroicons/vue/20/solid'
+import { BookmarkIcon } from "@heroicons/vue/20/solid";
 </script>
 
 <template>

@@ -1,14 +1,18 @@
 <script setup lang="ts">
-const userStore = useUserStore()
-const user = useSupabaseUser()
+const userStore = useUserStore();
+const user = useSupabaseUser();
 
-watch(user, () => {
+watch(
+ user,
+ () => {
   if (user.value) {
-    userStore.currentUser = user.value
-    userStore.isLoggedIn = true
-    return navigateTo('/')
+   userStore.currentUser = user.value;
+   userStore.isLoggedIn = true;
+   return navigateTo("/");
   }
-}, { immediate: true })
+ },
+ { immediate: true },
+);
 </script>
 
 <template>

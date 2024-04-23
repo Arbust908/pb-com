@@ -1,16 +1,19 @@
 <script setup lang='ts'>
-import type { RouteLocationRaw } from '#vue-router';
-import type { RouteRecordNormalized } from '#vue-router';
+import type { RouteLocationRaw } from "#vue-router";
+import type { RouteRecordNormalized } from "#vue-router";
 
-const router = useRouter()
+const router = useRouter();
 function isWidget(route: RouteRecordNormalized) {
-    const { path } = route
-    // looks for pages that are widgets but nor the index
-    return path.startsWith('/widget') && path !== '/widget'
+ const { path } = route;
+ // looks for pages that are widgets but nor the index
+ return path.startsWith("/widget") && path !== "/widget";
 }
-const widgetRoutes = router.getRoutes().filter(isWidget)
+const widgetRoutes = router.getRoutes().filter(isWidget);
 function toLongPath(route: RouteRecordNormalized) {
-    return { path: route.path, query: { long_mode: true } } satisfies RouteLocationRaw
+ return {
+  path: route.path,
+  query: { long_mode: true },
+ } satisfies RouteLocationRaw;
 }
 </script>
 <template>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useDebounceFn } from '@vueuse/core'
-import { nearestOneDigitAspectRatio } from '@/utils'
+import { useDebounceFn } from "@vueuse/core";
+import { nearestOneDigitAspectRatio } from "@/utils";
 
-const inputRatio = ref('')
-const nearestRatio = ref('')
+const inputRatio = ref("");
+const nearestRatio = ref("");
 
 const debouncedCalculation = useDebounceFn(() => {
-  nearestRatio.value = nearestOneDigitAspectRatio(inputRatio.value)
-}, 1000)
+ nearestRatio.value = nearestOneDigitAspectRatio(inputRatio.value);
+}, 1000);
 </script>
 
 <template>

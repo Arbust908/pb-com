@@ -14,10 +14,10 @@
 -->
 <script setup>
 const notificationMethods = [
-  { id: 'email', title: 'Email' },
-  { id: 'sms', title: 'Phone (SMS)' },
-  { id: 'push', title: 'Push notification' },
-]
+ { id: "email", title: "Email" },
+ { id: "sms", title: "Phone (SMS)" },
+ { id: "push", title: "Push notification" },
+];
 </script>
 
 <script setup>

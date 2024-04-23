@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const online = useOnline()
+const online = useOnline();
 // https://github.com/zyyv/chris.me to copy simple about
 // https://motion.dev/ for animations
 // https://twitter.com/drawsgood/status/1740754087023362175 for mascot/face following with Rive
 // https://masteringnuxt.com/blog/writing-a-cache-composable-in-nuxt-3 for useCacheFetch
-const { data } = useAsyncData('data', () => $fetch('/api/auth/getAll'))
+const { data } = useAsyncData("data", () => $fetch("/api/auth/getAll"));
 </script>
 
 <template>

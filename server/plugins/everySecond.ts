@@ -1,26 +1,28 @@
-import { useScheduler } from '#scheduler'
+import { useScheduler } from "#scheduler";
 
 export default defineNitroPlugin(() => {
-  /* startScheduler() */
-})
+ /* startScheduler() */
+});
 
 const mangaUrlList = [
-    `https://w15.mangafreak.net/Manga/Berserk`,
-    'https://w15.mangafreak.net/Manga/Jujutsu_Kaisen',
-    'https://w15.mangafreak.net/Manga/Dandadan',
-    'https://w15.mangafreak.net/Manga/Sousou_No_Frieren',
-    'https://w15.mangafreak.net/Manga/Kanan_Sama_Wa_Akumade_Choroi',
-]
+ `https://w15.mangafreak.net/Manga/Berserk`,
+ "https://w15.mangafreak.net/Manga/Jujutsu_Kaisen",
+ "https://w15.mangafreak.net/Manga/Dandadan",
+ "https://w15.mangafreak.net/Manga/Sousou_No_Frieren",
+ "https://w15.mangafreak.net/Manga/Kanan_Sama_Wa_Akumade_Choroi",
+];
 
 function startScheduler() {
-  const scheduler = useScheduler()
+ const scheduler = useScheduler();
 
-  scheduler.run(() => {
-    console.info('cool beans! I run every Hour! 😀', new Date().toISOString())
-  }).hourly()
+ scheduler
+  .run(() => {
+   console.info("cool beans! I run every Hour! 😀", new Date().toISOString());
+  })
+  .hourly();
 
-  // create as many tasks as you want here
-  /*  everySecond
+ // create as many tasks as you want here
+ /*  everySecond
  everySeconds
  everyMinute
  everyMinutes

@@ -1,55 +1,55 @@
 <script lang="ts" setup>
-import { formatFileSize } from '@/utils'
+import { formatFileSize } from "@/utils";
+
+const { modelToDisplayName, specialModelText } = useOllama();
 
 const {
-  modelToDisplayName,
-  specialModelText,
-} = useOllama()
-
-const {
-  models,
-  selectedModel,
-  selectModel,
-  messages,
-  newMessage,
-  isResponding,
-  sendMessage,
-  getModels,
-} = useChat()
+ models,
+ selectedModel,
+ selectModel,
+ messages,
+ newMessage,
+ isResponding,
+ sendMessage,
+ getModels,
+} = useChat();
 
 const roleClasses = {
-  user: 'bg-emerald-500 -mr-2 ml-auto rounded-br-none',
-  model: 'bg-indigo-500 -ml-2 mr-auto rounded-bl-none',
-  error: 'bg-red-100 mx-auto rounded-md text-red-500 text-center text-xs font-bold',
-}
+ user: "bg-emerald-500 -mr-2 ml-auto rounded-br-none",
+ model: "bg-indigo-500 -ml-2 mr-auto rounded-bl-none",
+ error:
+  "bg-red-100 mx-auto rounded-md text-red-500 text-center text-xs font-bold",
+};
 
 const modelDisplayName = computed(() => {
-  if (selectedModel.value)
-    return modelToDisplayName(selectedModel.value.name)
+ if (selectedModel.value) return modelToDisplayName(selectedModel.value.name);
 
-  return ''
-})
+ return "";
+});
 
 function onSubmit() {
-  console.log('onSubmit')
-  console.log(chatStructure.value)
-  sendMessage(chatStructure.value)
+ console.log("onSubmit");
+ console.log(chatStructure.value);
+ sendMessage(chatStructure.value);
 }
 
-const openModal = ref(false)
-const toggleModal = useToggle(openModal)
-function onOpenModal() { toggleModal(true) }
+const openModal = ref(false);
+const toggleModal = useToggle(openModal);
+function onOpenModal() {
+ toggleModal(true);
+}
 
-const chatStructure = ref<'ollama' | 'openRouter'>('ollama')
+const chatStructure = ref<"ollama" | "openRouter">("ollama");
 function toggleChatStructure() {
-  chatStructure.value = chatStructure.value === 'ollama' ? 'openRouter' : 'ollama'
+ chatStructure.value =
+  chatStructure.value === "ollama" ? "openRouter" : "ollama";
 }
 
 onMounted(async () => {
-  await getModels('ollama')
-  console.log('models', models.value)
-  selectModel(models.value[0])
-})
+ await getModels("ollama");
+ console.log("models", models.value);
+ selectModel(models.value[0]);
+});
 </script>
 
 <template>

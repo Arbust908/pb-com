@@ -1,76 +1,74 @@
 <script setup lang="ts">
-import { useStorage } from '@vueuse/core'
+import { useStorage } from "@vueuse/core";
 
-const container = ref(null)
-const { tilt, roll, source } = useParallax(document?.body)
-const isHovered = useElementHover(container)
+const container = ref(null);
+const { tilt, roll, source } = useParallax(document?.body);
+const isHovered = useElementHover(container);
 watch(isHovered, (value) => {
-  console.log('isHovered', value)
-})
-const isLeft = usePageLeave()
+ console.log("isHovered", value);
+});
+const isLeft = usePageLeave();
 
-const vault = useStorage('my-vault', {})
+const vault = useStorage("my-vault", {});
 
 function checkVaultUser() {
-  if (vault.value?.user && vault.value?.expiration) {
-    const now = new Date()
-    const expiration = new Date(vault.value.expiration)
-    if (now < expiration) {
-      isLoggedIn.value = true
-      console.log('Logged via vault', vault.value)
-    }
+ if (vault.value?.user && vault.value?.expiration) {
+  const now = new Date();
+  const expiration = new Date(vault.value.expiration);
+  if (now < expiration) {
+   isLoggedIn.value = true;
+   console.log("Logged via vault", vault.value);
   }
+ }
 }
 
 function checkParamUser() {
-  const params = new URLSearchParams(window.location.search)
-  const newParams = params
-    .toString()
-    .split('&')
-    .reduce((acc, cur) => {
-      const [key, value] = cur.split('=')
-      acc[key] = value
-      return acc
-    }, {}) as { u: string, p: string }
+ const params = new URLSearchParams(window.location.search);
+ const newParams = params
+  .toString()
+  .split("&")
+  .reduce((acc, cur) => {
+   const [key, value] = cur.split("=");
+   acc[key] = value;
+   return acc;
+  }, {}) as { u: string; p: string };
 
-  if (newParams && newParams?.u && newParams?.p) {
-    user.value = newParams.u
-    password.value = newParams.p
-    onSubmit(new Event('submit'))
-  }
+ if (newParams && newParams?.u && newParams?.p) {
+  user.value = newParams.u;
+  password.value = newParams.p;
+  onSubmit(new Event("submit"));
+ }
 }
 
 onMounted(() => {
-  console.log('state', vault.value)
-  checkVaultUser()
-  if (!isLoggedIn.value)
-    checkParamUser()
+ console.log("state", vault.value);
+ checkVaultUser();
+ if (!isLoggedIn.value) checkParamUser();
 
-  setTimeout(() => {
-    checkVaultUser()
-    if (!isLoggedIn.value)
-      checkParamUser()
-  }, 1000 * 1)
-})
+ setTimeout(() => {
+  checkVaultUser();
+  if (!isLoggedIn.value) checkParamUser();
+ }, 1000 * 1);
+});
 
-const user = ref('')
-const password = ref('')
-const isLoggedIn = ref(false)
+const user = ref("");
+const password = ref("");
+const isLoggedIn = ref(false);
 async function onSubmit(event: Event) {
-  event.preventDefault()
+ event.preventDefault();
 
-  const result = (await $fetch('/api/auth/simpleAuth', {
-    method: 'POST',
-    body: JSON.stringify({
-      user: user.value,
-      password: password.value,
-    }),
-  })) as { success: boolean, user: any }
+ const result = (await $fetch("/api/auth/simpleAuth", {
+  method: "POST",
+  body: JSON.stringify({
+   user: user.value,
+   password: password.value,
+  }),
+ })) as { success: boolean; user: any };
 
-  if (result.success) {
-    isLoggedIn.value = true
-    vault.value = { ...result.user }
-  }
+ if (result.success) {
+  isLoggedIn.value = true;
+  vault.value = { ...result.user };
+ }
 }
 </script>
 

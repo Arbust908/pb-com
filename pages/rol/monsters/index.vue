@@ -1,16 +1,16 @@
 <script setup lang='ts'>
-const name = 'Monster Name'
-const type = 'Type'
-const dodge = 10
-const resist = 10
-const hp = 20
-const str = 10
-const dex = 10
-const con = 10
-const int = 10
-const wis = 10
-const cha = 10
-const actions = ['Action 1', 'action 2', 'action 3']
+const name = "Monster Name";
+const type = "Type";
+const dodge = 10;
+const resist = 10;
+const hp = 20;
+const str = 10;
+const dex = 10;
+const con = 10;
+const int = 10;
+const wis = 10;
+const cha = 10;
+const actions = ["Action 1", "action 2", "action 3"];
 </script>
 
 <template>

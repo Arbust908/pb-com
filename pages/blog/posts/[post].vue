@@ -1,6 +1,6 @@
 <script setup lang='ts'>
-const route = useRoute()
-const postName = computed(() => route.params.post)
+const route = useRoute();
+const postName = computed(() => route.params.post);
 </script>
 
 <template>

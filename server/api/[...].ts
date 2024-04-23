@@ -1,4 +1,4 @@
-const startAt = Date.now()
+const startAt = Date.now();
 
 /* Signed URL w Supabase
 // https://twitter.com/john_komarnicki/status/1744084581844705452
@@ -18,7 +18,7 @@ window.location.href = data.signedURL
 */
 
 export default defineEventHandler(() => ({
-  startAt,
-  uptime: Date.now() - startAt,
-  msg: 'Hello from H3!',
-}))
+ startAt,
+ uptime: Date.now() - startAt,
+ msg: "Hello from H3!",
+}));

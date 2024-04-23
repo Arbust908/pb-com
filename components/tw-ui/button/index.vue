@@ -1,35 +1,30 @@
 <script setup lang="ts">
-const theme = ref('light')
+const theme = ref("light");
 const themeClasses = computed(() => {
-  if (theme.value === 'primary')
-    return 'bg-indigo-600 text-white hover:bg-indigo-500  focus-visible:outline-indigo-600'
-  else if (theme.value === 'light')
-    return 'bg-white text-gray-900 hover:bg-gray-50 focus-visible:outline-gray-300'
-  else if (theme.value === 'dark')
-    return 'bg-gray-900 text-white hover:bg-gray-800 focus-visible:outline-gray-300'
-  else if (theme.value === 'third')
-    return 'bg-white/10 text-white hover:bg-white/20 focus-visible:outline-gray-300'
-})
+ if (theme.value === "primary")
+  return "bg-indigo-600 text-white hover:bg-indigo-500  focus-visible:outline-indigo-600";
+ else if (theme.value === "light")
+  return "bg-white text-gray-900 hover:bg-gray-50 focus-visible:outline-gray-300";
+ else if (theme.value === "dark")
+  return "bg-gray-900 text-white hover:bg-gray-800 focus-visible:outline-gray-300";
+ else if (theme.value === "third")
+  return "bg-white/10 text-white hover:bg-white/20 focus-visible:outline-gray-300";
+});
 const roundnessClasses = computed(() => {
-  if (roundness.value === 'none')
-    return ''
-  else if (roundness.value === 'md')
-    return 'rounded-md'
-  else if (roundness.value === 'full')
-    return 'rounded-full'
-})
+ if (roundness.value === "none") return "";
+ else if (roundness.value === "md") return "rounded-md";
+ else if (roundness.value === "full") return "rounded-full";
+});
 const sizeClasses = computed(() => {
-  if (size.value === 'xs')
-    return 'px-2 py-1 text-xs font-semibold gap-x-1.5'
-  else if (size.value === 'sm')
-    return 'px-2 py-1 text-sm font-semibold gap-x-1.5'
-  else if (size.value === 'md')
-    return 'px-2.5 py-1.5 text-sm font-semibold gap-x-1.5'
-  else if (size.value === 'lg')
-    return 'px-3 py-2 text-sm font-semibold gap-x-2'
-  else if (size.value === 'xl')
-    return 'px-3.5 py-2.5 text-sm font-semibold gap-x-2'
-})
+ if (size.value === "xs") return "px-2 py-1 text-xs font-semibold gap-x-1.5";
+ else if (size.value === "sm")
+  return "px-2 py-1 text-sm font-semibold gap-x-1.5";
+ else if (size.value === "md")
+  return "px-2.5 py-1.5 text-sm font-semibold gap-x-1.5";
+ else if (size.value === "lg") return "px-3 py-2 text-sm font-semibold gap-x-2";
+ else if (size.value === "xl")
+  return "px-3.5 py-2.5 text-sm font-semibold gap-x-2";
+});
 </script>
 
 <template>

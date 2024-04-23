@@ -1,5 +1,5 @@
 export default defineEventHandler(async () => {
-  /* const user = await prisma.user.create({
+ /* const user = await prisma.user.create({
     data: {
       name: 'Pancho',
       email: 'yo@panchoblanco.com',
@@ -65,5 +65,5 @@ export default defineEventHandler(async () => {
     },
   }) */
 
-  return 'post'
-})
+ return "post";
+});

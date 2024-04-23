@@ -1,9 +1,9 @@
 <script setup lang='ts'>
 // https://twitter.com/jh3yy/status/1735499859715584298 animation for number changes
-const { data, refresh } = useAsyncData('dollar', () => $fetch('/api/dolar'))
+const { data, refresh } = useAsyncData("dollar", () => $fetch("/api/dolar"));
 
 function handleRefresh() {
-  refresh()
+ refresh();
 }
 </script>
 

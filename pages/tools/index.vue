@@ -1,23 +1,25 @@
 <script setup lang="ts">
 // icons from https://icones.js.org/collection/ri
 const actions = [
-  {
-    title: 'Receipt reader',
-    href: '/tools/receipt-reader',
-    icon: 'i-ri:qr-scan-2-fill',
-    iconForeground: 'text-teal-700',
-    iconBackground: 'bg-teal-50',
-    description: 'Doloribus dolores nostrum quia qui natus officia quod et dolorem. Sit repellendus qui ut at blanditiis et quo et molestiae.',
-  },
-  {
-    title: 'Ratio rounder',
-    href: '/tools/ratio-rounder',
-    icon: 'i-ri:aspect-ratio-fill',
-    iconForeground: 'text-purple-700',
-    iconBackground: 'bg-purple-50',
-    description: 'Doloribus dolores nostrum quia qui natus officia quod et dolorem. Sit repellendus qui ut at blanditiis et quo et molestiae.',
-  },
-]
+ {
+  title: "Receipt reader",
+  href: "/tools/receipt-reader",
+  icon: "i-ri:qr-scan-2-fill",
+  iconForeground: "text-teal-700",
+  iconBackground: "bg-teal-50",
+  description:
+   "Doloribus dolores nostrum quia qui natus officia quod et dolorem. Sit repellendus qui ut at blanditiis et quo et molestiae.",
+ },
+ {
+  title: "Ratio rounder",
+  href: "/tools/ratio-rounder",
+  icon: "i-ri:aspect-ratio-fill",
+  iconForeground: "text-purple-700",
+  iconBackground: "bg-purple-50",
+  description:
+   "Doloribus dolores nostrum quia qui natus officia quod et dolorem. Sit repellendus qui ut at blanditiis et quo et molestiae.",
+ },
+];
 </script>
 
 <template>

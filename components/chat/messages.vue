@@ -1,15 +1,15 @@
 <script setup lang='ts'>
 interface ChatMessage {
-  id: string
-  message: string
-  role: 'user' | 'model'
+ id: string;
+ message: string;
+ role: "user" | "model";
 }
 
 interface Props {
-  messages: ChatMessage[]
-  isResponding: boolean
+ messages: ChatMessage[];
+ isResponding: boolean;
 }
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <template>

@@ -1,29 +1,29 @@
 <script setup lang="ts">
 import {
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-  TransitionChild,
-  TransitionRoot,
-} from '@headlessui/vue'
+ Dialog,
+ DialogPanel,
+ DialogTitle,
+ TransitionChild,
+ TransitionRoot,
+} from "@headlessui/vue";
 
 interface Props {
-  shouldOpen: boolean
-  title: string
+ shouldOpen: boolean;
+ title: string;
 }
 
-const props = defineProps<Props>()
-const emit = defineEmits(['update:shouldOpen'])
+const props = defineProps<Props>();
+const emit = defineEmits(["update:shouldOpen"]);
 
 const isOpen = computed({
-  get: () => props.shouldOpen,
-  set: (value) => {
-    emit('update:shouldOpen', value)
-  },
-})
+ get: () => props.shouldOpen,
+ set: (value) => {
+  emit("update:shouldOpen", value);
+ },
+});
 
 function closeModal() {
-  isOpen.value = false
+ isOpen.value = false;
 }
 </script>
 

@@ -1,18 +1,15 @@
 <script setup lang='ts'>
 interface Props {
-  place: string
-  date: string
-  description: string
+ place: string;
+ date: string;
+ description: string;
 }
-withDefaults(
-  defineProps<Props>(),
-  {
-    place: 'Study Place',
-    date: '1991',
-    description: 'Study Description',
-  },
-)
-const isExtended = ref(false)
+withDefaults(defineProps<Props>(), {
+ place: "Study Place",
+ date: "1991",
+ description: "Study Description",
+});
+const isExtended = ref(false);
 </script>
 
 <template>

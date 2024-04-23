@@ -1,12 +1,12 @@
 <script>
 export default {
-  props: {
-    author: {
-      type: Object,
-      required: true,
-    },
+ props: {
+  author: {
+   type: Object,
+   required: true,
   },
-}
+ },
+};
 </script>
 
 <template>

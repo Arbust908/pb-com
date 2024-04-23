@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const general_store = useGeneralStore()
-const { print_mode } = storeToRefs(general_store)
+const general_store = useGeneralStore();
+const { print_mode } = storeToRefs(general_store);
 </script>
 
 <template>

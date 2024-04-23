@@ -1,45 +1,53 @@
 <script lang="ts" setup>
-import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
-import type { AI_MODEL_REQUEST_CLIENT, MODEL_TYPES } from '@/types'
-import { allowedModels } from '@/types'
-import { getResponseMsg } from '@/utils'
+import {
+ Listbox,
+ ListboxButton,
+ ListboxLabel,
+ ListboxOption,
+ ListboxOptions,
+} from "@headlessui/vue";
+import type { AI_MODEL_REQUEST_CLIENT, MODEL_TYPES } from "@/types";
+import { allowedModels } from "@/types";
+import { getResponseMsg } from "@/utils";
 
-const selectedModel = ref<MODEL_TYPES>(allowedModels.CAPYBARA)
-const models = Object.values(allowedModels)
+const selectedModel = ref<MODEL_TYPES>(allowedModels.CAPYBARA);
+const models = Object.values(allowedModels);
 interface ChatMessage {
-  id: string
-  text: string
-  role: 'user' | 'model'
+ id: string;
+ text: string;
+ role: "user" | "model";
 }
-const messages = ref<ChatMessage[]>([])
-const newMessage = ref('')
-const isResponding = ref(false)
-const openModal = ref(false)
+const messages = ref<ChatMessage[]>([]);
+const newMessage = ref("");
+const isResponding = ref(false);
+const openModal = ref(false);
 
 async function sendMessage() {
-  console.log('sendMessage')
-  isResponding.value = true
-  if (newMessage.value) {
-    const payload = {
-      message: newMessage.value,
-      model: selectedModel.value,
-    } satisfies AI_MODEL_REQUEST_CLIENT
-    try {
-      console.log('try')
-      const data = await $fetch('/api/assistant', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-      })
-      messages.value.push({ id: data.id, text: getResponseMsg(data), role: 'model' })
-      newMessage.value = ''
-    }
-    catch (error) {
-      console.error(error)
-    }
-    finally {
-      isResponding.value = false
-    }
+ console.log("sendMessage");
+ isResponding.value = true;
+ if (newMessage.value) {
+  const payload = {
+   message: newMessage.value,
+   model: selectedModel.value,
+  } satisfies AI_MODEL_REQUEST_CLIENT;
+  try {
+   console.log("try");
+   const data = await $fetch("/api/assistant", {
+    method: "POST",
+    body: JSON.stringify(payload),
+   });
+   messages.value.push({
+    id: data.id,
+    text: getResponseMsg(data),
+    role: "model",
+   });
+   newMessage.value = "";
+  } catch (error) {
+   console.error(error);
+  } finally {
+   isResponding.value = false;
   }
+ }
 }
 </script>
 

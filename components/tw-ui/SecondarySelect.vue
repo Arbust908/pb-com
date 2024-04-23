@@ -1,22 +1,28 @@
 <script setup>
-import { ref } from 'vue'
-import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
+import { ref } from "vue";
+import {
+ Listbox,
+ ListboxButton,
+ ListboxLabel,
+ ListboxOption,
+ ListboxOptions,
+} from "@headlessui/vue";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid";
 
 const people = [
-  { name: 'Wade Cooper', username: '@wadecooper' },
-  { name: 'Arlene Mccoy', username: '@arlenemccoy' },
-  { name: 'Devon Webb', username: '@devonwebb' },
-  { name: 'Tom Cook', username: '@tomcook' },
-  { name: 'Tanya Fox', username: '@tanyafox' },
-  { name: 'Hellen Schmidt', username: '@hellenschmidt' },
-  { name: 'Caroline Schultz', username: '@carolineschultz' },
-  { name: 'Mason Heaney', username: '@masonheaney' },
-  { name: 'Claudie Smitham', username: '@claudiesmitham' },
-  { name: 'Emil Schaefer', username: '@emilschaefer' },
-]
+ { name: "Wade Cooper", username: "@wadecooper" },
+ { name: "Arlene Mccoy", username: "@arlenemccoy" },
+ { name: "Devon Webb", username: "@devonwebb" },
+ { name: "Tom Cook", username: "@tomcook" },
+ { name: "Tanya Fox", username: "@tanyafox" },
+ { name: "Hellen Schmidt", username: "@hellenschmidt" },
+ { name: "Caroline Schultz", username: "@carolineschultz" },
+ { name: "Mason Heaney", username: "@masonheaney" },
+ { name: "Claudie Smitham", username: "@claudiesmitham" },
+ { name: "Emil Schaefer", username: "@emilschaefer" },
+];
 
-const selected = ref(people[3])
+const selected = ref(people[3]);
 </script>
 
 <template>

@@ -1,43 +1,51 @@
 <script setup lang='ts'>
-import type { BaseExercise, Exercise, Muscle } from '~/types'
+import type { BaseExercise, Exercise, Muscle } from "~/types";
 
-const muscles = ref<Muscle[]>(['chest', 'back', 'shoulders', 'biceps', 'triceps', 'legs', 'abs'])
+const muscles = ref<Muscle[]>([
+ "chest",
+ "back",
+ "shoulders",
+ "biceps",
+ "triceps",
+ "legs",
+ "abs",
+]);
 const baseExercise = ref<BaseExercise>({
-  name: '',
-  image: '',
-  video: '',
-  muscleGroups: [],
-})
+ name: "",
+ image: "",
+ video: "",
+ muscleGroups: [],
+});
 const exampleExercise = ref<Exercise>({
-  ...baseExercise.value,
-  sets: 3,
-  reps: 10,
-  weight: 0,
-  time: 0,
-})
+ ...baseExercise.value,
+ sets: 3,
+ reps: 10,
+ weight: 0,
+ time: 0,
+});
 
-const timer = ref<any | null>(null)
-const isRunning = computed(() => !!timer.value)
+const timer = ref<any | null>(null);
+const isRunning = computed(() => !!timer.value);
 
 function onSubmit(event: Event) {
-  event.preventDefault()
-  console.log(exampleExercise.value)
+ event.preventDefault();
+ console.log(exampleExercise.value);
 }
 
 function startTimer() {
-  const start = Date.now()
-  timer.value = setInterval(() => {
-    const delta = Date.now() - start
-    exampleExercise.value.time = Math.floor(delta / 1000)
-  }, 1000)
-  return timer
+ const start = Date.now();
+ timer.value = setInterval(() => {
+  const delta = Date.now() - start;
+  exampleExercise.value.time = Math.floor(delta / 1000);
+ }, 1000);
+ return timer;
 }
 
 function endTimer() {
-  if (timer.value) {
-    clearInterval(timer.value)
-    timer.value = null
-  }
+ if (timer.value) {
+  clearInterval(timer.value);
+  timer.value = null;
+ }
 }
 </script>
 

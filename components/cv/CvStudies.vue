@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const learn_list = ['dh', 'up', 'slc']
+const learn_list = ["dh", "up", "slc"];
 </script>
 
 <template>

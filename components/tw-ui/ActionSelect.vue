@@ -1,14 +1,28 @@
 <script setup>
-import { ref } from 'vue'
-import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
-import { CheckIcon, ChevronDownIcon } from '@heroicons/vue/20/solid'
+import { ref } from "vue";
+import {
+ Listbox,
+ ListboxButton,
+ ListboxLabel,
+ ListboxOption,
+ ListboxOptions,
+} from "@headlessui/vue";
+import { CheckIcon, ChevronDownIcon } from "@heroicons/vue/20/solid";
 
 const publishingOptions = [
-  { title: 'Published', description: 'This job posting can be viewed by anyone who has the link.', current: true },
-  { title: 'Draft', description: 'This job posting will no longer be publicly accessible.', current: false },
-]
+ {
+  title: "Published",
+  description: "This job posting can be viewed by anyone who has the link.",
+  current: true,
+ },
+ {
+  title: "Draft",
+  description: "This job posting will no longer be publicly accessible.",
+  current: false,
+ },
+];
 
-const selected = ref(publishingOptions[0])
+const selected = ref(publishingOptions[0]);
 </script>
 
 <template>

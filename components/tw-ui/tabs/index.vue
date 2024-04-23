@@ -14,11 +14,11 @@
 -->
 <script setup>
 const tabs = [
-  { name: 'My Account', href: '#', current: false },
-  { name: 'Company', href: '#', current: false },
-  { name: 'Team Members', href: '#', current: true },
-  { name: 'Billing', href: '#', current: false },
-]
+ { name: "My Account", href: "#", current: false },
+ { name: "Company", href: "#", current: false },
+ { name: "Team Members", href: "#", current: true },
+ { name: "Billing", href: "#", current: false },
+];
 </script>
 
 <script setup>

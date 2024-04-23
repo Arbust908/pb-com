@@ -1,45 +1,44 @@
 <script setup lang="ts">
-import type { ActionTypes, User } from '~/types'
-import { fullActions } from '~/types'
+import type { ActionTypes, User } from "~/types";
+import { fullActions } from "~/types";
 
-const userStore = useUserStore()
+const userStore = useUserStore();
 
-const email = ref<string>('')
-const password = ref<string>('')
-const errorMsg = ref<string | null>(null)
+const email = ref<string>("");
+const password = ref<string>("");
+const errorMsg = ref<string | null>(null);
 
-const action = ref<ActionTypes>('LOGIN')
+const action = ref<ActionTypes>("LOGIN");
 
 function changeType() {
-  action.value = action.value === 'LOGIN' ? 'REGISTER' : 'LOGIN'
+ action.value = action.value === "LOGIN" ? "REGISTER" : "LOGIN";
 }
 
 async function onSubmit(event: Event) {
-  errorMsg.value = null
-  console.log(`onSubmit::${action.value}`)
-  event.preventDefault()
+ errorMsg.value = null;
+ console.log(`onSubmit::${action.value}`);
+ event.preventDefault();
 
-  const actionUrl = fullActions[action.value]
-  const user = {
-    email: email.value,
-    password: password.value,
-  } as User
+ const actionUrl = fullActions[action.value];
+ const user = {
+  email: email.value,
+  password: password.value,
+ } as User;
 
-  const result = await $fetch(actionUrl, {
-    method: 'POST',
-    body: JSON.stringify(user),
-  })
-  console.log(result)
-  if (result.success) {
-    console.log(result)
-    userStore.currentUser = result.data
-    userStore.isLoggedIn = true
-    console.log('userStore.currentUser', userStore.currentUser)
-    await navigateTo('/profile')
-  }
-  else if (result.error) {
-    errorMsg.value = result.error
-  }
+ const result = await $fetch(actionUrl, {
+  method: "POST",
+  body: JSON.stringify(user),
+ });
+ console.log(result);
+ if (result.success) {
+  console.log(result);
+  userStore.currentUser = result.data;
+  userStore.isLoggedIn = true;
+  console.log("userStore.currentUser", userStore.currentUser);
+  await navigateTo("/profile");
+ } else if (result.error) {
+  errorMsg.value = result.error;
+ }
 }
 </script>
 

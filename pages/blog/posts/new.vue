@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const title = ref('')
-const content = ref('')
-const category = ref('technology')
+const title = ref("");
+const content = ref("");
+const category = ref("technology");
 
 function submitForm() {
-  // Handle form submission logic here
+ // Handle form submission logic here
 }
 </script>
 

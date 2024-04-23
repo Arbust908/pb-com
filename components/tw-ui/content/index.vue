@@ -1,5 +1,9 @@
 <script setup>
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/vue/20/solid'
+import {
+ CloudArrowUpIcon,
+ LockClosedIcon,
+ ServerIcon,
+} from "@heroicons/vue/20/solid";
 </script>
 
 <script setup>

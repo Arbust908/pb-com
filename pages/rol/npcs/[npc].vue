@@ -1,6 +1,6 @@
 <script setup lang='ts'>
-const route = useRoute()
-const npcName = computed(() => route.params.npc)
+const route = useRoute();
+const npcName = computed(() => route.params.npc);
 </script>
 
 <template>

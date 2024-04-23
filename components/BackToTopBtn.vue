@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 function backToTop() {
-  window.scrollTo(0, 0)
+ window.scrollTo(0, 0);
 }
 </script>
 

@@ -1,25 +1,25 @@
 <script setup lang="ts">
 interface Income {
-  id: number
-  description: string
-  amount: number
+ id: number;
+ description: string;
+ amount: number;
 }
 
 interface Expense {
-  id: number
-  description: string
-  amount: number
+ id: number;
+ description: string;
+ amount: number;
 }
 
 const incomes = ref<Income[]>([
-  { id: 1, description: 'Salary', amount: 5000 },
-  { id: 2, description: 'Freelance Work', amount: 1000 },
-])
+ { id: 1, description: "Salary", amount: 5000 },
+ { id: 2, description: "Freelance Work", amount: 1000 },
+]);
 
 const expenses = ref<Expense[]>([
-  { id: 1, description: 'Rent', amount: 1500 },
-  { id: 2, description: 'Groceries', amount: 200 },
-])
+ { id: 1, description: "Rent", amount: 1500 },
+ { id: 2, description: "Groceries", amount: 200 },
+]);
 </script>
 
 <template>

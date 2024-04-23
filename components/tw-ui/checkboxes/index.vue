@@ -14,12 +14,12 @@
 -->
 <script setup>
 const people = [
-  { id: 1, name: 'Annette Black' },
-  { id: 2, name: 'Cody Fisher' },
-  { id: 3, name: 'Courtney Henry' },
-  { id: 4, name: 'Kathryn Murphy' },
-  { id: 5, name: 'Theresa Webb' },
-]
+ { id: 1, name: "Annette Black" },
+ { id: 2, name: "Cody Fisher" },
+ { id: 3, name: "Courtney Henry" },
+ { id: 4, name: "Kathryn Murphy" },
+ { id: 5, name: "Theresa Webb" },
+];
 </script>
 
 <!--

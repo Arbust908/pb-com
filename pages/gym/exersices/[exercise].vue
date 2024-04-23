@@ -1,6 +1,6 @@
 <script setup lang='ts'>
-const route = useRoute()
-const exerciseName = computed(() => route.params.exercise)
+const route = useRoute();
+const exerciseName = computed(() => route.params.exercise);
 </script>
 
 <template>
