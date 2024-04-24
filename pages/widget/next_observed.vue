@@ -26,13 +26,13 @@ const daysToNextHoliday = computed(() => {
     return Math.ceil((nextHoliday.value.date.getTime() - today.value.getTime()) / (1000 * 60 * 60 * 24));
 });
 definePageMeta({
-  layout: 'home',
+  layout: 'none',
 })
 </script>
 
 <template>
-  <main class="grid content-start justify-items-center gap-4 py-8 min-h-full">
-    <div class="grid content-start justify-items-center bg-gray-800/10 rounded w-400px aspect-ratio-square p-5">
+  <main class="grid content-start justify-items-center gap-4 p-8 min-h-full">
+    <div class="grid content-start justify-items-center w-full bg-gray-800/10 rounded aspect-ratio-square p-10 grided-box">
     <WidgetBox v-slot="{ isLong }">
         <div class="h-full items-center" :class="isLong ? 'grid long-holiday justify-items-center' : 'flex flex-col justify-center '">
           <h1 class="text-xl font-bold" :class="{ 'nextHoly': isLong }">Next Holiday</h1>
@@ -62,5 +62,12 @@ definePageMeta({
 }
 .days {
   grid-area: days;
+}
+
+.grided-box {
+  background-image:
+    url(https://nucleoapp.com/assets/img/svg-patterns/chessboard-3.svg),
+    url(https://nucleoapp.com/assets/img/svg-patterns/cols-dotted-2.svg),
+    url(https://nucleoapp.com/assets/img/svg-patterns/grid-2.svg);
 }
 </style>
