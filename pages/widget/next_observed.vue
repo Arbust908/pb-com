@@ -31,7 +31,7 @@ definePageMeta({
 </script>
 
 <template>
-  <main class="grid content-start justify-items-center gap-4 p-8 min-h-full">
+  <main class="grid content-start justify-items-center gap-4 min-h-full">
     <div class="grid content-start justify-items-center w-full bg-gray-800/10 rounded aspect-ratio-square p-10 grided-box">
     <WidgetBox v-slot="{ isLong }">
         <div class="h-full items-center" :class="isLong ? 'grid long-holiday justify-items-center' : 'flex flex-col justify-center '">
