@@ -32,29 +32,23 @@ const formattedDate = computed(() => {
 definePageMeta({
   layout: 'none',
 })
+
+// 18 cuadrados de largo. 1 cuadrado = 6 TWU
 </script>
 
 <template>
-  <main class="grid content-start justify-items-center gap-4 min-h-full">
+  <main class="grid content-start justify-items-center gap-4 min-h-full pt-12">
     <div class="grid content-start justify-items-center w-full bg-gray-800/10 rounded p-12 grided-box">
-    <WidgetBox v-slot="{ isLong }">
-        <div class="h-full items-center" :class="isLong ? 'grid long-holiday justify-items-center' : 'flex flex-col justify-center '">
-          <h1 class="text-2xl font-bold" :class="{ 'nextHoly': isLong }">Next Holiday</h1>
-          <p class="text-4xl" :class="{ 'name': isLong }">{{ nextHoliday?.name }}</p>
-          <p class="text-6xl font-bold p-2" :class="{ 'daysToGo text-6xl': isLong }">{{ daysToNextHoliday }}</p>
-          <p class="text-2xl font-bold" :class="{ 'days': isLong }">days to go</p>
-          <p class="text-4xl" :class="{ 'date': isLong }">{{ formattedDate }}</p>
+    <WidgetBox v-slot="{ isLong }" class="border">
+        <div class="h-full items-center gap-2" :class="isLong ? 'grid long-holiday justify-items-center' : 'flex flex-col justify-center'">
+          <h1 class="text-4xl font-bold" :class="{ 'nextHoly': isLong }">Next Holiday</h1>
+          <p class="text-5xl" :class="{ 'name': isLong }">{{ nextHoliday?.name }}</p>
+          <p class="text-8xl font-bold p-2" :class="{ 'daysToGo text-6xl': isLong }">{{ daysToNextHoliday }}</p>
+          <p class="text-3xl font-bold" :class="{ 'days': isLong }">days to go</p>
+          <p class="text-5xl" :class="{ 'date': isLong }">{{ formattedDate }}</p>
         </div>
     </WidgetBox>
-    <WidgetBox v-slot="{ isLong }">
-        <div class="h-full items-center" :class="isLong ? 'grid long-holiday justify-items-center' : 'flex flex-col justify-center '">
-          <h1 class="text-2xl font-bold" :class="{ 'nextHoly': isLong }">Next Holiday</h1>
-          <p class="text-4xl" :class="{ 'name': isLong }">{{ nextHoliday?.name }}</p>
-          <p class="text-6xl font-bold p-2" :class="{ 'daysToGo text-6xl': isLong }">{{ daysToNextHoliday }}</p>
-          <p class="text-2xl font-bold" :class="{ 'days': isLong }">days to go</p>
-          <p class="text-4xl" :class="{ 'date': isLong }">{{ formattedDate }}</p>
-        </div>
-    </WidgetBox>
+    <div class="py-24"></div>
     </div>
     <NuxtLink to="/widget" class="text-xl md:text-sm font-bold rounded-md bg-purple-700 px-4 py-2 hover:(shadow bg-purple-800 text-gray-200)">go back</NuxtLink>
   </main>
