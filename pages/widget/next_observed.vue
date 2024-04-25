@@ -25,6 +25,10 @@ const daysToNextHoliday = computed(() => {
     if (!nextHoliday.value) return 0;
     return Math.ceil((nextHoliday.value.date.getTime() - today.value.getTime()) / (1000 * 60 * 60 * 24));
 });
+const formattedDate = computed(() => {
+    return `${nextHoliday.value?.date.getUTCDate()} / ${(nextHoliday.value?.date.getUTCMonth() || 0) + 1}`;
+});
+
 definePageMeta({
   layout: 'none',
 })
@@ -36,10 +40,10 @@ definePageMeta({
     <WidgetBox v-slot="{ isLong }">
         <div class="h-full items-center" :class="isLong ? 'grid long-holiday justify-items-center' : 'flex flex-col justify-center '">
           <h1 class="text-2xl font-bold" :class="{ 'nextHoly': isLong }">Next Holiday</h1>
-          <p class="text-2xl font-bold" :class="{ 'name': isLong }">{{ nextHoliday?.name }}</p>
-          <p class="text-6xl font-bold" :class="{ 'daysToGo text-6xl': isLong }">{{ daysToNextHoliday }}</p>
+          <p class="text-4xl" :class="{ 'name': isLong }">{{ nextHoliday?.name }}</p>
+          <p class="text-6xl font-bold p-2" :class="{ 'daysToGo text-6xl': isLong }">{{ daysToNextHoliday }}</p>
           <p class="text-2xl font-bold" :class="{ 'days': isLong }">days to go</p>
-          <p class="text-4xl font-bold" :class="{ 'date': isLong }">{{ nextHoliday?.date.toLocaleDateString() }}</p>
+          <p class="text-4xl" :class="{ 'date': isLong }">{{ formattedDate }}</p>
         </div>
     </WidgetBox>
     </div>
