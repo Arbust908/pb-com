@@ -8,7 +8,7 @@ const isLong = computed(() => {
 </script>
 
 <template>
-     <div class="rounded max-w-360px w-full" :class="isLong ? 'aspect-ratio-2/1' : 'aspect-ratio-square'">
+     <div class="rounded w-full" :class="isLong ? 'aspect-ratio-2/1' : 'aspect-ratio-square'">
         <slot :is-long="isLong"></slot>
      </div>
 </template>
