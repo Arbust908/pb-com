@@ -17,10 +17,20 @@ const holidays = ref<Holiday[]>([
     { date: new Date("2025-01-01"), name: "New Year's Day" },
 ]);
 const today = ref(new Date());
+const nextHolidayIndex = computed(() => {
+    return holidays.value.findIndex((holiday) => holiday.date > today.value);
+});
+function getHoliday(index: number) {
+    return holidays.value[index];
+}
 
 const nextHoliday = computed(() => {
-    return holidays.value.find((holiday) => holiday.date > today.value);
+    return getHoliday(nextHolidayIndex.value);
 });
+const followingHoliday = computed(() => {
+    return getHoliday(nextHolidayIndex.value + 1);
+});
+
 const daysToNextHoliday = computed(() => {
     if (!nextHoliday.value) return 0;
     return Math.ceil((nextHoliday.value.date.getTime() - today.value.getTime()) / (1000 * 60 * 60 * 24));
@@ -33,19 +43,20 @@ definePageMeta({
   layout: 'none',
 })
 
-// 18 cuadrados de largo. 1 cuadrado = 6 TWU
+// 18 cuadrados de largo. 1 cuadrado = 6 TWU = 24px
+// 360 + 48 + 48 = 456px
 </script>
 
 <template>
   <main class="grid content-start justify-items-center gap-4 min-h-full pt-12">
-    <div class="grid content-start justify-items-center w-full bg-gray-800/10 rounded p-12 grided-box">
-    <WidgetBox v-slot="{ isLong }" class="border">
-        <div class="h-full items-center gap-2" :class="isLong ? 'grid long-holiday justify-items-center' : 'flex flex-col justify-center'">
-          <h1 class="text-4xl font-bold" :class="{ 'nextHoly': isLong }">Next Holiday</h1>
-          <p class="text-5xl" :class="{ 'name': isLong }">{{ nextHoliday?.name }}</p>
-          <p class="text-8xl font-bold p-2" :class="{ 'daysToGo text-6xl': isLong }">{{ daysToNextHoliday }}</p>
+    <div class="grid content-start justify-items-center w-full bg-gray-800/10 rounded p-6 grided-box max-w-456px">
+    <WidgetBox v-slot="{ isLong }">
+        <div class="h-full items-center gap-2 p-6" :class="isLong ? 'grid long-holiday justify-items-center' : 'flex flex-col'">
+          <h1 class="text-40px font-bold" :class="{ 'nextHoly': isLong }">Next Holiday</h1>
+          <p class="text-32px" :class="{ 'name': isLong }">{{ nextHoliday?.name }} :: {{ formattedDate }}</p>
+          <p class="text-128px font-bold" :class="{ 'daysToGo text-6xl': isLong }">{{ daysToNextHoliday }}</p>
           <p class="text-3xl font-bold" :class="{ 'days': isLong }">days to go</p>
-          <p class="text-5xl" :class="{ 'date': isLong }">{{ formattedDate }}</p>
+          <p class="text-lg">Next => {{ followingHoliday.date.toLocaleDateString() || 'Update list' }}</p>
         </div>
     </WidgetBox>
     <div class="py-24"></div>
