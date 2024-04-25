@@ -36,7 +36,16 @@ definePageMeta({
 
 <template>
   <main class="grid content-start justify-items-center gap-4 min-h-full">
-    <div class="grid content-start justify-items-center w-full bg-gray-800/10 rounded aspect-ratio-square p-10 grided-box">
+    <div class="grid content-start justify-items-center w-full bg-gray-800/10 rounded p-12 grided-box">
+    <WidgetBox v-slot="{ isLong }">
+        <div class="h-full items-center" :class="isLong ? 'grid long-holiday justify-items-center' : 'flex flex-col justify-center '">
+          <h1 class="text-2xl font-bold" :class="{ 'nextHoly': isLong }">Next Holiday</h1>
+          <p class="text-4xl" :class="{ 'name': isLong }">{{ nextHoliday?.name }}</p>
+          <p class="text-6xl font-bold p-2" :class="{ 'daysToGo text-6xl': isLong }">{{ daysToNextHoliday }}</p>
+          <p class="text-2xl font-bold" :class="{ 'days': isLong }">days to go</p>
+          <p class="text-4xl" :class="{ 'date': isLong }">{{ formattedDate }}</p>
+        </div>
+    </WidgetBox>
     <WidgetBox v-slot="{ isLong }">
         <div class="h-full items-center" :class="isLong ? 'grid long-holiday justify-items-center' : 'flex flex-col justify-center '">
           <h1 class="text-2xl font-bold" :class="{ 'nextHoly': isLong }">Next Holiday</h1>
