@@ -54,9 +54,9 @@ definePageMeta({
         <div class="h-full items-center gap-2 p-6" :class="isLong ? 'grid long-holiday justify-items-center' : 'flex flex-col'">
           <h1 class="text-40px font-bold" :class="{ 'nextHoly': isLong }">Next Holiday</h1>
           <p class="text-32px" :class="{ 'name': isLong }">{{ nextHoliday?.name }} :: {{ formattedDate }}</p>
-          <p class="text-128px font-bold" :class="{ 'daysToGo text-6xl': isLong }">{{ daysToNextHoliday }}</p>
+          <p class="text-128px font-bold -my-8" :class="{ 'daysToGo text-6xl': isLong }">{{ daysToNextHoliday }}</p>
           <p class="text-3xl font-bold" :class="{ 'days': isLong }">days to go</p>
-          <p class="text-lg">Next => {{ followingHoliday.date.toLocaleDateString() || 'Update list' }}</p>
+          <p class="text-2xl">Next => {{ followingHoliday.date.toLocaleDateString() || 'Update list' }}</p>
         </div>
     </WidgetBox>
     <div class="py-24"></div>
