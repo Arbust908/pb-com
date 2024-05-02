@@ -6,15 +6,15 @@ interface Holiday {
   name: string;
 }
 const holidays = ref<Holiday[]>([
-  { date: new Date("2024-02-12"), name: "Carnival / Shrove Monday" },
-  { date: new Date("2024-02-13"), name: "Carnival / Shrove Tuesday" },
+  { date: new Date("2024-02-12"), name: "Carnival" },
+  { date: new Date("2024-02-13"), name: "Carnival" },
   { date: new Date("2024-03-29"), name: "Good Friday" },
   { date: new Date("2024-05-01"), name: "Labor Day" },
   { date: new Date("2024-07-09"), name: "Arg Independence" },
   { date: new Date("2024-09-07"), name: "Br Independence" },
-  { date: new Date("2024-12-25"), name: "Christmas Day" },
+  { date: new Date("2024-12-25"), name: "XMas Day" },
   { date: new Date("2024-12-31"), name: "New Year’s Eve" },
-  { date: new Date("2025-01-01"), name: "New Year's Day" },
+  { date: new Date("2025-01-01"), name: "2025!" },
 ]);
 const today = ref(new Date());
 const nextHolidayIndex = computed(() => {
