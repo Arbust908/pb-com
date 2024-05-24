@@ -34,6 +34,7 @@ export default defineConfig({
           --feature: minmax(0, 192px);
   
           display: grid;
+          align-content: flex-start;
           grid-template-columns:
             [full-start] var(--full)
             [feature-start] var(--feature)
