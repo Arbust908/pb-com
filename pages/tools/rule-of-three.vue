@@ -2,12 +2,7 @@
   const a = ref<number>(100);
 const b = ref<number>(100);
 const c = ref<number>(50);
-const debouncedCalculation = useDebounceFn(() => {
-    return (c.value * b.value) / a.value;
-}, 1000)
-const x = computed(() => {
-    return debouncedCalculation();
-});
+const x = computed(() => (c.value * b.value) / a.value);
 </script>
 
 <template>
