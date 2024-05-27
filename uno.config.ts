@@ -34,7 +34,6 @@ export default defineConfig({
           --feature: minmax(0, 192px);
   
           display: grid;
-          align-content: flex-start;
           grid-template-columns:
             [full-start] var(--full)
             [feature-start] var(--feature)
@@ -109,6 +108,11 @@ export default defineConfig({
          }
       `
     }],
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter
+    ['scrollbar-gutter', { 'scrollbar-gutter': 'auto' }],
+    ['scrollbar-gutter-stable', { 'scrollbar-gutter': 'stable' }],
+    ['scrollbar-gutter-stable-both', { 'scrollbar-gutter': 'stable both-edges' }],
+    ['scrollbar-gutter-unset', { 'scrollbar-gutter': 'unset' }],
   ],
   presets: [
     presetUno(),

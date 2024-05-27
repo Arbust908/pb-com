@@ -1,9 +1,5 @@
 <script setup lang='ts'>
-interface ChatMessage {
-  id: string
-  message: string
-  role: 'user' | 'model'
-}
+import type { ChatMessage } from '@/types'
 
 interface Props {
   messages: ChatMessage[]
@@ -13,7 +9,7 @@ defineProps<Props>()
 </script>
 
 <template>
-  <section class="py-4 space-y-2">
+  <section class="py-4 space-y-4">
     <ChatMessage v-for="msg in messages" :key="msg.id" v-bind="msg" />
     <ChatMessage v-if="isResponding" :is-responding="isResponding" role="model" />
   </section>

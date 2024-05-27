@@ -27,7 +27,7 @@ const { print_mode } = storeToRefs(general_store)
         class="inline-flex items-center p-3 md:py-0"
         title="Chat with AI"
       >
-        <i class="i-ri:chat-smile-3-fill inline h-6 w-6" />
+        <i class="i-solar:chat-round-call-bold-duotone inline h-6 w-6" />
       </NuxtLink>
     </section>
     <div class="awesome-line" />

@@ -2,68 +2,56 @@
 import { formatFileSize } from '@/utils'
 
 const {
-  modelToDisplayName,
-  specialModelText,
-} = useOllama()
-
-const {
   models,
-  selectedModel,
-  selectModel,
-  messages,
-  newMessage,
-  isResponding,
-  sendMessage,
-  getModels,
+    selectedModel,
+    selectModel,
+    messages,
+    newMessage,
+    isResponding,
+    sendMessage,
+    getModels,
+    ROLE_STYLES,
+    CHAT_STRUCTURE,
+    toggleChatStructure,
 } = useChat()
 
-const roleClasses = {
-  user: 'bg-emerald-500 -mr-2 ml-auto rounded-br-none',
-  model: 'bg-indigo-500 -ml-2 mr-auto rounded-bl-none',
-  error: 'bg-red-100 mx-auto rounded-md text-red-500 text-center text-xs font-bold',
-}
+
 
 const modelDisplayName = computed(() => {
-  if (selectedModel.value)
+  if (!selectedModel.value) return 'Missing Name'
+
+  if (CHAT_STRUCTURE.value === 'ollama')
     return modelToDisplayName(selectedModel.value.name)
+  else
+    return 'Open Router'
 
   return ''
 })
 
 function onSubmit() {
   console.log('onSubmit')
-  console.log(chatStructure.value)
-  sendMessage(chatStructure.value)
+  console.log(CHAT_STRUCTURE.value)
+  sendMessage(CHAT_STRUCTURE.value)
 }
 
 const openModal = ref(false)
 const toggleModal = useToggle(openModal)
 function onOpenModal() { toggleModal(true) }
 
-const chatStructure = ref<'ollama' | 'openRouter'>('ollama')
-function toggleChatStructure() {
-  chatStructure.value = chatStructure.value === 'ollama' ? 'openRouter' : 'ollama'
-}
-
-onMounted(async () => {
-  await getModels('ollama')
-  console.log('models', models.value)
-  selectModel(models.value[0])
-})
 </script>
 
 <template>
   <section class="flex flex-col p-4">
     <header>
       <h2 class="text-2xl font-bold capitalize">
-        {{ chatStructure }}
+        {{ CHAT_STRUCTURE }}
       </h2>
     </header>
     <div class="flex grow flex-col pb-4 space-y-3">
       <div class="grow" />
       <p
         v-for="message in messages" :key="message.id" class="max-w-[calc(100%-4px)] w-max rounded-2xl p-2"
-        :class="roleClasses[message.role]"
+        :class="ROLE_STYLES[message.role]"
       >
         {{ message.text }}
       </p>
@@ -77,13 +65,13 @@ onMounted(async () => {
           type="button" class="size-8 flex-middle rounded p-1 transition duration-150 hover:(bg-purple-600)"
           @click="toggleChatStructure"
         >
-          <i class="i-ri:refresh-line" />
+          <i class="i-solar:refresh-square-bold-duotone" />
         </button>
         <button
           type="button" class="size-8 flex-middle rounded p-1 transition duration-150 hover:(bg-purple-600)"
           @click="onOpenModal"
         >
-          <i class="i-ri:settings-3-line" />
+          <i class="i-solar:settings-minimalistic-bold-duotone" />
         </button>
       </nav>
       <div class="flex grow flex-col gap-2" @keypress.enter="onSubmit">
@@ -103,7 +91,7 @@ onMounted(async () => {
         class="flex flex-col items-center gap-2 rounded bg-indigo-300 p-2 text-indigo-800 font-bold" type="button"
         @click="onSubmit"
       >
-        <i class="i-ri:send-plane-fill size-5" />
+        <i class="i-solar:plain-bold-duotone size-5" />
       </button>
     </div>
     <Teleport to="body">

@@ -120,29 +120,29 @@ const sizeClasses = computed(() => {
   </button>
   <hr>
   <button type="button" class="inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm text-white font-semibold shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2 focus-visible:outline">
-    <i class="i-ri:checkbox-circle-fill size-5 -ml-0.5" aria-hidden="true" />
+    <i class="i-solar:check-circle-bold-duotone size-5 -ml-0.5" aria-hidden="true" />
     Button text
   </button>
   <button type="button" class="inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm text-white font-semibold shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2 focus-visible:outline">
-    <i class="i-ri:checkbox-circle-fill size-5 -ml-0.5" aria-hidden="true" />
+    <i class="i-solar:check-circle-bold-duotone size-5 -ml-0.5" aria-hidden="true" />
     Button text
   </button>
   <button type="button" class="inline-flex items-center gap-x-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm text-white font-semibold shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2 focus-visible:outline">
-    <i class="i-ri:checkbox-circle-fill size-5 -ml-0.5" aria-hidden="true" />
+    <i class="i-solar:check-circle-bold-duotone size-5 -ml-0.5" aria-hidden="true" />
     Button text
   </button>
   <hr>
   <button type="button" class="inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm text-white font-semibold shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2 focus-visible:outline">
     Button text
-    <i class="i-ri:checkbox-circle-fill size-5 -ml-0.5" aria-hidden="true" />
+    <i class="i-solar:check-circle-bold-duotone size-5 -ml-0.5" aria-hidden="true" />
   </button>
   <button type="button" class="inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm text-white font-semibold shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2 focus-visible:outline">
     Button text
-    <i class="i-ri:checkbox-circle-fill size-5 -ml-0.5" aria-hidden="true" />
+    <i class="i-solar:check-circle-bold-duotone size-5 -ml-0.5" aria-hidden="true" />
   </button>
   <button type="button" class="inline-flex items-center gap-x-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm text-white font-semibold shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2 focus-visible:outline">
     Button text
-    <i class="i-ri:checkbox-circle-fill size-5 -ml-0.5" aria-hidden="true" />
+    <i class="i-solar:check-circle-bold-duotone size-5 -ml-0.5" aria-hidden="true" />
   </button>
   <hr>
   <button type="button" class="rounded-full bg-indigo-600 px-2.5 py-1 text-xs text-white font-semibold shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2 focus-visible:outline">
@@ -178,12 +178,12 @@ const sizeClasses = computed(() => {
   </button>
   <hr>
   <button type="button" class="inline-flex rounded-full bg-indigo-600 p-1 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2 focus-visible:outline">
-    <i class="i-ri:add-fill size-5" aria-hidden="true" />
+    <i class="i-solar:add-square-line-duotone size-5" aria-hidden="true" />
   </button>
   <button type="button" class="inline-flex rounded-full bg-indigo-600 p-1.5 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2 focus-visible:outline">
-    <i class="i-ri:add-fill size-5" aria-hidden="true" />
+    <i class="i-solar:add-square-line-duotone size-5" aria-hidden="true" />
   </button>
   <button type="button" class="inline-flex rounded-full bg-indigo-600 p-2 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2 focus-visible:outline">
-    <i class="i-ri:add-fill size-5" aria-hidden="true" />
+    <i class="i-solar:add-square-line-duotone size-5" aria-hidden="true" />
   </button>
 </template>

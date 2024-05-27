@@ -56,7 +56,7 @@ async function sendMessage() {
     </div>
     <div class="flex justify-between gap-4">
       <button type="button" @click="openModal = true">
-        <i class="i-ri:list-settings-fill size-5 text-slate-500" />
+        <i class="i-solar:list-settings-fill size-5 text-slate-500" />
       </button>
       <div class="flex grow flex-col gap-2" @keypress.enter="sendMessage">
         <label for="message" class="text-xs opacity-50">
@@ -87,7 +87,7 @@ async function sendMessage() {
                   <span class="ml-2 truncate text-gray-500">secundary</span>
                 </span>
                 <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                  <i class="i-ri:expand-up-down-line size-5 text-gray-400" aria-hidden="true" />
+                  <i class="i-solar:expand-up-down-line size-5 text-gray-400" aria-hidden="true" />
                 </span>
               </ListboxButton>
 
@@ -101,7 +101,7 @@ async function sendMessage() {
                       </div>
 
                       <span v-if="selected" class="absolute inset-y-0 right-0 flex items-center pr-4" :class="[active ? 'text-white' : 'text-indigo-600']">
-                        <i class="i-ri:check-fill size-5" aria-hidden="true" />
+                        <i class="i-solar:check-fill size-5" aria-hidden="true" />
                       </span>
                     </li>
                   </ListboxOption>

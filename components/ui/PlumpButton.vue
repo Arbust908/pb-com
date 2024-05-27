@@ -5,7 +5,7 @@
 <template>
   <button>
     <span>
-      <i class="i-ri:edit" />
+      <i class="i-solar:pen-2-bold-duotone" />
       <span>Edit</span>
     </span>
   </button>

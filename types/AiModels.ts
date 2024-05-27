@@ -16,7 +16,7 @@ const NOUS_CAPYBARA: ModelResponse = {
   name: 'nousresearch/nous-capybara-7b:free',
   family: 'capybara',
   families: ['capybara'],
-  parameter_size: '8k',
+  parameter_size: '8b',
 }
 const MISTRAL: ModelResponse = {
   ..._BASE_MODEL,
@@ -46,22 +46,45 @@ const CINEMATIKA: ModelResponse = {
   families: ['cinematika'],
   parameter_size: '7b',
 }
+// openchat/openchat-7b:free
+const OPENCHAT: ModelResponse = {
+  ..._BASE_MODEL,
+  name: 'openchat/openchat-7b:free',
+  family: 'openchat',
+  families: ['openchat'],
+  parameter_size: '7b',
+}
+// google/gemma-7b-it:free
+const GEMMA: ModelResponse = {
+  ..._BASE_MODEL,
+  name: 'google/gemma-7b-it:free',
+  family: 'gemma',
+  families: ['gemma'],
+  parameter_size: '7b',
+}
+// meta-llama/llama-3-8b-instruct:free
+const LLAMA_3_8B: ModelResponse = {
+  ..._BASE_MODEL,
+  name: 'meta-llama/llama-3-8b-instruct:free',
+  family: 'llama',
+  families: ['llama'],
+  parameter_size: '8b',
+}
+
 
 export const allowedModels = [
+  TOPPY_M,
   NOUS_CAPYBARA,
   MISTRAL,
   MYTHOMIST,
-  TOPPY_M,
   CINEMATIKA,
-  /* CAPYBARA: 'capybara-7b',
-  CINEMATIKA: 'cinematika-7b',
-  MIXTRAL: 'mixtral-8x7b',
-  MYTHOMIST: 'mythomist-7b',
-  OPENCHAT: 'openchat-7b',
-  PPLX: 'pplx-7b',
-  WORLD: 'world-3b',
-  ZEPHYR: 'zephyr-7b', */
+  OPENCHAT,
+  GEMMA,
+  LLAMA_3_8B,
 ] satisfies ModelResponse[]
+
+export const modelNames = allowedModels.map((model) => model.name) as  ModelResponse['name'][]
+export const defaultModel = TOPPY_M.name as ModelResponse['name']
 
 export interface AI_MODEL_REQUEST_CLIENT {
   model: ModelResponse['name']
@@ -104,6 +127,7 @@ export interface AI_MODEL_RESPONSE {
 
 export interface ChatMessage {
   id?: string
-  text: string
+  text?: string
   role: 'user' | 'model' | 'error'
+  timestamp?: number
 }
