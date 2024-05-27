@@ -1,11 +1,12 @@
 <script setup lang="ts">
 const general_store = useGeneralStore()
-const { print_mode } = storeToRefs(general_store)
+const { print_mode, layout_start } = storeToRefs(general_store)
 </script>
 
 <template>
   <div
-    :class="print_mode ? 'print pt-0' : null"
+    :class="[print_mode ? 'print pt-0' : null]"
+    :style="layout_start ? 'align-content: flex-start;' : null"
     class="grid grid-cols-[100%] grid-rows-[auto_1fr_auto] min-h-full"
   >
     <GeneralNavBar class="relative z-40" />

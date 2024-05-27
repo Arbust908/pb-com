@@ -25,21 +25,21 @@ const actions = ['Action 1', 'action 2', 'action 3']
       <section class="grid grid-cols-3">
         <div class="border rounded-l border-r-none text-center">
           <p>
-            <i class="i-ri:run-fill" />
+            <i class="i-solar:run-fill" />
             Dodge
           </p>
           <p>{{ dodge }}</p>
         </div>
         <div class="border rounded-r border-l-none text-center">
           <p>
-            <i class="i-ri:shield-line" />
+            <i class="i-solar:shield-line" />
             Resist
           </p>
           <p>{{ resist }}</p>
         </div>
         <div class="text-center">
           <p>
-            <i class="i-ri:heart-3-fill" />
+            <i class="i-solar:heart-3-fill" />
             HP
           </p>
           <p>{{ hp }}</p>

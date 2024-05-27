@@ -53,7 +53,7 @@ function toggleLang(e) {
     title="Change language"
     @click="toggleLang"
   >
-    <i class="i-ri:a-b size-5 text-slate-500" />
+    <i class="i-solar:text-field-focus-bold-duotone size-5 text-slate-500" />
   </button>
 </template>
 

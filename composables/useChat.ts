@@ -30,7 +30,7 @@ export function useChat() {
       isResponding.value = false
       return
     }
-
+    const userMessageTimestamp = Date.now()
     const payload = {
       message: newMessage.value,
       model: selectedModel.value.name,
@@ -39,16 +39,23 @@ export function useChat() {
     try {
       console.log('try')
       console.log('assistantUrl', chatStructure)
+      const newMsg = {
+        id: getNewId(messages.value),
+        text: newMessage.value,
+        role: 'user',
+        timestamp: userMessageTimestamp,
+      }
+      messages.value.push(newMsg)
+
       const data = await $fetch(`/api/assistant/${chatStructure}`, {
         method: 'POST',
         body: JSON.stringify(payload),
       })
-      const newMsg = { id: getNewId(messages.value), text: newMessage.value, role: 'user' }
-      messages.value.push(newMsg)
+
       console.log('data', data)
       const responseText = getResponseMsg(data, chatStructure)
 
-      messages.value.push({ id: data.id, text: responseText, role: 'model' })
+      messages.value.push({ id: data.id, text: responseText, role: 'model', timestamp: Date.now() })
       newMessage.value = ''
     }
     catch (error) {
@@ -71,6 +78,58 @@ export function useChat() {
     }
   }
 
+  const ROLE_STYLES = {
+    user: 'bg-emerald-500 -mr-2 ml-auto rounded-br-none',
+    model: 'bg-indigo-500 -ml-2 mr-auto rounded-bl-none',
+    error: 'bg-red-100 mx-auto rounded-md text-red-500 text-center text-xs font-bold',
+  }
+
+  const DEFAULT_STRUCTURE = 'openRouter'
+  const CHAT_STRUCTURE = ref<'ollama' | 'openRouter'>(DEFAULT_STRUCTURE)
+  function toggleChatStructure() {
+    CHAT_STRUCTURE.value = CHAT_STRUCTURE.value === 'ollama' ? 'openRouter' : 'ollama'
+  }
+
+  const selectedModelInfo = computed(() => {
+    if (!selectedModel.value) return {
+      displayName: 'Missing Name',
+      specialText: 'No info'
+    }
+    return formatModelInfo(selectedModel.value)
+  });
+  const modelDisplayName = computed(() => selectedModelInfo.value?.displayName)
+  const modelModalText = computed(() => selectedModelInfo.value?.specialText)
+  function formatModelInfo(model: ModelResponse) {
+    const nameKeyWords = [':latest', '-uncensored', ':free']
+    const specials: string[] = []
+    let displayName = model.name;
+    nameKeyWords.forEach(keyword => {
+      if (displayName.includes(keyword)) {
+        specials.push(keyword.replace(':', '').replace('-', ''))
+        displayName = displayName.replace(keyword, '');
+      }
+    });
+
+    if (displayName.includes('/')) {
+      const parts = displayName.split('/');
+      displayName = parts[1];
+    }
+
+    displayName = displayName.replace(/-\d{1,2}b/, '');
+    displayName = displayName.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ');
+
+    return {
+      displayName,
+      specialText: joinArrayWithDifferentLastElement(specials, ', ', ' & ')
+    }
+  }
+
+  onMounted(async () => {
+    await getModels(CHAT_STRUCTURE.value)
+    selectModel(models.value[0])
+  })
+
+
   return {
     models,
     selectedModel,
@@ -80,5 +139,11 @@ export function useChat() {
     isResponding,
     sendMessage,
     getModels,
+    ROLE_STYLES,
+    CHAT_STRUCTURE,
+    toggleChatStructure,
+    modelDisplayName,
+    modelModalText,
+    formatModelInfo,
   }
 }

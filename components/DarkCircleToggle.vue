@@ -51,8 +51,8 @@ useHead({
     :title="`Toggle ${isDark ? 'to Light' : 'to Dark'} mode`"
     @click="toggleTheme"
   >
-    <i v-if="!isDark" class="i-ri:moon-fill size-5 text-slate-500" />
-    <i v-else class="i-ri:sun-fill size-5 text-slate-500" />
+    <i v-if="!isDark" class="i-solar:moon-bold-duotone size-5 text-slate-500" />
+    <i v-else class="i-solar:sun-bold-duotone size-5 text-slate-500" />
   </button>
 </template>
 

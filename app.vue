@@ -31,6 +31,7 @@ useHead({
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
+  <section class="modal__layer z-50"></section>
 </template>
 
 <style>

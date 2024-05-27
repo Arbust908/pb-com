@@ -13,7 +13,7 @@ const items = [
   <section class="card-grid">
     <article v-for="(item, index) in items" :key="item.name + index" class="card" :class="item.cardType">
       <h2>
-        <i v-if="item.isRelique" class="i-ri:star-fill size-2" />
+        <i v-if="item.isRelique" class="i-solar:stars-minimalistic-bold size-2" />
         <span>
           {{ item.name }}
         </span>
