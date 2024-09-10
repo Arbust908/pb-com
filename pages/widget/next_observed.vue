@@ -4,17 +4,21 @@ import WidgetBox from "../../components/widget/WidgetBox.vue";
 interface Holiday {
   date: Date;
   name: string;
+  end?: Date;
 }
 const holidays = ref<Holiday[]>([
-  { date: new Date("2024-02-12"), name: "Carnival" },
-  { date: new Date("2024-02-13"), name: "Carnival" },
+  { date: new Date("2024-02-12"), name: "Carnival", end: new Date("2024-02-13") },
   { date: new Date("2024-03-29"), name: "Good Friday" },
   { date: new Date("2024-05-01"), name: "Labor Day" },
   { date: new Date("2024-07-09"), name: "Arg Independence" },
   { date: new Date("2024-09-07"), name: "Br Independence" },
+  { date: new Date("2024-09-23"), name: "HQ Trip", end: new Date("2024-09-29") },
+  { date: new Date("2024-10-10"), name: "NYC Trip", end: new Date("2024-10-20") },
   { date: new Date("2024-12-25"), name: "XMas Day" },
   { date: new Date("2024-12-31"), name: "New Year’s Eve" },
   { date: new Date("2025-01-01"), name: "2025!" },
+  { date: new Date("2025-02-12"), name: "Carnival" },
+  { date: new Date("2025-02-13"), name: "Carnival" },
 ]);
 const today = ref(new Date());
 const nextHolidayIndex = computed(() => {
@@ -24,13 +28,21 @@ function getHoliday(index: number) {
   return holidays.value[index];
 }
 
+const previousHoliday = computed(() => {
+  return getHoliday(nextHolidayIndex.value - 1);
+});
 const nextHoliday = computed(() => {
-  console.log(`Next holiday index: ${nextHolidayIndex.value}`)
   return getHoliday(nextHolidayIndex.value);
 });
 const followingHoliday = computed(() => {
-  console.log(`Following holiday index: ${nextHolidayIndex.value + 1}`)
   return getHoliday(nextHolidayIndex.value + 1);
+});
+
+const isActiveHoliday = computed(() => {
+  if (previousHoliday.value && previousHoliday.value.end) {
+    return previousHoliday.value.end > today.value;
+  }
+  return false;
 });
 
 const daysToNextHoliday = computed(() => {
@@ -57,7 +69,7 @@ definePageMeta({
 
 <template>
   <main class="grid content-start justify-items-center gap-4 min-h-full pt-12">
-    <div class="grid content-start justify-items-center w-full bg-gray-800/10 rounded p-6 grided-box max-w-456px">
+    <div class="grid content-start justify-items-center w-full rounded p-6 grided-box max-w-456px" :class="isActiveHoliday ? 'bg-teal-700/80' : 'bg-gray-800/10'">
       <WidgetBox v-slot="{ isLong }">
         <div class="h-full items-center gap-2 p-6" :class="isLong
             ? 'grid long-holiday justify-items-center'
