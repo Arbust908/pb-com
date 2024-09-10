@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     },
     openRouterKey: '',
   },
+
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
@@ -74,10 +75,14 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
+
   i18n: {
     vueI18n: './locales/i18n.config.ts',
   },
+
   supabase: {
     redirect: false,
   },
+
+  compatibilityDate: '2024-09-10',
 })
