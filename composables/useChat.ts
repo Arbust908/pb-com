@@ -1,5 +1,5 @@
 import type { ModelResponse } from 'ollama'
-import type { ChatMessage } from '~/types'
+import type { ChatMessage, OPEN_ROUTER_MODELS } from '~/types'
 
 export function useChat() {
   const selectedModel = ref<ModelResponse>()
@@ -66,10 +66,28 @@ export function useChat() {
       isResponding.value = false
     }
   }
+  function openRouterGroups(models: OPEN_ROUTER_MODELS[]) {
+    return models.reduce((acc, model) => {
+      const group = model.name.split('/')[0]
+      if (!acc.includes(group)) acc.push(group)
+      return acc
+    }, [] as string[])
+  }
+  function isOpenRouterFreeModel(model: OPEN_ROUTER_MODELS) {
+    const idContainsFree = model.id.includes(':free')
+    const nameContainsFree = model.name.includes('(free)')
+    const pricingIsFree = Number(model.pricing.completion) === 0 && Number(model.pricing.image) === 0 && Number(model.pricing.request) === 0 && Number(model.pricing.prompt) === 0
+    return pricingIsFree && (idContainsFree || nameContainsFree)
+  }
   async function getModels(provider: 'ollama' | 'openRouter') {
     try {
       const _provider = provider ?? 'ollama'
       const data = await $fetch<ModelResponse[]>(`/api/assistant/${_provider}/models`)
+
+      if (provider === 'openRouter') {
+        const freeModels = (data as unknown as OPEN_ROUTER_MODELS[])?.filter(isOpenRouterFreeModel)
+        selectedModel.value = freeModels.sort((a,b) => a.context_length - b.context_length)[0]
+      }
 
       models.value = data
     }
@@ -145,5 +163,7 @@ export function useChat() {
     modelDisplayName,
     modelModalText,
     formatModelInfo,
+    openRouterGroups,
+isOpenRouterFreeModel,
   }
 }

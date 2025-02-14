@@ -7,18 +7,45 @@ const {
     newMessage,
     isResponding,
     sendMessage,
-    getModels,
     ROLE_STYLES,
     CHAT_STRUCTURE,
     toggleChatStructure,
     modelDisplayName,
     modelModalText,
     formatModelInfo,
+    isOpenRouterFreeModel,
+    openRouterGroups,
 } = useChat()
 
 function onSubmit() {
   sendMessage(CHAT_STRUCTURE.value)
 }
+
+const searchValue = ref('')
+const showFreeModels = ref(true)
+const dateOrder = ref<'asc' | 'desc'>('desc')
+const groups = computed(() => {
+  return openRouterGroups(models.value)
+})
+
+const shownModels = computed(() => {
+  let _models = models.value
+  if (showFreeModels.value) {
+    _models = _models.filter(model => isOpenRouterFreeModel(model))
+  }
+  if (searchValue.value) {
+    _models = _models.filter(model => {
+      return model.name.toLowerCase().includes(searchValue.value.toLowerCase())
+    })
+  }
+  return _models.sort((a, b) => {
+    if (dateOrder.value === 'asc') {
+      return a?.created - b?.created
+    } else {
+      return b?.created - a?.created
+    }
+  })
+})
 
 const openModal = ref(false)
 const toggleModal = useToggle(openModal)
@@ -62,13 +89,13 @@ function onOpenModal() { toggleModal(true) }
       <div v-show="openModal" class="fixed inset-0 z-40 flex-middle">
         <aside class="modal-cloak fixed inset-0 z-0 bg-slate-600/25 backdrop-blur" @click="toggleModal(false)" />
         <section
-          class="z-10 grid grid-cols-1 gap-4 border border-slate-6 rounded bg-slate-7 py-4 text-slate-300 shadow md:grid-cols-3 sm:grid-cols-2 h-full max-h-[80vh] scrollbar-gutter-stable-both overflow-y-scroll w-full max-w-sm mx-auto"
+          class="z-10 grid grid-cols-1 gap-4 border border-slate-6 rounded bg-slate-7 py-4 text-slate-300 shadow md:grid-cols-3 sm:grid-cols-2 h-full max-h-[80vh] scrollbar-gutter-stable-both overflow-y-scroll w-full max-w-sm md:max-w-[80%] mx-auto"
         >
           <h2 class="col-span-full text-2xl font-bold">
             Select Model
           </h2>
           <button
-            v-for="model in models" :key="model.name"
+            v-for="model in shownModels" :key="model.name"
             class="border rounded p-2 text-left ring-0 ring-violet-500 transition duration-150 ease-in-out space-y-1"
             :class="model === selectedModel ? 'border-violet-500 ring-3 ring-violet-600' : 'border-slate-200 hover:(ring-3)'"
             @click="selectModel(model)"
