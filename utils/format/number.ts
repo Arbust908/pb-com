@@ -8,3 +8,11 @@ export function formatFileSize(size: number): string {
   }
   return `${size.toFixed(2)} ${units[index]}`
 }
+
+export function formatCurrency(amount: number, currency: string = 'USD', locale: string = 'en-US'): string {
+  const formatter = new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency,
+  })
+  return formatter.format(amount)
+}

@@ -1,4 +1,10 @@
 <script setup lang="ts">
+definePageMeta({
+  // middleware: ['auth'],
+  layout: "auth",
+  title: 'Personal Finances :: Pancho Blanco',
+})
+
 interface Income {
   id: number
   description: string

@@ -112,6 +112,10 @@ export default defineConfig({
     ['scrollbar-gutter-stable', { 'scrollbar-gutter': 'stable' }],
     ['scrollbar-gutter-stable-both', { 'scrollbar-gutter': 'stable both-edges' }],
     ['scrollbar-gutter-unset', { 'scrollbar-gutter': 'unset' }],
+    ['shadow-flat', { 'box-shadow': '0 0 0 rgba(0,0,0,0)' }],
+    ['shadow-harsh', { 'box-shadow': '4px 4px 0 rgba(0,0,0,1)' }],
+    ['shadow-inner-harsh', { 'box-shadow': 'inset 4px 4px 0 rgba(0,0,0,1)' }],
+    ['interpolate-size', { 'interpolate-size': 'allow-keywords' }],
   ],
   presets: [
     presetUno(),

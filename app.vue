@@ -45,11 +45,4 @@ body,
   min-height: -webkit-fill-available;
   @apply h-100svh m-0 p-0 scroll-smooth font-sans;
 }
-
-body {
-  @apply bg-slate-100;
-}
-.dark body {
-  @apply bg-slate-700 text-slate-100;
-}
 </style>
