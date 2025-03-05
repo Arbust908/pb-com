@@ -1,90 +1,40 @@
 <script lang="ts" setup>
-const {
-  models,
-    selectedModel,
-    selectModel,
-    messages,
-    newMessage,
-    isResponding,
-    sendMessage,
-    ROLE_STYLES,
-    CHAT_STRUCTURE,
-    toggleChatStructure,
-    modelDisplayName,
-    modelModalText,
-    formatModelInfo,
-    isOpenRouterFreeModel,
-    openRouterGroups,
-} = useChat()
-
-function onSubmit() {
-  sendMessage(CHAT_STRUCTURE.value)
-}
-
-const searchValue = ref('')
-const showFreeModels = ref(true)
-const dateOrder = ref<'asc' | 'desc'>('desc')
-const groups = computed(() => {
-  return openRouterGroups(models.value)
+definePageMeta({
+  // middleware: ['auth'],
+  layout: "auth",
+  title: 'Ask AI :: Pancho Blanco',
 })
 
-const shownModels = computed(() => {
-  let _models = models.value
-  if (showFreeModels.value) {
-    _models = _models.filter(model => isOpenRouterFreeModel(model))
-  }
-  if (searchValue.value) {
-    _models = _models.filter(model => {
-      return model.name.toLowerCase().includes(searchValue.value.toLowerCase())
-    })
-  }
-  return _models.sort((a, b) => {
-    if (dateOrder.value === 'asc') {
-      return a?.created - b?.created
-    } else {
-      return b?.created - a?.created
-    }
-  })
-})
-
-const openModal = ref(false)
-const toggleModal = useToggle(openModal)
-function onOpenModal() { toggleModal(true) }
+const messages = ref([
+  { id: 9895299, message: 'Hello', sender: 'user', timestamp: new Date() },
+  { id: 9895899, message: 'Hello', sender: 'model', timestamp: new Date() },
+  { id: 9895200, message: 'Hello', sender: 'system', timestamp: new Date() },
+])
 </script>
 
 <template>
-  <section class="grid p-4 chat-layout h-full max-h-full">
-    <ChatMessages :messages="messages" :is-responding="isResponding" />
-    <div class="flex gap-2 area-input">
-      <nav class="flex flex-col gap-4 self-end">
-        <button type="button" class="flex-middle rounded p-1 transition duration-150 hover:(bg-violet-8)"
-          @click="toggleChatStructure">
-          <i class="i-solar:refresh-square-bold-duotone size-6" />
-        </button>
-        <button type="button" class="flex-middle rounded p-1 transition duration-150 hover:(bg-violet-8)"
-          @click="onOpenModal">
-          <i class="i-solar:settings-minimalistic-bold-duotone size-6" />
-        </button>
-      </nav>
-      <div class="flex grow flex-col gap-2" @keypress.enter="onSubmit">
-        <label for="message" class="text-xs opacity-50">
-          Talking to
-          <span class="font-bold">
-            {{ modelDisplayName }}
-          </span>
-          <span class="opacity-50">
-            via {{ CHAT_STRUCTURE }}
-          </span>
-        </label>
-        <textarea v-model="newMessage" type="text" placeholder="Type your message"
-          class="border-slate-800 w-full grow border rounded rounded-lg bg-transparent p-2 text-slate-2" />
+  <section class="grid grid-cols-[240px_1fr_240px] h-full max-h-full">
+    <aside class="bg-zinc-8 border-r-3 border-black p-2">
+      <article class="p-4 border-3 border-black rounded">
+        <h2>
+          <span>Model Name</span>
+          <span class="text-zinc-3">by Company</span>
+        </h2>
+      </article>
+    </aside>
+    <article class="bg-zinc-9 bg-opacity-9 backdrop-blur-sm">
+      <div class="max-w-[600px] mx-auto">
+        <div v-for="message in messages" :key="message.id" class="text-sm">
+          <p>
+            {{ message.message }}
+          </p>
+            <span class="text-zinc-3">
+              {{ useTimeAgo(message.timestamp) }}
+            </span>
+        </div>
       </div>
-      <button
-        class="flex flex-col flex-middle self-end aspect-ratio-1/2 gap-2 rounded bg-violet-300 p-2 text-violet-800 font-bold"
-        type="button" @click="onSubmit">
-        <i class="i-solar:plain-bold-duotone size-5" />
-      </button>
-    </div>
+    </article>
+    <aside class="bg-zinc-9 bg-opacity-9 backdrop-blur-sm"></aside>
     <Teleport to=".modal__layer">
       <div v-show="openModal" class="fixed inset-0 z-40 flex-middle">
         <aside class="modal-cloak fixed inset-0 z-0 bg-slate-600/25 backdrop-blur" @click="toggleModal(false)" />
@@ -130,19 +80,3 @@ function onOpenModal() { toggleModal(true) }
     </Teleport>
   </section>
 </template>
-
-<style scoped>
-/* https://twitter.com/wesbos/status/1735729524069827044 */
-/* textarea {
-  field-sizing: content;
-} */
-
-.chat-layout {
-  grid-template-rows: [chat-start] 1fr [chat-end input-start] 200px [input-end];
-  grid-template-columns: [chat-start input-start] 1fr [chat-end input-end];
-}
-
-.area-input {
-  grid-area: input;
-}
-</style>

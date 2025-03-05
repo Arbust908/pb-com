@@ -1,4 +1,9 @@
 <script setup lang="ts">
+definePageMeta({
+  // middleware: ['auth'],
+  layout: "auth",
+})
+
 const router = useRouter()
 
 const filteredRoutes = computed(() => {
@@ -20,7 +25,7 @@ const filteredRoutes = computed(() => {
 </script>
 
 <template>
-  <section class="py-4 layout-grid-popout">
+  <section class="py-4 max-w-screen-lg mx-auto">
     <div class="sm:hidden">
       <label for="tabs" class="sr-only">Select a tab</label>
       <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
@@ -30,10 +35,15 @@ const filteredRoutes = computed(() => {
       </select>
     </div>
     <div class="hidden sm:block">
-      <div class="border-b border-slate-2">
-        <nav class="-mb-px flex space-x-2" aria-label="Tabs">
+      <div class="bg-zinc-7 border-3 border-black px-2 rounded">
+        <nav class="py-3 space-x-2 group" aria-label="Tabs">
           <NuxtLink v-for="tab in filteredRoutes" :key="tab.name" :to="tab.path"
-            :class="[tab.current ? 'border-violet-5 text-slate-6 dark:text-slate-1' : 'border-transparent text-slate-5 hover:border-slate-3 hover:text-slate-7 dark:hover:text-slate-3', 'whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium']"
+            :class="[
+                tab.current 
+                  ? 'border-black bg-rose-5 text-zinc-9'
+                  : 'border-transparent text-zinc-1 group-hover:opacity-75 hover:bg-rose-4 hover:border-zinc-8 hover:text-zinc-8 hover:',
+                  'whitespace-nowrap border-3 py-1 px-2 text-sm font-medium rounded transition duration-150 ease-in-out'
+                ]"
             :aria-current="tab.current ? 'page' : undefined">
             {{ tab.name }}
           </NuxtLink>
@@ -41,7 +51,7 @@ const filteredRoutes = computed(() => {
       </div>
     </div>
   </section>
-  <section>
+  <section class="py-4 max-w-screen-lg mx-auto">
     <NuxtPage />
   </section>
 </template>

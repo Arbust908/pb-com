@@ -6,7 +6,7 @@ const { print_mode, layout_start } = storeToRefs(general_store)
 <template>
   <div
     :class="[print_mode ? 'print pt-0' : null]"
-    class="grid grid-cols-[100%] grid-rows-[auto_1fr_auto] min-h-full"
+    class="grid grid-cols-[100%] grid-rows-[auto_1fr_auto] min-h-full bg-slate-1 dark:bg-slate-9"
   >
     <GeneralNavBar class="relative z-40" />
     <main class="relative z-20 layout-grid" :style="layout_start ? 'align-content: flex-start;' : null">

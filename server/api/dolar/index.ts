@@ -16,9 +16,14 @@ interface Exchange {
 }
 
 export default defineEventHandler(async () => {
-  const responses = await $fetch<Exchange[]>('https://dolarapi.com/api/v1/dolares')
+  const responses = await $fetch<Exchange[]>('https://dolarapi.com/v1/dolares')
+  const currentDate = new Date()
+  const currentDateString = currentDate.toISOString()
 
-  return responses
+  return {
+    data: responses,
+    lastUpdated: currentDateString,
+  }
 })
 /* https://dolarapi.com/v1/dolares/blue
 /// v1/cotizaciones/uyu

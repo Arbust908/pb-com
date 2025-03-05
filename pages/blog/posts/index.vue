@@ -1,4 +1,10 @@
 <script setup lang="ts">
+definePageMeta({
+  // middleware: ['auth'],
+  layout: "auth",
+  title: 'Blog Posts :: Pancho Blanco',
+})
+
 const loading = ref(true)
 const posts = ref([])
 
