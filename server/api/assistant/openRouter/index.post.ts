@@ -36,20 +36,21 @@ export default defineEventHandler(async (event) => {
   console.log('payload', payload)
   console.log('headers', headers)
 
-  const resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(payload),
-  }).catch((err) => {
-    console.error('ERROR', err)
+  try {
+    const resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(payload),
+    })  
+    console.log('resp', resp)
+  
+    return resp
+  } catch (error) {
+    console.error(error)
     throw createError({
       statusCode: 500,
       statusMessage: 'Error fetching from openrouter.ai',
-      message: err.message,
+      message: error.message,
     })
-  })
-
-  console.log('resp', resp)
-
-  return resp
+  }
 })

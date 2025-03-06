@@ -33,9 +33,8 @@ export function useChat() {
     const userMessageTimestamp = Date.now()
     const payload = {
       message: newMessage.value,
-      model: selectedModel.value.name,
+      model: selectedModel.value.id,
     }
-    console.log('payload', payload)
     try {
       console.log('try')
       console.log('assistantUrl', chatStructure)
@@ -52,7 +51,6 @@ export function useChat() {
         body: JSON.stringify(payload),
       })
 
-      console.log('data', data)
       const responseText = getResponseMsg(data, chatStructure)
 
       messages.value.push({ id: data.id, text: responseText, role: 'model', timestamp: Date.now() })
@@ -86,6 +84,7 @@ export function useChat() {
 
       if (provider === 'openRouter') {
         const freeModels = (data as unknown as OPEN_ROUTER_MODELS[])?.filter(isOpenRouterFreeModel)
+        console.log('freeModels', freeModels)
         selectedModel.value = freeModels.sort((a,b) => a.context_length - b.context_length)[0]
       }
 
