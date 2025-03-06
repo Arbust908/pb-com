@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
   console.log('payload', payload)
   console.log('headers', headers)
 
-  const resp = await $fetch('https://openrouter.ai/api/v1/chat/completions', {
+  const resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers,
     body: JSON.stringify(payload),
