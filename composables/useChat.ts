@@ -1,5 +1,5 @@
 import type { ModelResponse } from 'ollama'
-import type { ChatMessage, OPEN_ROUTER_MODELS } from '~/types'
+import type { ChatMessage, OPEN_ROUTER_MODELS, AI_MODEL_RESPONSE } from '~/types'
 
 export function useChat() {
   const selectedModel = ref<ModelResponse>()
@@ -33,7 +33,7 @@ export function useChat() {
     const userMessageTimestamp = Date.now()
     const payload = {
       message: newMessage.value,
-      model: selectedModel.value.id,
+      model: selectedModel.value.name,
     }
     try {
       console.log('try')
@@ -41,22 +41,22 @@ export function useChat() {
       const newMsg = {
         id: getNewId(messages.value),
         text: newMessage.value,
-        role: 'user',
+        role: 'user' as 'user',
         timestamp: userMessageTimestamp,
       }
       messages.value.push(newMsg)
 
-      const data = await $fetch(`/api/assistant/${chatStructure}`, {
+      const data = await $fetch<AI_MODEL_RESPONSE>(`/api/assistant/${chatStructure}`, {
         method: 'POST',
         body: JSON.stringify(payload),
       })
 
       const responseText = getResponseMsg(data, chatStructure)
 
-      messages.value.push({ id: data.id, text: responseText, role: 'model', timestamp: Date.now() })
+      messages.value.push({ id: data.id, text: responseText, role: 'model' as 'model', timestamp: Date.now() })
       newMessage.value = ''
     }
-    catch (error) {
+    catch (error: any) {
       console.error(error)
       errorMsg.value = error.message
     }
@@ -77,18 +77,29 @@ export function useChat() {
     const pricingIsFree = Number(model.pricing.completion) === 0 && Number(model.pricing.image) === 0 && Number(model.pricing.request) === 0 && Number(model.pricing.prompt) === 0
     return pricingIsFree && (idContainsFree || nameContainsFree)
   }
-  async function getModels(provider: 'ollama' | 'openRouter') {
+  async function getModels(provider: 'ollama' | 'openrouter') {
     try {
-      const _provider = provider ?? 'ollama'
-      const data = await $fetch<ModelResponse[]>(`/api/assistant/${_provider}/models`)
+      const _provider: 'ollama' | 'openrouter' = provider ?? 'ollama'
+      const data = await $fetch<OPEN_ROUTER_MODELS[]>(`/api/assistant/${_provider}/models`)
 
-      if (provider === 'openRouter') {
+      if (provider === 'openrouter') {
         const freeModels = (data as unknown as OPEN_ROUTER_MODELS[])?.filter(isOpenRouterFreeModel)
-        console.log('freeModels', freeModels)
-        selectedModel.value = freeModels.sort((a,b) => a.context_length - b.context_length)[0]
+        selectedModel.value = freeModels.sort((a, b) => a.context_length - b.context_length)[0] as any
+        models.value = freeModels.map(model => ({
+          name: model.name,
+          modified_at: new Date(model.created),
+          size: 0,
+          digest: '',
+          format: '',
+          family: model.architecture.modality,
+          families: [model.architecture.modality],
+          parameter_size: '0',
+          quantization_level: '0',
+        })) as ModelResponse[]
+        return
       }
 
-      models.value = data
+      models.value = data as ModelResponse[]
     }
     catch (error) {
       console.error(error)
@@ -101,10 +112,10 @@ export function useChat() {
     error: 'bg-red-100 mx-auto rounded-md text-red-500 text-center text-xs font-bold',
   }
 
-  const DEFAULT_STRUCTURE = 'openRouter'
-  const CHAT_STRUCTURE = ref<'ollama' | 'openRouter'>(DEFAULT_STRUCTURE)
+  const DEFAULT_STRUCTURE = 'openrouter'
+  const CHAT_STRUCTURE = ref<'ollama' | 'openrouter'>(DEFAULT_STRUCTURE)
   function toggleChatStructure() {
-    CHAT_STRUCTURE.value = CHAT_STRUCTURE.value === 'ollama' ? 'openRouter' : 'ollama'
+    CHAT_STRUCTURE.value = CHAT_STRUCTURE.value === 'ollama' ? 'openrouter' : 'ollama'
   }
 
   const selectedModelInfo = computed(() => {

@@ -1,4 +1,4 @@
-import { PromptTemplate } from "langchain/prompts";
+import { PromptTemplate } from "@langchain/core/prompts";
 
 export const chatPrompt = PromptTemplate.fromTemplate(`
 You are a friendly AI assistant. Follow these rules:

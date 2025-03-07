@@ -1,0 +1,24 @@
+# Cline Rules
+
+This file captures project-specific patterns, user preferences, and other insights to help Cline work more effectively.
+
+## Project Patterns
+
+- Document recurring patterns or conventions in the codebase.
+- Implementation paths for critical features.
+
+## User Preferences
+
+- Capture user's preferred tools, workflows, or coding styles.
+- Communication preferences.
+
+## Project Intelligence
+
+- Learned insights that aren't obvious from the code.
+- Known challenges or areas of complexity.
+- Evolution of project decisions.
+
+## Tool Usage Patterns
+
+- How Cline uses specific tools for this project.
+- Effective tool combinations or workflows.
