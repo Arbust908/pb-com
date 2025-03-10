@@ -4,13 +4,15 @@ This file captures project-specific patterns, user preferences, and other insigh
 
 ## Project Patterns
 
-- Document recurring patterns or conventions in the codebase.
-- Implementation paths for critical features.
+- We use the `Script Setup` vue syntax
+- We use `function` over `const` for methods
+- We'll have as much formatting as possible be done on the server side
 
 ## User Preferences
 
-- Capture user's preferred tools, workflows, or coding styles.
-- Communication preferences.
+- We use UnoCSS for styling
+- The UI is built with Nuxt 3
+- We are using a NeoBrutalism UI (With bold colors, bold borders, harsh shadows and corners with small radius)
 
 ## Project Intelligence
 
@@ -22,3 +24,43 @@ This file captures project-specific patterns, user preferences, and other insigh
 
 - How Cline uses specific tools for this project.
 - Effective tool combinations or workflows.
+
+# Security
+
+## Sensitive Files
+DO NOT read or modify:
+- .env files
+- **/config/secrets.* 
+- **/*.pem
+- Any file containing API keys, tokens, or credentials
+
+## Security Practices
+- Never commit sensitive files
+- Use environment variables for secrets
+- Keep credentials out of logs and output
+
+# Project Guidelines
+
+## Documentation Requirements
+- Update relevant documentation in /docs when modifying features
+- Keep README.md in sync with new capabilities
+- Maintain changelog entries in CHANGELOG.md
+
+## Architecture Decision Records
+Create ADRs in /docs/adr for:
+- Major dependency changes
+- Architectural pattern changes
+- New integration patterns
+- Database schema changes
+Follow template in /docs/adr/template.md
+
+## Code Style & Patterns
+- Generate API clients using OpenAPI Generator
+- Use TypeScript axios template
+- Place generated code in /src/generated
+- Prefer composition over inheritance
+- Use repository pattern for data access
+- Follow error handling pattern in /src/utils/errors.ts
+
+## Memory Bank
+- Currently updating the memory bank (March 6, 2025)

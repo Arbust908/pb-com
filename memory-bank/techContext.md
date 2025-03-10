@@ -2,20 +2,26 @@
 
 ## Technologies Used
 
-- List all programming languages, frameworks, libraries, and tools used in the project.
-- Specify versions and relevant configuration details.
+- Nuxt 3 (Framework)
+- Vue 3 (JavaScript Framework)
+- UnoCSS (CSS Utility Library)
+- TypeScript (Programming Language)
 
 ## Development Setup
 
-- Describe the recommended development environment setup.
-- Include instructions for installing dependencies and running the project locally.
+- **Prerequisites:** Node.js and npm (or yarn) installed.
+- Clone the repository.
+- Run `npm install` (or `yarn install`) to install dependencies.
+- Run `npm run dev` (or `yarn dev`) to start the development server.
 
 ## Technical Constraints
 
-- Document any technical limitations or constraints.
-- Performance, scalability, security, or compatibility requirements.
+- The application is built for modern browsers.
+- Performance should be optimized for fast loading and responsiveness.
 
 ## Dependencies
 
-- List project dependencies and how they are managed.
-- Include external APIs, services, or data sources.
+- Project dependencies are managed through npm (or yarn).
+- Key dependencies include Nuxt 3, Vue 3, and UnoCSS.
+
+<!-- "Technology is best when it brings people together." - Matt Mullenweg -->

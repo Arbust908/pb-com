@@ -1,29 +1,16 @@
 <template>
-  <LayoutAi>
-    <template #sidebar-left>
-      <ChatHistorySidebar />
-    </template>
-    <template #main>
-      <ChatMain />
-    </template>
-    <template #sidebar-right>
-      <ChatRightSidebar />
-    </template>
-  </LayoutAi>
+  <div class="grid grid-cols-[220px_1fr_220px] h-full">
+    <aside>Left Nav</aside>
+    <main>Main</main>
+    <aside>Right Nav</aside>
+  </div>
 </template>
 
 <script setup lang="ts">
-import LayoutAi from '@/layouts/ai.vue';
-import ChatHistorySidebar from '@/components/chat/ChatHistorySidebar.vue';
-import ChatMain from '@/components/chat/ChatMain.vue';
-import ChatRightSidebar from '@/components/chat/ChatRightSidebar.vue';
 
 definePageMeta({
   // middleware: ['auth'],
-  layout: "none",
+  layout: "auth",
   title: 'AI Chat :: Pancho Blanco',
 })
 </script>
-
-<style scoped>
-</style>

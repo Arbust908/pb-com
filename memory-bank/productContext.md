@@ -2,24 +2,29 @@
 
 ## Project Purpose
 
-- Explain why this project is being created.
-- Describe the problems it aims to solve.
-- Define the project's value proposition.
+- This project aims to create a personal website/portfolio to showcase skills, projects, and experience.
+- It serves as a central hub for professional online presence.
+- It provides a platform for interaction through chat functionality.
 
 ## Target Users
 
-- Identify the intended users of the project.
-- Describe their needs, goals, and pain points.
-- Create user personas if necessary.
+- Potential employers or clients.
+- Collaborators or peers in the field.
+- Individuals interested in learning more about the user.
 
 ## User Experience Goals
 
-- Define the desired user experience.
-- Specify key interaction patterns and design principles.
-- Outline accessibility and usability considerations.
+- The website should be easy to navigate and understand.
+- Information should be presented clearly and concisely.
+- The NeoBrutalism design should be visually engaging and memorable.
+- The chat functionality should be intuitive and responsive.
+- The website should be accessible on various devices.
 
 ## Success Metrics
 
-- Define how success will be measured.
-- Establish key performance indicators (KPIs).
-- Set targets for user engagement, satisfaction, etc.
+- Increased traffic to the website.
+- Positive feedback on the design and functionality.
+- Inquiries or contacts through the chat feature.
+- Engagement with showcased projects and content.
+
+<!-- "The only way to do great work is to love what you do." - Steve Jobs -->

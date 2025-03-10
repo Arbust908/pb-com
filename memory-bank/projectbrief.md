@@ -2,21 +2,28 @@
 
 ## Project Goals
 
-- Define the core goals and objectives of the project.
-- Outline the project's scope and boundaries.
-- Establish the primary source of truth for project requirements.
+- Create a Nuxt 3 web application.
+- Implement a NeoBrutalism UI design.
+- Incorporate chat functionality.
+- Utilize UnoCSS for styling.
+- Serve as a personal website/portfolio.
 
 ## Core Requirements
 
-- Detail the essential features and functionalities of the project.
-- Specify any mandatory constraints or limitations.
+- The application must be built using Nuxt 3.
+- The UI must adhere to NeoBrutalism design principles.
+- Chat functionality should be integrated.
+- Styling should be managed with UnoCSS.
 
 ## User Stories (Optional)
 
-- Describe the project from the perspective of different users.
-- Capture user needs and expectations.
+- As a user, I want to be able to navigate the website easily.
+- As a user, I want to be able to interact with the chat functionality.
+- As a user, I want the website to be visually appealing in a NeoBrutalist style.
 
 ## Out of Scope
 
-- Clearly list what is explicitly excluded from the project scope.
-- Manage expectations and prevent scope creep.
+- Features not explicitly mentioned in the project goals or core requirements.
+- Backend development beyond the scope of Nuxt 3's capabilities.
+
+<!-- "The journey of a thousand miles begins with a single step." - Lao Tzu -->

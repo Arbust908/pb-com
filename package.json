@@ -50,6 +50,7 @@
     "@iconify-json/ph": "^1.2.2",
     "@langchain/core": "^0.3.42",
     "@langchain/openai": "^0.4.4",
+    "langchain": "^0.3.19",
     "posthog-js": "^1.108.3"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
