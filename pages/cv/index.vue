@@ -38,7 +38,7 @@ const { print_mode } = storeToRefs(general_store)
       '. exp'
       '. study';
     grid-template-columns: 360px 1fr;
-    grid-template-rows: 64px 640px 1fr auto;
+    grid-template-rows: 64px auto 1fr auto;
     @apply grid gap-x-4;
   }
   .lang {
@@ -65,7 +65,7 @@ const { print_mode } = storeToRefs(general_store)
       '. exp'
       '. study';
     grid-template-columns: 400px clamp(320px, 60%, 640px);
-    grid-template-rows: 64px 640px 1fr auto;
+    grid-template-rows: 64px auto 1fr auto;
   }
 }
 </style>

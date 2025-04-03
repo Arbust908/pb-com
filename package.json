@@ -47,6 +47,7 @@
     "vue-tsc": "^1.8.25"
   },
   "dependencies": {
+    "@iconify-json/ic": "^1.2.2",
     "@iconify-json/ph": "^1.2.2",
     "@langchain/core": "^0.3.42",
     "@langchain/openai": "^0.4.4",
