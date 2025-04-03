@@ -20,12 +20,11 @@ const holidays = ref<Holiday[]>([
   { date: new Date("2025-01-01"), name: "2025!" },
   { date: new Date("2025-03-03"), name: "Carnival" },
   { date: new Date("2025-03-04"), name: "Carnival" },
-  { date: new Date("2025-03-05"), name: "Magic", end: new Date("2025-03-07")},
   { date: new Date("2025-04-18"), name: "Good Friday" },
   { date: new Date("2025-05-01"), name: "Labor Day" },
   { date: new Date("2025-07-09"), name: "Arg Independence" },
   { date: new Date("2025-09-07"), name: "Br Independence" },
-  { date: new Date("2025-09-23"), name: "HQ Trip", end: new Date("2024-09-29") },
+  { date: new Date("2025-09-23"), name: "HQ Trip (?)", end: new Date("2024-09-29") },
   { date: new Date("2025-12-25"), name: "XMas Day" },
   { date: new Date("2025-12-31"), name: "New Year’s Eve" },
   // 2026
