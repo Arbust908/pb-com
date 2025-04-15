@@ -1,6 +1,6 @@
 import { defineEventHandler } from 'h3'
 import { serverSupabaseClient } from '#supabase/server'
-import type { User } from '~/types'
+import type { ToDoType, User } from '~/types'
 
 export default defineEventHandler(async (event) => {
   const client = await serverSupabaseClient(event)

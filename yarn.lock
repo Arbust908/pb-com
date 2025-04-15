@@ -1777,7 +1777,7 @@
     vue-i18n "^9.14.1"
     vue-router "^4.4.4"
 
-"@nuxtjs/supabase@^1.1.6":
+"@nuxtjs/supabase@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@nuxtjs/supabase/-/supabase-1.5.0.tgz#95989257e759c1371de73e828ef77ad8813d7009"
   integrity sha512-UD+JVifYvvAuiTxwenw3QR36PfJgvZBSV2vGUhhzviWYtzv9SkIZmHcyIp31JIyTAhqqEoi1cv4ctfFmAP3cGQ==
@@ -6118,11 +6118,6 @@ is-typed-array@^1.1.13, is-typed-array@^1.1.14, is-typed-array@^1.1.15:
   integrity sha512-p3EcsicXjit7SaskXHs1hA91QxgTw46Fv6EFKKGS5DRFLD8yKnohjF3hxoju94b/OcMZoQukzpPpBE9uLVKzgQ==
   dependencies:
     which-typed-array "^1.1.16"
-
-is-unicode-supported@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/is-unicode-supported/-/is-unicode-supported-1.3.0.tgz#d824984b616c292a2e198207d4a609983842f714"
-  integrity sha512-43r2mRvz+8JRIKnWJ+3j8JtjRKZ6GmjzfaE/qiBJnikNnYv/6bagRJ1kUhNk8R5EX/GkobD+r+sfxCPJsiKBLQ==
 
 is-url@^1.2.4:
   version "1.2.4"

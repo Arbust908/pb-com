@@ -1,6 +1,6 @@
 import { defineEventHandler } from 'h3'
 import { serverSupabaseClient } from '#supabase/server'
-import type { User } from '~/types'
+import type { ToDoType, User } from '~/types'
 
 /* import { z } from 'zod' */
 /* const userSchema = z.object({

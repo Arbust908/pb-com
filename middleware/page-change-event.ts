@@ -8,4 +8,4 @@ export default defineNuxtRouteMiddleware((to, from) => {
     //
     posthog.capture(`Page::${to.name} || ${to.path}`)
   }
-  })
+})
