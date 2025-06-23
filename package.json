@@ -47,6 +47,7 @@
     "vue-tsc": "^1.8.25"
   },
   "dependencies": {
+    "@iconify-json/ic": "^1.2.2",
     "@iconify-json/ph": "^1.2.2",
     "posthog-js": "^1.108.3"
   },
