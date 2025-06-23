@@ -16,7 +16,7 @@ const { print_mode } = storeToRefs(general_store)
 </script>
 
 <template>
-    <div :class="print_mode && 'print'" class="relative layout-grid-feature">
+    <div :class="print_mode && 'print'" class="relative grid layout-grid-feature">
       <BlobyOne v-if="!print_mode" class="fixed z-0 w-90 opacity-60 filter-blur-2xl -right-8 -top-4" />
       <BlobyTwo v-if="!print_mode" class="fixed z-0 w-100 opacity-60 filter-blur-2xl -bottom-7 -left-6" />
       <CvSideNav v-if="!print_mode" class="lang relative z-10" />
@@ -31,7 +31,6 @@ const { print_mode } = storeToRefs(general_store)
 @media screen and (min-width: 768px) {
   /* https://colorgradient.dev/ */
   div {
-    display: grid;
     grid-template-areas:
       'lang .'
       'personal exp'
@@ -39,7 +38,7 @@ const { print_mode } = storeToRefs(general_store)
       '. study';
     grid-template-columns: 360px 1fr;
     grid-template-rows: 64px 640px 1fr auto;
-    @apply grid gap-x-4;
+    @apply gap-x-4;
   }
   .lang {
     grid-area: lang;
@@ -67,5 +66,14 @@ const { print_mode } = storeToRefs(general_store)
     grid-template-columns: 400px clamp(320px, 60%, 640px);
     grid-template-rows: 64px 640px 1fr auto;
   }
+}
+div.print {
+      grid-template-areas:
+      '. . .'
+      '. personal .'
+      '. exp .'
+      '. study .';
+    grid-template-columns: 200px 640px 200px;
+    grid-template-rows: 60px repeat(3, auto);
 }
 </style>

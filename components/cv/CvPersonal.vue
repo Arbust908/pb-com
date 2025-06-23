@@ -36,9 +36,11 @@ function birthday() {
     </h3>
     <article class="mb-6 mt-2">
       <ul>
-        <li class="mb-2 flex items-center gap-2">
-          <i class="i-ic:round-mail h-6 w-6 text-violet-600 dark:text-violet-300" />
-          <span>arbust908@gmail.com</span>
+        <li>
+          <a href="mailto:me@panchoblanco.dev" class="mb-2 flex items-center gap-2">
+            <i class="i-ic:round-mail h-6 w-6 text-violet-600 dark:text-violet-300" />
+            <span>me@panchoblanco.dev</span>
+          </a>
         </li>
         <li class="mb-2 flex items-center gap-2">
           <i class="i-ic:round-cake h-6 w-6 text-violet-600 dark:text-violet-300" />
