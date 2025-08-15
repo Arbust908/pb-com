@@ -1,50 +1,48 @@
 <script setup lang="ts">
 import WidgetBox from "../../components/widget/WidgetBox.vue";
 
-interface Holiday {
+interface HolidayDisplay {
   date: Date;
   name: string;
   end?: Date;
 }
-const holidays = ref<Holiday[]>([
-  /* { date: new Date("2024-02-12"), name: "Carnival", end: new Date("2024-02-13") },
-  { date: new Date("2024-03-29"), name: "Good Friday" },
-  { date: new Date("2024-05-01"), name: "Labor Day" },
-  { date: new Date("2024-07-09"), name: "Arg Independence" },
-  { date: new Date("2024-09-07"), name: "Br Independence" },
-  { date: new Date("2024-09-23"), name: "HQ Trip", end: new Date("2024-09-29") },
-  { date: new Date("2024-10-10"), name: "NYC Trip", end: new Date("2024-10-20") },
-  { date: new Date("2024-12-25"), name: "XMas Day" },
-  { date: new Date("2024-12-31"), name: "New Year’s Eve" }, */
-  // 2025
-  { date: new Date("2025-01-01"), name: "2025!" },
-  { date: new Date("2025-03-03"), name: "Carnival" },
-  { date: new Date("2025-03-04"), name: "Carnival" },
-  { date: new Date("2025-04-18"), name: "Good Friday" },
-  { date: new Date("2025-05-01"), name: "Labor Day" },
-  { date: new Date("2025-07-09"), name: "Arg Independence" },
-  { date: new Date("2025-09-07"), name: "Br Independence" },
-  { date: new Date("2025-09-23"), name: "HQ Trip (?)", end: new Date("2024-09-29") },
-  { date: new Date("2025-12-25"), name: "XMas Day" },
-  { date: new Date("2025-12-31"), name: "New Year’s Eve" },
-  // 2026
-  { date: new Date("2026-01-01"), name: "2026!" },
-]);
+
+// Use the holidays composable
+const { holidays: apiHolidays, loading, error, fetchHolidays } = useHolidays()
+
+// Convert API holidays to display format
+const holidays = computed<HolidayDisplay[]>(() => {
+  return apiHolidays.value.map(h => ({
+    date: new Date(h.date),
+    name: h.name,
+    end: h.endDate ? new Date(h.endDate) : undefined
+  }))
+})
+
+// Fetch holidays on mount
+onMounted(async () => {
+  await fetchHolidays()
+})
 const today = ref(new Date());
 const nextHolidayIndex = computed(() => {
+  if (holidays.value.length === 0) return -1;
   return holidays.value.findIndex((holiday) => holiday.date > today.value);
 });
 function getHoliday(index: number) {
+  if (index < 0 || index >= holidays.value.length) return null;
   return holidays.value[index];
 }
 
 const previousHoliday = computed(() => {
+  if (nextHolidayIndex.value <= 0) return null;
   return getHoliday(nextHolidayIndex.value - 1);
 });
 const nextHoliday = computed(() => {
+  if (nextHolidayIndex.value === -1) return null;
   return getHoliday(nextHolidayIndex.value);
 });
 const followingHoliday = computed(() => {
+  if (nextHolidayIndex.value === -1 || nextHolidayIndex.value >= holidays.value.length - 1) return null;
   return getHoliday(nextHolidayIndex.value + 1);
 });
 
@@ -68,13 +66,14 @@ const daysToNextHoliday = computed(() => {
     (nextHoliday.value.date.getTime() - today.value.getTime()) / (1000 * 60 * 60 * 24)
   );
 });
-const formatDateAsCompact = (date: Date) => {
+const formatDateAsCompact = (date: Date | undefined) => {
+  if (!date) return '';
   const day = date.getDate();
   const month = date.toLocaleString('en-US', { month: 'short' });
   return `${day} ${month}`;
 };
-const formattedDate = computed(() => formatDateAsCompact(nextHoliday.value.date));
-const followingHolidayDate = computed(() => formatDateAsCompact(followingHoliday.value.date));
+const formattedDate = computed(() => nextHoliday.value ? formatDateAsCompact(nextHoliday.value.date) : '');
+const followingHolidayDate = computed(() => followingHoliday.value ? formatDateAsCompact(followingHoliday.value.date) : '');
 
 definePageMeta({
   layout: "none",
@@ -86,7 +85,10 @@ definePageMeta({
 
 <template>
   <main class="grid content-start justify-items-center gap-4 min-h-full pt-12">
-    <div class="grid content-start justify-items-center w-full rounded p-6 grided-box max-w-456px" :class="isActiveHoliday ? 'bg-teal-700/80' : 'bg-gray-800/10'">
+    <div v-if="loading" class="text-xl">Loading holidays...</div>
+    <div v-else-if="error" class="text-xl text-red-500">{{ error }}</div>
+    <div v-else-if="holidays.length === 0" class="text-xl">No holidays found</div>
+    <div v-else class="grid content-start justify-items-center w-full rounded p-6 grided-box max-w-456px" :class="isActiveHoliday ? 'bg-teal-700/80' : 'bg-gray-800/10'">
       <WidgetBox v-slot="{ isLong }">
         <div class="h-full items-center gap-2 p-6" :class="isLong
             ? 'grid long-holiday justify-items-center'
@@ -105,7 +107,7 @@ definePageMeta({
             {{ daysToNextHoliday }}
           </p>
           <p class="text-3xl font-bold" :class="{ days: isLong }">days to go</p>
-          <p class="text-2xl">
+          <p v-if="followingHoliday" class="text-2xl">
             Next =>
             {{ followingHolidayDate }}
           </p>
