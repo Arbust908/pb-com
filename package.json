@@ -11,7 +11,11 @@
     "start:generate": "npx serve .output/public",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:seed": "tsx server/db/seed.ts",
+    "db:studio": "drizzle-kit studio"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.4.4",
@@ -32,6 +36,8 @@
     "consola": "^3.2.3",
     "dat.gui": "^0.7.9",
     "dice-utils": "^2.0.1",
+    "dotenv": "^17.2.1",
+    "drizzle-kit": "^0.31.4",
     "eslint": "^8.56.0",
     "eslint-plugin-format": "^0.1.0",
     "eslint-ts-patch": "^8.55.0-1",
@@ -49,6 +55,8 @@
   "dependencies": {
     "@iconify-json/ic": "^1.2.2",
     "@iconify-json/ph": "^1.2.2",
+    "@libsql/client": "^0.15.11",
+    "drizzle-orm": "^0.44.4",
     "posthog-js": "^1.108.3"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
