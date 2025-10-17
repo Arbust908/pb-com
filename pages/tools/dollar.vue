@@ -3,7 +3,6 @@ import { useTimeAgo } from '@vueuse/core'
 import { formatCurrency } from '~/utils/format/number'
 import NumberFlow from '@number-flow/vue'
 
-// https://twitter.com/jh3yy/status/1735499859715584298 animation for number changes
 const { data, refresh, status } = useAsyncData('dollar', () => $fetch('/api/dolar'))
 
 const isLoading = ref(false)
