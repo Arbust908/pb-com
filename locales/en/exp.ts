@@ -6,50 +6,51 @@ export default
     start: '10/18/2022',
     end: null,
     description:
-      'As a Front-End Engineer, I collaborate with the team to develop and maintain multiple products. Our main stack is based on Vue, utilizing Nuxt 3, UnoCSS or TailwindCSS, and TypeScript. Our product lineup includes an app developed using React Native, a project in which I am actively involved. Additionally, I engage in brainstorming new features in collaboration with the UI and Back-End teams. I spearheaded an initiative to migrate our legacy code to our current stack.',
-    more: null,
-    /* 'As Front-end Lead I lead a team of 5 developers in the development of multiple web applications. Our main stack is based on Vue (Vite, Vue 3, UnoCSS or TailwindCSS, Pinia, Vue Router, and Typescript). Even so, we are now migrating our first proprietary product to Next.js. Beyond this product, we also have and maintain a management system for a logistics company in the form of a PWA, a management panel for our mining companies, and two institutional pages. All these products contain i18n to handle multiple languages ​​(usually English and Spanish).', */
+      'As a Front-End Engineer, I collaborate with the team to develop and maintain multiple products. Leading migration from Vue 2 to Vue 3 + Vite (Nuxt 3), reducing bundle size by 28% and first contentful paint to < 1.2s. Championing design-system adoption (Tailwind V4 + Storybook) enabling faster feature delivery with WCAG AA compliance. Our main stack is based on Vue, utilizing Nuxt 3, UnoCSS or TailwindCSS, and TypeScript. Our product lineup includes an app developed using React Native, a project in which I am actively involved. Additionally, I engage in brainstorming new features in collaboration with the UI and Back-End teams.',
+  more:
+    'Spearheaded migration of core app from Vue 2 to Vue 3 + Vite (Nuxt 3), cutting bundle size by 28% and reducing first contentful paint to < 1.2s. Championed design-system adoption (Tailwind V4 + Storybook) enabling 3 squads to ship features 30% faster with consistent WCAG AA compliance. Solo handled full migration to TanStack Query, modernizing data fetching layer across entire application. Developed mobile applications using React Native (Expo) serving 1k daily active users. Mentored 2 junior developers; one promoted to mid-level within 12 months. Maintenance and upgrade on Multi-Language Full-stack products (PHP, jQuery 4, CSS) improving feature turn around time by 25% in ticket velocity. I spearheaded an initiative to migrate our legacy code to our current stack.'
   },
   bitpatagonia: {
-    rol: 'Sr Front-End',
+    rol: 'Senior Front-End Engineer',
     company: 'BitPatagonia',
     start: '07/01/2020',
     end: '10/18/2022',
     description:
-      'I lead a team of 5 in the development of multiple web applications. We are currently migrating our SaaS from the current stack (Vite, Vue 3, UnoCSS, Pinia, and Typescript) to a more popular stack on the market based on React with Next. These and our other products contain i18n to handle multiple languages (usually English and Spanish).',
+      'Built front-end team from 0 to 5 developers delivering a multilingual logistics PWA processing 1k daily shipments with > 99% uptime. Led migration from Vue to React with Next.js.',
     more:
-      'As Front-end Lead I lead a team of 5 developers in the development of multiple web applications. Our main stack is based on Vue (Vite, Vue 3, UnoCSS or TailwindCSS, Pinia, Vue Router, and Typescript). Even so, we are now migrating our first proprietary product to Next.js. Beyond this product, we also have and maintain a management system for a logistics company in the form of a PWA, a management panel for our mining companies, and two institutional pages. All these products contain i18n to handle multiple languages ​​(usually English and Spanish).',
+      'As Front-end Lead I lead a team of 5 developers in the development of multiple web applications. Our main stack is based on Vue (Vite, Vue 3, UnoCSS or TailwindCSS, Pinia, Vue Router, and Typescript). Even so, we are now migrating our first proprietary product to Next.js. Beyond this product, we also have and maintain a management system for a logistics company in the form of a PWA, a management panel for our mining companies, and two institutional pages. All these products contain i18n to handle multiple languages (usually English and Spanish).',
   },
   viafoura: {
     rol: 'Front-End Developer',
     company: 'Viafoura',
-    start: '03/06/2021',
-    end: '12/30/2021',
+    start: '03/01/2021',
+    end: '12/31/2021',
     description:
       'Maintain and evolve Viafoura\'s Product (a social engagement script) built in multiple technologies (Backbone in v1 and Vue, Vuex in v2). I also took part in the brainstorming of the v3 product and new features in coordination with the UI and Back-end teams.',
-    more: null,
+    more: 'Modularised legacy Backbone widgets into Vue components, built into a custom tool reducing on-client size by 60%.',
   },
   forian: {
-    rol: 'Sr Front-End Developer',
+    rol: 'Senior Front-End Developer',
     company: 'Forian',
-    start: '03/05/2020',
-    end: '12/30/2020',
+    start: '06/01/2020',
+    end: '03/31/2021',
     description:
       'Development and maintain the Biotrack Product in an open collaboration with the backend team. Using Vue with Typescript, Vuetify (for accessibility standards, WCAG & ADA), Vuex and Vue Router to achieve the Jira tickets handed down by the USA POs (Product Owners).',
     more: null,
   },
   pointmore: {
-    rol: 'Sr Full Stack Developer',
+    rol: 'Senior Full Stack Developer',
     company: 'PointMore',
     start: '01/01/2020',
-    end: '12/31/2021',
+    end: '03/31/2021',
     description:
-      'Development of Web Apps with management systems and metric panels for a variety of clients. WebApps are build with Nuxt to offer SSR and SEO optimization, components in Vue, internal state management with Vuex and the option to make an installable app as a PWA. Connection to a SQL DB(Sequelize) with REST Api via Axios in Express services.Designs and Prototypes done with Adobe XD.',
-    more:
+      'Developed web apps with management systems and metric panels using Nuxt (Vue) and Next.js (React) for SSR/SEO optimization, state management, PWA capabilities, and SQL DB integration via Express REST APIs.',
+      more:
       'Point More is an Agency I started with 3 other ex-Digital House developers. Even though we all are Full Stack developers I\'m the main Front End dev. As a team, we take projects too large in scope for one dev. Usually, we build Complex eCommerce that need to have a pristine SEO ranking for that end I apply my knowledge to build PWA ready web apps that manage session information in Vuex states. For external data y connect to backend services via REST APIs using Axios. Depending on client demand we use an existing Component Library (like Vue-bootstrap), if not, I usually build a custom component library with the help of TailwindCSS styling. If our client doesn\'t have a design of their own I also take part in the Design phase using Adobe XD o Figma From time to time we have taken projects that did have an existing codebase in other languages or frameworks which we work on top (Laravel, React, Plain HTML + CSS + Alpine)',
+
   },
   digitalhouse_dev: {
-    rol: 'SSr Full Stack Developer',
+    rol: 'Semi-Senior Full Stack Developer',
     company: 'Digital House',
     start: '01/01/2017',
     end: '07/01/2020',
