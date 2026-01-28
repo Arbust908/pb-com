@@ -3,6 +3,12 @@ import shuffleLetters from 'shuffle-letters';
 // https://github.com/georapbox/shuffle-letters/tree/main
 import type { MetaData } from '@/composables/ultimateProtocol'
 import { useUP } from '@/composables/ultimateProtocol'
+import { useCvExperiences } from '@/composables/useCvExperiences'
+import type { CvExperience } from '@/composables/useCvExperiences'
+import { useCvSkills } from '@/composables/useCvSkills'
+import type { CvSkill } from '@/composables/useCvSkills'
+import { useCvLanguages } from '@/composables/useCvLanguages'
+import type { CvLanguage } from '@/composables/useCvLanguages'
 
 const meta: MetaData = {
   base_url: 'panchoblanco.com',
@@ -11,10 +17,52 @@ const meta: MetaData = {
           'Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Tengo mas de 8 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.',
 }
 useHead(useUP(meta))
+
+// CV Data
+const { experiences, fetch: fetchExperiences, loading: loadingExperiences } = useCvExperiences()
+const { skills, fetch: fetchSkills, loading: loadingSkills } = useCvSkills()
+const { languages, fetch: fetchLanguages, loading: loadingLanguages } = useCvLanguages()
+const { locale } = useI18n()
+
+// Get translation for current locale with fallback to 'en'
+function getTranslation(item: CvExperience | CvSkill | CvLanguage, field: string): string {
+  const translations = item.translations
+  return translations[locale.value]?.[field] || translations.en?.[field] || ''
+}
+
+function formatDate(date: string) {
+  return new Date(date).toLocaleDateString(locale.value, { year: 'numeric', month: 'short', day: '2-digit' })
+}
+
+// Get current experience + most recent ended experience
+const recentExperiences = computed(() => {
+  const expList = [...experiences.value]
+
+  // Find current employment (no endDate)
+  const currentExp = expList.find(exp => exp.endDate === null)
+
+  // Get all experiences with endDates, sorted by endDate descending
+  const endedExps = expList
+    .filter(exp => exp.endDate !== null)
+    .sort((a, b) => new Date(b.endDate!).getTime() - new Date(a.endDate!).getTime())
+
+  const result = []
+  if (currentExp) result.push(currentExp)
+  if (endedExps.length > 0) result.push(endedExps[0])
+
+  return result
+})
+
 // AI vue components https://www.vue0.dev/
-onMounted(() => {
+onMounted(async () => {
   shuffleLetters(document.querySelector('h2'))
+  await Promise.all([fetchExperiences(), fetchSkills(), fetchLanguages()])
 });
+
+// Loading state for all CV data
+const loadingCvData = computed(() =>
+  loadingExperiences.value || loadingSkills.value || loadingLanguages.value
+)
 </script>
 
 <template>
@@ -41,6 +89,84 @@ onMounted(() => {
       </NuxtLink>
     </div>
     <!-- <DotHero /> -->
+  </section>
+
+  <!-- CV Overview Section -->
+  <section v-if="!loadingCvData && (recentExperiences.length > 0 || skills.length > 0 || languages.length > 0)" class="py-8 px-6">
+    <div class="max-w-4xl mx-auto space-y-8">
+
+      <!-- Recent Experience -->
+      <div v-if="recentExperiences.length > 0">
+        <h3 class="text-2xl font-bold mb-6 text-center text-slate-800 dark:text-slate-200">
+          {{ $t('recent_work') }}
+        </h3>
+        <div class="grid grid-cols-1 gap-6">
+          <article
+            v-for="experience in recentExperiences"
+            :key="experience.id"
+            class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4"
+          >
+            <h4 class="font-semibold text-lg mb-2 flex flex-col gap-1">
+              <span class="text-emerald-600 dark:text-emerald-400">{{ getTranslation(experience, 'rol') }}</span>
+              <span class="text-slate-700 dark:text-slate-300 text-sm">@ {{ experience.company }}</span>
+            </h4>
+            <div class="text-sm text-slate-600 dark:text-slate-400 mb-2">
+              {{ formatDate(experience.startDate) }} -
+              <span v-if="!experience.endDate" class="text-emerald-600 dark:text-emerald-400 font-medium">
+                {{ $t('current') }}
+              </span>
+              <span v-else>{{ formatDate(experience.endDate) }}</span>
+            </div>
+            <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+              {{ getTranslation(experience, 'description') }}
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div v-if="skills.length > 0">
+        <h3 class="text-2xl font-bold mb-6 text-center text-slate-800 dark:text-slate-200">
+          {{ $t('skills_title') }}
+        </h3>
+        <div class="grid grid-cols-1 gap-4">
+          <div
+            v-for="skill in skills"
+            :key="skill.id"
+            class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4"
+          >
+            <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+              {{ getTranslation(skill, 'title') }}
+            </h4>
+            <p class="text-sm text-slate-700 dark:text-slate-300 whitespace-pre-line">
+              {{ skill.skillList }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Languages -->
+      <div v-if="languages.length > 0">
+        <h3 class="text-2xl font-bold mb-6 text-center text-slate-800 dark:text-slate-200">
+          {{ $t('lang_title') }}
+        </h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div
+            v-for="language in languages"
+            :key="language.id"
+            class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 text-center"
+          >
+            <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-1">
+              {{ getTranslation(language, 'name') }}
+            </h4>
+            <p class="text-sm text-slate-700 dark:text-slate-300">
+              {{ getTranslation(language, 'level') }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </section>
 </template>
 

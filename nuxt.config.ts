@@ -24,6 +24,28 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-pdf', // https://sidebase.io/nuxt-pdf/getting-started
   ],
 
+  routeRules: {
+    // Homepage and CV can be edited via admin - use ISR instead of prerender
+    '/': { isr: 3600 }, // Revalidate every hour
+    '/cv': { isr: 3600 }, // Revalidate every hour
+
+    // Blog - content may be updated occasionally
+    '/blog': { isr: 86400 }, // Revalidate daily
+    '/blog/**': { isr: 86400 },
+
+    // Admin routes - require authentication and interactivity
+    '/admin/**': { ssr: true },
+
+    // Auth page - needs login logic
+    '/auth': { ssr: true },
+
+    // Widget routes - assume dynamic/interactive
+    '/widget/**': { ssr: true },
+
+    // Catch-all - fallback to SSR
+    '/[...all]': { ssr: true }
+  },
+
   experimental: {
     payloadExtraction: false,
     renderJsonPayloads: true,

@@ -14,4 +14,5 @@ export default {
     desc: 'Foto blanco y negro de Pancho Blanco',
   },
   current: 'actual',
+  recent_work: 'Trabajo Reciente',
 }

@@ -14,4 +14,5 @@ export default {
     desc: 'Photo of Pancho Blanco with a black and white filter',
   },
   current: 'Current',
+  recent_work: 'Recent Work',
 }
