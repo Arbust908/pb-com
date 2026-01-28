@@ -1,3 +1,7 @@
+/**
+ * @deprecated This posts API is unused with incomplete migration.
+ * All functionality is commented out. Migration from Prisma to Drizzle was not completed.
+ */
 export default defineEventHandler(async () => {
   /* const user = await prisma.user.create({
     data: {

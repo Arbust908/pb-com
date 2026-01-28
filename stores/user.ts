@@ -13,10 +13,29 @@ export const useUserStore = defineStore('user', () => {
 
   const isLoggedIn = ref(false)
 
+  // Simple login for testing - accepts any username/password
+  const login = (username: string, password: string): boolean => {
+    if (username && password) {
+      currentUser.username = username
+      currentUser.email = username // just use username as email for simplicity
+      isLoggedIn.value = true
+      return true
+    }
+    return false
+  }
+
+  const logout = () => {
+    currentUser.username = ''
+    currentUser.email = ''
+    isLoggedIn.value = false
+  }
+
   return {
     currentUser,
     userName,
     userEmail,
     isLoggedIn,
+    login,
+    logout,
   }
 })

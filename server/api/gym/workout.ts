@@ -1,3 +1,7 @@
+/**
+ * @deprecated This gym/workout API is unused and incomplete.
+ * No components or pages reference this endpoint. The implementation is incomplete.
+ */
 export default defineEventHandler(async (event) => {
   try {
     const { email, password } = await readBody(event)
