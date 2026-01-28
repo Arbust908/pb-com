@@ -1,3 +1,7 @@
+/**
+ * @deprecated This currency/dolar API is implemented but unused.
+ * Fetches exchange rates from dolarapi.com but no UI components or pages reference this endpoint.
+ */
 // https://dolarapi.com/v1/dolares
 // https://bluelytics.com.ar/#!/api
 const ExchangeCoins = {

@@ -1,14 +1,5 @@
-import exp from './exp'
-import tongues from './tongues'
-import skills from './skills'
-import study from './study'
-
 export default {
   lang: 'en',
-  exp,
-  tongues,
-  skills,
-  study,
   rol: 'Creative Developer',
   change_lang: 'Cambiar Idioma',
   exp_title: 'Experience',

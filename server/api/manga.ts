@@ -1,3 +1,7 @@
+/**
+ * @deprecated This manga API is implemented but unused.
+ * Fetches data from MangaDex API but no UI components or pages reference this endpoint.
+ */
 export default defineEventHandler(async (event) => {
   const titleWithId = [
     ['Berserk', '801513ba-a712-498c-8f57-cae55b38cc92'],
