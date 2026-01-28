@@ -15,6 +15,7 @@
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
     "db:seed": "tsx server/db/seed.ts",
+    "db:seed-cv": "tsx server/db/seed-cv.ts",
     "db:studio": "drizzle-kit studio"
   },
   "devDependencies": {
@@ -58,7 +59,8 @@
     "@libsql/client": "^0.15.11",
     "@number-flow/vue": "^0.4.8",
     "drizzle-orm": "^0.44.4",
-    "posthog-js": "^1.108.3"
+    "posthog-js": "^1.108.3",
+    "vue-draggable-plus": "^0.6.1"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
