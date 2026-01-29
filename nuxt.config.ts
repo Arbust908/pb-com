@@ -33,6 +33,20 @@ export default defineNuxtConfig({
     '/blog': { isr: 86400 }, // Revalidate daily
     '/blog/**': { isr: 86400 },
 
+    // ✅ OPTIMIZED: API routes with proper caching & security headers
+    '/api/**': {
+      headers: {
+        'cache-control': 'private,max-age=300', // 5 min cache for API responses
+      }
+    },
+
+    // ✅ OPTIMIZED: Static assets caching
+    '/_nuxt/**': {
+      headers: {
+        'cache-control': 'public,max-age=31536000,s-maxage=31536000', // 1 year cache
+      }
+    },
+
     // Admin routes - require authentication and interactivity
     '/admin/**': { ssr: true },
 
@@ -60,11 +74,21 @@ export default defineNuxtConfig({
   ],
 
   nitro: {
+    // ✅ OPTIMIZED: Enable compression and minification for production
+    compressPublicAssets: true,
+    minify: true,
+
     esbuild: {
       options: {
         target: 'esnext',
       },
     },
+
+    // ✅ OPTIMIZED: Better performance for large apps
+    experimental: {
+      wasm: true,
+    },
+
     /* prerender: {
       crawlLinks: false,
       routes: ['/'],
