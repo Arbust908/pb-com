@@ -160,14 +160,14 @@ const tabs = [
       <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
       <select id="tabs" name="tabs" class="block w-full border-gray-300 rounded-md py-2 pl-3 pr-10 text-base focus:border-indigo-500 sm:text-sm focus:outline-none focus:ring-indigo-500">
         <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">
-{{ tab.name }}
-</option>
+          {{ tab.name }}
+        </option>
       </select>
     </div>
     <div class="hidden sm:block">
       <div class="border-b border-gray-200">
         <nav class="flex -mb-px space-x-8" aria-label="Tabs">
-          <a v-for="tab in tabs" :key="tab.name" :href="tab.href" class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium" :class="[tab.current ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700']" :aria-current="tab.current ? 'page' : undefined">{{ tab.name }}</a>
+          <a v-for="tab in tabs" :key="tab.name" :href="tab.href" class="whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium" :class="[tab.current ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700']" :aria-current="tab.current ? 'page' : undefined">{{ tab.name }}</a>
         </nav>
       </div>
     </div>

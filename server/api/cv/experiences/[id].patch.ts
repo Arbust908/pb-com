@@ -1,4 +1,4 @@
-import { eq, and } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import { parse } from 'valibot'
 import { db } from '~/server/db'
 import { cvExperiences, cvTranslations } from '~/server/db/schema'
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const id = getRouterParam(event, 'id')
-    if (!id || isNaN(Number(id))) {
+    if (!id || Number.isNaN(Number(id))) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Invalid experience ID',
@@ -31,11 +31,16 @@ export default defineEventHandler(async (event) => {
     const updateData: Record<string, unknown> = {
       updatedAt: new Date().toISOString(),
     }
-    if (validatedData.slug) updateData.slug = validatedData.slug
-    if (validatedData.company) updateData.company = validatedData.company
-    if (validatedData.startDate) updateData.startDate = validatedData.startDate
-    if (validatedData.endDate !== undefined) updateData.endDate = validatedData.endDate
-    if (validatedData.sortOrder !== undefined) updateData.sortOrder = validatedData.sortOrder
+    if (validatedData.slug)
+      updateData.slug = validatedData.slug
+    if (validatedData.company)
+      updateData.company = validatedData.company
+    if (validatedData.startDate)
+      updateData.startDate = validatedData.startDate
+    if (validatedData.endDate !== undefined)
+      updateData.endDate = validatedData.endDate
+    if (validatedData.sortOrder !== undefined)
+      updateData.sortOrder = validatedData.sortOrder
 
     // Get existing experience to get its slug
     const [existing] = await db
@@ -62,9 +67,11 @@ export default defineEventHandler(async (event) => {
       const entitySlug = validatedData.slug || existing.slug
 
       for (const [locale, fields] of Object.entries(validatedData.translations)) {
-        if (!fields) continue
+        if (!fields)
+          continue
         for (const [field, value] of Object.entries(fields)) {
-          if (value === undefined) continue
+          if (value === undefined)
+            continue
 
           // Check if translation exists
           const [existingTrans] = await db
@@ -75,8 +82,8 @@ export default defineEventHandler(async (event) => {
                 eq(cvTranslations.entityType, 'experience'),
                 eq(cvTranslations.entitySlug, entitySlug),
                 eq(cvTranslations.locale, locale),
-                eq(cvTranslations.field, field)
-              )
+                eq(cvTranslations.field, field),
+              ),
             )
 
           if (existingTrans) {
@@ -84,7 +91,8 @@ export default defineEventHandler(async (event) => {
               .update(cvTranslations)
               .set({ value, updatedAt: new Date().toISOString() })
               .where(eq(cvTranslations.id, existingTrans.id))
-          } else if (value) {
+          }
+          else if (value) {
             await db.insert(cvTranslations).values({
               entityType: 'experience',
               entitySlug,
@@ -104,8 +112,8 @@ export default defineEventHandler(async (event) => {
       .where(
         and(
           eq(cvTranslations.entityType, 'experience'),
-          eq(cvTranslations.entitySlug, updatedExperience.slug)
-        )
+          eq(cvTranslations.entitySlug, updatedExperience.slug),
+        ),
       )
 
     const translationsByLocale: Record<string, Record<string, string>> = {}
@@ -123,7 +131,8 @@ export default defineEventHandler(async (event) => {
         translations: translationsByLocale,
       },
     }
-  } catch (error: unknown) {
+  }
+  catch (error: unknown) {
     if (error && typeof error === 'object' && 'issues' in error) {
       throw createError({
         statusCode: 400,

@@ -25,7 +25,7 @@ export interface CreateSkillData {
 
 export interface UpdateSkillData extends Partial<CreateSkillData> {}
 
-export const useCvSkills = () => {
+export function useCvSkills() {
   const skills = useState<CvSkill[]>('cv-skills', () => [])
   const loading = useState<boolean>('cv-skills-loading', () => false)
   const error = useState<string | null>('cv-skills-error', () => null)
@@ -38,12 +38,14 @@ export const useCvSkills = () => {
       const response = await $fetch<ApiResponse<CvSkill[]>>(`/api/cv/skills${query}`)
       skills.value = response.data || []
       return skills.value
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to fetch skills'
       console.error('Error fetching skills:', err)
       return []
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -58,12 +60,14 @@ export const useCvSkills = () => {
       })
       await fetch()
       return response.data
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to create skill'
       console.error('Error creating skill:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -78,12 +82,14 @@ export const useCvSkills = () => {
       })
       await fetch()
       return response.data
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to update skill'
       console.error('Error updating skill:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -97,12 +103,14 @@ export const useCvSkills = () => {
       })
       await fetch()
       return true
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to delete skill'
       console.error('Error deleting skill:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -117,12 +125,14 @@ export const useCvSkills = () => {
       })
       await fetch()
       return true
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to reorder skills'
       console.error('Error reordering skills:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }

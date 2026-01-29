@@ -30,11 +30,13 @@ export const useUserStore = defineStore('user', () => {
         currentUser.email = username
         isLoggedIn.value = true
         return true
-      } else {
+      }
+      else {
         console.error('Login failed:', data.error)
         return false
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Login error:', error)
       return false
     }

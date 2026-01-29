@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm'
 import { db } from '~/server/db'
-import { cvExperiences, cvStudies, cvSkills, cvLanguages } from '~/server/db/schema'
+import { cvExperiences, cvLanguages, cvSkills, cvStudies } from '~/server/db/schema'
 import { serverSupabaseUser } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const body = await readBody(event)
-    const { entityType, orderedIds } = body as { entityType: string; orderedIds: number[] }
+    const { entityType, orderedIds } = body as { entityType: string, orderedIds: number[] }
 
     if (!entityType || !['experience', 'study', 'skill', 'language'].includes(entityType)) {
       throw createError({
@@ -46,7 +46,7 @@ export default defineEventHandler(async (event) => {
       db
         .update(table)
         .set({ sortOrder: index, updatedAt: new Date().toISOString() })
-        .where(eq(table.id, id))
+        .where(eq(table.id, id)),
     )
 
     await Promise.all(updates)
@@ -55,7 +55,8 @@ export default defineEventHandler(async (event) => {
       success: true,
       message: `Reordered ${orderedIds.length} ${entityType}s`,
     }
-  } catch (error: unknown) {
+  }
+  catch (error: unknown) {
     if (error && typeof error === 'object' && 'statusCode' in error) {
       throw error
     }

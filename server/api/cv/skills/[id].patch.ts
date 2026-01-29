@@ -1,4 +1,4 @@
-import { eq, and } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import { parse } from 'valibot'
 import { db } from '~/server/db'
 import { cvSkills, cvTranslations } from '~/server/db/schema'
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const id = getRouterParam(event, 'id')
-    if (!id || isNaN(Number(id))) {
+    if (!id || Number.isNaN(Number(id))) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Invalid skill ID',
@@ -31,9 +31,12 @@ export default defineEventHandler(async (event) => {
     const updateData: Record<string, unknown> = {
       updatedAt: new Date().toISOString(),
     }
-    if (validatedData.slug) updateData.slug = validatedData.slug
-    if (validatedData.skillList) updateData.skillList = validatedData.skillList
-    if (validatedData.sortOrder !== undefined) updateData.sortOrder = validatedData.sortOrder
+    if (validatedData.slug)
+      updateData.slug = validatedData.slug
+    if (validatedData.skillList)
+      updateData.skillList = validatedData.skillList
+    if (validatedData.sortOrder !== undefined)
+      updateData.sortOrder = validatedData.sortOrder
 
     // Get existing skill
     const [existing] = await db
@@ -60,9 +63,11 @@ export default defineEventHandler(async (event) => {
       const entitySlug = validatedData.slug || existing.slug
 
       for (const [locale, fields] of Object.entries(validatedData.translations)) {
-        if (!fields) continue
+        if (!fields)
+          continue
         for (const [field, value] of Object.entries(fields)) {
-          if (value === undefined) continue
+          if (value === undefined)
+            continue
 
           const [existingTrans] = await db
             .select()
@@ -72,8 +77,8 @@ export default defineEventHandler(async (event) => {
                 eq(cvTranslations.entityType, 'skill'),
                 eq(cvTranslations.entitySlug, entitySlug),
                 eq(cvTranslations.locale, locale),
-                eq(cvTranslations.field, field)
-              )
+                eq(cvTranslations.field, field),
+              ),
             )
 
           if (existingTrans) {
@@ -81,7 +86,8 @@ export default defineEventHandler(async (event) => {
               .update(cvTranslations)
               .set({ value, updatedAt: new Date().toISOString() })
               .where(eq(cvTranslations.id, existingTrans.id))
-          } else if (value) {
+          }
+          else if (value) {
             await db.insert(cvTranslations).values({
               entityType: 'skill',
               entitySlug,
@@ -101,8 +107,8 @@ export default defineEventHandler(async (event) => {
       .where(
         and(
           eq(cvTranslations.entityType, 'skill'),
-          eq(cvTranslations.entitySlug, updatedSkill.slug)
-        )
+          eq(cvTranslations.entitySlug, updatedSkill.slug),
+        ),
       )
 
     const translationsByLocale: Record<string, Record<string, string>> = {}
@@ -120,7 +126,8 @@ export default defineEventHandler(async (event) => {
         translations: translationsByLocale,
       },
     }
-  } catch (error: unknown) {
+  }
+  catch (error: unknown) {
     if (error && typeof error === 'object' && 'issues' in error) {
       throw createError({
         statusCode: 400,

@@ -148,6 +148,76 @@ const selectedMailingLists = ref(mailingLists[0])
   }
   ```
 -->
+<script setup>
+  import { ref } from 'vue'
+  import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
+
+  const memoryOptions = [
+    { name: '4 GB', inStock: true },
+    { name: '8 GB', inStock: true },
+    { name: '16 GB', inStock: true },
+    { name: '32 GB', inStock: true },
+    { name: '64 GB', inStock: true },
+    { name: '128 GB', inStock: false },
+  ]
+
+  const mem = ref(memoryOptions[2])
+  </script>
+
+<script setup>
+import { ref } from 'vue'
+import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
+
+const plans = [
+  { name: 'Hobby', ram: '8GB', cpus: '4 CPUs', disk: '160 GB SSD disk', price: '$40' },
+  { name: 'Startup', ram: '12GB', cpus: '6 CPUs', disk: '256 GB SSD disk', price: '$80' },
+  { name: 'Business', ram: '16GB', cpus: '8 CPUs', disk: '512 GB SSD disk', price: '$160' },
+  { name: 'Enterprise', ram: '32GB', cpus: '12 CPUs', disk: '1024 GB SSD disk', price: '$240' },
+]
+
+const selected = ref(plans[0])
+</script>
+
+  <!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<script setup>
+  import { ref } from 'vue'
+  import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
+
+  const plans = [
+    { name: 'Startup', priceMonthly: 29, priceYearly: 290, limit: 'Up to 5 active job postings' },
+    { name: 'Business', priceMonthly: 99, priceYearly: 990, limit: 'Up to 25 active job postings' },
+    { name: 'Enterprise', priceMonthly: 249, priceYearly: 2490, limit: 'Unlimited active job postings' },
+  ]
+
+  const selected = ref(plans[0])
+  </script>
+
+<script setup>
+import { ref } from 'vue'
+import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
+
+const settings = [
+  { name: 'Public access', description: 'This project would be available to anyone who has the link' },
+  { name: 'Private to Project Members', description: 'Only members of this project would be able to access' },
+  { name: 'Private to you', description: 'You are the only one able to access this project' },
+]
+
+const selected = ref(settings[0])
+</script>
+
 <template>
   <div>
     <label class="text-base text-gray-900 font-semibold">Notifications</label>
@@ -184,21 +254,7 @@ const selectedMailingLists = ref(mailingLists[0])
   </div>
 </template>
 
-  <!--
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
-<template>
+  <template>
     <fieldset>
       <legend class="sr-only">Plan</legend>
       <div class="space-y-5">
@@ -306,6 +362,20 @@ const selectedMailingLists = ref(mailingLists[0])
   </RadioGroup>
 </template>
 
+<!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
 <template>
     <div>
       <div class="flex items-center justify-between">
@@ -325,22 +395,6 @@ const selectedMailingLists = ref(mailingLists[0])
       </RadioGroup>
     </div>
   </template>
-
-  <script setup>
-  import { ref } from 'vue'
-  import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-
-  const memoryOptions = [
-    { name: '4 GB', inStock: true },
-    { name: '8 GB', inStock: true },
-    { name: '16 GB', inStock: true },
-    { name: '32 GB', inStock: true },
-    { name: '64 GB', inStock: true },
-    { name: '128 GB', inStock: false },
-  ]
-
-  const mem = ref(memoryOptions[2])
-  </script>
 
   <template>
   <RadioGroup v-model="selected">
@@ -371,21 +425,7 @@ const selectedMailingLists = ref(mailingLists[0])
   </RadioGroup>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-
-const plans = [
-  { name: 'Hobby', ram: '8GB', cpus: '4 CPUs', disk: '160 GB SSD disk', price: '$40' },
-  { name: 'Startup', ram: '12GB', cpus: '6 CPUs', disk: '256 GB SSD disk', price: '$80' },
-  { name: 'Business', ram: '16GB', cpus: '8 CPUs', disk: '512 GB SSD disk', price: '$160' },
-  { name: 'Enterprise', ram: '32GB', cpus: '12 CPUs', disk: '1024 GB SSD disk', price: '$240' },
-]
-
-const selected = ref(plans[0])
-</script>
-
-<!--
+  <!--
   This example requires some changes to your config:
 
   ```
@@ -423,33 +463,6 @@ const selected = ref(plans[0])
     </RadioGroup>
   </template>
 
-  <script setup>
-  import { ref } from 'vue'
-  import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-
-  const plans = [
-    { name: 'Startup', priceMonthly: 29, priceYearly: 290, limit: 'Up to 5 active job postings' },
-    { name: 'Business', priceMonthly: 99, priceYearly: 990, limit: 'Up to 25 active job postings' },
-    { name: 'Enterprise', priceMonthly: 249, priceYearly: 2490, limit: 'Unlimited active job postings' },
-  ]
-
-  const selected = ref(plans[0])
-  </script>
-
-  <!--
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
   <RadioGroup v-model="selected">
     <RadioGroupLabel class="sr-only">Privacy setting</RadioGroupLabel>
@@ -468,16 +481,3 @@ const selected = ref(plans[0])
     </div>
   </RadioGroup>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-
-const settings = [
-  { name: 'Public access', description: 'This project would be available to anyone who has the link' },
-  { name: 'Private to Project Members', description: 'Only members of this project would be able to access' },
-  { name: 'Private to you', description: 'You are the only one able to access this project' },
-]
-
-const selected = ref(settings[0])
-</script>

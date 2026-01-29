@@ -2,7 +2,6 @@
 import posthog from 'posthog-js'
 import { appName } from '@/constants'
 
-const { locale } = useI18n()
 const isDark = useDark()
 const isDev = import.meta.dev
 
@@ -21,8 +20,8 @@ useHead({
     {
       rel: 'icon',
       href: isDev ? '/pb-favicon-local.png' : isDark.value ? '/pb-favicon-dark.png' : '/pb-favicon-light.png',
-    }
-  ]
+    },
+  ],
 })
 </script>
 
@@ -31,7 +30,7 @@ useHead({
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
-  <section class="modal__layer z-50"></section>
+  <section class="modal__layer z-50" />
 </template>
 
 <style>

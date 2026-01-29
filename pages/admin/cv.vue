@@ -214,13 +214,15 @@ async function handleExperienceSubmit() {
     if (editingItem.value) {
       await experienceStore.update((editingItem.value as CvExperience).id, data)
       successMessage.value = 'Experience updated!'
-    } else {
+    }
+    else {
       await experienceStore.create(data)
       successMessage.value = 'Experience created!'
     }
     resetForms()
     setTimeout(() => (successMessage.value = ''), 3000)
-  } catch (err: unknown) {
+  }
+  catch (err: unknown) {
     const e = err as { data?: { statusMessage?: string } }
     errorMessage.value = e.data?.statusMessage || 'An error occurred'
     setTimeout(() => (errorMessage.value = ''), 5000)
@@ -234,13 +236,15 @@ async function handleStudySubmit() {
     if (editingItem.value) {
       await studyStore.update((editingItem.value as CvStudy).id, studyForm.value)
       successMessage.value = 'Study updated!'
-    } else {
+    }
+    else {
       await studyStore.create(studyForm.value)
       successMessage.value = 'Study created!'
     }
     resetForms()
     setTimeout(() => (successMessage.value = ''), 3000)
-  } catch (err: unknown) {
+  }
+  catch (err: unknown) {
     const e = err as { data?: { statusMessage?: string } }
     errorMessage.value = e.data?.statusMessage || 'An error occurred'
     setTimeout(() => (errorMessage.value = ''), 5000)
@@ -254,13 +258,15 @@ async function handleSkillSubmit() {
     if (editingItem.value) {
       await skillStore.update((editingItem.value as CvSkill).id, skillForm.value)
       successMessage.value = 'Skill updated!'
-    } else {
+    }
+    else {
       await skillStore.create(skillForm.value)
       successMessage.value = 'Skill created!'
     }
     resetForms()
     setTimeout(() => (successMessage.value = ''), 3000)
-  } catch (err: unknown) {
+  }
+  catch (err: unknown) {
     const e = err as { data?: { statusMessage?: string } }
     errorMessage.value = e.data?.statusMessage || 'An error occurred'
     setTimeout(() => (errorMessage.value = ''), 5000)
@@ -274,13 +280,15 @@ async function handleLanguageSubmit() {
     if (editingItem.value) {
       await languageStore.update((editingItem.value as CvLanguage).id, languageForm.value)
       successMessage.value = 'Language updated!'
-    } else {
+    }
+    else {
       await languageStore.create(languageForm.value)
       successMessage.value = 'Language created!'
     }
     resetForms()
     setTimeout(() => (successMessage.value = ''), 3000)
-  } catch (err: unknown) {
+  }
+  catch (err: unknown) {
     const e = err as { data?: { statusMessage?: string } }
     errorMessage.value = e.data?.statusMessage || 'An error occurred'
     setTimeout(() => (errorMessage.value = ''), 5000)
@@ -289,12 +297,12 @@ async function handleLanguageSubmit() {
 
 // Delete handlers
 async function handleDeleteExperience(item: CvExperience) {
-  if (!confirm(`Delete experience at ${item.company}?`)) return
   try {
     await experienceStore.remove(item.id)
     successMessage.value = 'Experience deleted!'
     setTimeout(() => (successMessage.value = ''), 3000)
-  } catch (err: unknown) {
+  }
+  catch (err: unknown) {
     const e = err as { data?: { statusMessage?: string } }
     errorMessage.value = e.data?.statusMessage || 'Failed to delete'
     setTimeout(() => (errorMessage.value = ''), 5000)
@@ -302,12 +310,12 @@ async function handleDeleteExperience(item: CvExperience) {
 }
 
 async function handleDeleteStudy(item: CvStudy) {
-  if (!confirm(`Delete study ${item.slug}?`)) return
   try {
     await studyStore.remove(item.id)
     successMessage.value = 'Study deleted!'
     setTimeout(() => (successMessage.value = ''), 3000)
-  } catch (err: unknown) {
+  }
+  catch (err: unknown) {
     const e = err as { data?: { statusMessage?: string } }
     errorMessage.value = e.data?.statusMessage || 'Failed to delete'
     setTimeout(() => (errorMessage.value = ''), 5000)
@@ -315,12 +323,12 @@ async function handleDeleteStudy(item: CvStudy) {
 }
 
 async function handleDeleteSkill(item: CvSkill) {
-  if (!confirm(`Delete skill ${item.slug}?`)) return
   try {
     await skillStore.remove(item.id)
     successMessage.value = 'Skill deleted!'
     setTimeout(() => (successMessage.value = ''), 3000)
-  } catch (err: unknown) {
+  }
+  catch (err: unknown) {
     const e = err as { data?: { statusMessage?: string } }
     errorMessage.value = e.data?.statusMessage || 'Failed to delete'
     setTimeout(() => (errorMessage.value = ''), 5000)
@@ -328,12 +336,12 @@ async function handleDeleteSkill(item: CvSkill) {
 }
 
 async function handleDeleteLanguage(item: CvLanguage) {
-  if (!confirm(`Delete language ${item.slug}?`)) return
   try {
     await languageStore.remove(item.id)
     successMessage.value = 'Language deleted!'
     setTimeout(() => (successMessage.value = ''), 3000)
-  } catch (err: unknown) {
+  }
+  catch (err: unknown) {
     const e = err as { data?: { statusMessage?: string } }
     errorMessage.value = e.data?.statusMessage || 'Failed to delete'
     setTimeout(() => (errorMessage.value = ''), 5000)
@@ -344,7 +352,8 @@ async function handleDeleteLanguage(item: CvLanguage) {
 async function handleReorderExperiences(ids: number[]) {
   try {
     await experienceStore.reorder(ids)
-  } catch {
+  }
+  catch {
     errorMessage.value = 'Failed to reorder'
     setTimeout(() => (errorMessage.value = ''), 3000)
   }
@@ -353,7 +362,8 @@ async function handleReorderExperiences(ids: number[]) {
 async function handleReorderStudies(ids: number[]) {
   try {
     await studyStore.reorder(ids)
-  } catch {
+  }
+  catch {
     errorMessage.value = 'Failed to reorder'
     setTimeout(() => (errorMessage.value = ''), 3000)
   }
@@ -362,7 +372,8 @@ async function handleReorderStudies(ids: number[]) {
 async function handleReorderSkills(ids: number[]) {
   try {
     await skillStore.reorder(ids)
-  } catch {
+  }
+  catch {
     errorMessage.value = 'Failed to reorder'
     setTimeout(() => (errorMessage.value = ''), 3000)
   }
@@ -371,7 +382,8 @@ async function handleReorderSkills(ids: number[]) {
 async function handleReorderLanguages(ids: number[]) {
   try {
     await languageStore.reorder(ids)
-  } catch {
+  }
+  catch {
     errorMessage.value = 'Failed to reorder'
     setTimeout(() => (errorMessage.value = ''), 3000)
   }
@@ -379,11 +391,9 @@ async function handleReorderLanguages(ids: number[]) {
 
 // Logout handler
 function handleLogout() {
-  if (confirm('Are you sure you want to log out?')) {
-    const userStore = useUserStore()
-    userStore.logout()
-    navigateTo('/auth')
-  }
+  const userStore = useUserStore()
+  userStore.logout()
+  navigateTo('/auth')
 }
 
 // Watch for tab changes to close form
@@ -393,17 +403,21 @@ watch(activeTab, () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-800 py-8">
-    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="min-h-screen bg-gray-50 py-8 dark:bg-gray-800">
+    <div class="mx-auto max-w-[1200px] px-4 lg:px-8 sm:px-6">
       <!-- Header -->
-      <div class="mb-8 flex justify-between items-center">
+      <div class="mb-8 flex items-center justify-between">
         <div>
-          <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">CV Management</h1>
-          <p class="mt-2 text-gray-600 dark:text-gray-400">Manage your CV content with bilingual support</p>
+          <h1 class="text-3xl text-gray-900 font-bold dark:text-gray-100">
+            CV Management
+          </h1>
+          <p class="mt-2 text-gray-600 dark:text-gray-400">
+            Manage your CV content with bilingual support
+          </p>
         </div>
         <button
+          class="inline-flex items-center border border-gray-300 rounded-md bg-white px-4 py-2 text-sm text-gray-700 font-medium shadow-sm dark:border-gray-600 dark:bg-gray-800 hover:bg-gray-50 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:hover:bg-gray-700"
           @click="handleLogout"
-          class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
         >
           <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v.1" />
@@ -415,25 +429,25 @@ watch(activeTab, () => {
       <!-- Messages -->
       <div
         v-if="successMessage"
-        class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 dark:bg-green-900 dark:border-green-800 dark:text-green-300 rounded"
+        class="mb-4 border border-green-400 rounded bg-green-100 p-4 text-green-700 dark:border-green-800 dark:bg-green-900 dark:text-green-300"
       >
         {{ successMessage }}
       </div>
       <div
         v-if="errorMessage"
-        class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 dark:bg-red-900 dark:border-red-800 dark:text-red-300 rounded"
+        class="mb-4 border border-red-400 rounded bg-red-100 p-4 text-red-700 dark:border-red-800 dark:bg-red-900 dark:text-red-300"
       >
         {{ errorMessage }}
       </div>
 
       <!-- Tabs -->
       <div class="mb-6 border-b border-gray-200 dark:border-gray-700">
-        <nav class="-mb-px flex space-x-8">
+        <nav class="flex -mb-px space-x-8">
           <button
             v-for="tab in tabs"
             :key="tab.key"
             type="button"
-            class="py-4 px-1 border-b-2 font-medium text-sm transition-colors"
+            class="border-b-2 px-1 py-4 text-sm font-medium transition-colors"
             :class="
               activeTab === tab.key
                 ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400'
@@ -449,48 +463,48 @@ watch(activeTab, () => {
       <!-- EXPERIENCES TAB -->
       <template v-if="activeTab === 'experiences'">
         <!-- Form -->
-        <div v-if="showForm" class="mb-8 bg-white dark:bg-gray-900 shadow rounded-lg p-6">
-          <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+        <div v-if="showForm" class="mb-8 rounded-lg bg-white p-6 shadow dark:bg-gray-900">
+          <h2 class="mb-4 text-xl text-gray-900 font-semibold dark:text-gray-100">
             {{ editingItem ? 'Edit Experience' : 'Add New Experience' }}
           </h2>
           <form class="space-y-4" @submit.prevent="handleExperienceSubmit">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Slug *</label>
+                <label class="block text-sm text-gray-700 font-medium dark:text-gray-300">Slug *</label>
                 <input
                   v-model="experienceForm.slug"
                   type="text"
                   required
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border dark:bg-gray-800 dark:border-gray-600"
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm dark:border-gray-600 focus:border-indigo-500 dark:bg-gray-800 sm:text-sm focus:ring-indigo-500"
                   placeholder="e.g. demandio"
-                />
+                >
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Company *</label>
+                <label class="block text-sm text-gray-700 font-medium dark:text-gray-300">Company *</label>
                 <input
                   v-model="experienceForm.company"
                   type="text"
                   required
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border dark:bg-gray-800 dark:border-gray-600"
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm dark:border-gray-600 focus:border-indigo-500 dark:bg-gray-800 sm:text-sm focus:ring-indigo-500"
                   placeholder="e.g. Demand.io"
-                />
+                >
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Start Date *</label>
+                <label class="block text-sm text-gray-700 font-medium dark:text-gray-300">Start Date *</label>
                 <input
                   v-model="experienceForm.startDate"
                   type="date"
                   required
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border dark:bg-gray-800 dark:border-gray-600"
-                />
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm dark:border-gray-600 focus:border-indigo-500 dark:bg-gray-800 sm:text-sm focus:ring-indigo-500"
+                >
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">End Date</label>
+                <label class="block text-sm text-gray-700 font-medium dark:text-gray-300">End Date</label>
                 <input
                   v-model="experienceForm.endDate"
                   type="date"
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border dark:bg-gray-800 dark:border-gray-600"
-                />
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm dark:border-gray-600 focus:border-indigo-500 dark:bg-gray-800 sm:text-sm focus:ring-indigo-500"
+                >
               </div>
             </div>
 
@@ -500,13 +514,13 @@ watch(activeTab, () => {
               <button
                 type="submit"
                 :disabled="experienceStore.loading.value"
-                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
+                class="inline-flex justify-center border border-transparent rounded-md bg-indigo-600 px-4 py-2 text-sm text-white font-medium shadow-sm hover:bg-indigo-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 {{ experienceStore.loading.value ? 'Saving...' : editingItem ? 'Update' : 'Create' }}
               </button>
               <button
                 type="button"
-                class="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
+                class="inline-flex justify-center border border-gray-300 rounded-md bg-white px-4 py-2 text-sm text-gray-700 font-medium shadow-sm dark:border-gray-600 dark:bg-gray-800 hover:bg-gray-50 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 @click="resetForms"
               >
                 Cancel
@@ -518,10 +532,10 @@ watch(activeTab, () => {
         <!-- Add Button -->
         <div v-if="!showForm" class="mb-6">
           <button
-            class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            class="inline-flex items-center border border-transparent rounded-md bg-indigo-600 px-4 py-2 text-sm text-white font-medium shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             @click="openCreateForm"
           >
-            <svg class="mr-2 -ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <svg class="mr-2 h-5 w-5 -ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path
                 fill-rule="evenodd"
                 d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
@@ -546,30 +560,30 @@ watch(activeTab, () => {
 
       <!-- STUDIES TAB -->
       <template v-if="activeTab === 'studies'">
-        <div v-if="showForm" class="mb-8 bg-white dark:bg-gray-900 shadow rounded-lg p-6">
-          <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+        <div v-if="showForm" class="mb-8 rounded-lg bg-white p-6 shadow dark:bg-gray-900">
+          <h2 class="mb-4 text-xl text-gray-900 font-semibold dark:text-gray-100">
             {{ editingItem ? 'Edit Study' : 'Add New Study' }}
           </h2>
           <form class="space-y-4" @submit.prevent="handleStudySubmit">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Slug *</label>
+                <label class="block text-sm text-gray-700 font-medium dark:text-gray-300">Slug *</label>
                 <input
                   v-model="studyForm.slug"
                   type="text"
                   required
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border dark:bg-gray-800 dark:border-gray-600"
-                />
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm dark:border-gray-600 focus:border-indigo-500 dark:bg-gray-800 sm:text-sm focus:ring-indigo-500"
+                >
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Date Range *</label>
+                <label class="block text-sm text-gray-700 font-medium dark:text-gray-300">Date Range *</label>
                 <input
                   v-model="studyForm.dateRange"
                   type="text"
                   required
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border dark:bg-gray-800 dark:border-gray-600"
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm dark:border-gray-600 focus:border-indigo-500 dark:bg-gray-800 sm:text-sm focus:ring-indigo-500"
                   placeholder="e.g. 2009 - 2013"
-                />
+                >
               </div>
             </div>
 
@@ -579,13 +593,13 @@ watch(activeTab, () => {
               <button
                 type="submit"
                 :disabled="studyStore.loading.value"
-                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 disabled:opacity-50"
+                class="inline-flex justify-center border border-transparent rounded-md bg-indigo-600 px-4 py-2 text-sm text-white font-medium shadow-sm hover:bg-indigo-700 disabled:opacity-50"
               >
                 {{ studyStore.loading.value ? 'Saving...' : editingItem ? 'Update' : 'Create' }}
               </button>
               <button
                 type="button"
-                class="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
+                class="inline-flex justify-center border border-gray-300 rounded-md bg-white px-4 py-2 text-sm text-gray-700 font-medium shadow-sm dark:border-gray-600 dark:bg-gray-800 hover:bg-gray-50 dark:text-gray-300"
                 @click="resetForms"
               >
                 Cancel
@@ -596,10 +610,10 @@ watch(activeTab, () => {
 
         <div v-if="!showForm" class="mb-6">
           <button
-            class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
+            class="inline-flex items-center border border-transparent rounded-md bg-indigo-600 px-4 py-2 text-sm text-white font-medium shadow-sm hover:bg-indigo-700"
             @click="openCreateForm"
           >
-            <svg class="mr-2 -ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <svg class="mr-2 h-5 w-5 -ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
             </svg>
             Add Study
@@ -619,30 +633,30 @@ watch(activeTab, () => {
 
       <!-- SKILLS TAB -->
       <template v-if="activeTab === 'skills'">
-        <div v-if="showForm" class="mb-8 bg-white dark:bg-gray-900 shadow rounded-lg p-6">
-          <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+        <div v-if="showForm" class="mb-8 rounded-lg bg-white p-6 shadow dark:bg-gray-900">
+          <h2 class="mb-4 text-xl text-gray-900 font-semibold dark:text-gray-100">
             {{ editingItem ? 'Edit Skill' : 'Add New Skill' }}
           </h2>
           <form class="space-y-4" @submit.prevent="handleSkillSubmit">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Slug *</label>
+                <label class="block text-sm text-gray-700 font-medium dark:text-gray-300">Slug *</label>
                 <input
                   v-model="skillForm.slug"
                   type="text"
                   required
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border dark:bg-gray-800 dark:border-gray-600"
-                />
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm dark:border-gray-600 focus:border-indigo-500 dark:bg-gray-800 sm:text-sm focus:ring-indigo-500"
+                >
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Skill List *</label>
+                <label class="block text-sm text-gray-700 font-medium dark:text-gray-300">Skill List *</label>
                 <input
                   v-model="skillForm.skillList"
                   type="text"
                   required
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border dark:bg-gray-800 dark:border-gray-600"
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm dark:border-gray-600 focus:border-indigo-500 dark:bg-gray-800 sm:text-sm focus:ring-indigo-500"
                   placeholder="Comma-separated skills"
-                />
+                >
               </div>
             </div>
 
@@ -652,13 +666,13 @@ watch(activeTab, () => {
               <button
                 type="submit"
                 :disabled="skillStore.loading.value"
-                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 disabled:opacity-50"
+                class="inline-flex justify-center border border-transparent rounded-md bg-indigo-600 px-4 py-2 text-sm text-white font-medium shadow-sm hover:bg-indigo-700 disabled:opacity-50"
               >
                 {{ skillStore.loading.value ? 'Saving...' : editingItem ? 'Update' : 'Create' }}
               </button>
               <button
                 type="button"
-                class="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
+                class="inline-flex justify-center border border-gray-300 rounded-md bg-white px-4 py-2 text-sm text-gray-700 font-medium shadow-sm dark:border-gray-600 dark:bg-gray-800 hover:bg-gray-50 dark:text-gray-300"
                 @click="resetForms"
               >
                 Cancel
@@ -669,10 +683,10 @@ watch(activeTab, () => {
 
         <div v-if="!showForm" class="mb-6">
           <button
-            class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
+            class="inline-flex items-center border border-transparent rounded-md bg-indigo-600 px-4 py-2 text-sm text-white font-medium shadow-sm hover:bg-indigo-700"
             @click="openCreateForm"
           >
-            <svg class="mr-2 -ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <svg class="mr-2 h-5 w-5 -ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
             </svg>
             Add Skill
@@ -692,20 +706,20 @@ watch(activeTab, () => {
 
       <!-- LANGUAGES TAB -->
       <template v-if="activeTab === 'languages'">
-        <div v-if="showForm" class="mb-8 bg-white dark:bg-gray-900 shadow rounded-lg p-6">
-          <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+        <div v-if="showForm" class="mb-8 rounded-lg bg-white p-6 shadow dark:bg-gray-900">
+          <h2 class="mb-4 text-xl text-gray-900 font-semibold dark:text-gray-100">
             {{ editingItem ? 'Edit Language' : 'Add New Language' }}
           </h2>
           <form class="space-y-4" @submit.prevent="handleLanguageSubmit">
             <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Slug *</label>
+              <label class="block text-sm text-gray-700 font-medium dark:text-gray-300">Slug *</label>
               <input
                 v-model="languageForm.slug"
                 type="text"
                 required
-                class="mt-1 block w-full max-w-xs rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border dark:bg-gray-800 dark:border-gray-600"
+                class="mt-1 block max-w-xs w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm dark:border-gray-600 focus:border-indigo-500 dark:bg-gray-800 sm:text-sm focus:ring-indigo-500"
                 placeholder="e.g. en, es"
-              />
+              >
             </div>
 
             <AdminCvTranslationFields v-model="languageForm.translations" :fields="languageFields" />
@@ -714,13 +728,13 @@ watch(activeTab, () => {
               <button
                 type="submit"
                 :disabled="languageStore.loading.value"
-                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 disabled:opacity-50"
+                class="inline-flex justify-center border border-transparent rounded-md bg-indigo-600 px-4 py-2 text-sm text-white font-medium shadow-sm hover:bg-indigo-700 disabled:opacity-50"
               >
                 {{ languageStore.loading.value ? 'Saving...' : editingItem ? 'Update' : 'Create' }}
               </button>
               <button
                 type="button"
-                class="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
+                class="inline-flex justify-center border border-gray-300 rounded-md bg-white px-4 py-2 text-sm text-gray-700 font-medium shadow-sm dark:border-gray-600 dark:bg-gray-800 hover:bg-gray-50 dark:text-gray-300"
                 @click="resetForms"
               >
                 Cancel
@@ -731,10 +745,10 @@ watch(activeTab, () => {
 
         <div v-if="!showForm" class="mb-6">
           <button
-            class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
+            class="inline-flex items-center border border-transparent rounded-md bg-indigo-600 px-4 py-2 text-sm text-white font-medium shadow-sm hover:bg-indigo-700"
             @click="openCreateForm"
           >
-            <svg class="mr-2 -ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <svg class="mr-2 h-5 w-5 -ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
             </svg>
             Add Language
@@ -753,7 +767,7 @@ watch(activeTab, () => {
 
       <!-- Footer -->
       <div class="mt-8 text-center">
-        <NuxtLink to="/cv" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 font-medium">
+        <NuxtLink to="/cv" class="text-indigo-600 font-medium dark:text-indigo-400 hover:text-indigo-900">
           View CV Page
         </NuxtLink>
       </div>

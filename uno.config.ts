@@ -81,7 +81,8 @@ export default defineConfig({
     ['text-balance', { 'text-wrap': 'balance;' }],
     ['text-pretty', { 'text-wrap': 'pretty;' }],
     ['text-stable', { 'text-wrap': 'stable;' }],
-    ['grid-cols-subgrid',	{ 'grid-template-columns': 'subgrid;' }],
+    ['grid-cols-subgrid', { 'grid-template-columns': 'subgrid;' }],
+    // eslint-disable-next-line unused-imports/no-unused-vars
     [/^bg-checked$/, ([,], { rawSelector, currentSelector, variantHandlers, theme }) => {
       const selector = `.${currentSelector}`
       const mainColor = theme.colors.slate[200]

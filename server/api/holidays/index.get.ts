@@ -1,9 +1,9 @@
 import { defineEventHandler } from 'h3'
+import { asc } from 'drizzle-orm'
 import { db } from '~/server/db'
 import { holidays } from '~/server/db/schema'
-import { asc } from 'drizzle-orm'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   try {
     // Fetch all holidays ordered by date
     const allHolidays = await db
@@ -15,7 +15,8 @@ export default defineEventHandler(async (event) => {
       success: true,
       data: allHolidays,
     }
-  } catch (error: any) {
+  }
+  catch (error: any) {
     throw createError({
       statusCode: 500,
       statusMessage: error.message || 'Failed to fetch holidays',

@@ -27,7 +27,7 @@ watch(
   (newItems) => {
     localItems.value = [...newItems]
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 function getLabel(item: Item): string {
@@ -35,18 +35,19 @@ function getLabel(item: Item): string {
 }
 
 function getSublabel(item: Item): string {
-  if (!props.sublabelKey) return ''
+  if (!props.sublabelKey)
+    return ''
   return String(item[props.sublabelKey] || '')
 }
 
 function handleDragEnd() {
-  const orderedIds = localItems.value.map((item) => item.id)
+  const orderedIds = localItems.value.map(item => item.id)
   emit('reorder', orderedIds)
 }
 </script>
 
 <template>
-  <div class="bg-white dark:bg-gray-900 shadow overflow-hidden sm:rounded-md">
+  <div class="overflow-hidden bg-white shadow sm:rounded-md dark:bg-gray-900">
     <div v-if="loading && !items.length" class="p-6 text-center text-gray-500">
       Loading...
     </div>
@@ -64,10 +65,10 @@ function handleDragEnd() {
       <li
         v-for="item in localItems"
         :key="item.id"
-        class="px-4 py-4 hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center gap-3"
+        class="flex items-center gap-3 px-4 py-4 hover:bg-gray-50 dark:hover:bg-gray-800"
       >
         <!-- Drag handle -->
-        <div class="drag-handle cursor-grab active:cursor-grabbing text-gray-400 hover:text-gray-600">
+        <div class="drag-handle cursor-grab text-gray-400 active:cursor-grabbing hover:text-gray-600">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="8" y1="6" x2="8" y2="6" />
             <line x1="16" y1="6" x2="16" y2="6" />
@@ -85,11 +86,11 @@ function handleDragEnd() {
         </div>
 
         <!-- Content -->
-        <div class="flex-1 min-w-0">
-          <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+        <div class="min-w-0 flex-1">
+          <h3 class="truncate text-sm text-gray-900 font-medium dark:text-gray-100">
             {{ getLabel(item) }}
           </h3>
-          <p v-if="sublabelKey" class="text-sm text-gray-500 dark:text-gray-400 truncate">
+          <p v-if="sublabelKey" class="truncate text-sm text-gray-500 dark:text-gray-400">
             {{ getSublabel(item) }}
           </p>
         </div>
@@ -98,14 +99,14 @@ function handleDragEnd() {
         <div class="flex items-center gap-2">
           <button
             type="button"
-            class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 font-medium text-sm"
+            class="text-sm text-indigo-600 font-medium dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300"
             @click="emit('edit', item)"
           >
             Edit
           </button>
           <button
             type="button"
-            class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm"
+            class="text-sm text-red-600 font-medium dark:text-red-400 hover:text-red-900 dark:hover:text-red-300"
             @click="emit('delete', item)"
           >
             Delete

@@ -16,14 +16,14 @@ export interface CreateLanguageData {
   slug: string
   sortOrder?: number
   translations?: {
-    en?: { name?: string; level?: string }
-    es?: { name?: string; level?: string }
+    en?: { name?: string, level?: string }
+    es?: { name?: string, level?: string }
   }
 }
 
 export interface UpdateLanguageData extends Partial<CreateLanguageData> {}
 
-export const useCvLanguages = () => {
+export function useCvLanguages() {
   const languages = useState<CvLanguage[]>('cv-languages', () => [])
   const loading = useState<boolean>('cv-languages-loading', () => false)
   const error = useState<string | null>('cv-languages-error', () => null)
@@ -36,12 +36,14 @@ export const useCvLanguages = () => {
       const response = await $fetch<ApiResponse<CvLanguage[]>>(`/api/cv/languages${query}`)
       languages.value = response.data || []
       return languages.value
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to fetch languages'
       console.error('Error fetching languages:', err)
       return []
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -56,12 +58,14 @@ export const useCvLanguages = () => {
       })
       await fetch()
       return response.data
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to create language'
       console.error('Error creating language:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -76,12 +80,14 @@ export const useCvLanguages = () => {
       })
       await fetch()
       return response.data
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to update language'
       console.error('Error updating language:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -95,12 +101,14 @@ export const useCvLanguages = () => {
       })
       await fetch()
       return true
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to delete language'
       console.error('Error deleting language:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -115,12 +123,14 @@ export const useCvLanguages = () => {
       })
       await fetch()
       return true
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to reorder languages'
       console.error('Error reordering languages:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }

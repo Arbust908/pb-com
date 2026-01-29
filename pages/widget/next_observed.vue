@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import WidgetBox from "../../components/widget/WidgetBox.vue";
+import WidgetBox from '../../components/widget/WidgetBox.vue'
 
 interface HolidayDisplay {
-  date: Date;
-  name: string;
-  end?: Date;
+  date: Date
+  name: string
+  end?: Date
 }
 
 // Use the holidays composable
@@ -15,7 +15,7 @@ const holidays = computed<HolidayDisplay[]>(() => {
   return apiHolidays.value.map(h => ({
     date: new Date(h.date),
     name: h.name,
-    end: h.endDate ? new Date(h.endDate) : undefined
+    end: h.endDate ? new Date(h.endDate) : undefined,
   }))
 })
 
@@ -23,35 +23,40 @@ const holidays = computed<HolidayDisplay[]>(() => {
 onMounted(async () => {
   await fetchHolidays()
 })
-const today = ref(new Date());
+const today = ref(new Date())
 const nextHolidayIndex = computed(() => {
-  if (holidays.value.length === 0) return -1;
-  return holidays.value.findIndex((holiday) => holiday.date > today.value);
-});
+  if (holidays.value.length === 0)
+    return -1
+  return holidays.value.findIndex(holiday => holiday.date > today.value)
+})
 function getHoliday(index: number) {
-  if (index < 0 || index >= holidays.value.length) return null;
-  return holidays.value[index];
+  if (index < 0 || index >= holidays.value.length)
+    return null
+  return holidays.value[index]
 }
 
 const previousHoliday = computed(() => {
-  if (nextHolidayIndex.value <= 0) return null;
-  return getHoliday(nextHolidayIndex.value - 1);
-});
+  if (nextHolidayIndex.value <= 0)
+    return null
+  return getHoliday(nextHolidayIndex.value - 1)
+})
 const nextHoliday = computed(() => {
-  if (nextHolidayIndex.value === -1) return null;
-  return getHoliday(nextHolidayIndex.value);
-});
+  if (nextHolidayIndex.value === -1)
+    return null
+  return getHoliday(nextHolidayIndex.value)
+})
 const followingHoliday = computed(() => {
-  if (nextHolidayIndex.value === -1 || nextHolidayIndex.value >= holidays.value.length - 1) return null;
-  return getHoliday(nextHolidayIndex.value + 1);
-});
+  if (nextHolidayIndex.value === -1 || nextHolidayIndex.value >= holidays.value.length - 1)
+    return null
+  return getHoliday(nextHolidayIndex.value + 1)
+})
 
 const isActiveHoliday = computed(() => {
   if (previousHoliday.value && previousHoliday.value.end) {
-    return previousHoliday.value.end > today.value;
+    return previousHoliday.value.end > today.value
   }
-  return false;
-});
+  return false
+})
 
 const shownHoliday = computed(() => {
   if (isActiveHoliday.value) {
@@ -61,69 +66,86 @@ const shownHoliday = computed(() => {
 })
 
 const daysToNextHoliday = computed(() => {
-  if (!nextHoliday.value) return 0;
+  if (!nextHoliday.value)
+    return 0
   return Math.ceil(
-    (nextHoliday.value.date.getTime() - today.value.getTime()) / (1000 * 60 * 60 * 24)
-  );
-});
-const formatDateAsCompact = (date: Date | undefined) => {
-  if (!date) return '';
-  const day = date.getDate();
-  const month = date.toLocaleString('en-US', { month: 'short' });
-  return `${day} ${month}`;
-};
-const formattedDate = computed(() => nextHoliday.value ? formatDateAsCompact(nextHoliday.value.date) : '');
-const followingHolidayDate = computed(() => followingHoliday.value ? formatDateAsCompact(followingHoliday.value.date) : '');
+    (nextHoliday.value.date.getTime() - today.value.getTime()) / (1000 * 60 * 60 * 24),
+  )
+})
+function formatDateAsCompact(date: Date | undefined) {
+  if (!date)
+    return ''
+  const day = date.getDate()
+  const month = date.toLocaleString('en-US', { month: 'short' })
+  return `${day} ${month}`
+}
+const formattedDate = computed(() => nextHoliday.value ? formatDateAsCompact(nextHoliday.value.date) : '')
+const followingHolidayDate = computed(() => followingHoliday.value ? formatDateAsCompact(followingHoliday.value.date) : '')
 
 definePageMeta({
-  layout: "none",
-});
+  layout: 'none',
+})
 
 // 18 cuadrados de largo. 1 cuadrado = 6 TWU = 24px
 // 360 + 48 + 48 = 456px
 </script>
 
 <template>
-  <main class="grid content-start justify-items-center gap-4 min-h-full pt-12">
-    <div v-if="loading" class="text-xl">Loading holidays...</div>
-    <div v-else-if="error" class="text-xl text-red-500">{{ error }}</div>
-    <div v-else-if="holidays.length === 0" class="text-xl">No holidays found</div>
-    <div v-else class="grid content-start justify-items-center w-full rounded p-6 grided-box max-w-456px" :class="isActiveHoliday ? 'bg-teal-700/80' : 'bg-gray-800/10'">
+  <main class="grid min-h-full content-start justify-items-center gap-4 pt-12">
+    <div v-if="loading" class="text-xl">
+      Loading holidays...
+    </div>
+    <div v-else-if="error" class="text-xl text-red-500">
+      {{ error }}
+    </div>
+    <div v-else-if="holidays.length === 0" class="text-xl">
+      No holidays found
+    </div>
+    <div v-else class="grided-box grid max-w-456px w-full content-start justify-items-center rounded p-6" :class="isActiveHoliday ? 'bg-teal-700/80' : 'bg-gray-800/10'">
       <WidgetBox v-slot="{ isLong }">
-        <div class="h-full items-center gap-2 p-6" :class="isLong
+        <div
+          class="h-full items-center gap-2 p-6" :class="isLong
             ? 'grid long-holiday justify-items-center'
             : 'flex flex-col'
-          ">
+          "
+        >
           <h1 class="text-40px font-bold" :class="{ nextHoly: isLong }">
-            {{ isActiveHoliday ? 'Current Holiday' : 'Next Holiday'}}
+            {{ isActiveHoliday ? 'Current Holiday' : 'Next Holiday' }}
           </h1>
           <div class="grid" :class="{ name: isLong }">
             <p class="text-32px" :class="{ name: isLong }">
               {{ shownHoliday?.name }}
             </p>
-            <p class="text-sm text-right">{{ formattedDate }}</p>
+            <p class="text-right text-sm">
+              {{ formattedDate }}
+            </p>
           </div>
           <p class="text-128px font-bold -my-8" :class="{ 'daysToGo text-6xl': isLong }">
             {{ daysToNextHoliday }}
           </p>
-          <p class="text-3xl font-bold" :class="{ days: isLong }">days to go</p>
+          <p class="text-3xl font-bold" :class="{ days: isLong }">
+            days to go
+          </p>
           <p v-if="followingHoliday" class="text-2xl">
             Next =>
             {{ followingHolidayDate }}
           </p>
         </div>
       </WidgetBox>
-      <div class="py-24"></div>
+      <div class="py-24" />
     </div>
-    <NuxtLink to="/widget"
-      class="text-xl md:text-sm font-bold rounded-md bg-purple-700 px-4 py-2 hover:(shadow bg-purple-800 text-gray-200)">
-      go back</NuxtLink>
+    <NuxtLink
+      to="/widget"
+      class="rounded-md bg-purple-700 px-4 py-2 text-xl font-bold hover:(bg-purple-800 text-gray-200 shadow) md:text-sm"
+    >
+      go back
+    </NuxtLink>
   </main>
 </template>
 
 <style scoped>
 .long-holiday {
-  grid-template-areas: "daysToGo nextHoly" "daysToGo name" "days date";
+  grid-template-areas: 'daysToGo nextHoly' 'daysToGo name' 'days date';
 }
 
 .nextHoly {

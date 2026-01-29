@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useGeneralStore } from '~/composables'
-import { useUserStore } from '~/stores/user'
 
 const general_store = useGeneralStore()
-const userStore = useUserStore()
 const { print_mode } = storeToRefs(general_store)
-const client = useSupabaseClient()
-const router = useRouter()
 
 // https://codepen.io/jh3y/pen/QWoKXdo
 // https://twitter.com/jh3yy/status/1746101914700493168

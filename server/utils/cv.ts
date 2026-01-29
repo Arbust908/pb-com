@@ -1,13 +1,13 @@
 import {
-  object,
-  string,
-  number,
-  optional,
-  minLength,
+  type Output,
   isoDate,
+  minLength,
+  number,
+  object,
+  optional,
   partial,
   picklist,
-  type Output,
+  string,
 } from 'valibot'
 
 // Entity types for translations
@@ -31,16 +31,16 @@ export const CreateExperienceSchema = object({
           rol: optional(string()),
           description: optional(string()),
           more: optional(string()),
-        })
+        }),
       ),
       es: optional(
         object({
           rol: optional(string()),
           description: optional(string()),
           more: optional(string()),
-        })
+        }),
       ),
-    })
+    }),
   ),
 })
 
@@ -60,15 +60,15 @@ export const CreateStudySchema = object({
         object({
           place: optional(string()),
           description: optional(string()),
-        })
+        }),
       ),
       es: optional(
         object({
           place: optional(string()),
           description: optional(string()),
-        })
+        }),
       ),
-    })
+    }),
   ),
 })
 
@@ -87,14 +87,14 @@ export const CreateSkillSchema = object({
       en: optional(
         object({
           title: optional(string()),
-        })
+        }),
       ),
       es: optional(
         object({
           title: optional(string()),
-        })
+        }),
       ),
-    })
+    }),
   ),
 })
 
@@ -113,15 +113,15 @@ export const CreateLanguageSchema = object({
         object({
           name: optional(string()),
           level: optional(string()),
-        })
+        }),
       ),
       es: optional(
         object({
           name: optional(string()),
           level: optional(string()),
-        })
+        }),
       ),
-    })
+    }),
   ),
 })
 

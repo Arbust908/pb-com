@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer, unique } from 'drizzle-orm/sqlite-core'
+import { integer, sqliteTable, text, unique } from 'drizzle-orm/sqlite-core'
 import { sql } from 'drizzle-orm'
 
 export const holidays = sqliteTable('holidays', {
@@ -100,14 +100,14 @@ export const cvTranslations = sqliteTable(
       .notNull()
       .default(sql`CURRENT_TIMESTAMP`),
   },
-  (table) => [
+  table => [
     unique('cv_translations_unique').on(
       table.entityType,
       table.entitySlug,
       table.locale,
-      table.field
+      table.field,
     ),
-  ]
+  ],
 )
 
 export type CvTranslation = typeof cvTranslations.$inferSelect

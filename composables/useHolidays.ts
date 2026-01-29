@@ -12,7 +12,7 @@ interface ApiResponse<T> {
   data: T
 }
 
-export const useHolidays = () => {
+export function useHolidays() {
   const holidays = useState<Holiday[]>('holidays', () => [])
   const loading = useState<boolean>('holidays-loading', () => false)
   const error = useState<string | null>('holidays-error', () => null)
@@ -24,11 +24,13 @@ export const useHolidays = () => {
       const response = await $fetch<ApiResponse<Holiday[]>>('/api/holidays')
       holidays.value = response.data || []
       return holidays.value
-    } catch (err: any) {
+    }
+    catch (err: any) {
       error.value = err.data?.statusMessage || 'Failed to fetch holidays'
       console.error('Error fetching holidays:', err)
       return []
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -43,11 +45,13 @@ export const useHolidays = () => {
       })
       await fetchHolidays() // Refresh the list
       return response.data
-    } catch (err: any) {
+    }
+    catch (err: any) {
       error.value = err.data?.statusMessage || 'Failed to create holiday'
       console.error('Error creating holiday:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -62,11 +66,13 @@ export const useHolidays = () => {
       })
       await fetchHolidays() // Refresh the list
       return response.data
-    } catch (err: any) {
+    }
+    catch (err: any) {
       error.value = err.data?.statusMessage || 'Failed to update holiday'
       console.error('Error updating holiday:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -80,11 +86,13 @@ export const useHolidays = () => {
       })
       await fetchHolidays() // Refresh the list
       return true
-    } catch (err: any) {
+    }
+    catch (err: any) {
       error.value = err.data?.statusMessage || 'Failed to delete holiday'
       console.error('Error deleting holiday:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
