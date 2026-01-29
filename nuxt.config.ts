@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv'
+import { visualizer } from 'rollup-plugin-visualizer'
 import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
@@ -37,14 +38,14 @@ export default defineNuxtConfig({
     '/api/**': {
       headers: {
         'cache-control': 'private,max-age=300', // 5 min cache for API responses
-      }
+      },
     },
 
     // ✅ OPTIMIZED: Static assets caching
     '/_nuxt/**': {
       headers: {
         'cache-control': 'public,max-age=31536000,s-maxage=31536000', // 1 year cache
-      }
+      },
     },
 
     // Admin routes - require authentication and interactivity
@@ -57,7 +58,7 @@ export default defineNuxtConfig({
     '/widget/**': { ssr: true },
 
     // Catch-all - fallback to SSR
-    '/[...all]': { ssr: true }
+    '/[...all]': { ssr: true },
   },
 
   experimental: {
@@ -73,9 +74,44 @@ export default defineNuxtConfig({
     '@/assets/index.css',
   ],
 
+  vite: {
+    // ✅ OPTIMIZED: Vite performance configuration (antfu preferences)
+    build: {
+      reportCompressedSize: false,
+      // ✅ PERF BUDGET: Warn if individual chunks exceed 500KB
+      chunkSizeWarningLimit: 500,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vue: ['vue', 'vue-router', 'pinia'],
+            nuxt: ['@nuxt/kit', '@nuxt/schema'],
+          },
+        },
+        plugins:
+          import.meta.env.NODE_ENV === 'development'
+            ? []
+            : [
+              // Bundle analysis for production builds
+                ...(import.meta.env.ANALYZE
+                  ? [visualizer({
+                      filename: 'dist/stats.html',
+                      title: 'Bundle Analysis',
+                      gzipSize: true,
+                      brotliSize: true,
+                    })]
+                  : []),
+              ],
+      },
+      sourcemap: import.meta.env.NODE_ENV === 'development',
+    },
+  },
+
   nitro: {
     // ✅ OPTIMIZED: Enable compression and minification for production
-    compressPublicAssets: true,
+    compressPublicAssets: {
+      brotli: true,
+      gzip: true,
+    },
     minify: true,
 
     esbuild: {
@@ -102,7 +138,7 @@ export default defineNuxtConfig({
       link: [
         /* { rel: 'icon', href: '/favicon.ico', sizes: 'any' }, */
         /* { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }, */
-       /*  { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }, */
+        /*  { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }, */
       ],
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

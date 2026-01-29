@@ -1,4 +1,4 @@
-import { object, string, number, optional, minLength, isoDate, custom, partial, type Output } from 'valibot'
+import { type Output, isoDate, minLength, number, object, optional, partial, string } from 'valibot'
 
 // Validation schemas for holidays
 export const HolidaySchema = object({
@@ -18,7 +18,7 @@ export const CreateHolidaySchema = object({
 })
 
 // Custom validator for date comparison
-export const validateHolidayDates = (input: Output<typeof CreateHolidaySchema>) => {
+export function validateHolidayDates(input: Output<typeof CreateHolidaySchema>) {
   if (input.endDate) {
     const startDate = new Date(input.date)
     const endDate = new Date(input.endDate)

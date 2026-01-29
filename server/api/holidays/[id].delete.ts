@@ -1,8 +1,8 @@
 import { defineEventHandler } from 'h3'
+import { eq } from 'drizzle-orm'
 import { serverSupabaseUser } from '#supabase/server'
 import { db } from '~/server/db'
 import { holidays } from '~/server/db/schema'
-import { eq } from 'drizzle-orm'
 
 export default defineEventHandler(async (event) => {
   try {
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
 
     // Get holiday ID from params
     const id = getRouterParam(event, 'id')
-    if (!id || isNaN(Number(id))) {
+    if (!id || Number.isNaN(Number(id))) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Invalid holiday ID',
@@ -41,7 +41,8 @@ export default defineEventHandler(async (event) => {
       success: true,
       data: deletedHoliday,
     }
-  } catch (error: any) {
+  }
+  catch (error: any) {
     // Handle auth and not found errors
     if (error.statusCode === 401 || error.statusCode === 404 || error.statusCode === 400) {
       throw error

@@ -96,7 +96,6 @@ const LLAMA_3_8B: ModelResponse = {
   parameter_size: '8b',
 }
 
-
 export const allowedModels = [
   TOPPY_M,
   NOUS_CAPYBARA,
@@ -108,7 +107,7 @@ export const allowedModels = [
   LLAMA_3_8B,
 ] satisfies ModelResponse[]
 
-export const modelNames = allowedModels.map((model) => model.name) as  ModelResponse['name'][]
+export const modelNames = allowedModels.map(model => model.name) as ModelResponse['name'][]
 export const defaultModel = TOPPY_M.name as ModelResponse['name']
 
 export interface AI_MODEL_REQUEST_CLIENT {

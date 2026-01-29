@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
 import type { CSSProperties } from 'vue'
-import { useMediaQuery, useParallax } from '@vueuse/core'
+import { useParallax } from '@vueuse/core'
 
 const target = ref(null)
-const isMobile = useMediaQuery('(max-width: 700px)')
 
 const parallax = reactive(useParallax(target))
 

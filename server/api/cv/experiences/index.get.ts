@@ -1,12 +1,9 @@
-import { eq, asc } from 'drizzle-orm'
+import { asc, eq } from 'drizzle-orm'
 import { db } from '~/server/db'
 import { cvExperiences, cvTranslations } from '~/server/db/schema'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   try {
-    const query = getQuery(event)
-    const locale = (query.locale as string) || 'en'
-
     // Fetch all experiences ordered by sortOrder
     const experiences = await db
       .select()
@@ -21,7 +18,7 @@ export default defineEventHandler(async (event) => {
 
     // Build response with nested translations
     const data = experiences.map((exp) => {
-      const expTranslations = translations.filter((t) => t.entitySlug === exp.slug)
+      const expTranslations = translations.filter(t => t.entitySlug === exp.slug)
 
       const translationsByLocale: Record<string, Record<string, string>> = {}
       for (const t of expTranslations) {
@@ -38,7 +35,8 @@ export default defineEventHandler(async (event) => {
     })
 
     return { success: true, data }
-  } catch (error: unknown) {
+  }
+  catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Failed to fetch experiences'
     throw createError({
       statusCode: 500,

@@ -2,30 +2,31 @@ import * as dotenv from 'dotenv'
 import { createClient } from '@libsql/client'
 import { drizzle } from 'drizzle-orm/libsql'
 import {
-  cvExperiences,
-  cvStudies,
-  cvSkills,
-  cvLanguages,
-  cvTranslations,
   type NewCvExperience,
-  type NewCvStudy,
-  type NewCvSkill,
   type NewCvLanguage,
+  type NewCvSkill,
+  type NewCvStudy,
   type NewCvTranslation,
+  cvExperiences,
+  cvLanguages,
+  cvSkills,
+  cvStudies,
+  cvTranslations,
 } from './schema'
 
 dotenv.config()
 
 const client = createClient({
-  url: process.env.TURSO_DATABASE_URL!,
-  authToken: process.env.TURSO_AUTH_TOKEN!,
+  url: import.meta.env.TURSO_DATABASE_URL!,
+  authToken: import.meta.env.TURSO_AUTH_TOKEN!,
 })
 
 const db = drizzle(client)
 
 // Convert MM/DD/YYYY to ISO date
 function parseDate(dateStr: string | null): string | null {
-  if (!dateStr) return null
+  if (!dateStr)
+    return null
   const [month, day, year] = dateStr.split('/')
   return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
 }
@@ -56,7 +57,7 @@ const experiencesEn = {
     start: '03/01/2021',
     end: '12/31/2021',
     description:
-      "Maintain and evolve Viafoura's Product (a social engagement script) built in multiple technologies (Backbone in v1 and Vue, Vuex in v2). I also took part in the brainstorming of the v3 product and new features in coordination with the UI and Back-end teams.",
+      'Maintain and evolve Viafoura\'s Product (a social engagement script) built in multiple technologies (Backbone in v1 and Vue, Vuex in v2). I also took part in the brainstorming of the v3 product and new features in coordination with the UI and Back-end teams.',
     more: 'Modularised legacy Backbone widgets into Vue components, built into a custom tool reducing on-client size by 60%.',
   },
   forian: {
@@ -75,7 +76,7 @@ const experiencesEn = {
     end: '03/31/2021',
     description:
       'Developed web apps with management systems and metric panels using Nuxt (Vue) and Next.js (React) for SSR/SEO optimization, state management, PWA capabilities, and SQL DB integration via Express REST APIs.',
-    more: "Point More is an Agency I started with 3 other ex-Digital House developers. Even though we all are Full Stack developers I'm the main Front End dev. As a team, we take projects too large in scope for one dev. Usually, we build Complex eCommerce that need to have a pristine SEO ranking for that end I apply my knowledge to build PWA ready web apps that manage session information in Vuex states. For external data y connect to backend services via REST APIs using Axios. Depending on client demand we use an existing Component Library (like Vue-bootstrap), if not, I usually build a custom component library with the help of TailwindCSS styling. If our client doesn't have a design of their own I also take part in the Design phase using Adobe XD o Figma From time to time we have taken projects that did have an existing codebase in other languages or frameworks which we work on top (Laravel, React, Plain HTML + CSS + Alpine)",
+    more: 'Point More is an Agency I started with 3 other ex-Digital House developers. Even though we all are Full Stack developers I\'m the main Front End dev. As a team, we take projects too large in scope for one dev. Usually, we build Complex eCommerce that need to have a pristine SEO ranking for that end I apply my knowledge to build PWA ready web apps that manage session information in Vuex states. For external data y connect to backend services via REST APIs using Axios. Depending on client demand we use an existing Component Library (like Vue-bootstrap), if not, I usually build a custom component library with the help of TailwindCSS styling. If our client doesn\'t have a design of their own I also take part in the Design phase using Adobe XD o Figma From time to time we have taken projects that did have an existing codebase in other languages or frameworks which we work on top (Laravel, React, Plain HTML + CSS + Alpine)',
   },
   digitalhouse_dev: {
     rol: 'Semi-Senior Full Stack Developer',
@@ -84,7 +85,7 @@ const experiencesEn = {
     end: '07/01/2020',
     description:
       'Develop a website with a content editing system and integration with external systems. Paired with an internal Editable REST Api. Laravel + SASS / Vue + Tailwind / Node + ORM(Homemade).Prototype and design in Adobe XD.',
-    more: "I started as the only Front End developer in this project where the continents were that we should use Laravel as our framework. As a styling library, I wrote various SASS functions with the company's brand's manual to be used in the Blade templates. As a second version, for security and speed, we migrated all backend CMS to a Vue + Node service and served all data to the Laravel Front End via APIs. I upgraded all our Blade templates into Blade Components for reusability and maintainability. For new Components, I had to design them and get them approved, which I did with Adobe XD. We then migrated our Blade Components to Vue components for optimization. This meant I had to teach our team Vue. As the last version we migrated our complete Laravel Front End to Nuxt and switched our SASS library for TailwindCSS.",
+    more: 'I started as the only Front End developer in this project where the continents were that we should use Laravel as our framework. As a styling library, I wrote various SASS functions with the company\'s brand\'s manual to be used in the Blade templates. As a second version, for security and speed, we migrated all backend CMS to a Vue + Node service and served all data to the Laravel Front End via APIs. I upgraded all our Blade templates into Blade Components for reusability and maintainability. For new Components, I had to design them and get them approved, which I did with Adobe XD. We then migrated our Blade Components to Vue components for optimization. This meant I had to teach our team Vue. As the last version we migrated our complete Laravel Front End to Nuxt and switched our SASS library for TailwindCSS.',
   },
   digitalhouse: {
     rol: 'Coding Teacher',
@@ -92,7 +93,7 @@ const experiencesEn = {
     start: '07/01/2016',
     end: '12/01/2018',
     description: 'Teach Code. Html + CSS, PHP, SQL, Laravel and JS.',
-    more: "I was at the head of the classroom in various commissions for 5 months teaching and training non-developers in our Full-Stack technologies (HTML, CSS, JS, SQL, and PHP with Laravel).The curriculum started with simple web pages with HTML and CSS up to an Advanced level with responsive mobile-first designs. Then we embarked into the backend with simple server responses with PHP and server-rendered dynamic pages. We learned SQL databases with MySQL and made PDO connections with our PHP backends. After that I explained the Basis of OOP (Object-oriented Programming), SOLID design pattern, and ACID. After a concept-heavy unit we start building a full-stack application with Laravel as a framework. Finally we explore client dynamic pages adding Javascript to the Laravel Apps. All students were evaluated in an application they had to build on their own in the span of 1 month consisting of one or more CRUDs, a login with a user profile, and dynamic front ends. As a plus I taught via workshops CSS Grid, animation with keyframes and SASS",
+    more: 'I was at the head of the classroom in various commissions for 5 months teaching and training non-developers in our Full-Stack technologies (HTML, CSS, JS, SQL, and PHP with Laravel).The curriculum started with simple web pages with HTML and CSS up to an Advanced level with responsive mobile-first designs. Then we embarked into the backend with simple server responses with PHP and server-rendered dynamic pages. We learned SQL databases with MySQL and made PDO connections with our PHP backends. After that I explained the Basis of OOP (Object-oriented Programming), SOLID design pattern, and ACID. After a concept-heavy unit we start building a full-stack application with Laravel as a framework. Finally we explore client dynamic pages adding Javascript to the Laravel Apps. All students were evaluated in an application they had to build on their own in the span of 1 month consisting of one or more CRUDs, a login with a user profile, and dynamic front ends. As a plus I taught via workshops CSS Grid, animation with keyframes and SASS',
   },
 }
 
@@ -155,7 +156,7 @@ const studiesEn = {
     description: 'Graphic Design',
   },
   slc: {
-    place: "St Luke's College",
+    place: 'St Luke\'s College',
     date: '1996 - 2008',
     description: 'Bachelor Degree (Bilingual)',
   },
@@ -172,14 +173,14 @@ const studiesEs = {
     description: 'Disenador Grafico',
   },
   slc: {
-    place: "St Luke's College",
+    place: 'St Luke\'s College',
     description: 'Bachillerato (Bilingue)',
   },
 }
 
 // Skills data
-const webSkillList =
-  'Vue 3, Vite, UnoCSS, Pinia, TypeScript, Nuxt 3, Prisma, Vue, Nuxt, Tailwind, React, Next, Vitest, Jest, HTML, CSS (Scss Sass), Scrum, Bootstrap, PHP, POO, Git, MySQL, UML, JavaScript, Laravel, Node, Express, Handlebars, SEO, GTM'
+const webSkillList
+  = 'Vue 3, Vite, UnoCSS, Pinia, TypeScript, Nuxt 3, Prisma, Vue, Nuxt, Tailwind, React, Next, Vitest, Jest, HTML, CSS (Scss Sass), Scrum, Bootstrap, PHP, POO, Git, MySQL, UML, JavaScript, Laravel, Node, Express, Handlebars, SEO, GTM'
 const adobeSkillList = 'Photoshop, Illustrator, InDesign'
 const otherSkillListEn = 'Photography, Video Editing, Unity & C#, Maya, 3DMax, ZBrush'
 const otherSkillListEs = 'Fotografia, Edicion de Video, Unity & C#, Maya, 3DMax, ZBrush'
@@ -197,18 +198,14 @@ const languagesData = {
 }
 
 async function seed() {
-  console.log('Seeding CV data...')
-
   try {
     // Check if already seeded
     const existingExps = await db.select().from(cvExperiences)
     if (existingExps.length > 0) {
-      console.log('CV data already exists. Skipping seed.')
       return
     }
 
     // Seed experiences
-    console.log('Inserting experiences...')
     const expKeys = Object.keys(experiencesEn) as (keyof typeof experiencesEn)[]
     const experienceRecords: NewCvExperience[] = expKeys.map((slug, idx) => ({
       slug,
@@ -219,7 +216,6 @@ async function seed() {
     }))
 
     await db.insert(cvExperiences).values(experienceRecords)
-    console.log(`Inserted ${experienceRecords.length} experiences`)
 
     // Seed experience translations
     const expTranslations: NewCvTranslation[] = []
@@ -236,7 +232,7 @@ async function seed() {
           locale: 'en',
           field: 'description',
           value: en.description,
-        }
+        },
       )
       if (en.more) {
         expTranslations.push({
@@ -257,7 +253,7 @@ async function seed() {
           locale: 'es',
           field: 'description',
           value: es.description,
-        }
+        },
       )
       if (es.more) {
         expTranslations.push({
@@ -271,10 +267,8 @@ async function seed() {
     }
 
     await db.insert(cvTranslations).values(expTranslations)
-    console.log(`Inserted ${expTranslations.length} experience translations`)
 
     // Seed studies
-    console.log('Inserting studies...')
     const studyKeys = Object.keys(studiesEn) as (keyof typeof studiesEn)[]
     const studyRecords: NewCvStudy[] = studyKeys.map((slug, idx) => ({
       slug,
@@ -283,7 +277,6 @@ async function seed() {
     }))
 
     await db.insert(cvStudies).values(studyRecords)
-    console.log(`Inserted ${studyRecords.length} studies`)
 
     // Seed study translations
     const studyTranslations: NewCvTranslation[] = []
@@ -307,15 +300,13 @@ async function seed() {
           locale: 'es',
           field: 'description',
           value: es.description,
-        }
+        },
       )
     }
 
     await db.insert(cvTranslations).values(studyTranslations)
-    console.log(`Inserted ${studyTranslations.length} study translations`)
 
     // Seed skills
-    console.log('Inserting skills...')
     const skillRecords: NewCvSkill[] = [
       { slug: 'web', skillList: skillsData.web.list, sortOrder: 0 },
       { slug: 'adobe', skillList: skillsData.adobe.list, sortOrder: 1 },
@@ -323,7 +314,6 @@ async function seed() {
     ]
 
     await db.insert(cvSkills).values(skillRecords)
-    console.log(`Inserted ${skillRecords.length} skills`)
 
     // Seed skill translations
     const skillTranslations: NewCvTranslation[] = [
@@ -339,17 +329,14 @@ async function seed() {
     ]
 
     await db.insert(cvTranslations).values(skillTranslations)
-    console.log(`Inserted ${skillTranslations.length} skill translations`)
 
     // Seed languages
-    console.log('Inserting languages...')
     const languageRecords: NewCvLanguage[] = [
       { slug: 'es', sortOrder: 0 },
       { slug: 'en', sortOrder: 1 },
     ]
 
     await db.insert(cvLanguages).values(languageRecords)
-    console.log(`Inserted ${languageRecords.length} languages`)
 
     // Seed language translations
     const langTranslations: NewCvTranslation[] = []
@@ -358,21 +345,18 @@ async function seed() {
         { entityType: 'language', entitySlug: slug, locale: 'en', field: 'name', value: data.nameEn },
         { entityType: 'language', entitySlug: slug, locale: 'en', field: 'level', value: data.levelEn },
         { entityType: 'language', entitySlug: slug, locale: 'es', field: 'name', value: data.nameEs },
-        { entityType: 'language', entitySlug: slug, locale: 'es', field: 'level', value: data.levelEs }
+        { entityType: 'language', entitySlug: slug, locale: 'es', field: 'level', value: data.levelEs },
       )
     }
 
     await db.insert(cvTranslations).values(langTranslations)
-    console.log(`Inserted ${langTranslations.length} language translations`)
-
-    console.log('CV seed completed!')
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Seed failed:', error)
-    process.exit(1)
+    import.meta.exit(1)
   }
 }
 
 seed().then(() => {
-  console.log('Done!')
-  process.exit(0)
+  import.meta.exit(0)
 })

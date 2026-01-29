@@ -50,7 +50,8 @@ export default defineEventHandler(async (event) => {
       const translationsToInsert = []
 
       for (const [locale, fields] of Object.entries(validatedData.translations)) {
-        if (!fields) continue
+        if (!fields)
+          continue
         for (const [field, value] of Object.entries(fields)) {
           if (value) {
             translationsToInsert.push({
@@ -77,7 +78,8 @@ export default defineEventHandler(async (event) => {
 
     const translationsByLocale: Record<string, Record<string, string>> = {}
     for (const t of translations) {
-      if (t.entityType !== 'study') continue
+      if (t.entityType !== 'study')
+        continue
       if (!translationsByLocale[t.locale]) {
         translationsByLocale[t.locale] = {}
       }
@@ -91,7 +93,8 @@ export default defineEventHandler(async (event) => {
         translations: translationsByLocale,
       },
     }
-  } catch (error: unknown) {
+  }
+  catch (error: unknown) {
     if (error && typeof error === 'object' && 'issues' in error) {
       throw createError({
         statusCode: 400,

@@ -3,8 +3,8 @@ import { createClient } from '@libsql/client'
 import * as schema from './schema'
 
 // Get environment variables
-const tursoUrl = process.env.TURSO_DATABASE_URL
-const tursoAuthToken = process.env.TURSO_AUTH_TOKEN
+const tursoUrl = import.meta.env.TURSO_DATABASE_URL
+const tursoAuthToken = import.meta.env.TURSO_AUTH_TOKEN
 
 if (!tursoUrl || !tursoAuthToken) {
   throw new Error('TURSO_DATABASE_URL and TURSO_AUTH_TOKEN must be set')

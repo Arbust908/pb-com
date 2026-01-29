@@ -1,23 +1,27 @@
 <script setup lang='ts'>
-import type { RouteLocationRaw } from '#vue-router';
-import type { RouteRecordNormalized } from '#vue-router';
+import type { RouteLocationRaw, RouteRecordNormalized } from '#vue-router'
 
 const router = useRouter()
 function isWidget(route: RouteRecordNormalized) {
-    const { path } = route
-    // looks for pages that are widgets but nor the index
-    return path.startsWith('/widget') && path !== '/widget'
+  const { path } = route
+  // looks for pages that are widgets but nor the index
+  return path.startsWith('/widget') && path !== '/widget'
 }
 const widgetRoutes = router.getRoutes().filter(isWidget)
 function toLongPath(route: RouteRecordNormalized) {
-    return { path: route.path, query: { long_mode: true } } satisfies RouteLocationRaw
+  return { path: route.path, query: { long_mode: true } } satisfies RouteLocationRaw
 }
 </script>
+
 <template>
-    <main class="grid content-start justify-items-center py-8">
-        <div v-for="route in widgetRoutes" :key="route.path" class="grid md:grid-cols-2 gap-4">
-            <NuxtLink :to="route.path" class="text-xl md:text-sm font-bold rounded-md bg-purple-700 px-4 py-2 hover:(shadow bg-purple-800 text-gray-200)">{{ route.name }}</NuxtLink>
-            <NuxtLink :to="toLongPath(route)" class="text-xl md:text-sm font-bold rounded-md bg-purple-700 px-4 py-2 hover:(shadow bg-purple-800 text-gray-200)">{{ route.name }} Long</NuxtLink>
-        </div>
-    </main>
+  <main class="grid content-start justify-items-center py-8">
+    <div v-for="route in widgetRoutes" :key="route.path" class="grid gap-4 md:grid-cols-2">
+      <NuxtLink :to="route.path" class="rounded-md bg-purple-700 px-4 py-2 text-xl font-bold hover:(bg-purple-800 text-gray-200 shadow) md:text-sm">
+        {{ route.name }}
+      </NuxtLink>
+      <NuxtLink :to="toLongPath(route)" class="rounded-md bg-purple-700 px-4 py-2 text-xl font-bold hover:(bg-purple-800 text-gray-200 shadow) md:text-sm">
+        {{ route.name }} Long
+      </NuxtLink>
+    </div>
+  </main>
 </template>

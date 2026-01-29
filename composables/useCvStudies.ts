@@ -18,14 +18,14 @@ export interface CreateStudyData {
   dateRange: string
   sortOrder?: number
   translations?: {
-    en?: { place?: string; description?: string }
-    es?: { place?: string; description?: string }
+    en?: { place?: string, description?: string }
+    es?: { place?: string, description?: string }
   }
 }
 
 export interface UpdateStudyData extends Partial<CreateStudyData> {}
 
-export const useCvStudies = () => {
+export function useCvStudies() {
   const studies = useState<CvStudy[]>('cv-studies', () => [])
   const loading = useState<boolean>('cv-studies-loading', () => false)
   const error = useState<string | null>('cv-studies-error', () => null)
@@ -38,12 +38,14 @@ export const useCvStudies = () => {
       const response = await $fetch<ApiResponse<CvStudy[]>>(`/api/cv/studies${query}`)
       studies.value = response.data || []
       return studies.value
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to fetch studies'
       console.error('Error fetching studies:', err)
       return []
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -58,12 +60,14 @@ export const useCvStudies = () => {
       })
       await fetch()
       return response.data
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to create study'
       console.error('Error creating study:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -78,12 +82,14 @@ export const useCvStudies = () => {
       })
       await fetch()
       return response.data
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to update study'
       console.error('Error updating study:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -97,12 +103,14 @@ export const useCvStudies = () => {
       })
       await fetch()
       return true
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to delete study'
       console.error('Error deleting study:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -117,12 +125,14 @@ export const useCvStudies = () => {
       })
       await fetch()
       return true
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       const e = err as { data?: { statusMessage?: string } }
       error.value = e.data?.statusMessage || 'Failed to reorder studies'
       console.error('Error reordering studies:', err)
       throw err
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }

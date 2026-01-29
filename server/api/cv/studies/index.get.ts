@@ -1,12 +1,9 @@
-import { eq, asc } from 'drizzle-orm'
+import { asc, eq } from 'drizzle-orm'
 import { db } from '~/server/db'
 import { cvStudies, cvTranslations } from '~/server/db/schema'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   try {
-    const query = getQuery(event)
-    const locale = (query.locale as string) || 'en'
-
     // Fetch all studies ordered by sortOrder
     const studies = await db
       .select()
@@ -21,7 +18,7 @@ export default defineEventHandler(async (event) => {
 
     // Build response with nested translations
     const data = studies.map((study) => {
-      const studyTranslations = translations.filter((t) => t.entitySlug === study.slug)
+      const studyTranslations = translations.filter(t => t.entitySlug === study.slug)
 
       const translationsByLocale: Record<string, Record<string, string>> = {}
       for (const t of studyTranslations) {
@@ -38,7 +35,8 @@ export default defineEventHandler(async (event) => {
     })
 
     return { success: true, data }
-  } catch (error: unknown) {
+  }
+  catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Failed to fetch studies'
     throw createError({
       statusCode: 500,

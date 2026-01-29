@@ -1,4 +1,4 @@
-import { eq, and } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import { db } from '~/server/db'
 import { cvExperiences, cvTranslations } from '~/server/db/schema'
 import { serverSupabaseUser } from '#supabase/server'
@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const id = getRouterParam(event, 'id')
-    if (!id || isNaN(Number(id))) {
+    if (!id || Number.isNaN(Number(id))) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Invalid experience ID',
@@ -41,8 +41,8 @@ export default defineEventHandler(async (event) => {
       .where(
         and(
           eq(cvTranslations.entityType, 'experience'),
-          eq(cvTranslations.entitySlug, existing.slug)
-        )
+          eq(cvTranslations.entitySlug, existing.slug),
+        ),
       )
 
     // Delete experience
@@ -55,7 +55,8 @@ export default defineEventHandler(async (event) => {
       success: true,
       data: deletedExperience,
     }
-  } catch (error: unknown) {
+  }
+  catch (error: unknown) {
     if (error && typeof error === 'object' && 'statusCode' in error) {
       throw error
     }

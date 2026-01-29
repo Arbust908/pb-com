@@ -18,7 +18,8 @@ function getSkillTranslation(skill: typeof skills.value[number], field: string):
 function getSkillList(skill: typeof skills.value[number]): string {
   // Check if there's a locale-specific list in translations (for 'other' skill)
   const localizedList = skill.translations[locale.value]?.list
-  if (localizedList) return localizedList
+  if (localizedList)
+    return localizedList
   return skill.skillList
 }
 
@@ -42,7 +43,7 @@ function birthday() {
     <picture>
       <source type="image/webp" srcset="/img/avatar.webp">
       <img
-        class="right-0 top-0 mb-4 border-2 border-slate-500 rounded object-cover shadow absolute h-40 w-40 m-2 md:-m-2 md:w-32 lg:w-40"
+        class="absolute right-0 top-0 m-2 mb-4 h-40 w-40 border-2 border-slate-500 rounded object-cover shadow lg:w-40 md:w-32 md:-m-2"
         src="/img/avatar.jpg"
         :alt="t('avatar.desc')"
       >

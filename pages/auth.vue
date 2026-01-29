@@ -6,7 +6,7 @@ const password = ref('')
 const error = ref('')
 const loading = ref(false)
 
-const handleLogin = async () => {
+async function handleLogin() {
   if (!username.value || !password.value) {
     error.value = 'Both username and password are required'
     return
@@ -20,7 +20,8 @@ const handleLogin = async () => {
 
   if (success) {
     await navigateTo('/admin/cv')
-  } else {
+  }
+  else {
     error.value = 'Login failed. Please try again.'
   }
 
@@ -30,9 +31,9 @@ const handleLogin = async () => {
 
 <template>
   <div class="min-h-screen flex items-center justify-center bg-slate-100 dark:bg-slate-900">
-    <div class="max-w-md w-full space-y-8 p-8 bg-white dark:bg-slate-800 rounded-lg shadow-lg">
+    <div class="max-w-md w-full rounded-lg bg-white p-8 shadow-lg space-y-8 dark:bg-slate-800">
       <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">
+        <h2 class="text-3xl text-slate-900 font-extrabold dark:text-white">
           Admin Login
         </h2>
         <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
@@ -49,7 +50,7 @@ const handleLogin = async () => {
               v-model="username"
               type="text"
               required
-              class="relative block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 placeholder-slate-500 text-slate-900 dark:text-white dark:bg-slate-700 rounded-t-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
+              class="relative block w-full border border-slate-300 rounded-t-md px-3 py-2 text-slate-900 focus:z-10 dark:border-slate-600 focus:border-violet-500 dark:bg-slate-700 sm:text-sm dark:text-white focus:outline-none focus:ring-violet-500 placeholder-slate-500"
               placeholder="Username"
             >
           </div>
@@ -60,13 +61,13 @@ const handleLogin = async () => {
               v-model="password"
               type="password"
               required
-              class="relative block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 placeholder-slate-500 text-slate-900 dark:text-white dark:bg-slate-700 rounded-b-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
+              class="relative block w-full border border-slate-300 rounded-b-md px-3 py-2 text-slate-900 focus:z-10 dark:border-slate-600 focus:border-violet-500 dark:bg-slate-700 sm:text-sm dark:text-white focus:outline-none focus:ring-violet-500 placeholder-slate-500"
               placeholder="Password"
             >
           </div>
         </div>
 
-        <div v-if="error" class="text-red-600 text-sm text-center">
+        <div v-if="error" class="text-center text-sm text-red-600">
           {{ error }}
         </div>
 
@@ -74,7 +75,7 @@ const handleLogin = async () => {
           <button
             type="submit"
             :disabled="loading"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="group relative w-full flex justify-center border border-transparent rounded-md bg-violet-600 px-4 py-2 text-sm text-white font-medium disabled:cursor-not-allowed hover:bg-violet-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
           >
             <span v-if="loading">Logging in...</span>
             <span v-else>Sign in</span>
