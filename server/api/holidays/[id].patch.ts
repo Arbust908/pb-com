@@ -1,9 +1,9 @@
 import { defineEventHandler } from 'h3'
+import { eq } from 'drizzle-orm'
+import { parse } from 'valibot'
 import { serverSupabaseUser } from '#supabase/server'
 import { db } from '~/server/db'
 import { holidays } from '~/server/db/schema'
-import { eq } from 'drizzle-orm'
-import { parse } from 'valibot'
 import { UpdateHolidaySchema } from '~/server/utils/holidays'
 
 export default defineEventHandler(async (event) => {
@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
 
     // Get holiday ID from params
     const id = getRouterParam(event, 'id')
-    if (!id || isNaN(Number(id))) {
+    if (!id || Number.isNaN(Number(id))) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Invalid holiday ID',
@@ -28,17 +28,17 @@ export default defineEventHandler(async (event) => {
 
     // Get and validate request body
     const body = await readBody(event)
-    
+
     // Validate with Valibot
     const validatedData = parse(UpdateHolidaySchema, body)
-    
+
     // Validate date logic if both dates are provided
     if (validatedData.date && validatedData.endDate) {
       const startDate = new Date(validatedData.date)
       const endDate = new Date(validatedData.endDate)
       const oneDayLater = new Date(startDate)
       oneDayLater.setDate(oneDayLater.getDate() + 1)
-      
+
       if (endDate < oneDayLater) {
         throw createError({
           statusCode: 400,
@@ -68,7 +68,8 @@ export default defineEventHandler(async (event) => {
       success: true,
       data: updatedHoliday,
     }
-  } catch (error: any) {
+  }
+  catch (error: any) {
     // Handle validation errors
     if (error.issues) {
       throw createError({

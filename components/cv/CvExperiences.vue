@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import exp from '@/locales/en/exp';
-const exp_list = Object.keys(exp)
+const { experiences, fetch } = useCvExperiences()
+await fetch()
 </script>
 
 <template>
@@ -9,9 +9,9 @@ const exp_list = Object.keys(exp)
       {{ $t('exp_title') }}
     </h2>
     <CvCardExperience
-      v-for="job in exp_list"
-      :key="job"
-      :job="job"
+      v-for="exp in experiences"
+      :key="exp.slug"
+      :experience="exp"
     />
   </section>
 </template>

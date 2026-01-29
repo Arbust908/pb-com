@@ -40,11 +40,11 @@ export default {
 </script>
 
 <template>
-  <nuxt-link
+  <NuxtLink
     :to="`/clases/${slug}`"
     class="m-auto flex justify-center pt-10 lg:mx-6 lg:my-8 lg:w-1/4"
-    @mouseenter.native="isHover = true"
-    @mouseleave.native="isHover = false"
+    @mouseenter="isHover = true"
+    @mouseleave="isHover = false"
   >
     <div class="relative h-48 w-64">
       <section
@@ -80,5 +80,5 @@ export default {
         class="absolute bottom-0 right-0 z-30 mb-2 h-3 rounded-xl transition-all duration-150 ease-out -mr-3"
       />
     </div>
-  </nuxt-link>
+  </NuxtLink>
 </template>

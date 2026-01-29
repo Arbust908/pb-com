@@ -5,8 +5,28 @@ const general_store = useGeneralStore()
 const { print_mode } = storeToRefs(general_store)
 const { togglePrintMode } = general_store
 
-const skill_list = ['web', 'adobe', 'other']
-const lang_list = ['es', 'en']
+const { skills, fetch: fetchSkills } = useCvSkills()
+const { languages, fetch: fetchLanguages } = useCvLanguages()
+
+await Promise.all([fetchSkills(), fetchLanguages()])
+
+function getSkillTranslation(skill: typeof skills.value[number], field: string): string {
+  const translations = skill.translations
+  return translations[locale.value]?.[field] || translations.en?.[field] || ''
+}
+
+function getSkillList(skill: typeof skills.value[number]): string {
+  // Check if there's a locale-specific list in translations (for 'other' skill)
+  const localizedList = skill.translations[locale.value]?.list
+  if (localizedList)
+    return localizedList
+  return skill.skillList
+}
+
+function getLangTranslation(lang: typeof languages.value[number], field: string): string {
+  const translations = lang.translations
+  return translations[locale.value]?.[field] || translations.en?.[field] || ''
+}
 
 function birthday() {
   return new Date('06/14/1991').toLocaleDateString(
@@ -23,7 +43,7 @@ function birthday() {
     <picture>
       <source type="image/webp" srcset="/img/avatar.webp">
       <img
-        class="right-0 top-0 mb-4 border-2 border-slate-500 rounded object-cover shadow absolute h-40 w-40 m-2 md:-m-2 md:w-32 lg:w-40"
+        class="absolute right-0 top-0 m-2 mb-4 h-40 w-40 border-2 border-slate-500 rounded object-cover shadow lg:w-40 md:w-32 md:-m-2"
         src="/img/avatar.jpg"
         :alt="t('avatar.desc')"
       >
@@ -57,12 +77,12 @@ function birthday() {
         <i class="i-ic:round-code mr-2 h-6 w-6" />
         <span> Skills </span>
       </h3>
-      <article v-for="group in skill_list" :key="group" class="mb-2">
+      <article v-for="skill in skills" :key="skill.slug" class="mb-2">
         <h4 class="mb-1 font-bold underline opacity-75">
-          {{ t(`skills.${group}.title`) }}
+          {{ getSkillTranslation(skill, 'title') }}
         </h4>
         <p class="text-sm text-slate-800 dark:text-slate-200">
-          {{ t(`skills.${group}.list`) }}
+          {{ getSkillList(skill) }}
         </p>
       </article>
     </section>
@@ -72,15 +92,15 @@ function birthday() {
         <span> {{ t('lang_title') }} </span>
       </h3>
       <article
-        v-for="lang in lang_list"
-        :key="lang"
+        v-for="lang in languages"
+        :key="lang.slug"
         class="mb-1 flex justify-between"
       >
         <h4 class="mb-1 font-bold">
-          {{ t(`tongues.${lang}.name`) }}
+          {{ getLangTranslation(lang, 'name') }}
         </h4>
         <p class="text-slate-800 dark:text-slate-200">
-          {{ t(`tongues.${lang}.level`) }}
+          {{ getLangTranslation(lang, 'level') }}
         </p>
       </article>
     </section>

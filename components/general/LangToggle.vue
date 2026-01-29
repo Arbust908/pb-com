@@ -1,21 +1,13 @@
 <script lang="ts" setup>
-import shuffleLetters from 'shuffle-letters';
-const { locale, locales, setLocale } = useI18n()
+const { locale, setLocale } = useI18n()
 
 function _toggleLang() {
-  /* console.log('toggleLang', locale.value, locales.value)
-  const indexLang = locales.value.indexOf(locale.value)
-  console.log('indexLang', indexLang)
-  const newLocale = locales.value[(indexLang + 1) % locales.value.length]
-  console.log('newLocale', newLocale) */
-  // setLocale(newLocale)
   const newLang = locale.value === 'es' ? 'en' : 'es'
   setLocale(newLang)
-  console.log('NewLang::', newLang)
   document.documentElement.lang = newLang
 }
 
-function toggleLang(e) {
+function toggleLang(e: MouseEvent) {
   const md = window.matchMedia('(max-width: 768px)').matches
   const x = e.clientX
   const y = e.clientY

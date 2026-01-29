@@ -101,17 +101,8 @@
 
 .card:after {
   opacity: 1;
-  background-image: url('https://assets.codepen.io/13471/sparkles.gif'),
-    url(https://assets.codepen.io/13471/holo.png),
-    linear-gradient(
-      125deg,
-      #ff008450 15%,
-      #fca40040 30%,
-      #ffff0030 40%,
-      #00ff8a20 60%,
-      #00cfff40 70%,
-      #cc4cfa50 85%
-    );
+  background-image: url('https://assets.codepen.io/13471/sparkles.gif'), url(https://assets.codepen.io/13471/holo.png),
+    linear-gradient(125deg, #ff008450 15%, #fca40040 30%, #ffff0030 40%, #00ff8a20 60%, #00cfff40 70%, #cc4cfa50 85%);
   background-position: 50% 50%;
   background-size: 160%;
   background-blend-mode: overlay;
@@ -137,13 +128,7 @@
 .card.active:before,
 .card:hover:before {
   animation: none;
-  background-image: linear-gradient(
-    110deg,
-    transparent 25%,
-    var(--color1) 48%,
-    var(--color2) 52%,
-    transparent 75%
-  );
+  background-image: linear-gradient(110deg, transparent 25%, var(--color1) 48%, var(--color2) 52%, transparent 75%);
   background-position: 50% 50%;
   background-size: 250% 250%;
   opacity: 0.88;

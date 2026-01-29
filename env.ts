@@ -9,7 +9,7 @@ const envVariables = z.object({
   SOMETHING_COOL: z.string(),
 })
 
-envVariables.parse(process.env)
+envVariables.parse(import.meta.env)
 
 declare global {
   namespace NodeJS {
@@ -19,4 +19,4 @@ declare global {
   }
 }
 
-console.log(process.env.SOMETHING_COOL) */
+console.log(import.meta.env.SOMETHING_COOL) */

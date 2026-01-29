@@ -1,8 +1,8 @@
 import { defineEventHandler } from 'h3'
+import { parse } from 'valibot'
 import { serverSupabaseUser } from '#supabase/server'
 import { db } from '~/server/db'
 import { holidays } from '~/server/db/schema'
-import { parse } from 'valibot'
 import { CreateHolidaySchema, validateHolidayDates } from '~/server/utils/holidays'
 
 export default defineEventHandler(async (event) => {
@@ -18,10 +18,10 @@ export default defineEventHandler(async (event) => {
 
     // Get and validate request body
     const body = await readBody(event)
-    
+
     // Validate with Valibot
     const validatedData = parse(CreateHolidaySchema, body)
-    
+
     // Validate date logic
     const finalData = validateHolidayDates(validatedData)
 
@@ -39,7 +39,8 @@ export default defineEventHandler(async (event) => {
       success: true,
       data: newHoliday,
     }
-  } catch (error: any) {
+  }
+  catch (error: any) {
     // Handle validation errors
     if (error.issues) {
       throw createError({
@@ -48,7 +49,7 @@ export default defineEventHandler(async (event) => {
         data: error.issues,
       })
     }
-    
+
     // Handle custom validation error
     if (error.message?.includes('End date must be')) {
       throw createError({
