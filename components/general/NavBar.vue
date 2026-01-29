@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useGeneralStore } from '~/composables'
-import { useUserStore } from '~/stores/user'
 
 const general_store = useGeneralStore()
-const userStore = useUserStore()
 const { print_mode } = storeToRefs(general_store)
-const client = useSupabaseClient()
-const router = useRouter()
 
 // https://codepen.io/jh3y/pen/QWoKXdo
 // https://twitter.com/jh3yy/status/1746101914700493168
@@ -33,22 +29,16 @@ const router = useRouter()
       </ClientOnly>
       <NuxtLink
         class="rounded-lg px-2 py-1 transition duration-150 ease-out hover:text-violet-500 hover:underline"
-        to="/about"
-      >
-        About
-      </NuxtLink>
-      <NuxtLink
-        class="rounded-lg px-2 py-1 transition duration-150 ease-out hover:text-violet-500 hover:underline"
         to="/cv"
       >
         Resume
       </NuxtLink>
-      <NuxtLink
+    <!--   <NuxtLink
         class="rounded-lg bg-violet-400 px-4 py-1 text-slate-900 transition duration-150 ease-out dark:bg-violet-600 dark:text-slate-100 hover:text-violet-500 hover:shadow dark:hover:bg-violet-800"
         to="/blog"
       >
         Blog
-      </NuxtLink>
+      </NuxtLink> -->
     </nav>
   </header>
 </template>

@@ -1,5 +1,12 @@
 <script setup lang="ts">
-const learn_list = ['dh', 'up', 'slc']
+const { locale } = useI18n()
+const { studies, fetch } = useCvStudies()
+await fetch()
+
+function getTranslation(study: typeof studies.value[number], field: string): string {
+  const translations = study.translations
+  return translations[locale.value]?.[field] || translations.en?.[field] || ''
+}
 </script>
 
 <template>
@@ -8,11 +15,11 @@ const learn_list = ['dh', 'up', 'slc']
       {{ $t('study_title') }}
     </h2>
     <CvCardStudy
-      v-for="study in learn_list"
-      :key="study"
-      :place="$t(`study.${study}.place`)"
-      :date="$t(`study.${study}.date`)"
-      :description="$t(`study.${study}.description`)"
+      v-for="study in studies"
+      :key="study.slug"
+      :place="getTranslation(study, 'place')"
+      :date="study.dateRange"
+      :description="getTranslation(study, 'description')"
     />
   </section>
 </template>

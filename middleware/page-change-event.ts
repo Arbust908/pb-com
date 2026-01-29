@@ -1,4 +1,5 @@
 import posthog from 'posthog-js'
+
 export default defineNuxtRouteMiddleware((to, from) => {
   const isDev = import.meta.dev
   if (!isDev) {
@@ -8,4 +9,4 @@ export default defineNuxtRouteMiddleware((to, from) => {
     //
     posthog.capture(`Page::${to.name} || ${to.path}`)
   }
-  })
+})

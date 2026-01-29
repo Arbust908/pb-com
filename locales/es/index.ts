@@ -1,14 +1,5 @@
-import exp from './exp'
-import tongues from './tongues'
-import skills from './skills'
-import study from './study'
-
 export default {
   lang: 'es',
-  exp,
-  tongues,
-  skills,
-  study,
   rol: 'Desarrollador Creativo',
   change_lang: 'Change Language',
   exp_title: 'Experiencia',
@@ -23,4 +14,5 @@ export default {
     desc: 'Foto blanco y negro de Pancho Blanco',
   },
   current: 'actual',
+  recent_work: 'Trabajo Reciente',
 }
