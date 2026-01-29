@@ -3,11 +3,8 @@ import shuffleLetters from 'shuffle-letters';
 // https://github.com/georapbox/shuffle-letters/tree/main
 import type { MetaData } from '@/composables/ultimateProtocol'
 import { useUP } from '@/composables/ultimateProtocol'
-import { useCvExperiences } from '@/composables/useCvExperiences'
 import type { CvExperience } from '@/composables/useCvExperiences'
-import { useCvSkills } from '@/composables/useCvSkills'
 import type { CvSkill } from '@/composables/useCvSkills'
-import { useCvLanguages } from '@/composables/useCvLanguages'
 import type { CvLanguage } from '@/composables/useCvLanguages'
 
 const meta: MetaData = {
@@ -18,11 +15,16 @@ const meta: MetaData = {
 }
 useHead(useUP(meta))
 
-// CV Data
-const { experiences, fetch: fetchExperiences, loading: loadingExperiences } = useCvExperiences()
-const { skills, fetch: fetchSkills, loading: loadingSkills } = useCvSkills()
-const { languages, fetch: fetchLanguages, loading: loadingLanguages } = useCvLanguages()
 const { locale } = useI18n()
+
+// Server-side data fetching for CV
+const { data: experiencesData, pending: pendingExperiences } = await useAsyncData('cv-experiences', () => $fetch('/api/cv/experiences'))
+const { data: skillsData, pending: pendingSkills } = await useAsyncData('cv-skills', () => $fetch('/api/cv/skills'))
+const { data: languagesData, pending: pendingLanguages } = await useAsyncData('cv-languages', () => $fetch('/api/cv/languages'))
+
+const experiences = computed(() => experiencesData.value?.data || [])
+const skills = computed(() => skillsData.value?.data || [])
+const languages = computed(() => languagesData.value?.data || [])
 
 // Get translation for current locale with fallback to 'en'
 function getTranslation(item: CvExperience | CvSkill | CvLanguage, field: string): string {
@@ -56,12 +58,11 @@ const recentExperiences = computed(() => {
 // AI vue components https://www.vue0.dev/
 onMounted(async () => {
   shuffleLetters(document.querySelector('h2'))
-  await Promise.all([fetchExperiences(), fetchSkills(), fetchLanguages()])
 });
 
 // Loading state for all CV data
 const loadingCvData = computed(() =>
-  loadingExperiences.value || loadingSkills.value || loadingLanguages.value
+  pendingExperiences.value || pendingSkills.value || pendingLanguages.value
 )
 </script>
 
@@ -92,7 +93,7 @@ const loadingCvData = computed(() =>
   </section>
 
   <!-- CV Overview Section -->
-  <section v-if="!loadingCvData && (recentExperiences.length > 0 || skills.length > 0 || languages.length > 0)" class="py-8 px-6">
+  <section v-if="!loadingCvData && (recentExperiences.length > 0 || skills.value.length > 0 || languages.value.length > 0)" class="py-8 px-6">
     <div class="max-w-4xl mx-auto space-y-8">
 
       <!-- Recent Experience -->
@@ -125,7 +126,7 @@ const loadingCvData = computed(() =>
       </div>
 
       <!-- Skills -->
-      <div v-if="skills.length > 0">
+      <div v-if="skills.length > 0 && !pendingSkills">
         <h3 class="text-2xl font-bold mb-6 text-center text-slate-800 dark:text-slate-200">
           {{ $t('skills_title') }}
         </h3>
@@ -146,7 +147,7 @@ const loadingCvData = computed(() =>
       </div>
 
       <!-- Languages -->
-      <div v-if="languages.length > 0">
+      <div v-if="languages.length > 0 && !pendingLanguages">
         <h3 class="text-2xl font-bold mb-6 text-center text-slate-800 dark:text-slate-200">
           {{ $t('lang_title') }}
         </h3>
