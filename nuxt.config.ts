@@ -81,12 +81,6 @@ export default defineNuxtConfig({
       // ✅ PERF BUDGET: Warn if individual chunks exceed 500KB
       chunkSizeWarningLimit: 500,
       rollupOptions: {
-        output: {
-          manualChunks: {
-            vue: ['vue', 'vue-router', 'pinia'],
-            nuxt: ['@nuxt/kit', '@nuxt/schema'],
-          },
-        },
         plugins:
           import.meta.env.NODE_ENV === 'development'
             ? []

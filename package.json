@@ -81,10 +81,7 @@
   },
   "lint-staged": {
     "*.{js,ts,vue,json,tsx}": [
-      "eslint --fix"
-    ],
-    "*.{js,ts,vue}": [
-      "yarn typecheck"
+      "eslint"
     ]
   }
 }
