@@ -7,7 +7,7 @@
     "build:analyze": "ANALYZE=true nuxi build",
     "build:visualize": "ANALYZE=true nuxi build",
     "dev:pwa": "VITE_PLUGIN_PWA=true nuxi dev",
-    "dev": "nuxi dev",
+    "dev": "portless pb-com nuxi dev",
     "generate": "nuxi generate",
     "postinstall": "nuxi prepare",
     "prepare": "npx simple-git-hooks",
