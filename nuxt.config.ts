@@ -6,6 +6,8 @@ export default defineNuxtConfig({
       appName: '',
     },
     openRouterKey: '',
+    devUser: '',
+    devPass: '',
   },
 
   modules: [
