@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab — Pancho Blanco</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0c0c0b;
+      --bg2: #141413;
+      --bg3: #1c1c1a;
+      --text: #f0ede8;
+      --text2: #908e89;
+      --text3: #4a4845;
+      --accent: #b8ff57;
+      --accent-dim: rgba(184,255,87,0.12);
+      --border: rgba(240,237,232,0.07);
+      --border-h: rgba(240,237,232,0.14);
+    }
+
+    html { background: var(--bg); color: var(--text); scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      padding: 72px 56px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ─── NAV ─────────────────────────────── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--text3);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-logo span { color: var(--text2); }
+    .nav-logo:hover { color: var(--text2); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text3);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--text); }
+    .nav-link.active { color: var(--accent); }
+
+    /* ─── HEADER ──────────────────────────── */
+    .header { margin-bottom: 56px; }
+    h1 {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(64px, 9vw, 120px);
+      font-weight: 400;
+      line-height: 0.9;
+      color: var(--text);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+    .subtitle {
+      font-size: 15px;
+      color: var(--text2);
+      max-width: 440px;
+      line-height: 1.65;
+    }
+
+    /* ─── FILTERS ─────────────────────────── */
+    .filters {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 44px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text3);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--border-h); color: var(--text2); }
+    .filter-btn.active {
+      background: var(--accent);
+      color: #0c0c0b;
+      border-color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ─── GRID ────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 960px) { .grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } body { padding: 40px 24px; } }
+
+    /* ─── CARD ────────────────────────────── */
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.35s, transform 0.35s cubic-bezier(0.23,1,0.32,1);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .card:hover { border-color: var(--border-h); transform: translateY(-2px); }
+
+    .card-preview {
+      height: 210px;
+      background: var(--bg3);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .card-body { padding: 20px 22px 22px; flex: 1; }
+    .card-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 9px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 7px;
+      line-height: 1.3;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    .card-arrow {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.25s, transform 0.25s, border-color 0.25s;
+      font-size: 13px;
+      color: var(--text);
+      background: var(--bg2);
+    }
+    .card:hover .card-arrow { opacity: 1; transform: scale(1); border-color: var(--border-h); }
+
+    /* ─── DEMO: SCRAMBLE ──────────────────── */
+    .scramble-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 36px;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      user-select: none;
+    }
+
+    /* ─── DEMO: MAGNETIC ──────────────────── */
+    .mag-btn {
+      padding: 11px 26px;
+      border-radius: 99px;
+      background: var(--accent);
+      color: #0c0c0b;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      pointer-events: none;
+      transition: transform 0.2s cubic-bezier(0.23,1,0.32,1);
+      letter-spacing: 0.01em;
+    }
+
+    /* ─── DEMO: TILT ──────────────────────── */
+    .tilt-wrap { perspective: 700px; }
+    .tilt-card {
+      width: 130px;
+      height: 88px;
+      background: var(--bg2);
+      border: 1px solid var(--border-h);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.08s linear;
+      position: relative;
+      overflow: hidden;
+    }
+    .tilt-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(184,255,87,0.1) 0%, transparent 60%);
+      transition: opacity 0.3s;
+      opacity: 0;
+    }
+    .tilt-card:hover::before { opacity: 1; }
+    .tilt-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── DEMO: TRAIL ─────────────────────── */
+    .trail-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--accent);
+      pointer-events: none;
+      transform-origin: center;
+    }
+
+    /* ─── DEMO: COUNTER ───────────────────── */
+    .counter-val {
+      font-size: 60px;
+      font-weight: 700;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .counter-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text3);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    /* ─── DEMO: TYPEWRITER ────────────────── */
+    .typewriter-wrap {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.7;
+      padding: 0 24px;
+    }
+    .tw-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--accent);
+      vertical-align: text-bottom;
+      margin-left: 2px;
+      animation: blink 0.85s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ─── DEMO: PROGRESS EMOJI ────────────── */
+    .progress-outer { width: 78%; position: relative; padding-top: 28px; }
+    .progress-emoji-label {
+      position: absolute;
+      top: 0;
+      font-size: 22px;
+      transform: translateX(-50%);
+      pointer-events: none;
+      transition: left 0.08s;
+      line-height: 1;
+    }
+    input[type=range].prog-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 99px;
+      background: var(--bg);
+      outline: none;
+      cursor: pointer;
+    }
+    input[type=range].prog-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: 3px solid var(--bg3);
+      transition: transform 0.15s;
+    }
+    input[type=range].prog-range::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+    /* ─── DEMO: CMD PALETTE ───────────────── */
+    .cmd-palette {
+      width: 86%;
+      background: rgba(12,12,11,0.9);
+      border: 1px solid var(--border-h);
+      border-radius: 12px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    .cmd-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cmd-icon { font-size: 14px; color: var(--text3); }
+    .cmd-input-fake {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--text2);
+      flex: 1;
+      pointer-events: none;
+    }
+    .cmd-shortcut {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text3);
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+    }
+    .cmd-items { padding: 6px; }
+    .cmd-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 10px;
+      border-radius: 7px;
+      font-size: 12px;
+      color: var(--text2);
+      transition: background 0.15s;
+    }
+    .cmd-item.is-active { background: var(--accent-dim); color: var(--accent); }
+    .cmd-item-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    /* ─── DEMO: MARQUEE ───────────────────── */
+    .marquee-outer { width: 100%; overflow: hidden; }
+    .marquee-track {
+      display: flex;
+      gap: 28px;
+      white-space: nowrap;
+      animation: marqueeA 10s linear infinite;
+    }
+    .card:hover .marquee-track { animation-duration: 3.5s; }
+    .marquee-track.rev { animation-name: marqueeB; animation-duration: 13s; }
+    .card:hover .marquee-track.rev { animation-duration: 4.5s; }
+    @keyframes marqueeA { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes marqueeB { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    .m-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text3);
+      flex-shrink: 0;
+    }
+    .m-item.hi { color: var(--accent); font-size: 10px; }
+
+    /* ─── DEMO: DOCK ──────────────────────── */
+    .dock {
+      display: flex;
+      align-items: flex-end;
+      gap: 7px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 18px;
+      border: 1px solid var(--border-h);
+    }
+    .dock-item {
+      width: 38px;
+      height: 38px;
+      background: var(--bg3);
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transform-origin: bottom center;
+      transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), margin-bottom 0.18s;
+    }
+
+    /* ─── DEMO: STAGGER ───────────────────── */
+    .stagger-list { width: 86%; }
+    .stagger-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text2);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .stagger-item.vis { opacity: 1; transform: none; }
+    .s-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* ─── DEMO: PALETTE ───────────────────── */
+    .swatch-row { display: flex; gap: 7px; }
+    .swatch {
+      flex: 1;
+      height: 56px;
+      border-radius: 10px;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), background 0.4s ease;
+    }
+
+    /* ─── FOOTER ──────────────────────────── */
+    footer {
+      margin-top: 88px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-left {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.04em;
+    }
+    .footer-right {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-right:hover { color: var(--accent); }
+
+    /* hint label for static previews */
+    .hint {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.06em;
+      pointer-events: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo"><span>pancho</span>blanco.dev</a>
+    <div class="nav-links">
+      <a href="/work" class="nav-link">Work</a>
+      <a href="/lab" class="nav-link active">Lab</a>
+      <a href="/resume" class="nav-link">Resume</a>
+    </div>
+  </nav>
+
+  <header class="header">
+    <h1>Lab</h1>
+    <p class="subtitle">A collection of micro-interactions, UI experiments, and interactive demos. Each piece is a proof of craft.</p>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All <span style="color:var(--text3);margin-left:4px">12</span></button>
+    <button class="filter-btn" data-filter="micro">Micro-interactions</button>
+    <button class="filter-btn" data-filter="demo">Interactive demos</button>
+    <button class="filter-btn" data-filter="css">CSS & animation</button>
+    <button class="filter-btn" data-filter="ui">UI components</button>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <!-- 1. Scramble text -->
+    <a class="card" href="#" data-cat="css">
+      <div class="card-preview" id="p-scramble">
+        <div class="scramble-text" id="scramble-el">hello</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">CSS & animation</div>
+        <div class="card-title">Text scramble effect</div>
+        <div class="card-desc">Characters randomly cycle before resolving to the target. Theatrical and satisfying on hero headings.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <!-- 2. Magnetic button -->
+    <a class="card" href="#" data-cat="micro">
+      <div class="card-preview" id="p-mag">
+        <button class="mag-btn" id="mag-btn">Move cursor here</button>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Micro-interaction</div>
+        <div class="card-title">Magnetic button</div>
+        <div class="card-desc">Button is attracted to the cursor with an elastic pull, snapping back with spring physics on leave.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <!-- 3. 3D card tilt -->
+    <a class="card" href="#" data-cat="micro">
+      <div class="card-preview" id="p-tilt">
+        <div class="tilt-wrap">
+          <div class="tilt-card" id="tilt-el">
+            <div class="tilt-label">3D tilt</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Micro-interaction</div>
+        <div class="card-title">3D card tilt</div>
+        <div class="card-desc">Perspective transform follows cursor position. Pairs with a specular highlight for depth.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <!-- 4. Cursor trail -->
+    <a class="card" href="#" data-cat="css">
+      <div class="card-preview" id="p-trail" style="cursor:none;">
+        <span class="hint">move cursor here</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">CSS & animation</div>
+        <div class="card-title">Cursor trail</div>
+        <div class="card-desc">Fading dots follow the cursor with decreasing scale. Adds magic to creative hero sections.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <!-- 5. Animated counter -->
+    <a class="card" href="#" data-cat="demo">
+      <div class="card-preview" id="p-counter" style="flex-direction:column;gap:0;">
+        <div class="counter-val" id="counter-el">0</div>
+        <div class="counter-label">daily shipments</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Interactive demo</div>
+        <div class="card-title">Animated counter</div>
+        <div class="card-desc">Numbers animate up from zero with a cubic ease-out. Hover to trigger — re-hovers replay.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <!-- 6. Typewriter -->
+    <a class="card" href="#" data-cat="css">
+      <div class="card-preview">
+        <div class="typewriter-wrap"><span id="tw-el"></span><span class="tw-cursor"></span></div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">CSS & animation</div>
+        <div class="card-title">Typewriter effect</div>
+        <div class="card-desc">Character-by-character reveal with variable speed and multi-phrase cycling on loop.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <!-- 7. Progress thumb emoji -->
+    <a class="card" href="#" data-cat="micro">
+      <div class="card-preview" style="flex-direction:column;gap:0;">
+        <div class="progress-outer">
+          <div class="progress-emoji-label" id="prog-emoji">😐</div>
+          <input type="range" class="prog-range" id="prog-range" min="0" max="100" value="50">
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Micro-interaction</div>
+        <div class="card-title">Progressive thumb emoji</div>
+        <div class="card-desc">The slider thumb transforms into context-aware emojis as you drag. Playful and delightful.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <!-- 8. Command palette -->
+    <a class="card" href="#" data-cat="ui">
+      <div class="card-preview" id="p-cmd">
+        <div class="cmd-palette">
+          <div class="cmd-top">
+            <span class="cmd-icon">⌘</span>
+            <span class="cmd-input-fake">Search commands…</span>
+            <span class="cmd-shortcut">K</span>
+          </div>
+          <div class="cmd-items">
+            <div class="cmd-item is-active" id="cmd-0"><div class="cmd-item-icon">🏠</div><span>Go to home</span></div>
+            <div class="cmd-item" id="cmd-1"><div class="cmd-item-icon">💼</div><span>Open work</span></div>
+            <div class="cmd-item" id="cmd-2"><div class="cmd-item-icon">🧪</div><span>Open lab</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">UI component</div>
+        <div class="card-title">Command palette ⌘K</div>
+        <div class="card-desc">Keyboard-first navigation modal with fuzzy search, grouped actions, and keyboard shortcuts.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <!-- 9. Infinite marquee -->
+    <a class="card" href="#" data-cat="css">
+      <div class="card-preview" id="p-marquee" style="flex-direction:column;gap:14px;">
+        <div class="marquee-outer">
+          <div class="marquee-track">
+            <span class="m-item">TypeScript</span><span class="m-item hi">✦</span>
+            <span class="m-item">React</span><span class="m-item hi">✦</span>
+            <span class="m-item">Vue</span><span class="m-item hi">✦</span>
+            <span class="m-item">Nuxt 4</span><span class="m-item hi">✦</span>
+            <span class="m-item">Next.js</span><span class="m-item hi">✦</span>
+            <span class="m-item">TypeScript</span><span class="m-item hi">✦</span>
+            <span class="m-item">React</span><span class="m-item hi">✦</span>
+            <span class="m-item">Vue</span><span class="m-item hi">✦</span>
+            <span class="m-item">Nuxt 4</span><span class="m-item hi">✦</span>
+            <span class="m-item">Next.js</span><span class="m-item hi">✦</span>
+          </div>
+        </div>
+        <div class="marquee-outer">
+          <div class="marquee-track rev">
+            <span class="m-item">Prisma</span><span class="m-item hi">✦</span>
+            <span class="m-item">Tailwind</span><span class="m-item hi">✦</span>
+            <span class="m-item">Storybook</span><span class="m-item hi">✦</span>
+            <span class="m-item">Playwright</span><span class="m-item hi">✦</span>
+            <span class="m-item">TanStack</span><span class="m-item hi">✦</span>
+            <span class="m-item">Prisma</span><span class="m-item hi">✦</span>
+            <span class="m-item">Tailwind</span><span class="m-item hi">✦</span>
+            <span class="m-item">Storybook</span><span class="m-item hi">✦</span>
+            <span class="m-item">Playwright</span><span class="m-item hi">✦</span>
+            <span class="m-item">TanStack</span><span class="m-item hi">✦</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">CSS & animation</div>
+        <div class="card-title">Infinite marquee</div>
+        <div class="card-desc">Seamlessly looping ticker. Speeds up on hover, with reversed direction on alternate rows.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <!-- 10. Dock magnify -->
+    <a class="card" href="#" data-cat="micro">
+      <div class="card-preview" id="p-dock">
+        <div class="dock" id="dock">
+          <div class="dock-item">🏠</div>
+          <div class="dock-item">💼</div>
+          <div class="dock-item">🧪</div>
+          <div class="dock-item">✉️</div>
+          <div class="dock-item">⚡</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Micro-interaction</div>
+        <div class="card-title">macOS dock magnify</div>
+        <div class="card-desc">Icons near the cursor grow proportionally using a Gaussian falloff — the classic macOS dock effect.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <!-- 11. Stagger list -->
+    <a class="card" href="#" data-cat="demo">
+      <div class="card-preview" id="p-stagger">
+        <div class="stagger-list" id="stagger-list">
+          <div class="stagger-item"><span class="s-dot"></span>Vue 2 → Vue 3 migration</div>
+          <div class="stagger-item"><span class="s-dot"></span>Design system rollout</div>
+          <div class="stagger-item"><span class="s-dot"></span>A/B testing infrastructure</div>
+          <div class="stagger-item"><span class="s-dot"></span>PWA with offline sync</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Interactive demo</div>
+        <div class="card-title">Staggered list reveal</div>
+        <div class="card-desc">Items cascade in with offset delays. Pairs with IntersectionObserver for scroll-triggered entrance.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <!-- 12. Color palette generator -->
+    <a class="card" href="#" data-cat="demo">
+      <div class="card-preview" id="p-palette">
+        <div class="swatch-row" id="swatch-row">
+          <div class="swatch" style="background:#2d2d2b;"></div>
+          <div class="swatch" style="background:#3d5a3e;"></div>
+          <div class="swatch" style="background:#b8ff57;"></div>
+          <div class="swatch" style="background:#f0ede8;"></div>
+          <div class="swatch" style="background:#e85d26;"></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Interactive demo</div>
+        <div class="card-title">Color palette generator</div>
+        <div class="card-desc">Harmonious palettes from a seed hue. Hover to cycle — exports as CSS custom properties.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+  </div>
+
+  <footer>
+    <div class="footer-left">12 experiments · updating regularly</div>
+    <a href="https://panchoblanco.dev" class="footer-right">panchoblanco.dev ↗</a>
+  </footer>
+
+  <script>
+    /* ── FILTER ────────────────────────────── */
+    const catMap = { micro:'micro', demo:'demo', css:'css', ui:'ui' };
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.card').forEach(c => {
+          c.style.display = (f === 'all' || c.dataset.cat === f) ? 'flex' : 'none';
+        });
+      });
+    });
+
+    /* ── 1. SCRAMBLE ───────────────────────── */
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
+    const WORDS = ['hello', '/lab', 'craft', 'build', '<code/>', 'ship.'];
+    let wIdx = 0, scvI = null;
+    const scEl = document.getElementById('scramble-el');
+
+    function scramble(target) {
+      let iter = 0;
+      clearInterval(scvI);
+      scvI = setInterval(() => {
+        scEl.textContent = target.split('').map((ch, i) => i < iter ? ch : CHARS[Math.floor(Math.random() * CHARS.length)]).join('');
+        if (iter >= target.length) { clearInterval(scvI); scEl.textContent = target; }
+        iter += 0.4;
+      }, 38);
+    }
+    scramble(WORDS[wIdx]);
+    setInterval(() => { wIdx = (wIdx + 1) % WORDS.length; scramble(WORDS[wIdx]); }, 2800);
+
+    /* ── 2. MAGNETIC ───────────────────────── */
+    const magArea = document.getElementById('p-mag');
+    const magBtn  = document.getElementById('mag-btn');
+    magArea.addEventListener('mousemove', e => {
+      const r = magArea.getBoundingClientRect();
+      const br = magBtn.getBoundingClientRect();
+      const cx = br.left + br.width / 2 - r.left;
+      const cy = br.top + br.height / 2 - r.top;
+      const dx = (e.clientX - r.left - cx) * 0.38;
+      const dy = (e.clientY - r.top  - cy) * 0.38;
+      magBtn.style.transform = `translate(${dx}px,${dy}px)`;
+    });
+    magArea.addEventListener('mouseleave', () => { magBtn.style.transform = ''; });
+
+    /* ── 3. TILT ───────────────────────────── */
+    const tiltArea = document.getElementById('p-tilt');
+    const tiltEl   = document.getElementById('tilt-el');
+    tiltArea.addEventListener('mousemove', e => {
+      const r = tiltArea.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top)  / r.height;
+      tiltEl.style.transform = `rotateX(${(y - 0.5) * -22}deg) rotateY(${(x - 0.5) * 22}deg) scale(1.06)`;
+      tiltEl.style.setProperty('--mx', (x * 100) + '%');
+      tiltEl.style.setProperty('--my', (y * 100) + '%');
+    });
+    tiltArea.addEventListener('mouseleave', () => { tiltEl.style.transform = ''; });
+
+    /* ── 4. CURSOR TRAIL ───────────────────── */
+    const trailArea = document.getElementById('p-trail');
+    trailArea.addEventListener('mousemove', e => {
+      const r = trailArea.getBoundingClientRect();
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      const s = Math.random() * 6 + 5;
+      const dot = document.createElement('div');
+      dot.className = 'trail-dot';
+      dot.style.cssText = `left:${x - s/2}px;top:${y - s/2}px;width:${s}px;height:${s}px;opacity:0.75;transition:opacity .5s,transform .5s;`;
+      trailArea.appendChild(dot);
+      requestAnimationFrame(() => { dot.style.opacity = '0'; dot.style.transform = 'scale(0)'; });
+      setTimeout(() => dot.remove(), 550);
+    });
+
+    /* ── 5. COUNTER ────────────────────────── */
+    const counterEl   = document.getElementById('counter-el');
+    const counterCard = document.getElementById('p-counter').closest('.card');
+    let cAnim = false;
+    function animCount(target, dur = 1400) {
+      if (cAnim) return;
+      cAnim = true;
+      const t0 = performance.now();
+      const ease = t => 1 - Math.pow(1 - t, 3);
+      (function tick(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        counterEl.textContent = Math.round(ease(p) * target).toLocaleString();
+        if (p < 1) requestAnimationFrame(tick);
+        else { counterEl.textContent = target.toLocaleString(); cAnim = false; }
+      })(t0);
+    }
+    counterCard.addEventListener('mouseenter', () => {
+      counterEl.textContent = '0'; cAnim = false; animCount(1247);
+    });
+
+    /* ── 6. TYPEWRITER ─────────────────────── */
+    const phrases = ['Building fast UIs.', 'Crafting interactions.', 'Ship with quality.', 'TypeScript ftw.'];
+    let pIdx = 0, cIdx = 0, typing = true;
+    const twEl = document.getElementById('tw-el');
+    function typeStep() {
+      const ph = phrases[pIdx];
+      if (typing) {
+        twEl.textContent = ph.slice(0, ++cIdx);
+        if (cIdx >= ph.length) { typing = false; setTimeout(typeStep, 1700); return; }
+        setTimeout(typeStep, 55 + Math.random() * 45);
+      } else {
+        twEl.textContent = ph.slice(0, --cIdx);
+        if (cIdx <= 0) { typing = true; pIdx = (pIdx + 1) % phrases.length; setTimeout(typeStep, 250); return; }
+        setTimeout(typeStep, 28);
+      }
+    }
+    typeStep();
+
+    /* ── 7. PROGRESS EMOJI ─────────────────── */
+    const progRange = document.getElementById('prog-range');
+    const progEmoji = document.getElementById('prog-emoji');
+    const emojis = [
+      {max:10,e:'😴'},{max:25,e:'😒'},{max:40,e:'😐'},
+      {max:60,e:'🙂'},{max:75,e:'😊'},{max:90,e:'😄'},{max:100,e:'🤩'}
+    ];
+    function syncEmoji() {
+      const v = +progRange.value;
+      const pct = v / 100;
+      progEmoji.textContent = (emojis.find(x => v <= x.max) || emojis.at(-1)).e;
+      progEmoji.style.left = (pct * progRange.offsetWidth) + 'px';
+    }
+    syncEmoji();
+    progRange.addEventListener('input', syncEmoji);
+
+    /* ── 8. CMD PALETTE CYCLE ──────────────── */
+    const cmdItems = [document.getElementById('cmd-0'), document.getElementById('cmd-1'), document.getElementById('cmd-2')];
+    let cmdA = 0;
+    setInterval(() => {
+      cmdItems[cmdA].classList.remove('is-active');
+      cmdA = (cmdA + 1) % cmdItems.length;
+      cmdItems[cmdA].classList.add('is-active');
+    }, 1400);
+
+    /* ── 10. DOCK MAGNIFY ──────────────────── */
+    const dock = document.getElementById('dock');
+    dock.addEventListener('mousemove', e => {
+      dock.querySelectorAll('.dock-item').forEach(item => {
+        const r = item.getBoundingClientRect();
+        const dist = Math.abs(e.clientX - (r.left + r.width / 2));
+        const maxD = 90;
+        const scale = dist < maxD ? 1 + (1 - dist / maxD) * 0.85 : 1;
+        const mb    = dist < maxD ? (1 - dist / maxD) * 14 : 0;
+        item.style.transform = `scale(${scale})`;
+        item.style.marginBottom = mb + 'px';
+      });
+    });
+    dock.addEventListener('mouseleave', () => {
+      dock.querySelectorAll('.dock-item').forEach(item => { item.style.transform = ''; item.style.marginBottom = ''; });
+    });
+
+    /* ── 11. STAGGER ───────────────────────── */
+    const staggerItems = document.querySelectorAll('.stagger-item');
+    const staggerCard  = document.getElementById('p-stagger').closest('.card');
+    function triggerStagger() {
+      staggerItems.forEach((item, i) => {
+        item.classList.remove('vis');
+        setTimeout(() => item.classList.add('vis'), i * 110 + 60);
+      });
+    }
+    staggerCard.addEventListener('mouseenter', triggerStagger);
+    setTimeout(triggerStagger, 500);
+
+    /* ── 12. PALETTE ───────────────────────── */
+    const palettes = [
+      ['#2d2d2b','#3d5a3e','#b8ff57','#f0ede8','#e85d26'],
+      ['#1a1a2e','#16213e','#0f3460','#e94560','#f5f0f6'],
+      ['#0d0d0d','#1b1b1b','#333','#ff6b35','#f7c59f'],
+      ['#2c1810','#8b4513','#d2691e','#f4a460','#ffdead'],
+      ['#0a0a0a','#1a1a1a','#ff0080','#ff8c00','#40ffaa'],
+    ];
+    let pI = 0;
+    const swatches = document.querySelectorAll('.swatch');
+    const paletteCard = document.getElementById('p-palette').closest('.card');
+    paletteCard.addEventListener('mouseenter', () => {
+      pI = (pI + 1) % palettes.length;
+      swatches.forEach((s, i) => {
+        setTimeout(() => {
+          s.style.background = palettes[pI][i];
+          s.style.transform = 'translateY(-10px)';
+          setTimeout(() => s.style.transform = '', 300);
+        }, i * 55);
+      });
+    });
+  </script>
+</body>
+</html>
