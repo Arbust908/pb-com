@@ -61,7 +61,7 @@
     "rollup-plugin-visualizer": "^6.0.5",
     "sharp": "^0.33.4",
     "simple-git-hooks": "^2.13.1",
-    "typescript": "^5.3.3",
+    "typescript": "5.5.4",
     "vitest": "^4.0.18",
     "vue-tsc": "^1.8.25"
   },
