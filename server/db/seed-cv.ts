@@ -34,13 +34,13 @@ function parseDate(dateStr: string | null): string | null {
 // Experience data from locales
 const experiencesEn = {
   demandio: {
-    rol: 'Front-End Engineer',
+    rol: 'Front-End Engineer (Contract)',
     company: 'Demand.io',
     start: '10/18/2022',
     end: null,
     description:
-      'As a Front-End Engineer, I collaborate with the team to develop and maintain multiple products. Leading migration from Vue 2 to Vue 3 + Vite (Nuxt 3), reducing bundle size by 28% and first contentful paint to < 1.2s. Championing design-system adoption (Tailwind V4 + Storybook) enabling faster feature delivery with WCAG AA compliance. Our main stack is based on Vue, utilizing Nuxt 3, UnoCSS or TailwindCSS, and TypeScript. Our product lineup includes an app developed using React Native, a project in which I am actively involved. Additionally, I engage in brainstorming new features in collaboration with the UI and Back-End teams.',
-    more: 'Spearheaded migration of core app from Vue 2 to Vue 3 + Vite (Nuxt 3), cutting bundle size by 28% and reducing first contentful paint to < 1.2s. Championed design-system adoption (Tailwind V4 + Storybook) enabling 3 squads to ship features 30% faster with consistent WCAG AA compliance. Solo handled full migration to TanStack Query, modernizing data fetching layer across entire application. Developed mobile applications using React Native (Expo) serving 1k daily active users. Mentored 2 junior developers; one promoted to mid-level within 12 months. Maintenance and upgrade on Multi-Language Full-stack products (PHP, jQuery 4, CSS) improving feature turn around time by 25% in ticket velocity. I spearheaded an initiative to migrate our legacy code to our current stack.',
+      'Architect and maintain SimplyCodes, a Chrome extension (70,000+ Chrome Web Store users, 4.6★) — own both the UI layer (checkout overlays, in-page widgets) and core extension logic (checkout detection, content-script injection, cross-context messaging).',
+    more: 'Led migration from Vue 2 to Vue 3 + Vite (Nuxt 3), reducing bundle size by 28% and first contentful paint to < 1.2s. Championed design-system adoption (Tailwind V4 + Storybook), enabling faster feature delivery with WCAG AA compliance. Managed dynamic blog content via Contentful CMS, integrating with the Nuxt frontend. Built referral tracking infrastructure and optimized conversion funnels to drive user acquisition. Led multiple A/B testing initiatives using GTM and GA4, analyzing user behavior and conversion metrics to inform product decisions. Stack: Vue, Nuxt 3, UnoCSS/TailwindCSS, TypeScript, React Native (Expo).',
   },
   bitpatagonia: {
     rol: 'Senior Front-End Engineer',
@@ -48,25 +48,25 @@ const experiencesEn = {
     start: '07/01/2020',
     end: '10/18/2022',
     description:
-      'Built front-end team from 0 to 5 developers delivering a multilingual logistics PWA processing 1k daily shipments with > 99% uptime. Led migration from Vue to React with Next.js.',
-    more: 'As Front-end Lead I lead a team of 5 developers in the development of multiple web applications. Our main stack is based on Vue (Vite, Vue 3, UnoCSS or TailwindCSS, Pinia, Vue Router, and Typescript). Even so, we are now migrating our first proprietary product to Next.js. Beyond this product, we also have and maintain a management system for a logistics company in the form of a PWA, a management panel for our mining companies, and two institutional pages. All these products contain i18n to handle multiple languages (usually English and Spanish).',
+      'Built front-end team from 1 to 5 developers delivering a multilingual logistics PWA processing 1k daily shipments with > 99% uptime. Implemented comprehensive analytics infrastructure using GTM and GA to track user behavior and conversion funnels. Led migration from Vue to React, improving performance and developer experience across the platform using Next.js, Redux, and Zod.',
+    more: 'Developed web apps with management systems and metric panels using Nuxt (Vue) and Next.js (React) for SSR/SEO optimization, state management, PWA capabilities, and SQL DB integration via Express REST APIs.',
   },
   viafoura: {
-    rol: 'Front-End Developer',
+    rol: 'Front-End Developer (Concurrent Contract)',
     company: 'Viafoura',
     start: '03/01/2021',
     end: '12/31/2021',
     description:
-      'Maintain and evolve Viafoura\'s Product (a social engagement script) built in multiple technologies (Backbone in v1 and Vue, Vuex in v2). I also took part in the brainstorming of the v3 product and new features in coordination with the UI and Back-end teams.',
+      'Maintained and evolved Viafoura\'s social engagement script built in multiple technologies (Backbone in v1, Vue/Vuex in v2). Participated in brainstorming the v3 product and new features in coordination with the UI and Back-End teams.',
     more: 'Modularised legacy Backbone widgets into Vue components, built into a custom tool reducing on-client size by 60%.',
   },
   forian: {
-    rol: 'Senior Front-End Developer',
+    rol: 'Senior Front-End Developer (Concurrent Contract)',
     company: 'Forian',
     start: '06/01/2020',
     end: '03/31/2021',
     description:
-      'Development and maintain the Biotrack Product in an open collaboration with the backend team. Using Vue with Typescript, Vuetify (for accessibility standards, WCAG & ADA), Vuex and Vue Router to achieve the Jira tickets handed down by the USA POs (Product Owners).',
+      'Developed and maintained the Biotrack product in open collaboration with the Back-End team. Built with Vue, TypeScript, Vuetify (WCAG & ADA accessibility), Vuex, and Vue Router, delivering features against Jira tickets from US-based Product Owners.',
     more: null,
   },
   pointmore: {
@@ -81,10 +81,10 @@ const experiencesEn = {
   digitalhouse_dev: {
     rol: 'Semi-Senior Full Stack Developer',
     company: 'Digital House',
-    start: '01/01/2017',
+    start: '07/01/2016',
     end: '07/01/2020',
     description:
-      'Develop a website with a content editing system and integration with external systems. Paired with an internal Editable REST Api. Laravel + SASS / Vue + Tailwind / Node + ORM(Homemade).Prototype and design in Adobe XD.',
+      'Developed a website with a content editing system and integration with external systems, paired with an internal REST API. Laravel + SCSS / Vue + Tailwind / Node + ORM (Homemade). Prototyped and designed in Adobe XD.',
     more: 'I started as the only Front End developer in this project where the continents were that we should use Laravel as our framework. As a styling library, I wrote various SASS functions with the company\'s brand\'s manual to be used in the Blade templates. As a second version, for security and speed, we migrated all backend CMS to a Vue + Node service and served all data to the Laravel Front End via APIs. I upgraded all our Blade templates into Blade Components for reusability and maintainability. For new Components, I had to design them and get them approved, which I did with Adobe XD. We then migrated our Blade Components to Vue components for optimization. This meant I had to teach our team Vue. As the last version we migrated our complete Laravel Front End to Nuxt and switched our SASS library for TailwindCSS.',
   },
   digitalhouse: {
@@ -99,27 +99,27 @@ const experiencesEn = {
 
 const experiencesEs = {
   demandio: {
-    rol: 'Ingeniero Front-End',
+    rol: 'Ingeniero Front-End (Contrato)',
     description:
-      'Como Ingeniero Front-End, colaboro con el equipo para desarrollar y mantener multiples productos. Lidere la migracion de Vue 2 a Vue 3 + Vite (Nuxt 3), reduciendo el tamano del bundle en un 28% y el First Contentful Paint a menos de 1.2s. Promovi la adopcion del design system (Tailwind V4 + Storybook) permitiendo una entrega de funcionalidades 30% mas rapida con cumplimiento consistente de WCAG AA. Nuestro stack principal se basa en Vue, utilizando Nuxt 3, UnoCSS o TailwindCSS y TypeScript. Nuestra linea de productos incluye una aplicacion desarrollada usando React Native, un proyecto en el que estoy activamente involucrado. Adicionalmente, participo en sesiones de brainstorming para nuevas funcionalidades en colaboracion con los equipos de UX y Back-End.',
-    more: 'Lidere la migracion del nucleo de la aplicacion de Vue 2 a Vue 3 + Vite (Nuxt 3), reduciendo el tamano del bundle en un 28% y el First Contentful Paint a menos de 1.2s. Promovi la adopcion del design system (Tailwind V4 + Storybook) permitiendo que 3 squads entreguen funcionalidades 30% mas rapido con cumplimiento consistente de WCAG AA. Maneje de forma independiente la migracion completa a TanStack Query, modernizando la capa de fetching de datos en toda la aplicacion. Desarrolle aplicaciones moviles usando React Native (Expo) atendiendo a 1k usuarios activos diarios. Mentoree a 2 desarrolladores junior; uno promovido a nivel medio en 12 meses. Mantenimiento y actualizacion de productos Full-Stack multiidioma (PHP, jQuery 4, CSS) mejorando el tiempo de entrega de funcionalidades en un 25% en velocidad de tickets. Lidere una iniciativa para migrar nuestro codigo legacy a nuestro stack actual.',
+      'Arquitecto y mantengo SimplyCodes, una extension de Chrome (mas de 70.000 usuarios en la Chrome Web Store, 4.6★) — a cargo tanto de la capa de UI (overlays de checkout, widgets in-page) como de la logica central de la extension (deteccion de checkout, inyeccion de content scripts, mensajeria entre contextos).',
+    more: 'Lidere la migracion de Vue 2 a Vue 3 + Vite (Nuxt 3), reduciendo el tamano del bundle en un 28% y el First Contentful Paint a menos de 1.2s. Promovi la adopcion del design system (Tailwind V4 + Storybook), permitiendo una entrega de funcionalidades mas rapida con cumplimiento de WCAG AA. Administre contenido dinamico del blog mediante Contentful CMS, integrado con el frontend en Nuxt. Construi infraestructura de tracking de referidos y optimice los funnels de conversion para impulsar la adquisicion de usuarios. Lidere multiples iniciativas de A/B testing usando GTM y GA4, analizando el comportamiento de usuarios y metricas de conversion para informar decisiones de producto. Stack: Vue, Nuxt 3, UnoCSS/TailwindCSS, TypeScript, React Native (Expo).',
   },
   bitpatagonia: {
     rol: 'Front-End Sr',
     description:
-      'Construi el equipo de Front-End desde 0 hasta 5 desarrolladores, entregando una PWA logistica multilingue que procesa 1k envios diarios con un uptime mayor al 99%. Lidere la migracion de Vue a React con Next.js.',
-    more: 'Como Lider de Front-End, dirigi un equipo de 5 desarrolladores en el desarrollo de multiples aplicaciones web. Nuestro stack principal se basa en Vue (Vite, Vue 3, UnoCSS o TailwindCSS, Pinia, Vue Router y TypeScript). Sin embargo, ahora estamos migrando nuestro primer producto propietario a Next.js. Ademas de este producto, tambien mantenemos un sistema de gestion para una empresa logistica en forma de PWA, un panel de gestion para nuestras empresas mineras y dos paginas institucionales. Todos estos productos contienen i18n para manejar multiples idiomas (generalmente Ingles y Espanol).',
+      'Construi el equipo de Front-End desde 1 hasta 5 desarrolladores, entregando una PWA logistica multilingue que procesa 1k envios diarios con un uptime mayor al 99%. Implemente infraestructura de analitica integral usando GTM y GA para seguir el comportamiento de usuarios y los funnels de conversion. Lidere la migracion de Vue a React, mejorando el rendimiento y la experiencia de desarrollo en toda la plataforma usando Next.js, Redux y Zod.',
+    more: 'Desarrolle web apps con sistemas de gestion y paneles de metricas usando Nuxt (Vue) y Next.js (React) para optimizacion de SSR/SEO, manejo de estado, capacidades PWA e integracion con base de datos SQL via APIs REST en Express.',
   },
   viafoura: {
-    rol: 'Desarrollador Front End',
+    rol: 'Desarrollador Front End (Contrato Concurrente)',
     description:
-      'Desarrollar y mantener el Producto Biotrack en colaboracion abierta con el equipo de Backend. Usando Vue con Typscript, Vuetify (por Estandares de Accesibilidad, WCAG & ADA), Vuex y Vue Router para completar los tickets de Jira entregados por los POs (Product Owners) de Estados Unidos.',
+      'Mantuve y evolucione el script de engagement social de Viafoura, construido con multiples tecnologias (Backbone en v1, Vue/Vuex en v2). Participe en el brainstorming del producto v3 y nuevas funcionalidades en coordinacion con los equipos de UI y Back-End.',
     more: null,
   },
   forian: {
-    rol: 'Desarrollador Front End Sr',
+    rol: 'Desarrollador Front End Sr (Contrato Concurrente)',
     description:
-      'Desarrollar y mantener el Producto Biotrack en colaboracion abierta con el equipo de Backend. Usando Vue con Typscript, Vuetify (por Estandares de Accesibilidad, WCAG & ADA), Vuex y Vue Router para completar los tickets de Jira entregados por los POs (Product Owners) de Estados Unidos.',
+      'Desarrolle y mantuve el producto Biotrack en colaboracion abierta con el equipo de Back-End. Construido con Vue, TypeScript, Vuetify (accesibilidad WCAG y ADA), Vuex y Vue Router, entregando funcionalidades segun tickets de Jira de Product Owners en EE.UU.',
     more: null,
   },
   pointmore: {
@@ -131,7 +131,7 @@ const experiencesEs = {
   digitalhouse_dev: {
     rol: 'Desarrollo Full Stack SSr',
     description:
-      'Desarrollo de una web con sistemas de edicion de contenido e interaccion con otros sistemas externos. Conexion con Api REST interna con CRUD. Laravel + SASS / Vue + Tailwind / Node + ORM (Propio). Prototipado y diseno en Adobe XD.',
+      'Desarrolle un sitio web con un sistema de edicion de contenido e integracion con sistemas externos, junto con una API REST interna. Laravel + SCSS / Vue + Tailwind / Node + ORM (propio). Prototipado y diseno en Adobe XD.',
     more: 'Comence como el unico desarrollador de Front End en este proyecto donde estaban los continentes que deberiamos usar Laravel como nuestro marco. Como biblioteca de estilos, escribi varias funciones de SASS con el manual de la marca de la compania para usarlas en las plantillas Blade. Como segunda version, por seguridad y velocidad, migramos todos los CMS backend a un servicio Vue + Node y entregamos todos los datos al Laravel Front End a traves de API. Actualice todas nuestras plantillas Blade a componentes Blade para su reutilizacion y mantenimiento. Para los componentes nuevos, tuve que disenarlos y obtener su aprobacion, lo que hice con Adobe XD. Luego migramos nuestros componentes Blade a componentes Vue para optimizarlos. Esto significaba que tenia que ensenarle Vue a nuestro equipo. Como ultima version, migramos nuestro Laravel Front End completo a Nuxt y cambiamos nuestra biblioteca SASS por TailwindCSS.',
   },
   digitalhouse: {
@@ -153,7 +153,7 @@ const studiesEn = {
   up: {
     place: 'UP - Universidad de Palermo',
     date: '2009 - 2013',
-    description: 'Graphic Design',
+    description: 'Multimedia Design (coursework)',
   },
   slc: {
     place: 'St Luke\'s College',
@@ -170,7 +170,7 @@ const studiesEs = {
   },
   up: {
     place: 'UP - Universidad de Palermo',
-    description: 'Disenador Grafico',
+    description: 'Diseno Multimedial (cursada)',
   },
   slc: {
     place: 'St Luke\'s College',
@@ -179,22 +179,38 @@ const studiesEs = {
 }
 
 // Skills data
-const webSkillList
-  = 'Vue 3, Vite, UnoCSS, Pinia, TypeScript, Nuxt 3, Prisma, Vue, Nuxt, Tailwind, React, Next, Vitest, Jest, HTML, CSS (Scss Sass), Scrum, Bootstrap, PHP, POO, Git, MySQL, UML, JavaScript, Laravel, Node, Express, Handlebars, SEO, GTM'
-const adobeSkillList = 'Photoshop, Illustrator, InDesign'
-const otherSkillListEn = 'Photography, Video Editing, Unity & C#, Maya, 3DMax, ZBrush'
-const otherSkillListEs = 'Fotografia, Edicion de Video, Unity & C#, Maya, 3DMax, ZBrush'
-
 const skillsData = {
-  web: { list: webSkillList, titleEn: 'Web Development', titleEs: 'Desarrollo Web' },
-  adobe: { list: adobeSkillList, titleEn: 'Adobe Suite CC', titleEs: 'Adobe Suite CC' },
-  other: { listEn: otherSkillListEn, listEs: otherSkillListEs, titleEn: 'Others', titleEs: 'Otros' },
+  webcore: {
+    list: 'TypeScript, JavaScript (ES6+), HTML5, CSS3, PHP, REST, MySQL, Git, Sass, SCSS',
+    titleEn: 'Web Core',
+    titleEs: 'Fundamentos Web',
+  },
+  frameworks: {
+    list: 'React, Next.js, Vue, Nuxt 4, React Native (Expo), TanStack Query, Pinia, Zustand, Redux, Vuex, Tailwind/UnoCSS, Node.js (Express, Handlebars, Nest), Prisma ORM, Drizzle, Laravel',
+    titleEn: 'Frameworks & Libraries',
+    titleEs: 'Frameworks y Librerias',
+  },
+  browserapis: {
+    list: 'Chrome Extensions (Manifest V3), Content Scripts, Service Workers, chrome.storage / runtime / tabs / scripting, WebExtensions API',
+    titleEn: 'Browser APIs',
+    titleEs: 'APIs del Navegador',
+  },
+  testing: {
+    list: 'Cypress, Playwright, Vitest, Jest, Storybook, Accessibility (WCAG AA), Auditability',
+    titleEn: 'Testing & Quality',
+    titleEs: 'Testing y Calidad',
+  },
+  tools: {
+    list: 'CI/CD Pipelines, Vite, GTM, GA, PostHog, AI-assisted (Claude Code, Antigravity), Design Systems, Agile/Scrum, SEO, SSR/SSG/ISR, i18n',
+    titleEn: 'Tools',
+    titleEs: 'Herramientas',
+  },
 }
 
 // Languages data
 const languagesData = {
-  es: { nameEn: 'Spanish', nameEs: 'Espanol', levelEn: 'Mother Tongue', levelEs: 'Lengua Madre' },
-  en: { nameEn: 'English', nameEs: 'Ingles', levelEn: 'Native', levelEs: 'Nativo' },
+  es: { nameEn: 'Spanish', nameEs: 'Espanol', levelEn: 'Native', levelEs: 'Nativo' },
+  en: { nameEn: 'English', nameEs: 'Ingles', levelEn: 'Fluent', levelEs: 'Fluido' },
 }
 
 async function seed() {
@@ -307,26 +323,24 @@ async function seed() {
     await db.insert(cvTranslations).values(studyTranslations)
 
     // Seed skills
-    const skillRecords: NewCvSkill[] = [
-      { slug: 'web', skillList: skillsData.web.list, sortOrder: 0 },
-      { slug: 'adobe', skillList: skillsData.adobe.list, sortOrder: 1 },
-      { slug: 'other', skillList: otherSkillListEn, sortOrder: 2 }, // EN list as base
-    ]
+    const skillKeys = Object.keys(skillsData) as (keyof typeof skillsData)[]
+    const skillRecords: NewCvSkill[] = skillKeys.map((slug, idx) => ({
+      slug,
+      skillList: skillsData[slug].list,
+      sortOrder: idx,
+    }))
 
     await db.insert(cvSkills).values(skillRecords)
 
     // Seed skill translations
-    const skillTranslations: NewCvTranslation[] = [
-      { entityType: 'skill', entitySlug: 'web', locale: 'en', field: 'title', value: skillsData.web.titleEn },
-      { entityType: 'skill', entitySlug: 'web', locale: 'es', field: 'title', value: skillsData.web.titleEs },
-      { entityType: 'skill', entitySlug: 'adobe', locale: 'en', field: 'title', value: skillsData.adobe.titleEn },
-      { entityType: 'skill', entitySlug: 'adobe', locale: 'es', field: 'title', value: skillsData.adobe.titleEs },
-      { entityType: 'skill', entitySlug: 'other', locale: 'en', field: 'title', value: skillsData.other.titleEn },
-      { entityType: 'skill', entitySlug: 'other', locale: 'es', field: 'title', value: skillsData.other.titleEs },
-      // For 'other', the list differs by locale
-      { entityType: 'skill', entitySlug: 'other', locale: 'en', field: 'list', value: otherSkillListEn },
-      { entityType: 'skill', entitySlug: 'other', locale: 'es', field: 'list', value: otherSkillListEs },
-    ]
+    const skillTranslations: NewCvTranslation[] = []
+    for (const slug of skillKeys) {
+      const { titleEn, titleEs } = skillsData[slug]
+      skillTranslations.push(
+        { entityType: 'skill', entitySlug: slug, locale: 'en', field: 'title', value: titleEn },
+        { entityType: 'skill', entitySlug: slug, locale: 'es', field: 'title', value: titleEs },
+      )
+    }
 
     await db.insert(cvTranslations).values(skillTranslations)
 
