@@ -1,21 +1,11 @@
 import { defineEventHandler } from 'h3'
 import { parse } from 'valibot'
-import { serverSupabaseUser } from '#supabase/server'
 import { db } from '~/server/db'
 import { holidays } from '~/server/db/schema'
 import { CreateHolidaySchema, validateHolidayDates } from '~/server/utils/holidays'
 
 export default defineEventHandler(async (event) => {
   try {
-    // Check authentication
-    const user = await serverSupabaseUser(event)
-    if (!user) {
-      throw createError({
-        statusCode: 401,
-        statusMessage: 'Unauthorized',
-      })
-    }
-
     // Get and validate request body
     const body = await readBody(event)
 

@@ -21,7 +21,6 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     'nuxt-scheduler',
     '@nuxtjs/i18n',
-    '@nuxtjs/supabase',
     '@sidebase/nuxt-pdf', // https://sidebase.io/nuxt-pdf/getting-started
   ],
 
@@ -154,10 +153,6 @@ export default defineNuxtConfig({
 
   i18n: {
     vueI18n: './locales/i18n.config.ts',
-  },
-
-  supabase: {
-    redirect: false,
   },
 
   compatibilityDate: '2024-09-10',
