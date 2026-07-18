@@ -1,6 +1,4 @@
 import * as dotenv from 'dotenv'
-import { visualizer } from 'rollup-plugin-visualizer'
-import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
 // https://twitter.com/iamandrewluca/status/1646464434963881985
@@ -79,22 +77,6 @@ export default defineNuxtConfig({
       reportCompressedSize: false,
       // ✅ PERF BUDGET: Warn if individual chunks exceed 500KB
       chunkSizeWarningLimit: 500,
-      rollupOptions: {
-        plugins:
-          import.meta.env.NODE_ENV === 'development'
-            ? []
-            : [
-              // Bundle analysis for production builds
-                ...(import.meta.env.ANALYZE
-                  ? [visualizer({
-                      filename: 'dist/stats.html',
-                      title: 'Bundle Analysis',
-                      gzipSize: true,
-                      brotliSize: true,
-                    })]
-                  : []),
-              ],
-      },
       sourcemap: import.meta.env.NODE_ENV === 'development',
     },
   },
@@ -138,16 +120,6 @@ export default defineNuxtConfig({
         { name: 'description', content: appDescription },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
       ],
-    },
-  },
-
-  pwa,
-
-  devtools: {
-    enabled: true,
-
-    timeline: {
-      enabled: true,
     },
   },
 
