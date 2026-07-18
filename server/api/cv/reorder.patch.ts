@@ -1,19 +1,9 @@
 import { eq } from 'drizzle-orm'
 import { db } from '~/server/db'
 import { cvExperiences, cvLanguages, cvSkills, cvStudies } from '~/server/db/schema'
-import { serverSupabaseUser } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
   try {
-    // Auth check
-    const user = await serverSupabaseUser(event)
-    if (!user) {
-      throw createError({
-        statusCode: 401,
-        statusMessage: 'Unauthorized',
-      })
-    }
-
     const body = await readBody(event)
     const { entityType, orderedIds } = body as { entityType: string, orderedIds: number[] }
 

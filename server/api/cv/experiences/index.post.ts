@@ -3,19 +3,9 @@ import { parse } from 'valibot'
 import { db } from '~/server/db'
 import { cvExperiences, cvTranslations } from '~/server/db/schema'
 import { CreateExperienceSchema } from '~/server/utils/cv'
-import { serverSupabaseUser } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
   try {
-    // Auth check
-    const user = await serverSupabaseUser(event)
-    if (!user) {
-      throw createError({
-        statusCode: 401,
-        statusMessage: 'Unauthorized',
-      })
-    }
-
     const body = await readBody(event)
     const validatedData = parse(CreateExperienceSchema, body)
 

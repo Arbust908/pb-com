@@ -1,20 +1,10 @@
 import { defineEventHandler } from 'h3'
 import { eq } from 'drizzle-orm'
-import { serverSupabaseUser } from '#supabase/server'
 import { db } from '~/server/db'
 import { holidays } from '~/server/db/schema'
 
 export default defineEventHandler(async (event) => {
   try {
-    // Check authentication
-    const user = await serverSupabaseUser(event)
-    if (!user) {
-      throw createError({
-        statusCode: 401,
-        statusMessage: 'Unauthorized',
-      })
-    }
-
     // Get holiday ID from params
     const id = getRouterParam(event, 'id')
     if (!id || Number.isNaN(Number(id))) {
