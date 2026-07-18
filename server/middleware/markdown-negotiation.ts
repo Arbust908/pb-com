@@ -6,7 +6,7 @@ interface CvSkill { id: number, skillList: string, translations: CvTranslations 
 interface CvLanguage { id: number, translations: CvTranslations }
 interface CvListResponse<T> { success: boolean, data: T[] }
 
-const SITE_URL = 'https://panchoblanco.com'
+const SITE_URL = 'https://panchoblanco.dev'
 
 function acceptsMarkdown(accept: string): boolean {
   // Return markdown only when the client explicitly asks for it. Browsers send

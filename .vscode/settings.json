@@ -3,9 +3,6 @@
     "*.css": "postcss"
   },
 
-  // Enable the ESlint flat config support
-  "eslint.experimental.useFlatConfig": true,
-
   // Disable the default formatter, use eslint instead
   "prettier.enable": false,
   "editor.formatOnSave": false,
@@ -32,26 +29,12 @@
   // Enable eslint for all supported languages
   "eslint.validate": [
     "javascript",
-    "javascriptreact",
     "typescript",
-    "typescriptreact",
     "vue",
     "html",
     "markdown",
     "json",
     "jsonc",
     "yaml"
-  ],
-  "cSpell.words": [
-    "Bloby",
-    "nuxtjs",
-    "ollama",
-    "popout",
-    "subgrid",
-    "Vite"
-  ],
-  "i18n-ally.localesPaths": [
-    "locales"
-  ],
-  "i18n-ally.editor.preferEditor": true
+  ]
 }

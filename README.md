@@ -17,4 +17,3 @@ Mi Everything App, que deberia ser de uso diario para multiples usos.
 - [UnoCSS](https://unocss.dev/)
 - [Nuxt](https://nuxt.com/)
 - [VueUse](https://vueuse.org/)
-- [Supabase](https://supabase.com/)
