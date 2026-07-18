@@ -48,7 +48,6 @@
     "ollama",
     "popout",
     "subgrid",
-    "Supabase",
     "Vite"
   ],
   "i18n-ally.localesPaths": [
