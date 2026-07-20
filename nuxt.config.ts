@@ -1,8 +1,4 @@
-import * as dotenv from 'dotenv'
 import { appDescription } from './constants/index'
-
-// https://twitter.com/iamandrewluca/status/1646464434963881985
-dotenv.config()
 
 export default defineNuxtConfig({
   runtimeConfig: {
@@ -25,8 +21,8 @@ export default defineNuxtConfig({
     '/cv': { isr: 3600 }, // Revalidate every hour
 
     // Blog - content may be updated occasionally
-    '/blog': { isr: 86400 }, // Revalidate daily
-    '/blog/**': { isr: 86400 },
+    // '/blog': { isr: 86400 }, // Revalidate daily
+    // '/blog/**': { isr: 86400 },
 
     // ✅ OPTIMIZED: API routes with proper caching & security headers
     '/api/**': {
@@ -41,15 +37,6 @@ export default defineNuxtConfig({
         'cache-control': 'public,max-age=31536000,s-maxage=31536000', // 1 year cache
       },
     },
-
-    // Admin routes - require authentication and interactivity
-    '/admin/**': { ssr: true },
-
-    // Auth page - needs login logic
-    '/auth': { ssr: true },
-
-    // Widget routes - assume dynamic/interactive
-    '/widget/**': { ssr: true },
 
     // Catch-all - fallback to SSR
     '/[...all]': { ssr: true },
@@ -120,7 +107,9 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    vueI18n: './locales/i18n.config.ts',
+    locales: ['en', 'es'],
+    defaultLocale: 'en',
+    vueI18n: 'locales/i18n.config.ts',
   },
 
   compatibilityDate: '2024-09-10',

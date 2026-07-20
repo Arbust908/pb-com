@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "slug": "dh",
+      "dateRange": "2016",
+      "sortOrder": 0,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "translations": {
+        "en": {
+          "place": "Digital House",
+          "description": "Full Stack Web Development! HTML 5, CSS 3, Scrum, Bootstrap, PHP, POO, GitHub, MySQL, UML"
+        },
+        "es": {
+          "place": "Digital House",
+          "description": "Desarrollo Web Full Stack! HTML 5, CSS 3, Scrum, Bootstrap, PHP, POO, GitHub, MySQL, UML"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "slug": "up",
+      "dateRange": "2009 - 2013",
+      "sortOrder": 1,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "translations": {
+        "en": {
+          "place": "UP - Universidad de Palermo",
+          "description": "Multimedia Design (coursework)"
+        },
+        "es": {
+          "place": "UP - Universidad de Palermo",
+          "description": "Diseno Multimedial (cursada)"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "slug": "slc",
+      "dateRange": "1996 - 2008",
+      "sortOrder": 2,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "translations": {
+        "en": {
+          "place": "St Luke's College",
+          "description": "Bachelor Degree (Bilingual)"
+        },
+        "es": {
+          "place": "St Luke's College",
+          "description": "Bachillerato (Bilingue)"
+        }
+      }
+    }
+  ]
+}

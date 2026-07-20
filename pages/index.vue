@@ -74,8 +74,7 @@ onMounted(async () => {
 
 <template>
   <section class="flex flex-col items-center gap-4 p-6 text-center">
-    <Logo class="w-1/2 fill-current" />
-    <h1 class="from-pink-500 to-violet-500 bg-gradient-to-r bg-clip-text text-4xl text-transparent font-light md:(text-6xl -mt-4)">
+    <h1 class="from-pink-500 to-violet-500 bg-gradient-to-r bg-clip-text text-4xl text-transparent font-light md:(text-6xl)">
       Pancho Blanco
     </h1>
     <h2 ref="heroRef" class="min-h-32px text-lg font-bold tracking-widest md:text-3xl">

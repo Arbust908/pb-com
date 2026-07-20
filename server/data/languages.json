@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "slug": "es",
+      "sortOrder": 0,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "translations": {
+        "en": { "name": "Spanish", "level": "Native" },
+        "es": { "name": "Espanol", "level": "Nativo" }
+      }
+    },
+    {
+      "id": 2,
+      "slug": "en",
+      "sortOrder": 1,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "translations": {
+        "en": { "name": "English", "level": "Fluent" },
+        "es": { "name": "Ingles", "level": "Fluido" }
+      }
+    }
+  ]
+}

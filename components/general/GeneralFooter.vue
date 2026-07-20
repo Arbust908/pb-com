@@ -1,14 +1,6 @@
-<script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { useGeneralStore } from '~/composables'
-
-const general_store = useGeneralStore()
-const { print_mode } = storeToRefs(general_store)
-</script>
-
 <template>
   <footer
-    class="flex flex-wrap items-center justify-between bg-slate-200 px-6 pb-1 pt-2 text-sm dark:bg-slate-800"
+    class="flex flex-wrap items-center justify-between bg-slate-200 px-6 pt-2 text-sm dark:bg-slate-800"
   >
     <section>
       <NuxtLink
@@ -17,17 +9,8 @@ const { print_mode } = storeToRefs(general_store)
         title="Github profile"
         external
       >
-        <span v-if="print_mode" class="mr-2">https://github.com/Arbust908</span>
-        <i class="i-ri:github-fill inline h-6 w-6" />
-      </NuxtLink>
-    </section>
-    <section>
-      <NuxtLink
-        to="/ask/ai"
-        class="inline-flex items-center p-3 md:py-0"
-        title="Chat with AI"
-      >
-        <i class="i-solar:chat-round-call-bold-duotone inline h-6 w-6" />
+        <span class="hidden">https://github.com/Arbust908</span>
+        <i class="i-ph:github-logo inline h-6 w-6" />
       </NuxtLink>
     </section>
     <div class="awesome-line" />
@@ -36,7 +19,7 @@ const { print_mode } = storeToRefs(general_store)
 
 <style>
   .awesome-line {
-  @apply w-full h-1.5 rounded-full;
+  @apply w-full h-2 rounded-t-full;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;

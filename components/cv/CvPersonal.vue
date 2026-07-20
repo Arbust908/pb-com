@@ -1,10 +1,6 @@
 <script setup lang="ts">
 const { t, locale } = useI18n()
 
-const general_store = useGeneralStore()
-const { print_mode } = storeToRefs(general_store)
-const { togglePrintMode } = general_store
-
 const { skills, fetch: fetchSkills } = useCvSkills()
 const { languages, fetch: fetchLanguages } = useCvLanguages()
 
@@ -58,23 +54,23 @@ function birthday() {
       <ul>
         <li>
           <a href="mailto:me@panchoblanco.dev" class="mb-2 flex items-center gap-2">
-            <i class="i-ic:round-mail h-6 w-6 text-violet-600 dark:text-violet-300" />
+            <i class="i-ph:envelope-simple size-6 text-violet-600 dark:text-violet-300" />
             <span>me@panchoblanco.dev</span>
           </a>
         </li>
         <li class="mb-2 flex items-center gap-2">
-          <i class="i-ic:round-cake h-6 w-6 text-violet-600 dark:text-violet-300" />
+          <i class="i-ph:cake size-6 text-violet-600 dark:text-violet-300" />
           <span>{{ birthday() }}</span>
         </li>
         <li class="mb-2 flex items-center gap-2">
-          <i class="i-ic:round-house h-6 w-6 text-violet-600 dark:text-violet-300" />
+          <i class="i-ph:house-simple size-6 text-violet-600 dark:text-violet-300" />
           <span>Buenos Aires, AR</span>
         </li>
       </ul>
     </article>
     <section class="mb-6">
       <h3 class="mb-2 flex items-center text-xl text-violet-600 dark:text-violet-400">
-        <i class="i-ic:round-code mr-2 h-6 w-6" />
+        <i class="i-ph:code-simple mr-2 size-6" />
         <span> Skills </span>
       </h3>
       <article v-for="skill in skills" :key="skill.slug" class="mb-2">
@@ -88,8 +84,8 @@ function birthday() {
     </section>
     <section class="mb-2">
       <h3 class="flex items-center text-xl">
-        <i class="i-ic:round-travel-explore mr-2 h-6 w-6" />
-        <span> {{ t('lang_title') }} </span>
+        <i class="i-ph:globe-simple mr-2 size-6" />
+        <span> {{ $t('lang_title') }} </span>
       </h3>
       <article
         v-for="lang in languages"
@@ -104,23 +100,5 @@ function birthday() {
         </p>
       </article>
     </section>
-    <footer class="my-2 flex items-center">
-      <button
-        class="flex items-center opacity-0 transition duration-150 ease-in-out hover:opacity-75"
-        @click="togglePrintMode()"
-      >
-        <i class="i-ic:round-print mr-2 inline-block h-6 w-6" />
-        <span> {{ t('print') }} </span>
-        ({{ print_mode }})
-      </button>
-      <div v-if="print_mode" class="w-full text-right text-sm opacity-75">
-        {{ t('last_update') }}
-        {{
-          new Intl.DateTimeFormat(locale, {
-            dateStyle: 'long',
-          }).format(new Date())
-        }}
-      </div>
-    </footer>
   </section>
 </template>
