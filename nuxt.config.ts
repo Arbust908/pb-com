@@ -16,10 +16,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@pinia/nuxt',
-    '@vite-pwa/nuxt',
-    'nuxt-scheduler',
     '@nuxtjs/i18n',
-    '@sidebase/nuxt-pdf', // https://sidebase.io/nuxt-pdf/getting-started
   ],
 
   routeRules: {
@@ -68,7 +65,6 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
-    '@/assets/index.css',
   ],
 
   vite: {

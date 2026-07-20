@@ -163,10 +163,4 @@ definePageMeta({
 .days {
   grid-area: days;
 }
-
-.grided-box {
-  background-image: url(https://nucleoapp.com/assets/img/svg-patterns/chessboard-3.svg),
-    url(https://nucleoapp.com/assets/img/svg-patterns/cols-dotted-2.svg),
-    url(https://nucleoapp.com/assets/img/svg-patterns/grid-2.svg);
-}
 </style>

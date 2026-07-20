@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "packageManager": "yarn@4.17.1",
   "scripts": {
     "build": "nuxi build",
     "build:analyze": "ANALYZE=true nuxi build",
@@ -35,18 +35,16 @@
     "pinia": "^2.1.7",
     "posthog-js": "^1.108.3",
     "shuffle-letters": "^1.1.0",
-    "valibot": "^0.25.0",
-    "vue-i18n": "^9.9.0"
+    "valibot": "^0.25.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.4.4",
     "@iconify-json/solar": "^1.1.9",
     "@nuxt/test-utils": "^3.23.0",
-    "@nuxtjs/i18n": "^8.0.0",
+    "@nuxtjs/i18n": "^10.4.1",
     "@pinia/nuxt": "^0.5.1",
-    "@sidebase/nuxt-pdf": "^0.2.0-alpha.0",
-    "@unocss/eslint-config": "^0.58.0",
-    "@unocss/nuxt": "^0.58.0",
+    "@unocss/eslint-config": "^66.7.5",
+    "@unocss/nuxt": "^66.7.5",
     "@vite-pwa/nuxt": "^0.3.5",
     "@vueuse/nuxt": "^10.7.0",
     "consola": "^3.2.3",
@@ -57,9 +55,7 @@
     "happy-dom": "^20.4.0",
     "lint-staged": "^16.2.7",
     "nuxt": "^3.13.1",
-    "nuxt-scheduler": "^0.1.9",
     "rollup-plugin-visualizer": "^6.0.5",
-    "sharp": "^0.33.4",
     "simple-git-hooks": "^2.13.1",
     "typescript": "5.5.4",
     "vitest": "^4.0.18",
