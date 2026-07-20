@@ -6,8 +6,6 @@ interface Props {
 }
 const props = defineProps<Props>()
 
-const general_store = useGeneralStore()
-const { print_mode } = storeToRefs(general_store)
 const { locale } = useI18n()
 
 const detailsShow = ref(false)
@@ -30,11 +28,6 @@ function formatDate(date: string) {
 function onClick() {
   isExpanded.value = !isExpanded.value
 }
-
-watch(print_mode, (isPrint) => {
-  if (isPrint)
-    isExpanded.value = true
-})
 </script>
 
 <template>
@@ -64,7 +57,7 @@ watch(print_mode, (isPrint) => {
         </span>
         <span v-else>{{ formatDate(experience.endDate) }}</span>
       </div>
-      <p v-if="!print_mode && isExpanded" class="font-light">
+      <p v-if="isExpanded" class="font-light">
         <span
           v-if="detailsShow"
           :key="`${experience.slug}-detail`"
@@ -74,14 +67,8 @@ watch(print_mode, (isPrint) => {
           {{ getTranslation('description') }}
         </span>
       </p>
-      <template v-if="print_mode">
-        <p>
-          <span v-html="hasMore() ? getTranslation('more') : getTranslation('description')" />
-        </p>
-      </template>
       <aside v-if="hasMore() && isExpanded" class="mt-2 flex justify-end">
         <button
-          :class="print_mode ? 'opacity-0' : null"
           class="transform rounded px-2 py-1 text-sm transition duration-150 ease-out hover:(bg-emerald-400 text-emerald-700 -translate-y-1)"
           @click="detailsShow = !detailsShow"
         >

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { useGeneralStore } from '~/composables'
 import { useUP } from '~/composables/ultimateProtocol'
 import type { MetaData } from '~/composables/ultimateProtocol'
 
@@ -11,16 +9,14 @@ const meta: MetaData = {
           'Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Estas son mis habilidades y experiencias. Tengo mas de 4 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.',
 }
 useHead(useUP(meta))
-const general_store = useGeneralStore()
-const { print_mode } = storeToRefs(general_store)
 </script>
 
 <template>
   <!-- eslint-disable vue/no-unused-refs -->
-  <div :class="print_mode && 'print'" class="relative grid layout-grid-feature">
-    <BlobyOne v-if="!print_mode" class="fixed z-0 w-90 opacity-60 filter-blur-2xl -right-8 -top-4" />
-    <BlobyTwo v-if="!print_mode" class="fixed z-0 w-100 opacity-60 filter-blur-2xl -bottom-7 -left-6" />
-    <CvSideNav v-if="!print_mode" class="lang relative z-10" />
+  <div class="relative grid layout-grid-feature">
+    <BlobyOne class="fixed z-0 w-90 opacity-60 filter-blur-2xl -right-8 -top-4" />
+    <BlobyTwo class="fixed z-0 w-100 opacity-60 filter-blur-2xl -bottom-7 -left-6" />
+    <CvSideNav class="lang relative z-10" />
     <CvPersonal class="personal relative z-10 h-fit" />
     <CvExperiences ref="exp" class="exp relative z-10" />
     <CvStudies ref="study" class="study relative z-10" />
