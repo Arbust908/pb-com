@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-/* https://www.aang.dev/playground/view-transition-theme-switcher */
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
