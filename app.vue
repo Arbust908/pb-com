@@ -26,7 +26,6 @@ useHead({
 </script>
 
 <template>
-  <VitePwaManifest />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
@@ -35,6 +34,11 @@ useHead({
 
 <style>
 /* https://twitter.com/alirdev/status/1734136001671643465 for full height safe on device */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
 html.dark {
   color-scheme: light dark;
 }

@@ -2,7 +2,7 @@ import { appendHeader, defineEventHandler, getRequestURL } from 'h3'
 
 // Routes that get RFC 8288 Link headers pointing to discovery resources.
 // Limited to user-facing landing pages so we don't pollute API responses or assets.
-const linkedPaths = new Set<string>(['/', '/cv', '/portfolio', '/blog'])
+const linkedPaths = new Set<string>(['/', '/cv', '/portfolio'])
 
 const links = [
   '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',

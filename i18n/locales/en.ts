@@ -1,7 +1,5 @@
 export default {
-  lang: 'en',
   rol: 'Creative Developer',
-  change_lang: 'Cambiar Idioma',
   exp_title: 'Experience',
   lang_title: 'Languages',
   skills_title: 'Skills',
@@ -15,4 +13,6 @@ export default {
   },
   current: 'Current',
   recent_work: 'Recent Work',
+  error_loading_data: 'Unable to load data',
+  change_lang: 'Cambiar Idioma',
 }

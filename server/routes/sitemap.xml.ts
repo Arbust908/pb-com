@@ -15,7 +15,6 @@ const entries: SitemapEntry[] = [
   { loc: `${SITE_URL}/`, changefreq: 'weekly', priority: 1.0, lastmod: today },
   { loc: `${SITE_URL}/cv`, changefreq: 'weekly', priority: 0.9, lastmod: today },
   { loc: `${SITE_URL}/portfolio`, changefreq: 'weekly', priority: 0.8, lastmod: today },
-  { loc: `${SITE_URL}/blog`, changefreq: 'weekly', priority: 0.6, lastmod: today },
 ]
 
 function escapeXml(value: string): string {

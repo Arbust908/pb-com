@@ -42,7 +42,6 @@ async function renderHomepageMarkdown(): Promise<string> {
   lines.push('')
   lines.push(`- Site: <${SITE_URL}/>`)
   lines.push(`- CV: <${SITE_URL}/cv>`)
-  lines.push(`- Blog: <${SITE_URL}/blog>`)
   lines.push(`- Portfolio: <${SITE_URL}/portfolio>`)
   lines.push(`- API catalog: <${SITE_URL}/.well-known/api-catalog>`)
   lines.push('')

@@ -57,7 +57,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="mt-40 min-h-screen flex flex-col items-center justify-start bg-slate-100 dark:bg-slate-900">
+  <div class="mt-40 flex flex-col items-center justify-start bg-slate-100 dark:bg-slate-900">
     <div class="w-full text-center space-y-6">
       <h1 class="from-pink-500 to-violet-500 bg-gradient-to-r bg-clip-text text-5xl text-transparent font-light md:text-7xl">
         Portfolio

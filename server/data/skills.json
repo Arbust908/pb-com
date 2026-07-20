@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "slug": "webcore",
+      "skillList": "TypeScript, JavaScript, HTML, CSS, PHP, REST, SQL, Git, Sass, SCSS",
+      "sortOrder": 0,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "translations": {
+        "en": { "title": "Web Core" },
+        "es": { "title": "Fundamentos Web" }
+      }
+    },
+    {
+      "id": 2,
+      "slug": "frameworks",
+      "skillList": "React, Next.js, Vue, Nuxt 4, React Native (Expo), TanStack (React) Query, Pinia, Zustand, Redux, Vuex, Tailwind/UnoCSS, Node.js (Express, Handlebars, Nest), Prisma ORM, Drizzle, Laravel",
+      "sortOrder": 1,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "translations": {
+        "en": { "title": "Frameworks & Libraries" },
+        "es": { "title": "Frameworks y Librerias" }
+      }
+    },
+    {
+      "id": 3,
+      "slug": "browserapis",
+      "skillList": "Chrome Extensions (Manifest V3), Content Scripts, Service Workers, chrome.storage / runtime / tabs / scripting, WebExtensions API",
+      "sortOrder": 2,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "translations": {
+        "en": { "title": "Browser APIs" },
+        "es": { "title": "APIs del Navegador" }
+      }
+    },
+    {
+      "id": 4,
+      "slug": "testing",
+      "skillList": "Cypress, Playwright, Vitest, Jest, Storybook, Accessibility (WCAG AA), Auditability",
+      "sortOrder": 3,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "translations": {
+        "en": { "title": "Testing & Quality" },
+        "es": { "title": "Testing y Calidad" }
+      }
+    },
+    {
+      "id": 5,
+      "slug": "tools",
+      "skillList": "CI/CD Pipelines, Vite, GTM, GA, PostHog, AI-assisted  Code (Claude Code, Antigravity), Design Systems, Agile/Scrum, SEO, SSR/SSG/ISR, i18n",
+      "sortOrder": 4,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "translations": {
+        "en": { "title": "Tools" },
+        "es": { "title": "Herramientas" }
+      }
+    }
+  ]
+}

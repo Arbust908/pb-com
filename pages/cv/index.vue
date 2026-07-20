@@ -21,7 +21,7 @@ const { print_mode } = storeToRefs(general_store)
     <BlobyOne v-if="!print_mode" class="fixed z-0 w-90 opacity-60 filter-blur-2xl -right-8 -top-4" />
     <BlobyTwo v-if="!print_mode" class="fixed z-0 w-100 opacity-60 filter-blur-2xl -bottom-7 -left-6" />
     <CvSideNav v-if="!print_mode" class="lang relative z-10" />
-    <CvPersonal class="personal relative z-10" />
+    <CvPersonal class="personal relative z-10 h-fit" />
     <CvExperiences ref="exp" class="exp relative z-10" />
     <CvStudies ref="study" class="study relative z-10" />
     <BackToTopBtn class="z-20" />
@@ -62,7 +62,7 @@ const { print_mode } = storeToRefs(general_store)
     grid-template-areas:
       'lang .'
       'personal exp'
-      '. exp'
+      'personal exp'
       '. study';
     grid-template-columns: 400px clamp(320px, 60%, 640px);
     grid-template-rows: 64px 640px 1fr auto;
