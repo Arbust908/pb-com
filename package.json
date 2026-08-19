@@ -31,7 +31,7 @@
     "eslint-plugin-format": "^0.1.0",
     "eslint-ts-patch": "^8.55.0-1",
     "lint-staged": "^16.2.7",
-    "nuxt": "^3.13.1",
+    "nuxt": "^4.5.2",
     "rollup-plugin-visualizer": "^6.0.5",
     "simple-git-hooks": "^2.13.1",
     "typescript": "5.5.4",
