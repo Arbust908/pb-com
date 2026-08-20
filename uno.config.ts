@@ -139,7 +139,17 @@ export default defineConfig({
             provider: 'none',
           },
         ],
-        serif: 'DM Serif Display',
+        serif: 'Instrument Serif',
+        display: [
+          {
+            name: 'Bitter',
+            provider: 'none',
+          },
+          {
+            name: 'serif',
+            provider: 'none',
+          },
+        ],
         mono: [
           {
             name: 'Space Mono',

@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    '@nuxt/content',
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@pinia/nuxt',
@@ -21,6 +22,10 @@ export default defineNuxtConfig({
     // Homepage and CV can be edited via admin - use ISR instead of prerender
     '/': { isr: 3600 }, // Revalidate every hour
     '/cv': { isr: 3600 }, // Revalidate every hour
+
+    // File-based case studies are rebuilt from Markdown and cached at the edge
+    '/work': { isr: 3600 },
+    '/work/**': { isr: 3600 },
 
     // Blog - content may be updated occasionally
     // '/blog': { isr: 86400 }, // Revalidate daily
@@ -54,6 +59,7 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
+    '@fontsource/bitter/latin-800.css',
   ],
 
   vite: {

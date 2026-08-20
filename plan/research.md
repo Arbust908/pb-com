@@ -29,7 +29,6 @@ Here's your `/lab` page prototype. Here's what's packed in there:
 
 More things I want to add for my personal site
 
-- https://www.unosend.co/ for one time password for people that want to se sensitive projects (session based authentication to some project pages)
 - more examples of microinteractions from https://www.microinteractionsui.com/
 - full page templates from (https://pro.lndevui.com/templates) but made on Vue with nuxt
 - more micro interactions (https://x.com/ardasarico/status/2021992426974720382
@@ -52,9 +51,7 @@ The three highest-ROI things to build first based on effort vs. impact:
 
 1. **Color-changing sticky nav** — CSS-only, shippable in an afternoon, makes the whole site feel more polished
 2. **Button → card expand** — one composable (`useExpandTransition`), one lab card, uses the View Transitions API which is a great technical showcase
-3. **Gate system** — unblocks your client-sharing workflow immediately
-
-Want me to start coding any of these? The gate system in particular I can stub out fully — `gate.vue`, the Nitro endpoint, the middleware, and the composable.
+The access-control idea has been deferred. The current case-study implementation is public and file-based.
 
 ---
 
@@ -152,19 +149,4 @@ Want me to rebuild the lab page HTML with this font stack swapped in?
 
 ---
 
-Could you give me a structural map of what labs and projects could be. And how would we gate it for specific users (admins like me and one time authorized users or timed based authorized users)
-And as a comment the whole thing is based on a poketbased db
-
----
-
-Let me map this out properly before writing anything.Here's the full map. A few things worth talking through:
-
-**The three token types map cleanly to your three use cases.** One-time is for the UnoSend flow — Fran generates a URL, drops the token into UnoSend, the client reads it once and the link dies. The session cookie that gets issued after that first valid hit means they can navigate `/work` freely for 24h without ever being challenged again. Timed is for longer windows like a week-long interview process or an agency that needs to review multiple projects. Admin is just standard PocketBase auth.
-
-**The scope system is the important design decision.** A token can unlock a single project (`scope_type: project, scope_id: demand-io`), all projects (`scope_type: all_projects`), all lab pieces, or literally everything. This means you can send a recruiter a token that only opens one case study, or send a potential long-term client a 30-day token that opens the whole private portfolio.
-
-**PocketBase hosting.** The big constraint is that PocketBase is stateful — it's a SQLite file. It can't run on Vercel. Fly.io is the cleanest fit: free tier, persistent volumes, the PocketBase Docker image deploys in about 5 minutes. Your Nuxt app stays on Vercel, Nitro talks to PocketBase over HTTPS at `pb.panchoblanco.dev`. You only ever talk to PocketBase from the server — never expose the service token to the client.
-
-**The session cookie** is a signed JWT (José library in Nitro) that encodes the scope and expiry. No PocketBase round-trip needed to validate it on every request — Nitro decodes it locally, then only hits PocketBase when it needs actual content.
-
-Want to start scaffolding the PocketBase schema and the Nitro token validation endpoint?
+The earlier database and gated-access proposal has been superseded by the file-based plan in `plan/plan.md`.
