@@ -16,7 +16,7 @@
     {
       "id": 2,
       "slug": "frameworks",
-      "skillList": "React, Next.js, Vue, Nuxt 4, React Native (Expo), TanStack (React) Query, Pinia, Zustand, Redux, Vuex, Tailwind/UnoCSS, Node.js (Express, Handlebars, Nest), Prisma ORM, Drizzle, Laravel",
+      "skillList": "React, Next.js, Vue, Nuxt 4, React Native (Expo), TanStack (React) Query, Pinia, Zustand, Redux, Vuex, Tailwind/UnoCSS, Node.js (Express, Handlebars, Nest), ElysiaJS, Prisma ORM, Drizzle, Laravel",
       "sortOrder": 1,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-01-01T00:00:00.000Z",

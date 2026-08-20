@@ -53,11 +53,12 @@ const recentExperiences = computed(() => {
     .filter(exp => exp.endDate !== null)
     .sort((a, b) => new Date(b.endDate!).getTime() - new Date(a.endDate!).getTime())
 
-  const result = []
+  const result: typeof expList = []
   if (currentExp)
     result.push(currentExp)
-  if (endedExps.length > 0)
-    result.push(endedExps[0])
+  const latestEnded = endedExps[0]
+  if (latestEnded)
+    result.push(latestEnded)
 
   return result
 })

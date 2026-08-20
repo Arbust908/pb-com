@@ -46,7 +46,7 @@ Minimal env needed — only `NUXT_APP_NAME` is actively used:
 NUXT_APP_NAME=Pancho Blanco
 ```
 
-Other keys (PocketBase, OpenRouter, Resend, Turso) are present in `.env` but currently unused by any live feature.
+Other integration keys may be present in `.env`, but they are currently unused by any live feature.
 
 ### Scripts
 
@@ -69,6 +69,8 @@ pb-com/
 │   └── general/     # NavBar, Footer, LangToggle, DarkToggle
 ├── composables/     # Shared stateful logic (auto-imported)
 ├── constants/       # App name, description
+├── content/         # Markdown case studies, grouped by language
+├── content.config.ts # Validated case-study frontmatter schema
 ├── layouts/         # Page layouts (default, home, none)
 ├── locales/         # i18n translations (en, es)
 ├── middleware/       # Route middleware

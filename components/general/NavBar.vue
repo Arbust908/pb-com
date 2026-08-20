@@ -1,13 +1,14 @@
 <script setup lang="ts">
 // https://codepen.io/jh3y/pen/QWoKXdo
 // https://twitter.com/jh3yy/status/1746101914700493168
+const localePath = useLocalePath()
 </script>
 
 <template>
   <header
     class="w-full flex flex-col items-center bg-slate-200 p-2 sm:flex-row sm:justify-between dark:bg-slate-800"
   >
-    <NuxtLink to="/" class="rounded-lg px-2 py-1 hover:text-violet-500">
+    <NuxtLink :to="localePath({ name: 'index' })" class="rounded-lg px-2 py-1 hover:text-violet-500">
       <h1 class="flex items-center text-lg font-bold">
         <Logo class="h-8 w-8 fill-current" />
         <span>
@@ -22,9 +23,15 @@
       </ClientOnly>
       <NuxtLink
         class="rounded-lg px-2 py-1 transition duration-150 ease-out hover:text-violet-500 hover:underline"
-        to="/cv"
+        :to="localePath({ name: 'work' })"
       >
-        Resume
+        {{ $t('work') }}
+      </NuxtLink>
+      <NuxtLink
+        class="rounded-lg px-2 py-1 transition duration-150 ease-out hover:text-violet-500 hover:underline"
+        :to="localePath({ name: 'cv' })"
+      >
+        {{ $t('resume') }}
       </NuxtLink>
     </nav>
   </header>
