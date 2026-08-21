@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 704 352" role="img" aria-labelledby="title">
+  <title id="title">Abstract geometric composition</title>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#172033" />
+      <stop offset="1" stop-color="#311b3d" />
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#fb7185" />
+      <stop offset="0.5" stop-color="#c084fc" />
+      <stop offset="1" stop-color="#22d3ee" />
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#fff" stroke-opacity=".07" />
+    </pattern>
+  </defs>
+  <rect width="704" height="352" fill="url(#background)" />
+  <rect width="704" height="352" fill="url(#grid)" />
+  <circle cx="612" cy="36" r="132" fill="#fb7185" fill-opacity=".18" />
+  <circle cx="88" cy="318" r="116" fill="#22d3ee" fill-opacity=".12" />
+  <path d="M88 218 204 102l116 116 116-116 116 116" fill="none" stroke="url(#line)" stroke-linecap="round" stroke-linejoin="round" stroke-width="18" />
+  <path d="M276 138 236 178l40 40M364 138l40 40-40 40" fill="none" stroke="#f8fafc" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" />
+</svg>

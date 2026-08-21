@@ -4,6 +4,7 @@ translationKey: file-based-case-studies
 locale: es
 title: Diseñando un sistema de casos de estudio basado en archivos
 description: Simplificar la publicación del portfolio usando Markdown, metadatos estructurados y un fallback bilingüe predecible.
+project: Portfolio
 organization: Personal
 projectType: personal
 sortOrder: 900
@@ -19,6 +20,11 @@ skills:
   - Arquitectura frontend
   - Diseño de contenido
   - Internacionalización
+areas:
+  - frontend
+  - architecture
+  - content
+  - e2e
 featured: true
 draft: false
 ---

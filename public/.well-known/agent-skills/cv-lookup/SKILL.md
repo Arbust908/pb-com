@@ -10,19 +10,19 @@ Pancho Blanco's CV is available as structured JSON via the public API endpoints 
 
 ## Endpoints
 
-- `GET https://panchoblanco.com/api/cv/experiences` — work history with company, role, dates, description.
-- `GET https://panchoblanco.com/api/cv/skills` — grouped skill lists (frameworks, languages, tools).
-- `GET https://panchoblanco.com/api/cv/studies` — formal education and certifications.
-- `GET https://panchoblanco.com/api/cv/languages` — spoken languages with proficiency levels.
+- `GET https://panchoblanco.dev/api/cv/experiences` — work history with company, role, dates, description.
+- `GET https://panchoblanco.dev/api/cv/skills` — grouped skill lists (frameworks, languages, tools).
+- `GET https://panchoblanco.dev/api/cv/studies` — formal education and certifications.
+- `GET https://panchoblanco.dev/api/cv/languages` — spoken languages with proficiency levels.
 
-The full API catalog is at `https://panchoblanco.com/.well-known/api-catalog`.
+The full API catalog is at `https://panchoblanco.dev/.well-known/api-catalog`.
 
 ## Markdown view
 
 The human pages also support `Accept: text/markdown` for a markdown-formatted version:
 
-- `https://panchoblanco.com/` — landing summary.
-- `https://panchoblanco.com/cv` — full CV (HTML only at this time).
+- `https://panchoblanco.dev/` — landing summary.
+- `https://panchoblanco.dev/cv` — full CV (HTML only at this time).
 
 ## Notes
 

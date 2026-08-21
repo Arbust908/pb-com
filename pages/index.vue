@@ -8,7 +8,7 @@ import type { CvSkill } from '@/composables/useCvSkills'
 import type { CvLanguage } from '@/composables/useCvLanguages'
 
 const meta: MetaData = {
-  base_url: 'panchoblanco.com',
+  base_url: 'https://panchoblanco.dev',
   title: 'Pancho Blanco :: Desarrollador Creativo',
   description:
           'Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Tengo mas de 8 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.',
@@ -16,6 +16,7 @@ const meta: MetaData = {
 useHead(useUP(meta))
 
 const { locale } = useI18n()
+const localePath = useLocalePath()
 
 // ✅ OPTIMIZED: Parallel data fetching for ~3x faster loading
 const { data: cvData, pending: pendingCvData, error: cvError } = await useAsyncData('cv-homepage-data', async () => {
@@ -67,126 +68,116 @@ const recentExperiences = computed(() => {
 const heroRef = ref<HTMLElement>()
 
 onMounted(async () => {
-  if (heroRef.value) {
+  if (heroRef.value && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     shuffleLetters(heroRef.value)
   }
 })
 </script>
 
 <template>
-  <section class="flex flex-col items-center gap-4 p-6 text-center">
-    <h1 class="from-pink-500 to-violet-500 bg-gradient-to-r bg-clip-text text-4xl text-transparent font-light md:(text-6xl)">
-      Pancho Blanco
-    </h1>
-    <h2 ref="heroRef" class="min-h-32px text-lg font-bold tracking-widest md:text-3xl">
-      {{ $t('rol') }}
-    </h2>
-    <div class="flex gap-x-4">
-      <!-- <NuxtLink
-        class="rounded-lg bg-violet-400 px-4 py-1 text-slate-900 transition duration-150 ease-out dark:bg-violet-600 dark:text-slate-100 hover:text-violet-500 hover:shadow dark:hover:bg-violet-800"
-        to="/blog"
-      >
-        Blog
-      </NuxtLink> -->
-      <NuxtLink
-        class="rounded-lg bg-violet-400 px-4 py-1 text-slate-900 transition duration-150 ease-out dark:bg-violet-600 dark:text-slate-100 hover:text-violet-500 hover:shadow dark:hover:bg-violet-800"
-        to="/cv"
-      >
-        Resume
-      </NuxtLink>
-    </div>
-    <!-- <DotHero /> -->
-  </section>
+  <div class="relative w-full overflow-hidden layout-grid-full">
+    <div aria-hidden="true" class="pointer-events-none absolute right--20 top--24 size-120 rounded-full ambient-secondary filter-blur-3xl" />
+    <div aria-hidden="true" class="pointer-events-none absolute left--32 top-80 size-96 rounded-full ambient-primary filter-blur-3xl" />
 
-  <!-- ✅ OPTIMIZED: Added error handling for API failures -->
-  <section v-if="cvError" class="px-6 py-8">
-    <div class="mx-auto max-w-4xl text-center">
-      <div class="border border-red-200 rounded-lg bg-red-50 p-6 dark:border-red-800 dark:bg-red-950">
-        <h3 class="mb-2 text-xl text-red-800 font-semibold dark:text-red-200">
+    <header class="relative grid content-container gap-10 pb-16 pt-14 lg:grid-cols-12 lg:items-end lg:pb-24 lg:pt-24 sm:pt-18">
+      <div class="lg:col-span-9">
+        <p class="mb-5 meta-label-primary">
+          Portfolio / Buenos Aires
+        </p>
+        <h1 class="display-heading text-[clamp(3.5rem,13vw,8rem)]">
+          Pancho Blanco
+        </h1>
+        <h2 ref="heroRef" class="mt-5 max-w-3xl min-h-8 text-lg text-body leading-snug sm:text-2xl">
+          {{ $t('rol') }}
+        </h2>
+      </div>
+      <nav class="flex flex-wrap gap-2 lg:col-span-3 lg:justify-end" aria-label="Portfolio destinations">
+        <NuxtLink class="control-primary" :to="localePath({ name: 'work' })">
+          {{ $t('work') }} <span aria-hidden="true" class="ml-2">↗</span>
+        </NuxtLink>
+        <NuxtLink class="pill-control text-body hover:(border-primary text-primary)" :to="localePath({ name: 'cv' })">
+          {{ $t('resume') }}
+        </NuxtLink>
+      </nav>
+    </header>
+
+    <section v-if="cvError" class="content-container pb-16">
+      <div class="border border-red-400/40 rounded-2xl bg-red-400/8 p-6">
+        <h3 class="text-xl text-red-800 font-semibold dark:text-red-200">
           {{ $t('error_loading_data') || 'Unable to load data' }}
         </h3>
-        <p class="text-red-600 dark:text-red-400">
+        <p class="mt-2 text-red-700 dark:text-red-300">
           Please try refreshing the page or contact support.
         </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CV Overview Section -->
-  <section v-else-if="!pendingCvData && (recentExperiences.length > 0 || skills.length > 0 || languages.length > 0)" class="px-6 py-8">
-    <div class="mx-auto max-w-4xl space-y-8">
-      <!-- Recent Experience -->
-      <div v-if="recentExperiences.length > 0">
-        <h3 class="mb-6 text-center text-2xl text-slate-800 font-bold dark:text-slate-200">
-          {{ $t('recent_work') }}
-        </h3>
-        <div class="grid grid-cols-1 gap-6">
-          <article
-            v-for="experience in recentExperiences"
-            :key="experience.id"
-            class="border border-slate-200 rounded-lg bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800"
-          >
-            <h4 class="mb-2 flex flex-col gap-1 text-lg font-semibold">
-              <span class="text-emerald-600 dark:text-emerald-400">{{ getTranslation(experience, 'rol') }}</span>
-              <span class="text-sm text-slate-700 dark:text-slate-300">@ {{ experience.company }}</span>
-            </h4>
-            <div class="mb-2 text-sm text-slate-600 dark:text-slate-400">
-              {{ formatDate(experience.startDate) }} -
-              <span v-if="!experience.endDate" class="text-emerald-600 font-medium dark:text-emerald-400">
-                {{ $t('current') }}
-              </span>
-              <span v-else>{{ formatDate(experience.endDate) }}</span>
+    <section v-else-if="!pendingCvData && (recentExperiences.length > 0 || skills.length > 0 || languages.length > 0)" class="content-container pb-18 lg:pb-28">
+      <div v-if="recentExperiences.length > 0" class="border-t border-base py-10 lg:grid lg:grid-cols-12 lg:gap-8 lg:py-16">
+        <div class="mb-7 lg:col-span-3 lg:mb-0">
+          <p class="meta-label-primary">
+            01 / {{ $t('recent_work') }}
+          </p>
+        </div>
+        <div class="grid gap-3 lg:col-span-9 md:grid-cols-2">
+          <article v-for="experience in recentExperiences" :key="experience.id" class="min-h-72 flex flex-col surface-frosted rounded-2xl p-5 sm:p-7">
+            <div class="mb-auto">
+              <p class="meta-label-secondary">
+                {{ experience.company }}
+              </p>
+              <h3 class="display-heading mt-5 text-[clamp(1.6rem,4vw,2.6rem)]">
+                {{ getTranslation(experience, 'rol') }}
+              </h3>
+              <p class="mt-5 text-sm text-body leading-relaxed">
+                {{ getTranslation(experience, 'description') }}
+              </p>
             </div>
-            <p class="text-sm text-slate-700 leading-relaxed dark:text-slate-300">
-              {{ getTranslation(experience, 'description') }}
+            <p class="mt-8 border-t border-base pt-4 text-[0.65rem] text-muted font-mono">
+              {{ formatDate(experience.startDate) }} /
+              <span v-if="!experience.endDate" class="text-primary">{{ $t('current') }}</span>
+              <span v-else>{{ formatDate(experience.endDate) }}</span>
             </p>
           </article>
         </div>
       </div>
 
-      <!-- Skills -->
-      <div v-if="skills.length > 0">
-        <h3 class="mb-6 text-center text-2xl text-slate-800 font-bold dark:text-slate-200">
-          {{ $t('skills_title') }}
-        </h3>
-        <div class="grid grid-cols-1 gap-4">
-          <div
-            v-for="skill in skills"
-            :key="skill.id"
-            class="border border-slate-200 rounded-lg bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800"
-          >
-            <h4 class="mb-2 text-emerald-600 font-semibold dark:text-emerald-400">
+      <div v-if="skills.length > 0" class="border-t border-base py-10 lg:grid lg:grid-cols-12 lg:gap-8 lg:py-16">
+        <div class="mb-7 lg:col-span-3 lg:mb-0">
+          <p class="meta-label-primary">
+            02 / {{ $t('skills_title') }}
+          </p>
+        </div>
+        <div class="grid gap-x-8 gap-y-10 lg:col-span-9 sm:grid-cols-2">
+          <article v-for="skill in skills" :key="skill.id" class="border-l border-primary pl-5">
+            <h3 class="text-lg font-bold tracking-[-0.02em]">
               {{ getTranslation(skill, 'title') }}
-            </h4>
-            <p class="whitespace-pre-line text-sm text-slate-700 dark:text-slate-300">
+            </h3>
+            <p class="mt-3 whitespace-pre-line text-sm text-body leading-relaxed">
               {{ skill.skillList }}
             </p>
-          </div>
+          </article>
         </div>
       </div>
 
-      <!-- Languages -->
-      <div v-if="languages.length > 0">
-        <h3 class="mb-6 text-center text-2xl text-slate-800 font-bold dark:text-slate-200">
-          {{ $t('lang_title') }}
-        </h3>
-        <div class="grid grid-cols-2 gap-4">
-          <div
-            v-for="language in languages"
-            :key="language.id"
-            class="border border-slate-200 rounded-lg bg-slate-50 p-4 text-center dark:border-slate-700 dark:bg-slate-800"
-          >
-            <h4 class="mb-1 text-emerald-600 font-semibold dark:text-emerald-400">
-              {{ getTranslation(language, 'name') }}
-            </h4>
-            <p class="text-sm text-slate-700 dark:text-slate-300">
-              {{ getTranslation(language, 'level') }}
-            </p>
-          </div>
+      <div v-if="languages.length > 0" class="border-t border-base py-10 lg:grid lg:grid-cols-12 lg:gap-8 lg:py-16">
+        <div class="mb-7 lg:col-span-3 lg:mb-0">
+          <p class="meta-label-primary">
+            03 / {{ $t('lang_title') }}
+          </p>
         </div>
+        <dl class="grid overflow-hidden border border-base rounded-2xl surface-bg lg:col-span-9 sm:grid-cols-2">
+          <div v-for="(language, index) in languages" :key="language.id" class="p-5 sm:p-7" :class="index ? 'border-t border-base sm:border-l sm:border-t-0' : ''">
+            <dt class="meta-label-secondary">
+              {{ getTranslation(language, 'name') }}
+            </dt>
+            <dd class="mt-3 text-xl font-medium">
+              {{ getTranslation(language, 'level') }}
+            </dd>
+          </div>
+        </dl>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <style scoped>

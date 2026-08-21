@@ -34,68 +34,71 @@ function birthday() {
 
 <template>
   <section
-    class="relative mb-4 rounded bg-slate-200/60 p-4 text-slate-800 shadow backdrop-blur-xl dark:(bg-slate-800/60 text-slate-200)"
+    class="relative mb-4 overflow-hidden surface-frosted rounded-2xl p-5 sm:p-7"
   >
     <picture>
       <source type="image/webp" srcset="/img/avatar.webp">
       <img
-        class="absolute right-0 top-0 m-2 mb-4 h-40 w-40 border-2 border-slate-500 rounded object-cover shadow lg:w-40 md:w-32 md:-m-2"
+        class="mb-6 aspect-square w-28 border border-base rounded-2xl object-cover sm:w-36"
         src="/img/avatar.jpg"
         :alt="t('avatar.desc')"
       >
     </picture>
-    <h2 class="text-3xl leading-none">
+    <p class="mb-3 meta-label-primary">
+      Curriculum Vitae
+    </p>
+    <h1 class="display-heading text-4xl leading-none">
       Fran Blanco
-    </h2>
-    <h3 class="tracking-wider">
+    </h1>
+    <h2 class="mt-2 text-sm text-body leading-snug">
       {{ t('rol') }}
-    </h3>
-    <article class="mb-6 mt-2">
-      <ul>
+    </h2>
+    <article class="my-7 border-y border-base py-5">
+      <ul class="text-sm space-y-3">
         <li>
-          <a href="mailto:me@panchoblanco.dev" class="mb-2 flex items-center gap-2">
-            <i class="i-ph:envelope-simple size-6 text-violet-600 dark:text-violet-300" />
+          <a href="mailto:me@panchoblanco.dev" class="flex items-center gap-2 transition hover:text-primary">
+            <i class="i-ph:envelope-simple size-5 text-primary" />
             <span>me@panchoblanco.dev</span>
           </a>
         </li>
-        <li class="mb-2 flex items-center gap-2">
-          <i class="i-ph:cake size-6 text-violet-600 dark:text-violet-300" />
+        <li class="flex items-center gap-2">
+          <i class="i-ph:cake size-5 text-primary" />
           <span>{{ birthday() }}</span>
         </li>
-        <li class="mb-2 flex items-center gap-2">
-          <i class="i-ph:house-simple size-6 text-violet-600 dark:text-violet-300" />
+        <li class="flex items-center gap-2">
+          <i class="i-ph:house-simple size-5 text-primary" />
           <span>Buenos Aires, AR</span>
         </li>
       </ul>
     </article>
     <section class="mb-6">
-      <h3 class="mb-2 flex items-center text-xl text-violet-600 dark:text-violet-400">
-        <i class="i-ph:code-simple mr-2 size-6" />
+      <h3 class="mb-5 flex items-center meta-label-primary">
+        <i class="i-ph:code-simple mr-2 size-5" />
         <span> Skills </span>
       </h3>
-      <article v-for="skill in skills" :key="skill.slug" class="mb-2">
-        <h4 class="mb-1 font-bold underline opacity-75">
+      <article v-for="skill in skills" :key="skill.slug" class="mb-4 border-l border-primary pl-4">
+        <h4 class="mb-1 font-bold">
           {{ getSkillTranslation(skill, 'title') }}
         </h4>
-        <p class="text-sm text-slate-800 dark:text-slate-200">
+        <p class="text-sm text-body leading-relaxed">
           {{ getSkillList(skill) }}
         </p>
       </article>
     </section>
     <section class="mb-2">
-      <h3 class="flex items-center text-xl">
-        <i class="i-ph:globe-simple mr-2 size-6" />
+      <h3 class="mb-4 flex items-center meta-label-secondary">
+        <i class="i-ph:globe-simple mr-2 size-5" />
         <span> {{ $t('lang_title') }} </span>
       </h3>
       <article
         v-for="lang in languages"
         :key="lang.slug"
-        class="mb-1 flex justify-between"
+        class="border-t border-base py-3 text-sm first:border-0"
       >
-        <h4 class="mb-1 font-bold">
+        <h4 class="font-bold">
           {{ getLangTranslation(lang, 'name') }}
         </h4>
-        <p class="text-slate-800 dark:text-slate-200">
+        <p class="mt-1 text-body">
           {{ getLangTranslation(lang, 'level') }}
         </p>
       </article>
