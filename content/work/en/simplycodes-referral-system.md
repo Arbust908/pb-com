@@ -27,7 +27,7 @@ areas:
   - product
   - e2e
 featured: true
-draft: true
+draft: false
 ---
 
 ## Context

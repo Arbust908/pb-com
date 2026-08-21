@@ -34,7 +34,7 @@ areas:
   - product
   - e2e
 featured: false
-draft: true
+draft: false
 ---
 
 ## Project summary

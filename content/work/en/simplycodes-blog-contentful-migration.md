@@ -26,7 +26,7 @@ areas:
   - content
   - e2e
 featured: true
-draft: true
+draft: false
 ---
 
 ## Context
