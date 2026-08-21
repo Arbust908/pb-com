@@ -6,9 +6,13 @@ export default defineNuxtConfig({
       appName: '',
     },
     openRouterKey: '',
+    devUser: '',
+    devPass: '',
+    phKey: '',
   },
 
   modules: [
+    '@nuxt/content',
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@pinia/nuxt',
@@ -16,9 +20,16 @@ export default defineNuxtConfig({
   ],
 
   routeRules: {
+    '/portfolio': { redirect: '/work' },
+    '/es/portfolio': { redirect: '/es/work' },
+
     // Homepage and CV can be edited via admin - use ISR instead of prerender
     '/': { isr: 3600 }, // Revalidate every hour
     '/cv': { isr: 3600 }, // Revalidate every hour
+
+    // File-based case studies are rebuilt from Markdown and cached at the edge
+    '/work': { isr: 3600 },
+    '/work/**': { isr: 3600 },
 
     // Blog - content may be updated occasionally
     // '/blog': { isr: 86400 }, // Revalidate daily
@@ -52,6 +63,7 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
+    '@fontsource/bitter/latin-800.css',
   ],
 
   vite: {
@@ -92,14 +104,14 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      viewport: 'width=device-width,initial-scale=1',
+      viewport: 'width=device-width,initial-scale=1,viewport-fit=cover',
       link: [
         /* { rel: 'icon', href: '/favicon.ico', sizes: 'any' }, */
         /* { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }, */
         /*  { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }, */
       ],
       meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
         { name: 'description', content: appDescription },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
       ],
@@ -109,6 +121,7 @@ export default defineNuxtConfig({
   i18n: {
     locales: ['en', 'es'],
     defaultLocale: 'en',
+    strategy: 'prefix_except_default',
     vueI18n: 'locales/i18n.config.ts',
   },
 

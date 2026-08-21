@@ -4,17 +4,19 @@ import { appName } from '@/constants'
 
 const isDark = useDark()
 const isDev = import.meta.dev
+const { locale } = useI18n()
 
 onMounted(() => {
-  if (!isDev) {
-    posthog.init('phc_IWe7D2dsdy63sd80Puspwd4UqBWaoatzh42WSwehkqF', { api_host: 'https://app.posthog.com' })
+  const phKey = useRuntimeConfig().public.phKey as string
+  if (!isDev && phKey) {
+    posthog.init(phKey, { api_host: 'https://app.posthog.com' })
   }
 })
 
-useHead({
+useHead(() => ({
   title: appName,
   htmlAttrs: {
-    lang: 'en',
+    lang: locale.value,
   },
   link: [
     {
@@ -22,7 +24,7 @@ useHead({
       href: isDev ? '/pb-favicon-local.png' : isDark.value ? '/pb-favicon-dark.png' : '/pb-favicon-light.png',
     },
   ],
-})
+}))
 </script>
 
 <template>
@@ -47,5 +49,11 @@ body,
 #__nuxt {
   min-height: -webkit-fill-available;
   @apply h-100svh m-0 p-0 scroll-smooth font-sans;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 </style>

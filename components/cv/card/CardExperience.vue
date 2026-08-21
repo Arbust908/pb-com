@@ -35,29 +35,29 @@ function onClick() {
     <article
       :key="locale"
       :class="
-        !experience.endDate ? 'border-violet-700 dark:border-violet-300' : 'border-slate-300 dark:border-slate-600'
+        !experience.endDate ? 'border-primary' : 'border-base'
       "
-      class="grid grid-cols-1 mb-4 gap-2 border rounded p-4 text-slate-800 bg-checked bg-checked dark:text-slate-200"
+      class="grid grid-cols-1 mb-3 gap-3 border rounded-2xl surface-bg p-5 backdrop-blur-xl sm:p-7"
     >
       <h3
-        class="flex flex-col cursor-pointer font-bold lg:flex-row sm:flex-row md:flex-col"
+        class="flex flex-col cursor-pointer text-xl font-bold tracking-[-0.02em] lg:flex-row sm:flex-row md:flex-col"
         @click="onClick"
       >
         <span>{{ getTranslation('rol') }}</span>
         <span class="hidden px-2 lg:inline sm:inline md:hidden"> / </span>
-        <span class="text-emerald-500"> {{ experience.company }} </span>
+        <span class="text-primary"> {{ experience.company }} </span>
       </h3>
-      <div class="text-sm leading-relaxed">
+      <div class="meta-label leading-relaxed">
         <span>{{ formatDate(experience.startDate) }}</span> -
         <span
           v-if="!experience.endDate"
-          class="rounded bg-emerald-800 px-2 text-emerald-300 font-bold dark:bg-emerald-300 dark:text-emerald-800"
+          class="rounded-full bg-rose-400/15 px-2 py-1 text-primary font-bold"
         >
           Actual
         </span>
         <span v-else>{{ formatDate(experience.endDate) }}</span>
       </div>
-      <p v-if="isExpanded" class="font-light">
+      <p v-if="isExpanded" class="text-sm text-body leading-relaxed">
         <span
           v-if="detailsShow"
           :key="`${experience.slug}-detail`"
@@ -69,7 +69,7 @@ function onClick() {
       </p>
       <aside v-if="hasMore() && isExpanded" class="mt-2 flex justify-end">
         <button
-          class="transform rounded px-2 py-1 text-sm transition duration-150 ease-out hover:(bg-emerald-400 text-emerald-700 -translate-y-1)"
+          class="pill-control text-body hover:(border-primary text-primary -translate-y-1)"
           @click="detailsShow = !detailsShow"
         >
           {{

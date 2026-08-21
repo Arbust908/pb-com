@@ -1,6 +1,6 @@
 import { defineEventHandler, setHeader } from 'h3'
 
-const SITE_URL = 'https://panchoblanco.com'
+const SITE_URL = 'https://panchoblanco.dev'
 
 export default defineEventHandler((event) => {
   setHeader(event, 'Content-Type', 'text/plain; charset=utf-8')

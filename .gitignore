@@ -6,3 +6,9 @@ dist
 .env
 .idea/
 .unlighthouse
+.claude
+.agents
+.data
+.claude
+.agent
+.claude/settings.local.json.old
