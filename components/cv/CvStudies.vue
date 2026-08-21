@@ -11,7 +11,7 @@ function getTranslation(study: typeof studies.value[number], field: string): str
 
 <template>
   <section>
-    <h2 id="study" class="mb-2 ml-4 text-3xl">
+    <h2 id="study" class="display-heading mb-6 mt-14 text-[clamp(2.5rem,7vw,4.5rem)]">
       {{ $t('study_title') }}
     </h2>
     <CvCardStudy

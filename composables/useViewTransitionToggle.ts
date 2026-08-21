@@ -1,5 +1,5 @@
 /* https://www.aang.dev/playground/view-transition-theme-switcher */
-export function useViewTransitionToggle(toggleFn: () => void) {
+export function useViewTransitionToggle(toggleFn: () => unknown) {
   function handleClick(e: MouseEvent) {
     const md = window.matchMedia('(max-width: 768px)').matches
     const x = e.clientX
@@ -13,12 +13,12 @@ export function useViewTransitionToggle(toggleFn: () => void) {
       !document?.startViewTransition
       || window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
-      toggleFn()
+      void toggleFn()
       return
     }
 
-    const transition = document.startViewTransition(() => {
-      toggleFn()
+    const transition = document.startViewTransition(async () => {
+      await toggleFn()
     })
 
     transition.ready.then(() => {

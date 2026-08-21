@@ -16,17 +16,17 @@ const isExtended = ref(false)
 </script>
 
 <template>
-  <article class="mb-4 cursor-pointer border-l-2 border-violet-400 p-4 text-slate-700 dark:text-slate-300" @click="isExtended = !isExtended">
-    <h3 class="flex flex-row items-center gap-x-3">
-      <span class="font-bold">
+  <article class="mb-3 cursor-pointer surface-frosted rounded-2xl p-5 transition hover:border-primary sm:p-7" @click="isExtended = !isExtended">
+    <h3 class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <span class="text-lg font-bold tracking-[-0.02em]">
         {{ place }}
       </span>
-      <span class="text-sm">
+      <span class="meta-label">
         {{ date }}
       </span>
     </h3>
     <template v-if="isExtended">
-      <p class="mt-2 font-light">
+      <p class="mt-4 border-t border-base pt-4 text-sm text-body leading-relaxed">
         {{ description }}
       </p>
     </template>

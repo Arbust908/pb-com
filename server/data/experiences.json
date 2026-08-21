@@ -2,23 +2,45 @@
   "success": true,
   "data": [
     {
+      "id": 8,
+      "slug": "demandio_fullstack",
+      "company": "Demand.io",
+      "startDate": "2026-02-19",
+      "endDate": null,
+      "sortOrder": 0,
+      "createdAt": "2026-08-19T00:00:00.000Z",
+      "updatedAt": "2026-08-19T00:00:00.000Z",
+      "translations": {
+        "en": {
+          "rol": "Full-Stack Developer",
+          "description": "Build and maintain full-stack product features for Demand.io, working across the existing frontend platform and backend services built with Node.js and ElysiaJS.",
+          "more": "Expanded from a frontend-focused role into full-stack product development, contributing across client and server boundaries with TypeScript, Node.js, and ElysiaJS."
+        },
+        "es": {
+          "rol": "Desarrollador Full Stack",
+          "description": "Desarrollo y mantengo funcionalidades full stack para Demand.io, trabajando sobre la plataforma frontend existente y servicios backend construidos con Node.js y ElysiaJS.",
+          "more": "Amplié mi rol enfocado en frontend hacia el desarrollo de producto full stack, contribuyendo a través de los límites entre cliente y servidor con TypeScript, Node.js y ElysiaJS."
+        }
+      }
+    },
+    {
       "id": 1,
       "slug": "demandio",
       "company": "Demand.io",
       "startDate": "2022-10-18",
-      "endDate": null,
-      "sortOrder": 0,
+      "endDate": "2026-02-19",
+      "sortOrder": 1,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-01-01T00:00:00.000Z",
       "translations": {
         "en": {
           "rol": "Front-End Engineer (Contract)",
-          "description": "Architect and maintain SimplyCodes, a Chrome extension (70,000+ Chrome Web Store users, 4.6★) — own both the UI layer (checkout overlays, in-page widgets) and core extension logic (checkout detection, content-script injection, cross-context messaging).",
+          "description": "Architected and maintained SimplyCodes, a Chrome extension (70,000+ Chrome Web Store users, 4.6★) — owned both the UI layer (checkout overlays, in-page widgets) and core extension logic (checkout detection, content-script injection, cross-context messaging).",
           "more": "Led migration from Vue 2 to Vue 3 + Vite (Nuxt 3), reducing bundle size by 28% and first contentful paint to < 1.2s. Championed design-system adoption (Tailwind V4 + Storybook), enabling faster feature delivery with WCAG AA compliance. Managed dynamic blog content via Contentful CMS, integrating with the Nuxt frontend. Built referral tracking infrastructure and optimized conversion funnels to drive user acquisition. Led multiple A/B testing initiatives using GTM and GA4, analyzing user behavior and conversion metrics to inform product decisions. Stack: Vue, Nuxt 3, UnoCSS/TailwindCSS, TypeScript, React Native (Expo)."
         },
         "es": {
           "rol": "Ingeniero Front-End (Contrato)",
-          "description": "Arquitecto y mantengo SimplyCodes, una extension de Chrome (mas de 70.000 usuarios en la Chrome Web Store, 4.6★) — a cargo tanto de la capa de UI (overlays de checkout, widgets in-page) como de la logica central de la extension (deteccion de checkout, inyeccion de content scripts, mensajeria entre contextos).",
+          "description": "Diseñé la arquitectura y mantuve SimplyCodes, una extensión de Chrome (más de 70.000 usuarios en la Chrome Web Store, 4,6★) — a cargo tanto de la capa de UI (overlays de checkout, widgets in-page) como de la lógica central de la extensión (detección de checkout, inyección de content scripts y mensajería entre contextos).",
           "more": "Lidere la migracion de Vue 2 a Vue 3 + Vite (Nuxt 3), reduciendo el tamano del bundle en un 28% y el First Contentful Paint a menos de 1.2s. Promovi la adopcion del design system (Tailwind V4 + Storybook), permitiendo una entrega de funcionalidades mas rapida con cumplimiento de WCAG AA. Administre contenido dinamico del blog mediante Contentful CMS, integrado con el frontend en Nuxt. Construi infraestructura de tracking de referidos y optimice los funnels de conversion para impulsar la adquisicion de usuarios. Lidere multiples iniciativas de A/B testing usando GTM y GA4, analizando el comportamiento de usuarios y metricas de conversion para informar decisiones de producto. Stack: Vue, Nuxt 3, UnoCSS/TailwindCSS, TypeScript, React Native (Expo)."
         }
       }

@@ -1,6 +1,6 @@
 import { defineEventHandler, setHeader } from 'h3'
 
-const SITE_URL = 'https://panchoblanco.com'
+const SITE_URL = 'https://panchoblanco.dev'
 
 interface SitemapEntry {
   loc: string
@@ -14,7 +14,11 @@ const today = new Date().toISOString().slice(0, 10)
 const entries: SitemapEntry[] = [
   { loc: `${SITE_URL}/`, changefreq: 'weekly', priority: 1.0, lastmod: today },
   { loc: `${SITE_URL}/cv`, changefreq: 'weekly', priority: 0.9, lastmod: today },
-  { loc: `${SITE_URL}/portfolio`, changefreq: 'weekly', priority: 0.8, lastmod: today },
+  { loc: `${SITE_URL}/work`, changefreq: 'weekly', priority: 0.8, lastmod: today },
+  { loc: `${SITE_URL}/about`, changefreq: 'monthly', priority: 0.7, lastmod: today },
+  { loc: `${SITE_URL}/privacy`, changefreq: 'yearly', priority: 0.3, lastmod: today },
+  { loc: `${SITE_URL}/es/about`, changefreq: 'monthly', priority: 0.7, lastmod: today },
+  { loc: `${SITE_URL}/es/privacy`, changefreq: 'yearly', priority: 0.3, lastmod: today },
 ]
 
 function escapeXml(value: string): string {

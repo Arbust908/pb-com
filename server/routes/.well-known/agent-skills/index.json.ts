@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto'
 import { defineEventHandler, setHeader } from 'h3'
 
-const SITE_URL = 'https://panchoblanco.com'
+const SITE_URL = 'https://panchoblanco.dev'
 const SCHEMA_URL
   = 'https://raw.githubusercontent.com/cloudflare/agent-skills-discovery-rfc/main/schema/v0.2.0.json'
 
