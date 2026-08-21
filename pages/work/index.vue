@@ -94,11 +94,11 @@ useSeoMeta({
 
 <template>
   <MotionConfig reduced-motion="user" :transition="{ type: 'spring', stiffness: 280, damping: 28 }">
-    <div class="base-bg relative w-full overflow-hidden text-base layout-grid-full">
-      <div aria-hidden="true" class="ambient-secondary pointer-events-none absolute right--20 top--24 size-120 rounded-full filter-blur-3xl" />
-      <div aria-hidden="true" class="ambient-primary pointer-events-none absolute right-48 top-16 size-72 rounded-full filter-blur-3xl" />
+    <div class="relative w-full overflow-hidden base-bg text-base layout-grid-full">
+      <div aria-hidden="true" class="pointer-events-none absolute right--20 top--24 size-120 rounded-full ambient-secondary filter-blur-3xl" />
+      <div aria-hidden="true" class="pointer-events-none absolute right-48 top-16 size-72 rounded-full ambient-primary filter-blur-3xl" />
 
-      <header class="content-container relative pb-10 pt-12 lg:pb-18 lg:pt-24 sm:pb-16 sm:pt-16">
+      <header class="relative content-container pb-10 pt-12 lg:pb-18 lg:pt-24 sm:pb-16 sm:pt-16">
         <div class="grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
           <motion.div
             :initial="{ opacity: 0, y: 24 }"
@@ -108,13 +108,13 @@ useSeoMeta({
             <h1 class="display-heading max-w-5xl text-[clamp(3.2rem,14vw,7rem)] leading-[0.88]">
               {{ $t('case_studies.title') }}
             </h1>
-            <p class="text-body mt-2 max-w-2xl text-base leading-relaxed lg:text-xl sm:text-lg">
+            <p class="mt-2 max-w-2xl text-base text-body leading-relaxed lg:text-xl sm:text-lg">
               {{ $t('case_studies.introduction') }}
             </p>
           </motion.div>
 
           <motion.figure
-            class="surface-frosted hidden h-44 overflow-hidden rounded-2xl lg:block"
+            class="hidden h-44 overflow-hidden surface-frosted rounded-2xl lg:block"
             :initial="{ opacity: 0, scale: 0.97 }"
             :animate="{ opacity: 1, scale: 1 }"
             :transition="{ delay: 0.14 }"
@@ -124,10 +124,10 @@ useSeoMeta({
         </div>
       </header>
 
-      <section class="border-base surface-strong-bg relative border-y backdrop-blur-xl lg:sticky lg:top-0 lg:z-30">
+      <section class="relative border-y border-base surface-strong-bg backdrop-blur-xl lg:sticky lg:top-0 lg:z-30">
         <div class="content-container py-3">
           <button
-            class="pill-control text-body hover:border-primary hover:text-primary w-full justify-between sm:hidden"
+            class="w-full pill-control justify-between text-body sm:hidden hover:border-primary hover:text-primary"
             type="button"
             @click="openFilters"
           >
@@ -169,7 +169,7 @@ useSeoMeta({
 
       <dialog
         ref="filterDialog"
-        class="work-filter-dialog surface-strong-bg fixed inset-x-0 bottom-0 top-auto m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl p-0 text-base sm:hidden"
+        class="work-filter-dialog fixed inset-x-0 bottom-0 top-auto m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl surface-strong-bg p-0 text-base sm:hidden"
         :aria-label="$t('case_studies.filters_label')"
       >
         <div class="mx-auto mt-2 h-1 w-10 rounded-full bg-slate-300 dark:bg-slate-600" aria-hidden="true" />
@@ -184,7 +184,7 @@ useSeoMeta({
 
         <div class="grid max-h-[calc(85dvh-8rem)] gap-2 overflow-y-auto px-4 pb-4" role="group" :aria-label="$t('case_studies.filters_label')">
           <button
-            class="border-base w-full flex items-center justify-between border rounded-2xl px-4 py-3 text-left text-sm font-mono transition-colors"
+            class="w-full flex items-center justify-between border border-base rounded-2xl px-4 py-3 text-left text-sm font-mono transition-colors"
             :class="activeFilter === null ? 'bg-rose-400 text-slate-950' : 'text-body hover:border-primary hover:text-primary'"
             :aria-pressed="activeFilter === null"
             type="button"
@@ -196,7 +196,7 @@ useSeoMeta({
           <button
             v-for="filter in filters"
             :key="filter"
-            class="border-base w-full flex items-center justify-between border rounded-2xl px-4 py-3 text-left text-sm font-mono transition-colors"
+            class="w-full flex items-center justify-between border border-base rounded-2xl px-4 py-3 text-left text-sm font-mono transition-colors"
             :class="activeFilter === filter ? 'bg-rose-400 text-slate-950' : 'text-body hover:border-primary hover:text-primary'"
             :aria-pressed="activeFilter === filter"
             type="button"
@@ -207,15 +207,15 @@ useSeoMeta({
           </button>
         </div>
 
-        <div class="work-filter-actions border-base border-t p-4">
-          <button class="control-primary w-full justify-center py-3" type="button" @click="closeFilters">
+        <div class="work-filter-actions border-t border-base p-4">
+          <button class="w-full control-primary justify-center py-3" type="button" @click="closeFilters">
             {{ $t('case_studies.close_filters') }}
           </button>
         </div>
       </dialog>
 
-      <main class="content-container relative py-6 lg:py-14 sm:py-10">
-        <div class="meta-label mb-5 flex items-center justify-between">
+      <main class="relative content-container py-6 lg:py-14 sm:py-10">
+        <div class="mb-5 flex items-center justify-between meta-label">
           <span>{{ $t('case_studies.showing') }}</span>
           <span>{{ filteredStudies.length.toString().padStart(2, '0') }}</span>
         </div>
@@ -262,17 +262,17 @@ useSeoMeta({
                   >
                     {{ study.title }}
                   </h2>
-                  <p class="text-body mt-5 max-w-2xl text-sm leading-relaxed sm:text-base">
+                  <p class="mt-5 max-w-2xl text-sm text-body leading-relaxed sm:text-base">
                     {{ study.description }}
                   </p>
                 </div>
 
-                <div class="border-subtle relative mt-auto flex items-center justify-between gap-4 border-t pt-2">
+                <div class="relative mt-auto flex items-center justify-between gap-4 border-t border-subtle pt-2">
                   <ul class="flex flex-wrap gap-x-3 gap-y-1.5">
-                    <li v-for="technology in study.technologies?.slice(0, 4)" :key="technology" class="text-muted text-2.5 font-mono">
+                    <li v-for="technology in study.technologies?.slice(0, 4)" :key="technology" class="text-2.5 text-muted font-mono">
                       {{ technology }}
                     </li>
-                    <li v-if="!study.technologies?.length" class="text-subtle text-2.5 font-mono">
+                    <li v-if="!study.technologies?.length" class="text-2.5 text-subtle font-mono">
                       {{ study.skills?.[0] }}
                     </li>
                   </ul>
