@@ -32,7 +32,7 @@ areas:
   - data
   - legacy
 featured: false
-draft: true
+draft: false
 ---
 
 ## Inheriting FYM

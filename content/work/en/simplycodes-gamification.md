@@ -25,7 +25,7 @@ areas:
   - architecture
   - product
 featured: true
-draft: true
+draft: false
 ---
 
 ## Context
