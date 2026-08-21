@@ -19,6 +19,9 @@ export default defineNuxtConfig({
   ],
 
   routeRules: {
+    '/portfolio': { redirect: '/work' },
+    '/es/portfolio': { redirect: '/es/work' },
+
     // Homepage and CV can be edited via admin - use ISR instead of prerender
     '/': { isr: 3600 }, // Revalidate every hour
     '/cv': { isr: 3600 }, // Revalidate every hour
@@ -100,14 +103,14 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      viewport: 'width=device-width,initial-scale=1',
+      viewport: 'width=device-width,initial-scale=1,viewport-fit=cover',
       link: [
         /* { rel: 'icon', href: '/favicon.ico', sizes: 'any' }, */
         /* { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }, */
         /*  { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }, */
       ],
       meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
         { name: 'description', content: appDescription },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
       ],
@@ -117,6 +120,7 @@ export default defineNuxtConfig({
   i18n: {
     locales: ['en', 'es'],
     defaultLocale: 'en',
+    strategy: 'prefix_except_default',
     vueI18n: 'locales/i18n.config.ts',
   },
 

@@ -1,27 +1,48 @@
+<script setup lang="ts">
+const currentYear = new Date().getFullYear()
+const localePath = useLocalePath()
+</script>
+
 <template>
   <footer
-    class="flex flex-wrap items-center justify-between bg-slate-200 px-6 pt-2 text-sm dark:bg-slate-800"
+    class="border-t border-base surface-strong-bg px-4 text-sm"
   >
-    <section>
-      <NuxtLink
-        href="https://github.com/Arbust908"
-        class="inline-flex items-center p-3 md:py-0"
-        title="Github profile"
-        external
-      >
-        <span class="hidden">https://github.com/Arbust908</span>
-        <i class="i-ph:github-logo inline h-6 w-6" />
-      </NuxtLink>
-    </section>
-    <div class="awesome-line" />
+    <div class="mx-auto max-w-360 flex flex-wrap items-center justify-between gap-3 px-2 py-4">
+      <p class="meta-label">
+        Pancho Blanco / {{ currentYear }}
+      </p>
+      <nav class="flex items-center gap-1 sm:gap-2" :aria-label="$t('footer_navigation')">
+        <NuxtLink
+          :to="localePath({ name: 'about' })"
+          class="rounded-full px-3 py-2 text-xs font-mono transition hover:text-primary"
+        >
+          {{ $t('about_link') }}
+        </NuxtLink>
+        <NuxtLink
+          :to="localePath({ name: 'privacy' })"
+          class="rounded-full px-3 py-2 text-xs font-mono transition hover:text-primary"
+        >
+          {{ $t('privacy_link') }}
+        </NuxtLink>
+        <NuxtLink
+          href="https://github.com/Arbust908"
+          class="icon-control"
+          :aria-label="$t('github_profile')"
+          rel="noreferrer"
+          external
+        >
+          <i class="i-ph:github-logo size-5" aria-hidden="true" />
+        </NuxtLink>
+      </nav>
+    </div>
+    <div class="awesome-line accent-line" />
   </footer>
 </template>
 
 <style>
-  .awesome-line {
-  @apply w-full h-2 rounded-t-full;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
+.awesome-line {
+  height: 2px;
+  width: 100%;
   animation: gradient 15s ease infinite;
 }
 
@@ -34,6 +55,12 @@
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .awesome-line {
+    animation: none;
   }
 }
 </style>

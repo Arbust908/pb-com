@@ -4,6 +4,7 @@ translationKey: file-based-case-studies
 locale: en
 title: Designing a file-based case-study system
 description: Simplifying a portfolio publishing model around Markdown, structured metadata, and predictable bilingual fallback.
+project: Portfolio
 organization: Personal
 projectType: personal
 sortOrder: 900
@@ -19,6 +20,11 @@ skills:
   - Frontend architecture
   - Content design
   - Internationalization
+areas:
+  - frontend
+  - architecture
+  - content
+  - e2e
 featured: true
 draft: false
 ---

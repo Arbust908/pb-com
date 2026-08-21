@@ -16,7 +16,7 @@
 
 **Nuxt 3** · Vue 3 · TypeScript · **UnoCSS** · i18n (`@nuxtjs/i18n`) · Pinia · PostHog · PWA (`@vite-pwa/nuxt`)
 
-**Rendering:** Hybrid (ISR + SSR) · **Deploy:** Vercel · **Fonts:** Space Grotesk, DM Serif Display, Space Mono
+**Rendering:** Hybrid (ISR + SSR) · **Deploy:** Vercel · **Fonts:** Plus Jakarta Sans, DM Serif Display, Google Sans Code
 
 ## Standout Features
 

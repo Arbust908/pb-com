@@ -3,8 +3,8 @@ import {
   presetAttributify,
   presetIcons,
   presetTypography,
-  presetUno,
   presetWebFonts,
+  presetWind3,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
@@ -14,8 +14,35 @@ import {
 
 export default defineConfig({
   shortcuts: [
-    ['btn', 'px-4 py-1 rounded inline-block bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
-    ['icon-btn', 'inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600'],
+    ['base-bg', 'bg-slate-100 dark:bg-slate-900'],
+    ['depth-bg', 'bg-slate-200 dark:bg-slate-950'],
+    ['surface-bg', 'bg-slate-50/70 dark:bg-slate-800/40'],
+    ['surface-strong-bg', 'bg-slate-50/90 dark:bg-slate-800/75'],
+    ['text-base', 'text-slate-950 dark:text-slate-50'],
+    ['text-body', 'text-slate-700 dark:text-slate-300'],
+    ['text-muted', 'text-slate-500 dark:text-slate-400'],
+    ['text-subtle', 'text-slate-400 dark:text-slate-500'],
+    ['text-depth', 'text-slate-200 dark:text-slate-950'],
+    ['text-primary', 'text-rose-700 dark:text-rose-300'],
+    ['text-secondary', 'text-purple-700 dark:text-purple-300'],
+    ['border-base', 'border-slate-300/70 dark:border-slate-700/70'],
+    ['border-subtle', 'border-slate-300/45 dark:border-slate-700/45'],
+    ['border-primary', 'border-rose-500/60 dark:border-rose-400/50'],
+    ['surface-frosted', 'border border-slate-300/70 bg-slate-50/70 backdrop-blur-xl dark:border-slate-700/70 dark:bg-slate-800/40'],
+    ['surface-recessed', 'border border-slate-300/60 bg-slate-200/80 dark:border-slate-700/60 dark:bg-slate-950/70'],
+    ['content-container', 'mx-auto w-full max-w-360 px-4 sm:px-6 lg:px-10'],
+    ['display-heading', '[word-spacing:0.04em] font-extrabold leading-[0.92] tracking-[-0.035em] font-sans'],
+    ['meta-label', 'text-[0.65rem] text-slate-500 tracking-[0.16em] font-mono uppercase dark:text-slate-400'],
+    ['meta-label-primary', 'text-[0.65rem] text-rose-700 tracking-[0.16em] font-mono uppercase dark:text-rose-300'],
+    ['meta-label-secondary', 'text-[0.65rem] text-purple-700 tracking-[0.16em] font-mono uppercase dark:text-purple-300'],
+    ['pill-control', 'inline-flex items-center border border-slate-300/70 rounded-full px-4 py-2 text-xs font-mono transition dark:border-slate-700/70'],
+    ['control-primary', 'inline-flex items-center rounded-full bg-rose-400 px-4 py-2 text-xs text-slate-950 font-mono transition hover:bg-rose-300 active:bg-rose-500 focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset-2'],
+    ['icon-control', 'size-9 inline-flex items-center justify-center border border-slate-300/70 rounded-full text-slate-700 transition hover:border-rose-500/60 hover:text-rose-700 dark:border-slate-700/70 dark:text-slate-300 dark:hover:border-rose-400/50 dark:hover:text-rose-300'],
+    ['accent-line', 'from-rose-400 via-purple-400 to-rose-400 bg-gradient-to-r bg-[length:200%_100%]'],
+    ['ambient-primary', 'bg-rose-400/15 dark:bg-rose-400/10'],
+    ['ambient-secondary', 'bg-purple-400/15 dark:bg-purple-400/10'],
+    ['btn', 'control-primary cursor-pointer disabled:cursor-default disabled:opacity-50'],
+    ['icon-btn', 'inline-block cursor-pointer select-none text-muted transition duration-200 ease-in-out hover:text-primary'],
     ['flex-middle', 'flex items-center justify-center'],
   ],
   rules: [
@@ -119,7 +146,7 @@ export default defineConfig({
     ['interpolate-size', { 'interpolate-size': 'allow-keywords' }],
   ],
   presets: [
-    presetUno(),
+    presetWind3(),
     presetAttributify(),
     presetIcons({
       extraProperties: {
@@ -131,7 +158,7 @@ export default defineConfig({
       fonts: {
         sans: [
           {
-            name: 'Space Grotesk',
+            name: 'Plus Jakarta Sans',
             weights: [300, 400, 500, 600, 700],
           },
           {
@@ -139,20 +166,12 @@ export default defineConfig({
             provider: 'none',
           },
         ],
-        serif: 'Instrument Serif',
-        display: [
-          {
-            name: 'Bitter',
-            provider: 'none',
-          },
-          {
-            name: 'serif',
-            provider: 'none',
-          },
-        ],
+        serif: 'Bitter',
         mono: [
           {
-            name: 'Space Mono',
+            name: 'Google Sans Code',
+            weights: [300, 400, 500, 600, 700, 800],
+            italic: true,
           },
           {
             name: 'monospace',

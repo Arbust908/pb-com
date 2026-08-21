@@ -6,33 +6,37 @@ const localePath = useLocalePath()
 
 <template>
   <header
-    class="w-full flex flex-col items-center bg-slate-200 p-2 sm:flex-row sm:justify-between dark:bg-slate-800"
+    class="hidden w-full border-b border-base surface-strong-bg px-4 py-3 backdrop-blur-xl sm:block sm:px-6"
   >
-    <NuxtLink :to="localePath({ name: 'index' })" class="rounded-lg px-2 py-1 hover:text-violet-500">
-      <h1 class="flex items-center text-lg font-bold">
-        <Logo class="h-8 w-8 fill-current" />
-        <span>
-          Pancho Blanco
-        </span>
-      </h1>
-    </NuxtLink>
-    <nav class="mr-4 flex items-center justify-between space-x-3">
-      <GeneralLangToggle />
-      <ClientOnly>
-        <DarkCircleToggle />
-      </ClientOnly>
-      <NuxtLink
-        class="rounded-lg px-2 py-1 transition duration-150 ease-out hover:text-violet-500 hover:underline"
-        :to="localePath({ name: 'work' })"
-      >
-        {{ $t('work') }}
+    <div class="mx-auto max-w-360 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+      <NuxtLink :to="localePath({ name: 'index' })" class="rounded-full transition hover:text-primary focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset-4">
+        <div class="flex items-center gap-2 text-base font-bold tracking-[-0.02em]">
+          <Logo class="h-8 w-8 fill-current" />
+          <span>
+            Pancho Blanco
+          </span>
+        </div>
       </NuxtLink>
-      <NuxtLink
-        class="rounded-lg px-2 py-1 transition duration-150 ease-out hover:text-violet-500 hover:underline"
-        :to="localePath({ name: 'cv' })"
-      >
-        {{ $t('resume') }}
-      </NuxtLink>
-    </nav>
+      <nav class="flex items-center justify-between gap-2">
+        <GeneralLangToggle />
+        <ClientOnly>
+          <DarkCircleToggle />
+        </ClientOnly>
+        <NuxtLink
+          class="rounded-full px-3 py-2 text-xs font-mono transition hover:text-primary"
+          active-class="text-primary"
+          :to="localePath({ name: 'work' })"
+        >
+          {{ $t('work') }}
+        </NuxtLink>
+        <NuxtLink
+          class="rounded-full px-3 py-2 text-xs font-mono transition hover:text-primary"
+          active-class="text-primary"
+          :to="localePath({ name: 'cv' })"
+        >
+          {{ $t('resume') }}
+        </NuxtLink>
+      </nav>
+    </div>
   </header>
 </template>
