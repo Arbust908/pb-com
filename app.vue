@@ -7,8 +7,9 @@ const isDev = import.meta.dev
 const { locale } = useI18n()
 
 onMounted(() => {
-  if (!isDev) {
-    posthog.init('phc_IWe7D2dsdy63sd80Puspwd4UqBWaoatzh42WSwehkqF', { api_host: 'https://app.posthog.com' })
+  const phKey = useRuntimeConfig().public.phKey as string
+  if (!isDev && phKey) {
+    posthog.init(phKey, { api_host: 'https://app.posthog.com' })
   }
 })
 
