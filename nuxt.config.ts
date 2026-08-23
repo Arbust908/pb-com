@@ -105,6 +105,19 @@ export default defineNuxtConfig({
   app: {
     head: {
       viewport: 'width=device-width,initial-scale=1,viewport-fit=cover',
+      script: [
+        {
+          innerHTML: `
+            (() => {
+              const saved = localStorage.getItem('vueuse-color-scheme')
+              const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+              const dark = saved === 'dark' || (saved !== 'light' && systemDark)
+
+              document.documentElement.classList.toggle('dark', dark)
+            })()
+          `,
+        },
+      ],
       link: [
         /* { rel: 'icon', href: '/favicon.ico', sizes: 'any' }, */
         /* { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }, */
