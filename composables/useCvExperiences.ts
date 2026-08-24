@@ -2,6 +2,7 @@ export interface CvExperience {
   id: number
   slug: string
   company: string
+  location?: string
   startDate: string
   endDate: string | null
   sortOrder: number

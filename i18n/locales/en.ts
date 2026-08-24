@@ -1,5 +1,5 @@
 export default {
-  rol: 'Creative Developer',
+  rol: '',
   exp_title: 'Experience',
   lang_title: 'Languages',
   skills_title: 'Skills',

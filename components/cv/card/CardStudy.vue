@@ -16,7 +16,7 @@ const isExtended = ref(false)
 </script>
 
 <template>
-  <article class="mb-3 cursor-pointer surface-frosted rounded-2xl p-5 transition hover:border-primary sm:p-7" @click="isExtended = !isExtended">
+  <article class="cursor-pointer surface-frosted rounded-lg p-3 transition hover:border-primary sm:p-4" @click="isExtended = !isExtended">
     <h3 class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
       <span class="text-lg font-bold tracking-[-0.02em]">
         {{ place }}

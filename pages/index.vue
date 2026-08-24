@@ -81,11 +81,12 @@ onMounted(async () => {
 
     <header class="relative grid content-container gap-10 pb-16 pt-14 lg:grid-cols-12 lg:items-end lg:pb-24 lg:pt-24 sm:pt-18">
       <div class="lg:col-span-9">
-        <p class="mb-5 meta-label-primary">
-          Portfolio / Buenos Aires
-        </p>
         <h1 class="display-heading text-[clamp(3.5rem,13vw,8rem)]">
-          Pancho Blanco
+          Francisco<br>
+          <span class="text-primary font-normal italic">
+            Pancho
+          </span><br>
+          Blanco
         </h1>
         <h2 ref="heroRef" class="mt-5 max-w-3xl min-h-8 text-lg text-body leading-snug sm:text-2xl">
           {{ $t('rol') }}
@@ -116,7 +117,7 @@ onMounted(async () => {
       <div v-if="recentExperiences.length > 0" class="border-t border-base py-10 lg:grid lg:grid-cols-12 lg:gap-8 lg:py-16">
         <div class="mb-7 lg:col-span-3 lg:mb-0">
           <p class="meta-label-primary">
-            01 / {{ $t('recent_work') }}
+            {{ $t('recent_work') }}
           </p>
         </div>
         <div class="grid gap-3 lg:col-span-9 md:grid-cols-2">
@@ -144,7 +145,7 @@ onMounted(async () => {
       <div v-if="skills.length > 0" class="border-t border-base py-10 lg:grid lg:grid-cols-12 lg:gap-8 lg:py-16">
         <div class="mb-7 lg:col-span-3 lg:mb-0">
           <p class="meta-label-primary">
-            02 / {{ $t('skills_title') }}
+            {{ $t('skills_title') }}
           </p>
         </div>
         <div class="grid gap-x-8 gap-y-10 lg:col-span-9 sm:grid-cols-2">
@@ -158,33 +159,6 @@ onMounted(async () => {
           </article>
         </div>
       </div>
-
-      <div v-if="languages.length > 0" class="border-t border-base py-10 lg:grid lg:grid-cols-12 lg:gap-8 lg:py-16">
-        <div class="mb-7 lg:col-span-3 lg:mb-0">
-          <p class="meta-label-primary">
-            03 / {{ $t('lang_title') }}
-          </p>
-        </div>
-        <dl class="grid overflow-hidden border border-base rounded-2xl surface-bg lg:col-span-9 sm:grid-cols-2">
-          <div v-for="(language, index) in languages" :key="language.id" class="p-5 sm:p-7" :class="index ? 'border-t border-base sm:border-l sm:border-t-0' : ''">
-            <dt class="meta-label-secondary">
-              {{ getTranslation(language, 'name') }}
-            </dt>
-            <dd class="mt-3 text-xl font-medium">
-              {{ getTranslation(language, 'level') }}
-            </dd>
-          </div>
-        </dl>
-      </div>
     </section>
   </div>
 </template>
-
-<style scoped>
-h1 {
-  view-transition-name: h1;
-}
-h2 {
-  view-transition-name: h2;
-}
-</style>

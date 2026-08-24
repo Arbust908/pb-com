@@ -31,7 +31,7 @@ export default defineConfig({
     ['surface-frosted', 'border border-slate-300/70 bg-slate-50/70 backdrop-blur-xl dark:border-slate-700/70 dark:bg-slate-800/40'],
     ['surface-recessed', 'border border-slate-300/60 bg-slate-200/80 dark:border-slate-700/60 dark:bg-slate-950/70'],
     ['content-container', 'mx-auto w-full max-w-360 px-4 sm:px-6 lg:px-10'],
-    ['display-heading', '[word-spacing:0.04em] font-extrabold leading-[0.92] tracking-[-0.035em] font-sans'],
+    ['display-heading', '[word-spacing:0.04em] font-extrabold leading-[0.92] tracking-[-0.035em] font-mono'],
     ['meta-label', 'text-[0.65rem] text-slate-500 tracking-[0.16em] font-mono uppercase dark:text-slate-400'],
     ['meta-label-primary', 'text-[0.65rem] text-rose-700 tracking-[0.16em] font-mono uppercase dark:text-rose-300'],
     ['meta-label-secondary', 'text-[0.65rem] text-purple-700 tracking-[0.16em] font-mono uppercase dark:text-purple-300'],
@@ -103,12 +103,14 @@ export default defineConfig({
       },
     ],
     // https://twitter.com/ChromiumDev/status/1734742817812152796
+    /*
     ['break-normal', { 'word-break': 'normal' }],
     ['break-phrase', { 'word-break': 'auto-phrase' }],
     ['text-balance', { 'text-wrap': 'balance;' }],
     ['text-pretty', { 'text-wrap': 'pretty;' }],
     ['text-stable', { 'text-wrap': 'stable;' }],
     ['grid-cols-subgrid', { 'grid-template-columns': 'subgrid;' }],
+    */
     // eslint-disable-next-line unused-imports/no-unused-vars
     [/^bg-checked$/, ([,], { rawSelector, currentSelector, variantHandlers, theme }) => {
       const selector = `.${currentSelector}`
@@ -136,6 +138,7 @@ export default defineConfig({
       `
     }],
     // https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter
+    /*
     ['scrollbar-gutter', { 'scrollbar-gutter': 'auto' }],
     ['scrollbar-gutter-stable', { 'scrollbar-gutter': 'stable' }],
     ['scrollbar-gutter-stable-both', { 'scrollbar-gutter': 'stable both-edges' }],
@@ -144,6 +147,7 @@ export default defineConfig({
     ['shadow-harsh', { 'box-shadow': '4px 4px 0 rgba(0,0,0,1)' }],
     ['shadow-inner-harsh', { 'box-shadow': 'inset 4px 4px 0 rgba(0,0,0,1)' }],
     ['interpolate-size', { 'interpolate-size': 'allow-keywords' }],
+    */
   ],
   presets: [
     presetWind3(),

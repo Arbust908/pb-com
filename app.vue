@@ -35,15 +35,37 @@ useHead(() => ({
 </template>
 
 <style>
-/* https://twitter.com/alirdev/status/1734136001671643465 for full height safe on device */
-::view-transition-old(root),
-::view-transition-new(root) {
+::view-transition-group(*) {
   animation: none;
 }
 
-html.dark {
+::view-transition-old(*) {
+  animation: view-transition-fade-out 150ms ease-in both;
+}
+
+::view-transition-new(*) {
+  animation: view-transition-fade-in 150ms 150ms ease-out both;
+}
+
+@keyframes view-transition-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes view-transition-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+html {
   color-scheme: light dark;
 }
+html.dark {
+  color-scheme: dark light;
+}
+
 html,
 body,
 #__nuxt {
@@ -54,6 +76,11 @@ body,
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
   }
 }
 </style>

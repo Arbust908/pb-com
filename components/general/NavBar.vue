@@ -18,10 +18,6 @@ const localePath = useLocalePath()
         </div>
       </NuxtLink>
       <nav class="flex items-center justify-between gap-2">
-        <GeneralLangToggle />
-        <ClientOnly>
-          <DarkCircleToggle />
-        </ClientOnly>
         <NuxtLink
           class="rounded-full px-3 py-2 text-xs font-mono transition hover:text-primary"
           active-class="text-primary"
@@ -36,6 +32,10 @@ const localePath = useLocalePath()
         >
           {{ $t('resume') }}
         </NuxtLink>
+        <GeneralLangToggle />
+        <ClientOnly>
+          <DarkCircleToggle />
+        </ClientOnly>
       </nav>
     </div>
   </header>

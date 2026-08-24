@@ -20,9 +20,6 @@ export default defineNuxtConfig({
   ],
 
   routeRules: {
-    '/portfolio': { redirect: '/work' },
-    '/es/portfolio': { redirect: '/es/work' },
-
     // Homepage and CV can be edited via admin - use ISR instead of prerender
     '/': { isr: 3600 }, // Revalidate every hour
     '/cv': { isr: 3600 }, // Revalidate every hour
@@ -30,10 +27,6 @@ export default defineNuxtConfig({
     // File-based case studies are rebuilt from Markdown and cached at the edge
     '/work': { isr: 3600 },
     '/work/**': { isr: 3600 },
-
-    // Blog - content may be updated occasionally
-    // '/blog': { isr: 86400 }, // Revalidate daily
-    // '/blog/**': { isr: 86400 },
 
     // ✅ OPTIMIZED: API routes with proper caching & security headers
     '/api/**': {
@@ -67,17 +60,14 @@ export default defineNuxtConfig({
   ],
 
   vite: {
-    // ✅ OPTIMIZED: Vite performance configuration (antfu preferences)
     build: {
       reportCompressedSize: false,
-      // ✅ PERF BUDGET: Warn if individual chunks exceed 500KB
       chunkSizeWarningLimit: 500,
       sourcemap: import.meta.env.NODE_ENV === 'development',
     },
   },
 
   nitro: {
-    // ✅ OPTIMIZED: Enable compression and minification for production
     compressPublicAssets: {
       brotli: true,
       gzip: true,
@@ -89,17 +79,6 @@ export default defineNuxtConfig({
         target: 'esnext',
       },
     },
-
-    // ✅ OPTIMIZED: Better performance for large apps
-    experimental: {
-      wasm: true,
-    },
-
-    /* prerender: {
-      crawlLinks: false,
-      routes: ['/'],
-      ignore: ['/hi'],
-    }, */
   },
 
   app: {
