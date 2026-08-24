@@ -11,4 +11,4 @@ dist
 .data
 .claude
 .agent
-.claude/settings.local.json.old
+.docs
