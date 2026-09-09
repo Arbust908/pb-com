@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { useUP } from '~/composables/ultimateProtocol'
-import type { MetaData } from '~/composables/ultimateProtocol'
+import { SITE_URL } from '~/constants'
 
-const meta: MetaData = {
-  base_url: 'https://panchoblanco.dev',
-  title: 'Curriculum Vitae :: Pancho Blanco',
-  description:
-          'Hola soy Francisco "Pancho" Blanco, un Desarrollador y Diseñador Grafico. Estas son mis habilidades y experiencias. Tengo mas de 4 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.',
-}
-useHead(useUP(meta))
+const { t } = useI18n()
+const route = useRoute()
+
+useHead(() => useUP({
+  base_url: SITE_URL,
+  title: t('cv.meta.title'),
+  description: t('cv.meta.description'),
+}, route.fullPath))
 </script>
 
 <template>

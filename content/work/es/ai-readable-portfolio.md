@@ -2,8 +2,8 @@
 slug: ai-readable-portfolio
 translationKey: ai-readable-portfolio
 locale: es
-title: Negociando Markdown para la página de inicio de un portfolio legible por IA
-description: Agregar una representación compacta y opcional y una capa de descubrimiento sin cambiar la experiencia en el navegador.
+title: Servir la página de inicio del portfolio como Markdown
+description: Cómo agregué una versión compacta y opcional de la página de inicio sin cambiar la experiencia en el navegador.
 project: Portfolio
 organization: Personal
 projectType: personal
@@ -31,7 +31,7 @@ draft: true
 
 ## Contexto
 
-Un portfolio tiene dos públicos con necesidades diferentes. Las personas se benefician de la navegación, la tipografía, el movimiento y el diseño responsivo. Los clientes automatizados necesitan los mismos datos centrales en una representación que sea fácil de descubrir y procesar.
+Un portfolio tiene dos públicos con necesidades distintas. Las personas usan la navegación, la tipografía, el movimiento y el diseño responsivo. Los clientes automatizados necesitan los mismos datos en un formato fácil de encontrar y procesar.
 
 El objetivo no era reemplazar el sitio web ni mantener un segundo sistema de contenido. Era hacer que la página de inicio existente fuera más útil para los clientes que piden Markdown explícitamente.
 
@@ -39,10 +39,10 @@ El objetivo no era reemplazar el sitio web ni mantener un segundo sistema de con
 
 - Las solicitudes normales de los navegadores todavía tenían que recibir la página HTML diseñada.
 - La respuesta alternativa tenía que reutilizar los datos existentes del CV en lugar de duplicarlos.
-- Los cachés necesitaban una señal que indicara que HTML y Markdown eran representaciones diferentes.
+- Los cachés necesitaban una señal que distinguiera las respuestas HTML y Markdown.
 - El descubrimiento podía abarcar varias rutas públicas, pero el soporte de Markdown tenía que anunciarse con precisión.
 
-## Enfoque
+## Implementación
 
 Agregué negociación de contenido en la capa de middleware del servidor. Para las solicitudes `GET` y `HEAD` a `/`, el middleware verifica que exista un tipo de medio `text/markdown` explícito. Las solicitudes `GET` que coinciden reciben Markdown; las solicitudes `HEAD` que coinciden reciben los mismos encabezados sin cuerpo. Las demás solicitudes continúan por el pipeline normal de renderizado de Nuxt.
 
@@ -81,13 +81,13 @@ Esto representa un cuerpo de respuesta un 95,0 % más pequeño para la represent
 
 ## Descubrimiento
 
-La negociación es una parte de una capa de descubrimiento más amplia. La página de inicio, el CV y el índice de trabajos exponen encabezados `Link` de RFC 8288 que dirigen a los clientes a:
+La negociación forma parte de otros mecanismos de descubrimiento. La página de inicio, el CV y el índice de trabajos exponen encabezados `Link` de RFC 8288 que dirigen a los clientes a:
 
 - un catálogo de linksets que describe los endpoints estructurados del CV;
 - un índice de habilidades para agentes con un hash de contenido para sus instrucciones de consulta del CV;
 - el sitemap XML.
 
-El sitio también publica reglas para crawlers que distinguen entre indexación para buscadores, entrenamiento de modelos y uso de IA durante la recuperación. En conjunto, estos recursos permiten que un cliente pase de una página orientada a personas a documentación para máquinas y JSON estructurado sin tener que adivinar nombres de rutas.
+El sitio también publica reglas para crawlers que distinguen entre indexación para buscadores, entrenamiento de modelos y uso de IA durante la recuperación. Con estos recursos, un cliente puede pasar de una página para personas a documentación para máquinas y JSON estructurado sin adivinar nombres de rutas.
 
 `[Imagen: flujo de la solicitud desde la negociación de HTML o Markdown hasta los datos del CV y los recursos de descubrimiento]`
 
@@ -99,6 +99,6 @@ Por ese motivo, este caso de estudio sigue siendo un borrador y la reducción me
 
 ## Resultado
 
-La implementación demuestra una forma acotada de mejora progresiva: una URL puede preservar su experiencia visual en el navegador y, al mismo tiempo, ofrecer una representación compacta a partir de los mismos datos subyacentes. También expuso una lección importante sobre sistemas: los encabezados correctos de la aplicación no son suficientes cuando un caché perimetral no varía según el encabezado de negociación.
+En la implementación local, la misma URL conserva la experiencia visual en el navegador y ofrece una respuesta compacta armada con los mismos datos. La verificación en producción también dejó un problema claro: los encabezados correctos de la aplicación no alcanzan si el caché perimetral ignora el encabezado de negociación.
 
 Los próximos pasos son corregir el comportamiento del caché en producción y el dominio anunciado, reemplazar la búsqueda de subcadenas por un parseo correcto de `Accept` y luego extender la negociación a los casos de estudio basados en archivos sin crear una segunda fuente de verdad.

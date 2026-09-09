@@ -2,14 +2,14 @@
 slug: fym
 translationKey: fym
 locale: es
-title: Manteniendo útil a FYM mientras planifico su reemplazo
-description: Cómo asumí la responsabilidad de un sistema para un consultorio odontológico con una década de antigüedad, estabilicé su entrega, incorporé el borrado recuperable y diseñé un camino de menor riesgo hacia su reemplazo
+title: Mantener FYM en uso mientras preparo su reemplazo
+description: Cómo asumí un sistema de diez años para un consultorio odontológico, estabilicé los despliegues, incorporé el borrado recuperable y preparé un reemplazo gradual
 project: FYM
 organization: Consultorio odontológico
 projectType: professional
 sortOrder: 80
 role: Responsable de mantenimiento de la aplicación legada y líder de modernización
-period: 2025 - actualidad
+period: 2025 hasta la actualidad
 technologies:
   - Symfony 2.8
   - PHP
@@ -41,7 +41,7 @@ FYM es el sistema operativo de un consultorio odontológico. Conecta fichas de p
 
 Funcionaba con Symfony 2.8, Doctrine 2, Twig, AdminLTE 2, Bower y Assetic, con un árbol de dependencias administrado manualmente y PostgreSQL 11. Los paquetes no podían actualizarse de manera segura, las actualizaciones automáticas del esquema estaban prohibidas, y las imágenes clínicas y los registros financieros hacían que cualquier pérdida de datos fuera inaceptable.
 
-Mi responsabilidad tenía dos horizontes: mantener la aplicación existente confiable y útil en el presente, mientras creaba una ruta incremental para salir de un stack que ya no podía actualizarse de manera convencional.
+Mi responsabilidad tenía dos partes: mantener la aplicación actual confiable y útil, y preparar una salida gradual de un stack que ya no podía actualizarse de manera convencional.
 
 ## Reconstrucción de la entrega
 
@@ -64,7 +64,7 @@ Incorporé un ciclo de vida recuperable para los registros de pacientes:
 - interfaces de confirmación y recuperación;
 - casos de tests funcionales que cubrían el ciclo de vida previsto.
 
-La funcionalidad inicial expuso cuán transversal era realmente el borrado. El trabajo posterior agregó SQL de migración compatible con PostgreSQL, registró el filtro de borrado lógico de Doctrine, eliminó a los pacientes borrados de los listados comunes y corrigió conteos, búsquedas, paginación y consultas de registros de atención.
+La primera versión mostró hasta dónde llegaba el borrado. Después agregué SQL de migración compatible con PostgreSQL, registré el filtro de borrado lógico de Doctrine, saqué a los pacientes borrados de los listados comunes y corregí conteos, búsquedas, paginación y consultas de registros de atención.
 
 Más adelante propagué el mismo límite a los selectores de profesionales, la gestión de usuarios y el catálogo de tratamientos. Fue menos un botón para borrar que una definición gradual de qué significaba que un registro estuviera "activo" en toda la aplicación.
 
@@ -100,9 +100,9 @@ Había tres opciones generales:
 2. Reescribirlo y reemplazarlo de una sola vez. Esto ofrecía un destino limpio, pero acoplaba el rediseño del producto, la migración de datos, la transferencia de imágenes, la paridad de flujos de trabajo y el reemplazo de infraestructura en un solo evento de alto riesgo.
 3. Separar la salida de datos del reemplazo del producto. Estabilizar la aplicación legada, exponer un límite de migración de solo lectura, verificar las copias de manera independiente y reemplazar los flujos de trabajo en incrementos controlados.
 
-Elegí la tercera dirección. El stack final todavía no está definido de manera intencional. Primero necesito un inventario de datos confiable, un proceso de copia repetible y evidencia sobre qué flujos de trabajo deben preservarse. Esto evita que la elección de un framework se convierta en la estrategia de migración.
+Elegí la tercera opción. Todavía no definí el stack final a propósito. Primero necesito un inventario confiable de los datos, un proceso de copia repetible y evidencia sobre los flujos de trabajo que hay que preservar. Elegir un framework no puede reemplazar una estrategia de migración.
 
-## Prueba del límite de migración
+## Prueba de la interfaz de migración
 
 Para poner a prueba ese límite, construí un prototipo local junto al repositorio legado. Un servicio independiente en TypeScript usa Hono y un esquema de PostgreSQL obtenido por introspección para brindar acceso autenticado y de solo lectura a 29 entidades legadas. Una capa de serialización traduce los nombres de la base de datos en español a nombres de API en inglés sin modificar FYM.
 
@@ -126,7 +126,7 @@ Futuros flujos de copia verificada y reemplazo
 stack de destino todavía por determinar
 ```
 
-Esto resuelve una incertidumbre arquitectónica: los datos de FYM pueden inspeccionarse mediante un límite separado sin cambiar la aplicación ni el esquema de producción. Todavía no demuestra una migración segura. Quedan pendientes los tests de contrato, una gestión de imágenes más segura, checksums, un seguimiento confiable de actualizaciones, el despliegue y una copia sanitizada de punta a punta.
+Esto despeja una duda de arquitectura: puedo inspeccionar los datos de FYM mediante una interfaz separada sin cambiar la aplicación ni el esquema de producción. Todavía no demuestra que la migración sea segura. Quedan pendientes los tests de contrato, una gestión de imágenes más segura, checksums, un seguimiento confiable de actualizaciones, el despliegue y una copia sanitizada de punta a punta.
 
 La interfaz de backup planificada y el receptor de sincronización con SQLite son solamente trabajo de diseño. No se entregó ninguna GUI de backup, receptor, aplicación clínica de reemplazo ni cambio a producción mediante este workspace de modernización.
 
@@ -134,25 +134,25 @@ La interfaz de backup planificada y el receptor de sincronización con SQLite so
 
 ### Entrega de la aplicación legada
 
-**Trabajo:** Compatibilidad del servidor y despliegue repetible. **Evidencia:** Incluido en commits, publicado en el repositorio remoto y respaldado por ejecuciones exitosas de automatización orientadas a producción.
+El trabajo incluyó la compatibilidad del servidor y un despliegue repetible. Está registrado en commits, publicado en el repositorio remoto y respaldado por ejecuciones exitosas de la automatización para producción.
 
 ### Ciclo de vida de los registros y flujos de trabajo diarios
 
-**Trabajo:** Borrado recuperable, filtrado de registros activos, mejoras de interfaz, correcciones financieras, arreglos de turnos y consultas acotadas del calendario. **Evidencia:** Incluido en commits y publicado en el repositorio remoto; todavía es necesario verificar el uso en producción y los resultados medidos.
+El trabajo incluyó borrado recuperable, filtrado de registros activos, mejoras de interfaz, correcciones financieras, arreglos de turnos y consultas acotadas del calendario. Está registrado en commits y publicado en el repositorio remoto. Todavía falta verificar el uso en producción y medir resultados.
 
 ### Límite de migración
 
-**Trabajo:** API Hono de solo lectura, traducción de campos, inventario de imágenes e interfaz de inspección en Nuxt. **Evidencia:** Implementado como prototipo local sin commit; no fue entregado ni desplegado.
+Construí una API Hono de solo lectura, traducción de campos, un inventario de imágenes y una interfaz de inspección en Nuxt. Es un prototipo local sin commit. No fue entregado ni desplegado.
 
 ### Migración futura
 
-**Trabajo:** Interfaz de backup, receptor de sincronización, aplicación de reemplazo y cambio definitivo. **Evidencia:** Solamente planes de arquitectura; no se afirma que ninguno esté construido ni completo.
+La interfaz de backup, el receptor de sincronización, la aplicación de reemplazo y el cambio definitivo son planes de arquitectura. Ninguno está construido ni completo.
 
 ## Continuidad ahora, reemplazo después
 
 FYM ahora tiene un proceso de despliegue repetible, semántica de borrado recuperable, una gestión más segura de registros inactivos, consultas acotadas de turnos e interfaces más claras. En paralelo, el prototipo demuestra una forma de inspeccionar datos legados sin convertir a la aplicación antigua en la base de cada decisión futura.
 
-El valor está en reducir el riesgo por etapas en lugar de ocultarlo detrás del anuncio de una reescritura. La empresa puede seguir usando FYM mientras el camino de migración se pone a prueba con sus datos reales y sus restricciones operativas.
+La idea es reducir el riesgo por etapas, no ocultarlo detrás del anuncio de una reescritura. La empresa puede seguir usando FYM mientras pruebo la migración con sus datos reales y sus restricciones operativas.
 
 ## Qué expuso el trabajo
 
@@ -160,11 +160,11 @@ La primera implementación de borrado lógico no fue la definitiva. Su SQL origi
 
 El prototipo expuso brechas similares: el esquema generado tiene 29 entidades mientras que los planes anteriores describen 30, varios campos de sincronización propuestos no pueden capturar todas las actualizaciones, y la transferencia de imágenes necesita una validación de rutas y streaming más sólidos.
 
-Estos hallazgos reforzaron el enfoque de migración: usar prototipos para exponer incógnitas, pero no confundir una arquitectura plausible con una transferencia verificada.
+Estos hallazgos confirmaron la estrategia de migración: usar prototipos para encontrar incógnitas sin confundir una arquitectura posible con una transferencia verificada.
 
 ## Próximos pasos
 
-FYM demuestra sobre todo el cuidado de un sistema bajo restricciones. El desafío de ingeniería no era simplemente escribir código más nuevo; era aprender dónde un sistema antiguo codificaba las reglas operativas reales del consultorio, mejorar esas reglas sin perder datos y crear puntos de separación a través de los cuales el sistema finalmente pueda reemplazarse.
+Este trabajo trata, ante todo, de cuidar un sistema con muchas restricciones. El problema no era simplemente escribir código nuevo. Había que descubrir dónde el sistema guardaba las reglas operativas reales del consultorio, mejorarlas sin perder datos y separar partes que permitieran reemplazarlo más adelante.
 
 La próxima decisión no es simplemente "¿qué framework debería reemplazar a Symfony?". Es determinar si el límite de migración puede producir una copia completa, repetible y verificable de manera independiente. Solo entonces deberían definirse el stack de reemplazo y el cambio flujo por flujo.
 

@@ -2,14 +2,14 @@
 slug: simplycodes-blog-contentful-migration
 translationKey: simplycodes-blog-contentful-migration
 locale: es
-title: Construyendo el blog de SimplyCodes sobre una plataforma compartida de Contentful
-description: Cómo implementé el frontend del blog de SimplyCodes sobre una plataforma de contenido reutilizable construida por el equipo, que redujo el trabajo duplicado y las solicitudes innecesarias al origen.
+title: El blog de SimplyCodes sobre una plataforma compartida de Contentful
+description: Cómo construí el frontend del blog sobre una API compartida de Contentful, con artículos renderizados en el servidor, datos tipados y solicitudes cacheadas.
 project: SimplyCodes
 organization: SimplyCodes · Demand.io
 projectType: professional
 sortOrder: 30
 role: Responsable principal de la implementación frontend
-period: Julio de 2024–febrero de 2025
+period: Julio de 2024 a febrero de 2025
 technologies:
   - Contentful
   - Nuxt
@@ -33,7 +33,7 @@ draft: false
 
 SimplyCodes necesitaba un blog que pudiera sostener contenido editorial sin hacer que la aplicación web fuera responsable de obtener, reformular y filtrar datos sin procesar del CMS. También tenía que integrarse en una plataforma más amplia de la empresa: otros productos publicaban contenido similar, por lo que reconstruir el mismo modelo y la misma vía de entrega para cada sitio duplicaría el trabajo de ingeniería e infraestructura.
 
-Fui el principal responsable de la implementación frontend para SimplyCodes. El backend fue construido por el equipo. Mi responsabilidad era convertir su API respaldada por Contentful en la experiencia para quienes leen: descubrimiento de artículos, layouts responsivos, renderizado de contenido enriquecido, navegación, metadatos y superficies de adquisición medibles.
+Fui el principal responsable de la implementación frontend para SimplyCodes. El equipo construyó el backend. Yo convertí la API conectada con Contentful en la experiencia de lectura: índice de artículos, layouts responsivos, contenido enriquecido, navegación, metadatos y llamados a la acción medibles.
 
 El trabajo comenzó con el frontend inicial de Contentful en julio de 2024. La migración continuó por etapas hasta que la aplicación pasó a cargar artículos únicamente desde Contentful en febrero de 2025.
 
@@ -61,15 +61,15 @@ Frontend de Nuxt
 
 Este límite mantuvo las credenciales y los detalles de las consultas al CMS fuera del cliente. También permitió que el backend filtrara por categoría o pilar de contenido antes de devolver una página de resultados, en lugar de enviar la colección completa de artículos a cada visitante. Las rutas de la API estaban detrás de una caché compartida de respuestas, lo que reducía el trabajo repetido contra el origen.
 
-## Reutilizando la estructura del blog
+## Reutilizar la estructura del blog
 
 Tratamos un artículo como un contrato a nivel de la empresa, en lugar de un objeto exclusivo de SimplyCodes. Las definiciones compartidas de TypeScript describían listas de artículos, autores, imágenes, categorías, pilares, metadatos y respuestas de artículos completos. El mismo paquete compartido también contenía contratos de blog para otro producto de la empresa.
 
 En el frontend de SimplyCodes, consumí esos contratos directamente en las capas de consulta y presentación. Esto les dio al frontend y al backend un vocabulario común, sin dejar de permitir un renderizado específico para cada producto. SimplyCodes podía agregar sus propios widgets y tratamiento visual sin bifurcar las estructuras subyacentes de autores y artículos.
 
-La reutilización le ahorró dinero a la empresa de forma cualitativa por dos vías. Los equipos no necesitaban modelar de manera independiente los mismos conceptos de blog para cada producto, y el backend centralizado podía encargarse una sola vez del filtrado y el cacheo, en lugar de repetir ese trabajo en cada frontend. No registramos un monto en dólares que se pudiera respaldar, por lo que no atribuyo una cifra financiera al ahorro.
+La reutilización evitó costos de dos maneras. Los equipos no tuvieron que modelar los mismos conceptos de blog para cada producto, y el backend centralizado resolvía una sola vez el filtrado y el cacheo. No registramos un monto en dólares que permita cuantificar ese ahorro.
 
-## Implementando la experiencia de lectura
+## Implementar la experiencia de lectura
 
 El frontend tenía dos superficies principales: un índice para el descubrimiento y una página de artículo para la lectura.
 
@@ -79,7 +79,7 @@ La página de artículo combinaba la respuesta normalizada con un layout respons
 
 `[Imagen: el índice del blog de SimplyCodes y la página de artículo en tamaños desktop y mobile]`
 
-## Renderizando contenido estructurado de forma segura
+## Renderizar contenido estructurado de forma segura
 
 El texto enriquecido de Contentful tenía que admitir más que párrafos e imágenes. El renderer vinculaba las entradas estructuradas con componentes reutilizables de Vue, con extensiones específicas de SimplyCodes para contenido interactivo o con muchos datos. Esto permitía que el equipo editorial compusiera artículos más ricos mientras el frontend conservaba el control del marcado y la presentación.
 
@@ -87,7 +87,7 @@ Los bloques embebidos también expusieron un caso límite de la migración: un w
 
 La tabla de contenidos se generaba a partir de los encabezados del artículo. Más adelante corregí sus etiquetas y el comportamiento de deduplicación para que los encabezados repetidos o con formato siguieran generando una navegación útil, en lugar de enlaces ambiguos.
 
-## Preservando el comportamiento de búsqueda y SEO
+## Preservar el comportamiento de búsqueda y SEO
 
 Una migración de CMS no está completa cuando el texto del artículo aparece en pantalla. Las páginas del blog también tenían que seguir siendo útiles como puntos de entrada desde buscadores.
 
@@ -95,11 +95,11 @@ Integré URLs canónicas, títulos de página, descripciones, campos de Open Gra
 
 También mejoré el desplazamiento por el blog con breadcrumbs, acceso a la búsqueda, tablas de contenidos, selección editorial y enlaces a artículos recientes. Estas funcionalidades conectaron el contenido migrado con el resto del producto, en lugar de tratar el blog como una salida aislada del CMS.
 
-## Conectando el contenido con el crecimiento
+## Conectar el contenido con la adquisición
 
-El blog era tanto una superficie editorial como un canal de adquisición. Una vez establecidas las bases de la migración, agregué superficies de promoción del producto dentro de la experiencia del blog y luego sumé atribución de campaña a sus llamados a la acción.
+El blog publicaba contenido editorial y también llevaba visitas al producto. Una vez establecidas las bases de la migración, agregué promociones dentro de los artículos y sumé atribución de campaña a sus llamados a la acción.
 
-Esto permitió medir esas ubicaciones sin mezclar la lógica de crecimiento con el modelo de contenido. Contentful seguía siendo responsable de la estructura editorial, el frontend controlaba la interacción y la presentación, y los parámetros de atribución conectaban determinados llamados a la acción con el recorrido analítico.
+Así pudimos medir esas ubicaciones sin mezclar la lógica de adquisición con el modelo de contenido. Contentful seguía a cargo de la estructura editorial, el frontend controlaba la interacción y la presentación, y los parámetros de atribución identificaban los llamados a la acción en analytics.
 
 ## Resultado
 
@@ -111,7 +111,7 @@ Este caso de estudio no afirma un aumento específico del tráfico, una tasa de 
 
 ## Reflexión
 
-La parte más sólida de esta migración no fue un único componente. Fue la separación de responsabilidades entre una plataforma de contenido compartida y una experiencia específica del producto.
+La decisión que mejor funcionó fue separar las responsabilidades de la plataforma de contenido y las de la experiencia propia de SimplyCodes.
 
 Mantener el acceso a Contentful, la normalización, el filtrado y el cacheo detrás de la API simplificó el frontend y les dio a otros productos una base reutilizable. Mantener el renderizado y el comportamiento de adquisición en SimplyCodes me permitió construir para su audiencia sin forzar a todos los productos a usar la misma interfaz.
 

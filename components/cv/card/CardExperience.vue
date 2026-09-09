@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import type { CvExperience } from '~/composables/useCvExperiences'
+import type { CvExperience } from '~/types'
 
 interface Props {
   experiences: CvExperience[]
@@ -13,7 +13,7 @@ const location = computed(() => props.experiences.find(experience => experience.
 const isCurrent = computed(() => props.experiences.some(experience => !experience.endDate))
 
 // Get translation for current locale with fallback to 'en'
-function getTranslation(experience: CvExperience, field: string): string {
+function getTranslation(experience: CvExperience, field: 'rol' | 'description'): string {
   const translations = experience.translations
   return translations[locale.value]?.[field] || translations.en?.[field] || ''
 }

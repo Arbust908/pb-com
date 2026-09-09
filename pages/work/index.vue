@@ -1,17 +1,12 @@
 <script setup lang="ts">
 import { LayoutGroup, MotionConfig, motion } from 'motion-v'
+import { CvSkillKinds, PROJECT_COLORS } from '~/types'
 
 const { locale, t } = useI18n()
 const localePath = useLocalePath()
 const activeFilter = ref<string | null>(null)
 const filterDialog = ref<HTMLDialogElement | null>(null)
-const areaOrder = ['frontend', 'backend', 'architecture', 'e2e', 'product', 'data', 'content', 'legacy'] as const
-const projectColors = {
-  SimplyCodes: '#b4ff4b',
-  Dealspotr: '#2cd700',
-  Knoji: '#009ff4',
-  personal: '#f54842',
-} as const
+const areaOrder = CvSkillKinds
 
 const { data: documents } = await useAsyncData('case-study-index', () => {
   const query = queryCollection('caseStudies')
@@ -56,16 +51,16 @@ const filteredStudies = computed(() => activeFilter.value
   : studies.value)
 
 function cardStyle(project: string, projectType: string) {
-  let color: string = projectColors.personal
+  let color: string = PROJECT_COLORS.personal
 
   if (project === 'SimplyCodes')
-    color = projectColors.SimplyCodes
+    color = PROJECT_COLORS.SimplyCodes
   else if (project === 'Dealspotr')
-    color = projectColors.Dealspotr
+    color = PROJECT_COLORS.Dealspotr
   else if (project === 'Knoji')
-    color = projectColors.Knoji
+    color = PROJECT_COLORS.Knoji
   else if (projectType === 'personal')
-    color = projectColors.personal
+    color = PROJECT_COLORS.personal
 
   return { '--card-color': color }
 }
@@ -93,8 +88,8 @@ useSeoMeta({
 </script>
 
 <template>
-  <MotionConfig reduced-motion="user" :transition="{ type: 'spring', stiffness: 280, damping: 28 }">
-    <div class="relative w-full overflow-hidden base-bg text-base layout-grid-full">
+  <MotionConfig reduced-motion="user" :transition="MOTION_SPRINT_OPTIONS">
+    <div class="relative w-full overflow-hidden base-bg text-base-color layout-grid-full">
       <div aria-hidden="true" class="pointer-events-none absolute right--20 top--24 size-120 rounded-full ambient-secondary filter-blur-3xl" />
       <div aria-hidden="true" class="pointer-events-none absolute right-48 top-16 size-72 rounded-full ambient-primary filter-blur-3xl" />
 
@@ -108,7 +103,7 @@ useSeoMeta({
             <h1 class="display-heading max-w-5xl text-[clamp(3.2rem,14vw,7rem)] leading-[0.88]">
               {{ $t('case_studies.title') }}
             </h1>
-            <p class="mt-2 max-w-2xl text-base text-body leading-relaxed lg:text-xl sm:text-lg">
+            <p class="mt-2 max-w-2xl text-base-color text-body leading-relaxed lg:text-xl sm:text-lg">
               {{ $t('case_studies.introduction') }}
             </p>
           </motion.div>
@@ -132,7 +127,7 @@ useSeoMeta({
             @click="openFilters"
           >
             <span class="flex items-center gap-2">
-              <span class="i-ph-funnel-simple text-base" aria-hidden="true" />
+              <span class="i-ph-funnel-simple text-base-color" aria-hidden="true" />
               {{ $t('case_studies.filters_button') }}
             </span>
             <span class="text-primary">
@@ -169,7 +164,7 @@ useSeoMeta({
 
       <dialog
         ref="filterDialog"
-        class="work-filter-dialog fixed inset-x-0 bottom-0 top-auto m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl surface-strong-bg p-0 text-base sm:hidden"
+        class="work-filter-dialog fixed inset-x-0 bottom-0 top-auto m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl surface-strong-bg p-0 text-base-color sm:hidden"
         :aria-label="$t('case_studies.filters_label')"
       >
         <div class="mx-auto mt-2 h-1 w-10 rounded-full bg-slate-300 dark:bg-slate-600" aria-hidden="true" />
@@ -209,7 +204,7 @@ useSeoMeta({
 
         <div class="work-filter-actions border-t border-base p-4">
           <button class="w-full control-primary justify-center py-3" type="button" @click="closeFilters">
-            {{ $t('case_studies.close_filters') }}
+            {{ $t('case_studies.show_projects') }}
           </button>
         </div>
       </dialog>
@@ -257,12 +252,12 @@ useSeoMeta({
 
                 <div class="relative self-start py-8 sm:pb-10">
                   <h2
-                    class="display-heading max-w-4xl text-[clamp(1.8rem,5vw,3.4rem)] leading-[0.94] tracking-[-0.025em] text-balance"
+                    class="display-heading max-w-4xl text-balance text-[clamp(1.8rem,5vw,3.4rem)] leading-[0.94] tracking-[-0.025em]"
                     :style="{ viewTransitionName: `study-title-${study.slug}` }"
                   >
                     {{ study.title }}
                   </h2>
-                  <p class="mt-5 max-w-2xl text-sm text-body leading-relaxed sm:text-base">
+                  <p class="mt-5 max-w-2xl text-sm text-body leading-relaxed sm:text-base-color">
                     {{ study.description }}
                   </p>
                 </div>

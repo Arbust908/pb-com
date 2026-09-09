@@ -1,6 +1,8 @@
 <script setup lang="ts">
-const { experiences, fetch } = useCvExperiences()
-await fetch()
+import type { CvExperience } from '~/types'
+
+const globalStore = useGlobalStore()
+const { experiences } = storeToRefs(globalStore)
 
 const groupedExperiences = computed(() => experiences.value.reduce<CvExperience[][]>((groups, experience) => {
   const previousGroup = groups.at(-1)

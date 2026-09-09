@@ -1,27 +1,19 @@
 <script setup lang="ts">
 const { t, locale } = useI18n()
 
-const { skills, fetch: fetchSkills } = useCvSkills()
-const { languages, fetch: fetchLanguages } = useCvLanguages()
+const globalStore = useGlobalStore()
+const { languages, skillsData } = storeToRefs(globalStore)
+const skills = computed(() => skillsData.value.skills)
+const skillGroups = computed(() => skillsData.value.groups)
 
-await Promise.all([fetchSkills(), fetchLanguages()])
-
-function getSkillTranslation(skill: typeof skills.value[number], field: string): string {
-  const translations = skill.translations
+function getSkillTranslation(group: typeof skillGroups.value[number], field: string): string {
+  const translations = group.translations
   return translations[locale.value]?.[field] || translations.en?.[field] || ''
 }
 
-function getSkillList(skill: typeof skills.value[number]): string {
-  // Check if there's a locale-specific list in translations (for 'other' skill)
-  const localizedList = skill.translations[locale.value]?.list
-  if (localizedList)
-    return localizedList
-  return skill.skillList
-}
-
-function getLangTranslation(lang: typeof languages.value[number], field: string): string {
-  const translations = lang.translations
-  return translations[locale.value]?.[field] || translations.en?.[field] || ''
+function getSkillList(group: typeof skillGroups.value[number]): string {
+  const skillBySlug = new Map(skills.value.map(skill => [skill.slug, skill.name]))
+  return group.skillSlugs.map(slug => skillBySlug.get(slug)).filter(Boolean).join(', ')
 }
 </script>
 
@@ -56,34 +48,15 @@ function getLangTranslation(lang: typeof languages.value[number], field: string)
         <i class="i-ph:code-simple mr-2 size-5" />
         <span> Skills </span>
       </h3>
-      <article v-for="skill in skills" :key="skill.slug" class="mb-4 pl-4">
+      <article v-for="group in skillGroups" :key="group.slug" class="mb-4 pl-4">
         <h4 class="mb-1 text-secondary font-bold">
-          {{ getSkillTranslation(skill, 'title') }}
+          {{ getSkillTranslation(group, 'title') }}
         </h4>
         <p class="text-sm text-body leading-relaxed">
-          {{ getSkillList(skill) }}
+          {{ getSkillList(group) }}
         </p>
       </article>
     </section>
-    <section class="mb-2">
-      <h3 class="mb-4 flex items-center meta-label-secondary">
-        <i class="i-ph:globe-simple mr-2 size-5" />
-        <span> {{ $t('lang_title') }} </span>
-      </h3>
-      <article class="flex flex-row divide-x divide-slate-300/20">
-        <div
-          v-for="lang in languages"
-          :key="lang.slug"
-          class="w-full px-4 text-sm"
-        >
-          <h4 class="font-bold">
-            {{ getLangTranslation(lang, 'name') }}
-          </h4>
-          <p class="mt-1 text-body">
-            {{ getLangTranslation(lang, 'level') }}
-          </p>
-        </div>
-      </article>
-    </section>
+    <CvPersonalLang :languages="languages" :locale="locale" />
   </section>
 </template>

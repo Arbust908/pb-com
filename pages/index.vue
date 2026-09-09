@@ -1,41 +1,47 @@
 <script setup lang="ts">
 import shuffleLetters from 'shuffle-letters'
-// https://github.com/georapbox/shuffle-letters/tree/main
 import type { MetaData } from '@/composables/ultimateProtocol'
 import { useUP } from '@/composables/ultimateProtocol'
-import type { CvExperience } from '@/composables/useCvExperiences'
-import type { CvSkill } from '@/composables/useCvSkills'
-import type { CvLanguage } from '@/composables/useCvLanguages'
+import { SITE_URL } from '~/constants'
+import type { CvExperience, CvLanguage, CvSkillGroup } from '~/types'
 
+// All this info should be i18n driven
 const meta: MetaData = {
-  base_url: 'https://panchoblanco.dev',
-  title: 'Pancho Blanco :: Desarrollador Creativo',
+  base_url: SITE_URL,
+  title: 'Pancho Blanco :: Senior Front-End Developer',
   description:
-          'Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Tengo mas de 8 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.',
+          'Senior Front-End Developer specializing in Vue, Nuxt, and TypeScript, with backend experience across Node.js, Express, Laravel, APIs, and SQL DB.',
 }
-useHead(useUP(meta))
+useHead(useUP(meta, useRoute().fullPath))
 
 const { locale } = useI18n()
-const localePath = useLocalePath()
 
-// ✅ OPTIMIZED: Parallel data fetching for ~3x faster loading
-const { data: cvData, pending: pendingCvData, error: cvError } = await useAsyncData('cv-homepage-data', async () => {
-  const [experiences, skills, languages] = await Promise.all([
-    $fetch('/api/cv/experiences'),
-    $fetch('/api/cv/skills'),
-    $fetch('/api/cv/languages'),
-  ])
-  return { experiences, skills, languages }
-})
-
-const experiences = computed(() => cvData.value?.experiences?.data || [])
-const skills = computed(() => cvData.value?.skills?.data || [])
-const languages = computed(() => cvData.value?.languages?.data || [])
+const globalStore = useGlobalStore()
+const { experiences, skillsData, languages } = storeToRefs(globalStore)
+const skillGroups = computed(() => skillsData.value.groups)
 
 // Get translation for current locale with fallback to 'en'
-function getTranslation(item: CvExperience | CvSkill | CvLanguage, field: string): string {
-  const translations = item.translations
+function getTranslation(item: CvExperience | CvSkillGroup | CvLanguage, field: string): string {
+  const translations = item.translations as Record<string, Record<string, string>>
   return translations[locale.value]?.[field] || translations.en?.[field] || ''
+}
+
+function getExperienceList(experience: CvExperience): string[] {
+  const localizedList = experience.translations[locale.value]?.list?.filter(Boolean) ?? []
+  const englishList = experience.translations.en?.list?.filter(Boolean) ?? []
+
+  if (localizedList.length)
+    return localizedList
+  if (englishList.length)
+    return englishList
+
+  const description = getTranslation(experience, 'description')
+  return description ? [description] : []
+}
+
+function getGroupSkillList(group: CvSkillGroup): string {
+  const skillBySlug = new Map(skillsData.value.skills.map(skill => [skill.slug, skill.name]))
+  return group.skillSlugs.map(slug => skillBySlug.get(slug)).filter(Boolean).join(', ')
 }
 
 function formatDate(date: string) {
@@ -76,10 +82,10 @@ onMounted(async () => {
 
 <template>
   <div class="relative w-full overflow-hidden layout-grid-full">
-    <div aria-hidden="true" class="pointer-events-none absolute right--20 top--24 size-120 rounded-full ambient-secondary filter-blur-3xl" />
-    <div aria-hidden="true" class="pointer-events-none absolute left--32 top-80 size-96 rounded-full ambient-primary filter-blur-3xl" />
+    <div aria-hidden="true" class="pointer-events-none fixed right--20 top--24 size-120 rounded-full ambient-secondary filter-blur-3xl" />
+    <div aria-hidden="true" class="pointer-events-none fixed left--32 top-80 size-96 rounded-full ambient-primary filter-blur-3xl" />
 
-    <header class="relative grid content-container gap-10 pb-16 pt-14 lg:grid-cols-12 lg:items-end lg:pb-24 lg:pt-24 sm:pt-18">
+    <header class="relative grid content-container gap-10 pb-16 pt-14 lg:items-end lg:pb-24 lg:pt-24 sm:pt-18">
       <div class="lg:col-span-9">
         <h1 class="display-heading text-[clamp(3.5rem,13vw,8rem)]">
           Francisco<br>
@@ -88,32 +94,13 @@ onMounted(async () => {
           </span><br>
           Blanco
         </h1>
-        <h2 ref="heroRef" class="mt-5 max-w-3xl min-h-8 text-lg text-body leading-snug sm:text-2xl">
+        <h2 ref="heroRef" class="mt-5 min-h-8 text-lg text-body leading-snug sm:text-2xl">
           {{ $t('rol') }}
         </h2>
       </div>
-      <nav class="flex flex-wrap gap-2 lg:col-span-3 lg:justify-end" aria-label="Portfolio destinations">
-        <NuxtLink class="control-primary" :to="localePath({ name: 'work' })">
-          {{ $t('work') }} <span aria-hidden="true" class="ml-2">↗</span>
-        </NuxtLink>
-        <NuxtLink class="pill-control text-body hover:(border-primary text-primary)" :to="localePath({ name: 'cv' })">
-          {{ $t('resume') }}
-        </NuxtLink>
-      </nav>
     </header>
 
-    <section v-if="cvError" class="content-container pb-16">
-      <div class="border border-red-400/40 rounded-2xl bg-red-400/8 p-6">
-        <h3 class="text-xl text-red-800 font-semibold dark:text-red-200">
-          {{ $t('error_loading_data') || 'Unable to load data' }}
-        </h3>
-        <p class="mt-2 text-red-700 dark:text-red-300">
-          Please try refreshing the page or contact support.
-        </p>
-      </div>
-    </section>
-
-    <section v-else-if="!pendingCvData && (recentExperiences.length > 0 || skills.length > 0 || languages.length > 0)" class="content-container pb-18 lg:pb-28">
+    <section v-if="recentExperiences.length > 0 || skillGroups.length > 0 || languages.length > 0" class="content-container pb-18 lg:pb-28">
       <div v-if="recentExperiences.length > 0" class="border-t border-base py-10 lg:grid lg:grid-cols-12 lg:gap-8 lg:py-16">
         <div class="mb-7 lg:col-span-3 lg:mb-0">
           <p class="meta-label-primary">
@@ -129,9 +116,11 @@ onMounted(async () => {
               <h3 class="display-heading mt-5 text-[clamp(1.6rem,4vw,2.6rem)]">
                 {{ getTranslation(experience, 'rol') }}
               </h3>
-              <p class="mt-5 text-sm text-body leading-relaxed">
-                {{ getTranslation(experience, 'description') }}
-              </p>
+              <ul class="mt-5 list-disc pl-4 text-sm text-body leading-relaxed space-y-1">
+                <li v-for="item in getExperienceList(experience)" :key="item">
+                  {{ item }}
+                </li>
+              </ul>
             </div>
             <p class="mt-8 border-t border-base pt-4 text-[0.65rem] text-muted font-mono">
               {{ formatDate(experience.startDate) }} /
@@ -142,19 +131,19 @@ onMounted(async () => {
         </div>
       </div>
 
-      <div v-if="skills.length > 0" class="border-t border-base py-10 lg:grid lg:grid-cols-12 lg:gap-8 lg:py-16">
+      <div v-if="skillGroups.length > 0" class="border-t border-base py-10 lg:grid lg:grid-cols-12 lg:gap-8 lg:py-16">
         <div class="mb-7 lg:col-span-3 lg:mb-0">
           <p class="meta-label-primary">
             {{ $t('skills_title') }}
           </p>
         </div>
         <div class="grid gap-x-8 gap-y-10 lg:col-span-9 sm:grid-cols-2">
-          <article v-for="skill in skills" :key="skill.id" class="border-l border-primary pl-5">
+          <article v-for="group in skillGroups" :key="group.id" class="border-l border-primary pl-5">
             <h3 class="text-lg font-bold tracking-[-0.02em]">
-              {{ getTranslation(skill, 'title') }}
+              {{ getTranslation(group, 'title') }}
             </h3>
             <p class="mt-3 whitespace-pre-line text-sm text-body leading-relaxed">
-              {{ skill.skillList }}
+              {{ getGroupSkillList(group) }}
             </p>
           </article>
         </div>

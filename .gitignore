@@ -12,3 +12,6 @@ dist
 .claude
 .agent
 .docs
+.yarn
+.DS_Store
+docs/

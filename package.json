@@ -15,7 +15,6 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@fontsource/bitter": "^5.3.0",
     "@iconify-json/ph": "^1.2.2",
     "@nuxt/content": "^3.15.2",
     "@vueuse/core": "^10.7.0",

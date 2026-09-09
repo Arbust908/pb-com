@@ -1,9 +1,9 @@
 <template>
   <div
-    class="mobile-nav-clearance grid grid-cols-[100%] grid-rows-[auto_1fr_auto] min-h-full base-bg text-base"
+    class="mobile-nav-clearance grid grid-cols-[100%] grid-rows-[auto_1fr_auto] min-h-full base-bg text-base-color"
   >
     <GeneralNavBar class="relative z-40" />
-    <main class="relative z-20 layout-grid" style="align-content: flex-start;">
+    <main class="relative z-20 content-start layout-grid">
       <slot />
     </main>
     <GeneralFooter class="relative z-40" />

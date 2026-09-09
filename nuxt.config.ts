@@ -4,11 +4,11 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       appName: '',
+      phKey: '',
     },
     openRouterKey: '',
     devUser: '',
     devPass: '',
-    phKey: '',
   },
 
   modules: [
@@ -56,7 +56,6 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
-    '@fontsource/bitter/latin-800.css',
   ],
 
   vite: {
@@ -103,7 +102,6 @@ export default defineNuxtConfig({
         /*  { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }, */
       ],
       meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
         { name: 'description', content: appDescription },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
       ],

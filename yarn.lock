@@ -1108,13 +1108,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/bitter@npm:^5.3.0":
-  version: 5.3.0
-  resolution: "@fontsource/bitter@npm:5.3.0"
-  checksum: 10c0/88f08966b7e5e0df4163001da6a4b05f62f613dafee46cb5b289dbc17ffc6a1dd7496adc72363b477121bd59e0d6804e047f7ace549f3e7c73b1ce1175e41e0a
-  languageName: node
-  linkType: hard
-
 "@humanwhocodes/config-array@npm:^0.13.0":
   version: 0.13.0
   resolution: "@humanwhocodes/config-array@npm:0.13.0"
@@ -13060,7 +13053,6 @@ __metadata:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     "@antfu/eslint-config": "npm:^2.4.4"
-    "@fontsource/bitter": "npm:^5.3.0"
     "@iconify-json/ph": "npm:^1.2.2"
     "@nuxt/content": "npm:^3.15.2"
     "@nuxtjs/i18n": "npm:^10.4.1"

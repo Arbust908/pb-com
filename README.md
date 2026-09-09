@@ -1,6 +1,6 @@
 # PanchoBlanco.dev
 
-> Personal portfolio of **Fran "Pancho" Blanco** — full-stack developer and creative technologist based in Buenos Aires, Argentina.
+> Personal portfolio of **Fran "Pancho" Blanco**, a Senior Front-End Developer specializing in Vue with backend experience, based in Buenos Aires, Argentina.
 
 ---
 

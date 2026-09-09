@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { locale } = useI18n()
-const { studies, fetch } = useCvStudies()
-await fetch()
+const globalStore = useGlobalStore()
+const { studies } = storeToRefs(globalStore)
 
 function getTranslation(study: typeof studies.value[number], field: string): string {
   const translations = study.translations

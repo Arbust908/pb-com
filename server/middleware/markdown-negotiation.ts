@@ -1,10 +1,13 @@
 import { defineEventHandler, getHeader, getRequestURL, setHeader } from 'h3'
 
 interface CvTranslations { [locale: string]: { [field: string]: string } }
-interface CvExperience { id: number, company: string, startDate: string, endDate: string | null, translations: CvTranslations }
-interface CvSkill { id: number, skillList: string, translations: CvTranslations }
+interface CvExperienceTranslations { [locale: string]: { rol: string, description: string, list: string[] } }
+interface CvExperience { id: number, company: string, startDate: string, endDate: string | null, translations: CvExperienceTranslations }
+interface CvSkill { slug: string, name: string }
+interface CvSkillGroup { skillSlugs: string[], translations: CvTranslations }
 interface CvLanguage { id: number, translations: CvTranslations }
 interface CvListResponse<T> { success: boolean, data: T[] }
+interface CvSkillsResponse { success: boolean, data: { skills: CvSkill[], groups: CvSkillGroup[] } }
 
 const SITE_URL = 'https://panchoblanco.dev'
 
@@ -31,14 +34,14 @@ async function safeFetch<T>(url: string): Promise<T | null> {
 async function renderHomepageMarkdown(): Promise<string> {
   const [experiences, skills, languages] = await Promise.all([
     safeFetch<CvListResponse<CvExperience>>('/api/cv/experiences'),
-    safeFetch<CvListResponse<CvSkill>>('/api/cv/skills'),
+    safeFetch<CvSkillsResponse>('/api/cv/skills'),
     safeFetch<CvListResponse<CvLanguage>>('/api/cv/languages'),
   ])
 
   const lines: string[] = []
-  lines.push('# Pancho Blanco — Desarrollador Creativo')
+  lines.push('# Pancho Blanco — Front-End Developer')
   lines.push('')
-  lines.push('Hola, soy Pancho Blanco — desarrollador y diseñador gráfico con más de 8 años en la industria. Apasionado por enseñar y aprender.')
+  lines.push('Senior Front-End Developer with 10+ years of experience, specializing in Vue, Nuxt, and TypeScript, with backend experience across Node.js, Express, Laravel, APIs, and SQL DB.')
   lines.push('')
   lines.push(`- Site: <${SITE_URL}/>`)
   lines.push(`- CV: <${SITE_URL}/cv>`)
@@ -57,8 +60,8 @@ async function renderHomepageMarkdown(): Promise<string> {
       lines.push('## Recent work')
       lines.push('')
       for (const e of recent) {
-        const role = tr(e, 'rol')
-        const desc = tr(e, 'description')
+        const role = e.translations?.en?.rol ?? ''
+        const desc = e.translations?.en?.description ?? ''
         const end = e.endDate ? new Date(e.endDate).toISOString().slice(0, 10) : 'present'
         const start = new Date(e.startDate).toISOString().slice(0, 10)
         lines.push(`### ${role} @ ${e.company}`)
@@ -68,20 +71,28 @@ async function renderHomepageMarkdown(): Promise<string> {
           lines.push(desc)
           lines.push('')
         }
+        const items = e.translations?.en?.list ?? []
+        if (items.length > 0) {
+          for (const item of items)
+            lines.push(`- ${item}`)
+          lines.push('')
+        }
       }
     }
   }
 
-  const sk = skills?.data ?? []
-  if (sk.length > 0) {
+  const skillGroups = skills?.data.groups ?? []
+  const skillBySlug = new Map(skills?.data.skills.map(skill => [skill.slug, skill.name]))
+  if (skillGroups.length > 0) {
     lines.push('## Skills')
     lines.push('')
-    for (const s of sk) {
-      const title = tr(s, 'title')
+    for (const group of skillGroups) {
+      const title = tr(group, 'title')
       lines.push(`### ${title}`)
-      if (s.skillList) {
+      const skillList = group.skillSlugs.map(slug => skillBySlug.get(slug)).filter(Boolean).join(', ')
+      if (skillList) {
         lines.push('')
-        lines.push(s.skillList)
+        lines.push(skillList)
         lines.push('')
       }
     }

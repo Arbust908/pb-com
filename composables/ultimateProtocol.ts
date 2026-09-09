@@ -5,7 +5,7 @@ export interface MetaData {
 }
 
 function titleProtocol({ title }: MetaData) {
-  return title === 'Pancho Blanco :: Desarrollador Creativo' ? `${title}` : `${title} :: Pancho Blanco`
+  return title === 'Pancho Blanco :: Senior Front-End Developer' ? `${title}` : `${title} :: Pancho Blanco`
 }
 function descriptioner({ description }: MetaData) {
   return [
@@ -49,28 +49,27 @@ function twitterProtocol(meta: MetaData) {
     },
   ]
 }
-function urlProtocol({ base_url }: MetaData) {
-  const route = useRoute()
+function urlProtocol({ base_url }: MetaData, path: string) {
   return [
     {
       hid: 'og:url',
       property: 'og:url',
-      content: base_url + route.fullPath,
+      content: base_url + path,
     },
   ]
 }
 
-export function useUltimateProtocol(meta: MetaData) {
+export function useUltimateProtocol(meta: MetaData, path: string) {
   return {
     title: titleProtocol(meta),
     meta: [
       ...descriptioner(meta),
       ...ogProtocol(meta),
       ...twitterProtocol(meta),
-      ...urlProtocol(meta),
+      ...urlProtocol(meta, path),
     ],
   }
 }
-export function useUP(meta: MetaData) {
-  return useUltimateProtocol(meta)
+export function useUP(meta: MetaData, path: string) {
+  return useUltimateProtocol(meta, path)
 }

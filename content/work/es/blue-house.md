@@ -2,14 +2,14 @@
 slug: blue-house
 translationKey: blue-house
 locale: es
-title: Construyendo un servicio de datos sobre cotizaciones del dólar en Argentina
-description: Cómo construí Blue House para recopilar cotizaciones actuales e históricas del dólar en Argentina, exponerlas mediante una API y facilitar la comprensión de sus variaciones.
+title: Un servicio de datos sobre las cotizaciones del dólar en Argentina
+description: Cómo construí Blue House para reunir cotizaciones actuales e históricas del dólar en Argentina, publicarlas mediante una API y mostrar sus variaciones.
 project: Blue House
 organization: Proyecto personal
 projectType: personal
 sortOrder: 70
 role: Creador y desarrollador full stack
-period: Julio - agosto de 2026
+period: Julio a agosto de 2026
 technologies:
   - Bun
   - TypeScript
@@ -39,7 +39,7 @@ draft: false
 
 ## Resumen del proyecto
 
-Blue House es un proyecto personal para recopilar, consultar y presentar cotizaciones del peso argentino frente al dólar estadounidense. Lo construí porque las fuentes disponibles no me ofrecían una única interfaz confiable tanto para las cotizaciones actuales como para las variaciones históricas. El MVP combina ingesta de datos actuales e históricos, almacenamiento en PostgreSQL, una API documentada y un panel responsive en Nuxt. Demuestra el recorrido completo del producto, pero todavía no la operación ni la adopción de un servicio público maduro.
+Blue House es un proyecto personal para recopilar, consultar y presentar cotizaciones del peso argentino frente al dólar estadounidense. Lo construí porque no encontraba una fuente confiable que reuniera valores actuales y variaciones históricas en una sola interfaz. El MVP combina datos actuales e históricos, almacenamiento en PostgreSQL, una API documentada y un panel responsive en Nuxt. El producto funciona de punta a punta, aunque todavía no hay evidencia sobre la operación ni la adopción de un servicio público maduro.
 
 ## Por qué un mismo dólar tiene varias cotizaciones
 
@@ -53,11 +53,11 @@ Para la mayoría de los visitantes, la primera comparación útil es entre el of
 
 Quería encontrar los últimos valores de compra y venta, entender las variaciones durante un período elegido y recuperar el valor disponible cerca de una fecha histórica. DolarAPI proporcionaba observaciones actuales para siete categorías de cotización, mientras que Ambito proporcionaba series históricas. Ninguna fuente cubría por sí sola el caso de uso completo, y sus payloads diferían en los nombres, las fechas, los formatos numéricos y en si una serie contenía valores separados de compra y venta.
 
-Eso llevó al proyecto más allá de envolver un endpoint de terceros. Necesitaba normalizar dos proveedores sin borrar la procedencia de los datos, evitar que las tareas programadas duplicaran o corrompieran información, definir una semántica temporal que contemplara Buenos Aires y exponer el resultado mediante una interfaz que siguiera siendo útil en un teléfono.
+No alcanzaba con envolver un endpoint de terceros. Necesitaba normalizar dos proveedores sin perder la procedencia de los datos, impedir que las tareas programadas duplicaran o corrompieran información, definir cómo tratar las fechas en Buenos Aires y mostrar el resultado en una interfaz que también funcionara bien en un teléfono.
 
 ## Exploración y prueba de concepto
 
-Usé el primer corte vertical para probar si podía convertir los datos de los proveedores en una línea de tiempo coherente. El poller inicial obtenía observaciones en vivo, las validaba con Zod, generaba huellas digitales deterministas y las almacenaba en PostgreSQL. Después amplié un límite por vez:
+La primera prueba debía mostrar si podía convertir los datos de ambos proveedores en una línea de tiempo coherente. El poller inicial obtenía observaciones en vivo, las validaba con Zod, generaba huellas digitales deterministas y las almacenaba en PostgreSQL. Después amplié el sistema una parte por vez:
 
 - las importaciones históricas mensuales pusieron a prueba los números y las fechas localizados de Ambito, además de sus respuestas con estructuras desiguales;
 - las migraciones SQL pusieron a prueba si el esquema podía evolucionar junto con el producto;
@@ -65,7 +65,7 @@ Usé el primer corte vertical para probar si podía convertir los datos de los p
 - las rutas de la API y un explorador pusieron a prueba el acceso más allá del panel;
 - el trabajo con contenedores ARM64 puso a prueba el despliegue en el entorno de destino.
 
-Este enfoque expuso temprano los interrogantes operativos y sobre los datos, antes de que agregara cuentas, control de acceso o conceptos de monetización alrededor de un núcleo inestable.
+Así encontré pronto los problemas operativos y de datos, antes de sumar cuentas, control de acceso o ideas de monetización sobre una base inestable.
 
 ## Definición de los límites del producto y del sistema
 
@@ -75,7 +75,7 @@ Consultar DolarAPI directamente habría dado como resultado el producto más peq
 
 ### Una aplicación o un workspace con varios paquetes
 
-Separé la recopilación y la presentación en un workspace de Bun con un poller, una aplicación web en Nuxt y un paquete de dominio compartido. Esto mantuvo el trabajo con los proveedores fuera del recorrido de las solicitudes sin duplicar las definiciones de las cotizaciones entre servicios.
+Separé la recopilación y la presentación en un workspace de Bun con un poller, una aplicación web en Nuxt y un paquete de dominio compartido. Así, las solicitudes web no dependen de los proveedores y los servicios comparten las definiciones de las cotizaciones.
 
 ### Protecciones en la aplicación o coordinación respaldada por la base de datos
 
@@ -128,7 +128,7 @@ También construí documentación navegable y un probador de endpoints que gener
 
 ## Diseño de la vista pública
 
-El panel sigue una dirección serena de "boletín cambiario". Las cotizaciones oficial y blue ocupan las tarjetas más grandes, mientras que las otras cinco categorías forman un grupo secundario. Un gráfico con siete series muestra la evolución durante períodos seleccionables, y la vigencia de los datos permanece visible sin imitar una terminal de trading.
+El panel toma como referencia un boletín cambiario. Las cotizaciones oficial y blue ocupan las tarjetas más grandes, mientras que las otras cinco categorías forman un grupo secundario. Un gráfico con siete series muestra la evolución durante períodos seleccionables. La fecha de actualización permanece visible, sin imitar una terminal de trading.
 
 Los proveedores no actualizan todas las cotizaciones al mismo tiempo, así que el gráfico combina todos los timestamps de las observaciones y arrastra hacia adelante el último valor conocido de cada categoría. La vista de 24 horas usa observaciones crudas; los períodos más largos usan la observación final de cada día de Buenos Aires.
 
@@ -156,13 +156,13 @@ Al principio, el proyecto llegó a incluir detección de anomalías. Los datos d
 
 La ingesta histórica también pasó de una carga retroactiva implícita de una sola vez a checkpoints mensuales. Las ejecuciones más pequeñas hicieron que las fallas fueran observables y que se pudieran reintentar.
 
-Estos cambios aclararon el MVP: primero preservar y explicar los datos de origen; agregar interpretación solamente cuando su comportamiento pueda validarse.
+Estos cambios terminaron de definir el MVP: primero había que preservar y explicar los datos de origen. La interpretación podía esperar hasta que fuera posible validarla.
 
 ## Reflexión y próximos pasos
 
-Blue House me enseñó cómo encajan los límites de un producto de datos pequeño: adaptadores de proveedores, migraciones de base de datos, semántica de tareas programadas, cálculos del servicio, compilaciones de contenedores, documentación de la API y un sistema visual específico del dominio.
+Blue House me permitió trabajar todas las partes de un producto de datos pequeño: adaptadores de proveedores, migraciones de base de datos, reglas para tareas programadas, cálculos del servicio, compilaciones de contenedores, documentación de la API y una interfaz pensada para las cotizaciones.
 
-El próximo paso es obtener evidencia operativa, no ampliar la superficie: migraciones repetibles, tests de deduplicación y rollback con una base de datos real, compilación de ambos contenedores, verificaciones del scheduler y de backups, y mediciones de vigencia y confiabilidad en el despliegue.
+El próximo paso es obtener evidencia operativa, no sumar funciones: migraciones repetibles, tests de deduplicación y rollback con una base de datos real, compilación de ambos contenedores, verificaciones del scheduler y de backups, y mediciones de vigencia y confiabilidad en el despliegue.
 
 Exploré alternativas de caché respaldado por Redis, colas, límites de solicitudes, cuentas, claves de API, webhooks y posibles niveles de servicio. Ninguna está publicada. Solo serán útiles cuando el tráfico y las necesidades de los consumidores muestren dónde el caché, la entrega asincrónica o el control de acceso resuelven un problema observado.
 

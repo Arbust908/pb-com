@@ -2,8 +2,8 @@
 slug: dealspotr-legacy-maintenance
 translationKey: dealspotr-legacy-maintenance
 locale: es
-title: Manteniendo productivo a Dealspotr
-description: Cómo lideré la evolución incremental de un producto legado en PHP y jQuery mientras protegía su circuito consolidado de usuarios y afiliados.
+title: Mantener productivo a Dealspotr
+description: Cómo mejoré por etapas un producto legado en PHP y jQuery sin poner en riesgo su circuito de usuarios y afiliados.
 project: Dealspotr
 organization: Dealspotr · Demand.io
 projectType: professional
@@ -37,11 +37,11 @@ draft: false
 
 ## Un producto maduro que todavía generaba valor
 
-Dealspotr era una comunidad consolidada de cupones cuyas páginas de comercios ayudaban a los compradores a encontrar y usar promociones. Esas páginas también eran una parte clave de nuestra estrategia de monetización: gestionaban la revelación de códigos, registraban interacciones y visitas salientes a los comercios, y contenían ofertas que generaban comisiones.
+Dealspotr era una comunidad de cupones. Sus páginas de comercios ayudaban a encontrar y usar promociones, y además sostenían buena parte de la monetización: revelaban códigos, registraban interacciones y visitas a los comercios, y mostraban ofertas que generaban comisiones.
 
 Para ese momento, gran parte de la aplicación tenía casi ocho años. Estaba renderizada principalmente en el servidor con PHP, y jQuery se encargaba de las interacciones del lado del cliente. Años de decisiones de producto estaban incorporados en los templates, el estado compartido, el orden de las promociones y el comportamiento específico de cada tarjeta.
 
-Lideré el esfuerzo para mantener este sistema útil y productivo. El objetivo no era disfrazarlo de software greenfield. Era entregar los cambios que el negocio necesitaba sin convertir cada pedido en otro parche que dificultara el trabajo del siguiente ingeniero.
+Lideré el trabajo para mantener este sistema útil y productivo. No intenté hacerlo pasar por software nuevo. Teníamos que entregar los cambios que pedía el negocio sin convertir cada pedido en otro parche que complicara al siguiente ingeniero.
 
 ## Un control simple sobre años de supuestos
 
@@ -49,11 +49,11 @@ Agregar filtros y ordenamiento de promociones es un ejemplo representativo. El p
 
 El feed no era una lista convencional. Mezclaba promociones comunes con ubicaciones preferenciales, códigos de revendedores y newsletters, ofertas no verificadas, promociones de competidores, financiación, liquidaciones, descuentos para audiencias específicas y anuncios propios. Esas tarjetas no compartían una única estructura de datos completa, y su posición afectaba el texto, la revelación, la votación, el modal, la analítica y el comportamiento de salida.
 
-Por lo tanto, un filtro del lado del cliente podía ocultar las ofertas equivocadas, anular un ranking cuidadosamente seleccionado, duplicar el comportamiento de los clics o romper la acción que hacía valiosa una promoción.
+Un filtro del lado del cliente podía ocultar ofertas que debían verse, alterar el ranking definido por el servidor, duplicar el manejo de clics o romper la acción principal de una promoción.
 
 ## Mapeo de las reglas invisibles
 
-Antes de cambiar la interfaz, rastreé el recorrido completo desde la preparación de promociones en el servidor hasta el renderizado de tarjetas y la mejora progresiva con jQuery. El modelo de dominio útil era implícito: la vigencia, el tipo, la ubicación, la prioridad comercial y el comportamiento de fallback de una promoción surgían a lo largo de varias etapas, en vez de provenir de un único objeto autoritativo.
+Antes de cambiar la interfaz, seguí todo el proceso, desde la preparación de promociones en el servidor hasta el renderizado de tarjetas y las interacciones con jQuery. El modelo de dominio estaba implícito. La vigencia, el tipo, la ubicación, la prioridad comercial y los fallbacks de una promoción se definían en distintas etapas, no en un único objeto.
 
 ```text
 Antes
@@ -96,13 +96,13 @@ El filtrado seleccionaba y reordenaba elementos que ya estaban renderizados. Mov
 
 La primera versión no resolvió todas las interacciones. El trabajo posterior corrigió la gestión de clics, el filtrado, los límites de visualización y el ranking predeterminado. Coordiné ese refuerzo con el equipo para que el estado intacto Todas + Mejores siguiera respetando el orden seleccionado por el servidor.
 
-Esa iteración es central para la historia. Mantener un producto antiguo significa hacerse cargo de lo que enseña la producción, no tratar el primer merge como la línea de llegada.
+Ese trabajo posterior fue parte del cambio. Mantener un producto antiguo exige corregir lo que aparece en producción, no dar el trabajo por terminado con el primer merge.
 
 ## De la exposición controlada al uso cotidiano
 
 Los controles comenzaron detrás de cohortes ponderadas. Adjuntamos el contexto del experimento a la analítica, agregamos overrides para realizar pruebas reproducibles y aumentamos gradualmente la exposición antes de habilitar la experiencia para todo el público.
 
-Esto limitó el alcance inicial de posibles daños y nos dio una forma de observar el comportamiento mientras corregíamos supuestos. Por sí solo, no demuestra una mejora en la conversión, así que considero la disponibilidad general como un resultado de entrega y no como un experimento exitoso.
+Así limitamos el posible daño inicial y pudimos observar el comportamiento mientras corregíamos nuestros supuestos. Esto no demuestra una mejora en la conversión. La disponibilidad general fue un resultado de entrega, no la prueba de que el experimento hubiera sido exitoso.
 
 ## Un límite que siguió dando resultados
 
@@ -110,7 +110,7 @@ La extracción resultó útil más allá del filtrado. En 2025, reutilicé el mi
 
 Apliqué el mismo principio incremental en la capa de infraestructura. Una allowlist selectiva de Nginx trasladó un grupo definido de rutas de comercios a SimplyCodes, mientras que el resto siguió pasando por Dealspotr. Después, el equipo alineó los enlaces internos y amplió la migración con el tiempo. Podíamos mover el tráfico deliberadamente sin exigir un reemplazo completo de una sola vez.
 
-## Manteniendo modificable a Dealspotr
+## Mantener modificable a Dealspotr
 
 Los compradores obtuvieron una forma disponible para todo el público de limitar y reordenar un feed mixto de promociones. El resultado a más largo plazo fue un conjunto de límites más claros alrededor de una de las áreas más complejas de la página:
 
@@ -124,7 +124,7 @@ No conservo informes que respalden una afirmación cuantificada sobre ingresos, 
 
 ## Deuda mantenida a propósito
 
-El sistema siguió siendo PHP procedural y jQuery. El estado compartido, los registros legados inconsistentes, los fallbacks específicos de cada tarjeta y la cobertura automatizada limitada todavía hacían que los cambios fueran costosos. Algunos comportamientos en producción requirieron correcciones posteriores, y los recorridos de datos estructurados y redirecciones se beneficiarían de una validación conservada más sólida.
+El sistema siguió siendo PHP procedural y jQuery. El estado compartido, los registros legados inconsistentes, los fallbacks específicos de cada tarjeta y la cobertura automatizada limitada todavía hacían que los cambios fueran costosos. Algunos comportamientos en producción requirieron correcciones posteriores. Los datos estructurados y las redirecciones todavía necesitan una validación automatizada más completa.
 
 Me detuve antes de hacer una limpieza general porque una refactorización no relacionada habría aumentado el riesgo sin mejorar el resultado inmediato. La siguiente inversión valiosa sería agregar cobertura de caracterización para combinaciones representativas de tarjetas y acciones críticas, y luego trasladar la normalización de promociones a un modelo explícito del lado del servidor.
 
@@ -132,4 +132,4 @@ Me detuve antes de hacer una limpieza general porque una refactorización no rel
 
 Liderar sistemas legados muchas veces implica resistir la reescritura que uno disfrutaría construir. Dealspotr era antiguo, pero todavía servía a los usuarios y sostenía al negocio. Su antigüedad hacía que entender y preservar su comportamiento fuera más importante, no menos.
 
-Mi función era mantenerlo productivo: descubrir reglas implícitas, elegir el límite útil más pequeño, coordinar la entrega incremental y volver cuando la producción expusiera supuestos que habíamos pasado por alto. El sistema no se modernizó de una sola vez, pero siguió siendo útil y se volvió más fácil de modificar donde el negocio más lo necesitaba.
+Mi tarea fue descubrir reglas implícitas, aislar el cambio más pequeño que aportara valor, coordinar entregas graduales y corregir los supuestos que fallaban en producción. El sistema siguió siendo útil y resultó más fácil de modificar en las áreas que el negocio todavía usaba.

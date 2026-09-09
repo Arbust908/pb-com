@@ -84,7 +84,7 @@ function closeFromBackdrop(event: MouseEvent) {
   <dialog
     id="mobile-more-dialog"
     ref="moreDialog"
-    class="mobile-more-dialog z-almost-infinity fixed inset-x-0 bottom-0 top-auto m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl bg-slate-50 p-0 text-base sm:hidden dark:bg-slate-800"
+    class="mobile-more-dialog z-almost-infinity fixed inset-x-0 bottom-0 top-auto m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl bg-slate-50 p-0 text-base-color sm:hidden dark:bg-slate-800"
     :aria-label="$t('more_menu')"
     @click="closeFromBackdrop"
     @close="isMoreOpen = false"

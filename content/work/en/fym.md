@@ -3,13 +3,13 @@ slug: fym
 translationKey: fym
 locale: en
 title: Keeping FYM useful while planning its replacement
-description: How I took ownership of a decade-old dental-practice system, stabilized its delivery, introduced recoverable deletion, and designed a lower-risk path toward replacement
+description: How I took ownership of a decade-old dental-practice system, made deployment repeatable, added recoverable deletion, and planned its replacement
 project: FYM
 organization: Dental practice
 projectType: professional
 sortOrder: 80
 role: Legacy application maintainer and modernization lead
-period: 2025 - present
+period: 2025 to present
 technologies:
   - Symfony 2.8
   - PHP
@@ -41,7 +41,7 @@ FYM is the operating system for a dental practice. It connects patient records, 
 
 It ran on Symfony 2.8, Doctrine 2, Twig, AdminLTE 2, Bower, and Assetic, with a manually managed dependency tree and PostgreSQL 11. Packages could not be upgraded safely, automatic schema updates were prohibited, and clinical images and financial records made data loss unacceptable.
 
-My responsibility had two horizons: keep the existing application reliable and useful now, while creating an incremental route away from a stack that could no longer be conventionally updated.
+I had to keep the application reliable while finding a gradual route away from a stack that could no longer be updated normally.
 
 ## Rebuilding delivery
 
@@ -49,11 +49,11 @@ The first assignment was moving FYM onto a new server setup without interrupting
 
 I then established a GitHub Actions deployment path adapted to Symfony 2's console layout, manual cache handling, filesystem permissions, and the server's PHP and OPcache behavior. This replaced undocumented server state with a repeatable production-target process. The original cutover and database-transfer logs still need to be recovered before I present the complete migration as independently verified.
 
-This established the rule for everything that followed: FYM could be improved, but every change had to preserve clinical and administrative continuity.
+This set the rule for later work. Every change had to preserve clinical and administrative continuity.
 
 ## Recoverable deletion as a system change
 
-The strongest example was patient deletion. A destructive delete was too risky for a record connected to appointments, care history, treatments, payments, and images. Hiding a patient in one screen was also insufficient; the same patient could reappear through search, calendars, reports, or related records.
+Patient deletion showed the risk clearly. A destructive delete was too risky for a record connected to appointments, care history, treatments, payments, and images. Hiding a patient in one screen was also insufficient; the same patient could reappear through search, calendars, reports, or related records.
 
 I introduced a recoverable lifecycle for patient records:
 
@@ -64,9 +64,9 @@ I introduced a recoverable lifecycle for patient records:
 - confirmation and recovery interfaces;
 - functional test cases covering the intended lifecycle.
 
-The initial feature exposed how cross-cutting deletion really was. Follow-up work added PostgreSQL-compatible migration SQL, registered Doctrine's soft-delete filter, removed deleted patients from ordinary listings, and corrected counts, search, pagination, and care-record queries.
+The initial feature showed how many parts of FYM depended on patient status. Follow-up work added PostgreSQL-compatible migration SQL, registered Doctrine's soft-delete filter, removed deleted patients from ordinary listings, and corrected counts, search, pagination, and care-record queries.
 
-I later propagated the same boundary into professional selectors, user management, and the treatment catalog. This was less a delete button than a gradual definition of what an "active" record meant across the application.
+I later applied the same rule to professional selectors, user management, and the treatment catalog. The work defined what an "active" record meant across the application and what happened after someone clicked delete.
 
 ```text
 Delete request
@@ -90,7 +90,7 @@ Once deployment and record lifecycle behavior were safer, I worked through small
 - Argentine currency presentation, input parsing, and financial-value precision were corrected.
 - Unbounded appointment loading was replaced with date-range queries matching the visible calendar interval.
 
-These changes avoid known failure modes and express daily workflows more clearly. Usability studies, accounting reconciliation, and performance measurements would be needed before claiming a quantified effect.
+These changes prevent known failures and make daily workflows clearer. I would need usability studies, accounting reconciliation, and performance measurements to claim a quantified effect.
 
 ## Choosing an incremental migration
 
@@ -136,7 +136,7 @@ The planned backup interface and SQLite synchronization receiver are design work
 
 **Work:** Server compatibility and repeatable deployment. **Evidence:** Committed, remotely published, and supported by successful production-target automation runs.
 
-### Record lifecycle and daily workflows
+### Record status and daily workflows
 
 **Work:** Recoverable deletion, active-record filtering, interface improvements, financial corrections, appointment fixes, and bounded calendar queries. **Evidence:** Committed and remotely published; production use and measured outcomes still need verification.
 
@@ -148,11 +148,11 @@ The planned backup interface and SQLite synchronization receiver are design work
 
 **Work:** Backup interface, synchronization receiver, replacement application, and cutover. **Evidence:** Architecture plans only; none are claimed as built or completed.
 
-## Continuity now, replacement later
+## Current operation and future replacement
 
-FYM now has a repeatable deployment path, recoverable deletion semantics, safer inactive-record handling, bounded appointment queries, and clearer interfaces. In parallel, the prototype demonstrates a way to inspect legacy data without making the old application the foundation of every future decision.
+FYM now has a repeatable deployment path, recoverable deletion semantics, safer inactive-record handling, bounded appointment queries, and clearer interfaces. In parallel, the prototype shows how to inspect legacy data without basing every future decision on the old application.
 
-The value is reducing risk in stages rather than hiding it behind a rewrite announcement. The company can continue using FYM while the migration path is tested against its real data and operating constraints.
+The company can continue using FYM while I test the migration against its real data and operating constraints. Each stage addresses a specific risk instead of deferring all risk to one rewrite.
 
 ## What the work exposed
 
@@ -160,11 +160,11 @@ The first soft-delete implementation was not the final one. Its original SQL use
 
 The prototype exposed similar gaps: the generated schema has 29 entities while older plans describe 30, several proposed sync fields cannot capture every update, and image transfer needs stronger path validation and streaming.
 
-These findings reinforced the migration approach: use prototypes to expose unknowns, but do not confuse a plausible architecture with a verified transfer.
+These findings confirmed why the prototype must remain separate from a migration claim. It exposes unknowns, but it does not prove that data can be transferred safely.
 
 ## What comes next
 
-FYM best demonstrates stewardship under constraint. The engineering challenge was not merely writing newer code; it was learning where an old system encoded the practice's real operating rules, improving those rules without losing data, and creating seams through which the system can eventually be replaced.
+The hard part was not writing newer code. I had to find where the old system encoded the practice's operating rules, improve it without losing data, and isolate the parts needed for an eventual replacement.
 
 The next decision is not simply "which framework should replace Symfony?" It is whether the migration boundary can produce a complete, repeatable, and independently verifiable copy. Only then should the replacement stack and workflow-by-workflow cutover be finalized.
 

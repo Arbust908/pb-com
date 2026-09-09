@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import posthog from 'posthog-js'
-import { appName } from '@/constants'
+import { FAVICONS, appName } from '@/constants'
 
 const isDark = useDark()
 const isDev = import.meta.dev
 const { locale } = useI18n()
+
+const globalStore = useGlobalStore()
+await useAsyncData('global-data', async () => {
+  await globalStore.fetchAll()
+  return true
+})
 
 onMounted(() => {
   const phKey = useRuntimeConfig().public.phKey as string
@@ -21,7 +27,7 @@ useHead(() => ({
   link: [
     {
       rel: 'icon',
-      href: isDev ? '/pb-favicon-local.png' : isDark.value ? '/pb-favicon-dark.png' : '/pb-favicon-light.png',
+      href: isDev ? FAVICONS.local : isDark.value ? FAVICONS.dark : FAVICONS.light,
     },
   ],
 }))
@@ -37,26 +43,6 @@ useHead(() => ({
 <style>
 ::view-transition-group(*) {
   animation: none;
-}
-
-::view-transition-old(*) {
-  animation: view-transition-fade-out 150ms ease-in both;
-}
-
-::view-transition-new(*) {
-  animation: view-transition-fade-in 150ms 150ms ease-out both;
-}
-
-@keyframes view-transition-fade-out {
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes view-transition-fade-in {
-  from {
-    opacity: 0;
-  }
 }
 
 html {

@@ -1,6 +1,5 @@
 import {
   defineConfig,
-  presetAttributify,
   presetIcons,
   presetTypography,
   presetWebFonts,
@@ -18,7 +17,7 @@ export default defineConfig({
     ['depth-bg', 'bg-slate-200 dark:bg-slate-950'],
     ['surface-bg', 'bg-slate-50/70 dark:bg-slate-800/40'],
     ['surface-strong-bg', 'bg-slate-50/90 dark:bg-slate-800/75'],
-    ['text-base', 'text-slate-950 dark:text-slate-50'],
+    ['text-base-color', 'text-slate-950 dark:text-slate-50'],
     ['text-body', 'text-slate-700 dark:text-slate-300'],
     ['text-muted', 'text-slate-500 dark:text-slate-400'],
     ['text-subtle', 'text-slate-400 dark:text-slate-500'],
@@ -116,23 +115,27 @@ export default defineConfig({
       const selector = `.${currentSelector}`
       const mainColor = theme.colors.slate[200]
       const darkColor = theme.colors.slate[700]
+      const backdropBrightness = 100
+      const backdropBlur = 8
+      const sqSize = 2
+      const bgSize = `${sqSize * 2}px ${sqSize * 2}px`
 
       return `
         ${selector} {
             background-color: transparent;
             background-image: 
               radial-gradient(
-                rgba(0,0,0,0) 2px,
-                ${mainColor} 2px
+                rgba(0,0,0,0) ${sqSize}px,
+                ${mainColor} ${sqSize}px
               );
-            background-size: 4px 4px;
-            backdrop-filter: brightness(100%) blur(3px);
+            background-size: ${bgSize};
+            backdrop-filter: brightness(${backdropBrightness}%) blur(${backdropBlur}px);
          }
         .dark ${selector} {
             background-image: 
               radial-gradient(
-                rgba(0,0,0,0) 2px,
-                ${darkColor} 2px
+                rgba(0,0,0,0) ${sqSize}px,
+                ${darkColor} ${sqSize}px
               );
          }
       `
@@ -151,7 +154,6 @@ export default defineConfig({
   ],
   presets: [
     presetWind3(),
-    presetAttributify(),
     presetIcons({
       extraProperties: {
         display: 'inline-block',
@@ -170,7 +172,6 @@ export default defineConfig({
             provider: 'none',
           },
         ],
-        serif: 'Bitter',
         mono: [
           {
             name: 'Google Sans Code',

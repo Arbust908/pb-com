@@ -2,14 +2,14 @@
 slug: knoji-legacy-maintenance
 translationKey: knoji-legacy-maintenance
 locale: en
-title: Modernizing Knoji codebase
-description: How I led an incremental structured-data expansion inside an SEO-sensitive procedural PHP platform without rewriting its page pipeline
+title: Adding structured data to Knoji's legacy codebase
+description: How I expanded structured data in an SEO-sensitive procedural PHP platform without rewriting its page pipeline
 project: Knoji
 organization: Knoji · Demand.io
 projectType: professional
 sortOrder: 60
-role: Technical Lead and Primary Implementer
-period: "October 2024 - June 2025; team follow-up through November 2025"
+role: Technical lead and primary implementer
+period: "October 2024 to June 2025; team follow-up through November 2025"
 technologies:
   - PHP
   - JSON-LD
@@ -37,19 +37,19 @@ draft: false
 
 Knoji's merchant pages combine coupon codes, offers, merchant policies, ratings, FAQs, and checkout guidance. The same information serves two audiences: people deciding whether to trust and use a promotion, and machines trying to understand the page.
 
-I led the team responsible for evolving this area of the platform and was the primary implementer of the structured-data work described here. The implementation happened in two phases: FAQ consolidation in October 2024, then a broader merchant-schema expansion from May to June 2025. The team continued maintaining adjacent SEO and schema behavior through November 2025.
+I led the team responsible for this area of the platform and was the primary implementer of the structured-data work described here. The implementation happened in two phases: FAQ consolidation in October 2024, then merchant-schema expansion from May to June 2025. The team continued maintaining adjacent SEO and schema behavior through November 2025.
 
 This was not a greenfield application. Merchant pages were assembled from large procedural PHP templates, shared variables, direct database results, and many conditional commercial modules. During the first phase, two near-duplicate merchant layouts were active. Promotion ordering was also business logic: a code's position depended on health, type, placement rules, and the modules already rendered above it.
 
-Rewriting that pipeline would have mixed an SEO change with a much larger product migration. The practical constraint was therefore to create a safer machine-readable path while preserving the visible page and its existing ordering behavior.
+Rewriting that pipeline would have mixed an SEO change with a much larger product migration. I instead needed to improve the machine-readable output while preserving the visible page and its ordering behavior.
 
 ## The problem
 
-The initial problem was duplicated FAQ semantics. Merchant templates contained a static coupon FAQ, while dynamic Merchant Information Questions (MIQs) were fetched and rendered separately. Structured markup reflected those separate paths instead of presenting one coherent FAQ entity.
+The initial problem was duplicated FAQ semantics. Merchant templates contained a static coupon FAQ, while dynamic Merchant Information Questions, or MIQs, were fetched and rendered separately. Structured markup reflected those separate paths instead of presenting one FAQ entity.
 
 The first attempt exposed the real maintenance problem. Adding an `FAQPage` wrapper was easy; determining when all questions were available, keeping both layouts aligned, and safely serializing dynamic answers was not. Hand-interpolated JSON could be broken by punctuation or HTML in merchant content, and emitting too early meant the MIQ records had not yet been collected.
 
-That episode revealed a broader gap. Knoji already emitted some page-level schema, but merchant policies, normalized offers, coupon tables, and checkout instructions remained disconnected from the structured-data layer.
+That work exposed missing coverage. Knoji already emitted some page-level schema, but its structured data did not include merchant policies, normalized offers, coupon tables, or checkout instructions.
 
 ## Investigation
 
@@ -60,7 +60,7 @@ I traced the rendered page backward from `views/header-head.php`, which globally
 - Promotion groups such as healthy codes, old codes, link deals, and sticky placements were mutated while the page was assembled.
 - Merchant policies, customer discounts, ratings, sidebar products, and coupon-table data each used different structures.
 
-The working hypothesis was that structured data should adapt to the existing rendering pipeline, not compete with it. Shared FAQ records could feed both visible and machine-readable output. Promotions needed a normalized intermediate representation before they could be mapped to `Offer` entities.
+I decided to adapt the structured data to the existing rendering pipeline. Shared FAQ records could feed both visible and machine-readable output. Promotions needed a normalized intermediate representation before they could map to `Offer` entities.
 
 ```text
 Before
@@ -86,7 +86,7 @@ I considered three boundaries for the work:
 
 1. Patch each template independently. This minimized initial movement but preserved duplicate FAQ logic and would make every schema addition layout-specific.
 2. Replace the merchant-page pipeline. This could produce a cleaner architecture, but it dramatically increased the regression surface around promotion ordering, seasonal modules, tracking links, and SEO-sensitive output.
-3. Add a compatibility seam. Keep the established rendering flow, normalize the data needed by structured output, and centralize JSON-LD serialization.
+3. Add a compatibility layer. Keep the established rendering flow, normalize the data needed by structured output, and centralize JSON-LD serialization.
 
 I chose the third option. It improved one cross-cutting concern without pretending the surrounding codebase had already been modernized.
 
@@ -100,7 +100,7 @@ Second, introduce a normalization step for promotions. `_code_sorter.php` copied
 
 All blocks flowed through an `outputJsonLd()` helper backed by `json_encode`, rather than assembling JSON fragments by string interpolation. A separate numeric formatter forced a dot decimal separator and removed locale-dependent thousands separators from schema prices.
 
-The visible rendering pipeline, database access, and existing merchant variables deliberately stayed in place. This constrained the blast radius, although it also left coupling between schema generation and template globals that a later migration should remove.
+I left the visible rendering pipeline, database access, and existing merchant variables in place to limit regressions. Schema generation still depends on template globals, which a later migration should remove.
 
 ## Implementation and rollout
 
@@ -128,7 +128,7 @@ The [May 2025 consolidation](https://github.com/demandio/knoji/commit/0530f80394
 
 Follow-up work mapped merchant policies and customer discounts to `PropertyValue` records, modeled the two visible coupon tables as `Dataset` structures, and mirrored the three visible checkout instructions as `HowToStep` records. The Dataset and HowTo changes were co-authored with GitHub Copilot; I remained responsible for integrating and reviewing them in the legacy page flow.
 
-The rollout was incremental rather than a schema rewrite in one release. Small follow-up commits corrected output structure and, in [`22669787`](https://github.com/demandio/knoji/commit/22669787d795eab2e13236bbfd8d968a80a78786), hardened decimal serialization after identifying locale-sensitive prices.
+We did not rewrite all schema in one release. Small follow-up commits corrected output structure. Commit [`22669787`](https://github.com/demandio/knoji/commit/22669787d795eab2e13236bbfd8d968a80a78786) hardened decimal serialization after we found locale-sensitive prices.
 
 ### Team follow-up
 
@@ -136,7 +136,7 @@ The work continued as team ownership rather than ending with my last implementat
 
 ## Outcome
 
-The result was broader and more consistent machine-readable coverage of merchant pages without replacing the procedural page system. The work established three useful seams:
+The changes expanded and standardized machine-readable coverage of merchant pages without replacing the procedural page system:
 
 - FAQs could be updated once and reflected in visible and structured representations.
 - Heterogeneous promotions passed through a normalized shape before schema mapping.
@@ -146,7 +146,7 @@ This is an architecture and coverage outcome, not a claim about search performan
 
 ## What did not work
 
-The implementation was intentionally iterative, and several early choices did not survive contact with the full page lifecycle:
+Several early choices failed once we tested them against the complete page lifecycle:
 
 - The first commit called the change JSON-LD but implemented a Microdata wrapper.
 - The first combined JSON block was hand-built and vulnerable to invalid punctuation and trailing commas.
@@ -155,7 +155,7 @@ The implementation was intentionally iterative, and several early choices did no
 - A temporary FAQ limit was introduced and then removed.
 - The promotion normalizer duplicated only part of a much larger placement pipeline, so equivalence with every visible ordering rule still needs rendered verification.
 
-The current evidence review also found issues that prevent me from presenting the implementation as fully validated: an unsafe outer FAQ interpolation, mismatched FAQ closure arguments, an `ItemList` construction mismatch, and defects in the Dataset description helper. These are concrete follow-up work, not reasons to hide the broader design, but the case study remains a draft until representative pages and every emitted block are revalidated.
+The current evidence review also found issues that prevent me from presenting the implementation as fully validated: an unsafe outer FAQ interpolation, mismatched FAQ closure arguments, an `ItemList` construction mismatch, and defects in the Dataset description helper. These defects need follow-up work. The case study remains a draft until representative pages and every emitted block are revalidated.
 
 ## Validation still required
 
@@ -165,6 +165,6 @@ Only Search Console or comparable production evidence could support claims about
 
 ## Reflection
 
-The hard part was not knowing how to produce JSON-LD. It was finding a boundary that improved machine-readable output without destabilizing a revenue- and SEO-sensitive page assembled from years of implicit rules.
+Producing JSON-LD was straightforward. The hard part was improving machine-readable output without destabilizing a revenue- and SEO-sensitive page assembled from years of implicit rules.
 
-A greenfield design would likely start with typed domain objects and derive both HTML and structured data from them. Knoji required the reverse approach: discover the domain model hidden in template state, add normalization at the narrowest useful seam, and preserve behavior until each dependency could be verified. Leading the work also meant treating later corrections by the team as part of the system's evolution, rather than reducing the story to only the commits under my name.
+A new system would likely start with typed domain objects and derive HTML and structured data from them. At Knoji, I had to find the domain model hidden in template state, normalize data at the narrowest useful point, and preserve behavior until we could verify each dependency. The team's later corrections are part of this work, not separate from the commits under my name.

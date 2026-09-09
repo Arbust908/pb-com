@@ -3,13 +3,13 @@ slug: simplycodes-blog-contentful-migration
 translationKey: simplycodes-blog-contentful-migration
 locale: en
 title: Building the SimplyCodes blog on a shared Contentful platform
-description: How I implemented the SimplyCodes blog frontend on a team-built, reusable content platform that reduced duplicated work and unnecessary origin requests.
+description: How I built the SimplyCodes blog frontend on a shared Contentful API, with server-rendered articles, typed data, and cached requests.
 project: SimplyCodes
 organization: SimplyCodes · Demand.io
 projectType: professional
 sortOrder: 30
-role: Primary Front-End Implementer
-period: July 2024–February 2025
+role: Primary front-end implementer
+period: July 2024 to February 2025
 technologies:
   - Contentful
   - Nuxt
@@ -31,15 +31,15 @@ draft: false
 
 ## Context
 
-SimplyCodes needed a blog that could support editorial content without making the web application responsible for fetching, reshaping, and filtering raw CMS data. It also needed to fit a wider company platform: other products published similar content, so rebuilding the same model and delivery path for every site would duplicate engineering and infrastructure work.
+SimplyCodes needed a blog without making the web application fetch, reshape, and filter raw CMS data. Other company products published similar content, so rebuilding the same model and delivery path for every site would duplicate engineering and infrastructure work.
 
-I was the primary frontend implementer for SimplyCodes. The backend was built by the team. My responsibility was to turn its Contentful-backed API into the reader-facing experience: article discovery, responsive layouts, rich-content rendering, navigation, metadata, and measurable acquisition surfaces.
+I was the primary frontend implementer for SimplyCodes. The team built the backend. I turned its Contentful-backed API into the blog index and article pages, including responsive layouts, rich-content rendering, navigation, metadata, and tracked product links.
 
 The work began with the initial Contentful frontend in July 2024. The migration continued in stages until the application moved to Contentful-only article loading in February 2025.
 
 ## The architectural boundary
 
-The most important decision was where CMS complexity should live. The browser did not query Contentful directly. Instead, the frontend requested a product-facing blog API built and operated by the team.
+We kept CMS access out of the browser. The frontend requested a product-facing blog API that the team built and operated.
 
 ```text
 Contentful
@@ -67,7 +67,7 @@ We treated an article as a company-level contract rather than a SimplyCodes-only
 
 On the SimplyCodes frontend, I consumed those contracts directly in the query and presentation layers. This gave the frontend and backend one vocabulary while still leaving room for product-specific rendering. SimplyCodes could add its own widgets and visual treatment without forking the underlying author and article shapes.
 
-The reuse saved the company money qualitatively in two ways. Teams did not need to independently model the same blog concepts for each product, and the centralized backend could handle filtering and caching once instead of repeating that work in every frontend. We did not record a defensible dollar amount, so I am not attaching a financial figure to the saving.
+This reuse avoided duplicate work. Teams did not need to model the same blog concepts for each product, and the centralized backend handled filtering and caching once instead of repeating that work in every frontend. We did not record a defensible dollar amount, so I am not attaching a financial figure to the saving.
 
 ## Implementing the reader experience
 
@@ -97,7 +97,7 @@ I also improved movement through the blog with breadcrumbs, search access, table
 
 ## Connecting content to growth
 
-The blog was both an editorial surface and an acquisition channel. After the migration foundation was in place, I added product promotion surfaces within the blog experience and then added campaign attribution to their calls to action.
+The blog also directed readers to the product. After the initial migration, I added product placements and campaign attribution to their calls to action.
 
 This made those placements measurable without mixing growth logic into the content model. Contentful remained responsible for editorial structure, the frontend controlled the interaction and presentation, and attribution parameters connected selected calls to action to the analytics path.
 
@@ -105,14 +105,14 @@ This made those placements measurable without mixing growth logic into the conte
 
 The result was a Contentful-backed blog frontend that could render structured articles, product-specific embeds, responsive navigation, and search-oriented metadata on top of a team-built API.
 
-The architecture reduced duplicated implementation across products by sharing blog contracts, and it avoided unnecessary work by filtering, paginating, and caching responses before they reached the frontend. For SimplyCodes, the same foundation supported both editorial reading and measurable paths back into the product.
+The architecture reduced duplicated implementation across products by sharing blog contracts. Filtering, pagination, and caching also reduced work before responses reached the frontend. SimplyCodes used the same API for editorial reading and tracked paths back into the product.
 
-This case study does not claim a specific traffic increase, cache-hit rate, publishing-time reduction, or dollar saving because those records are not available. The supported outcome is architectural: reuse lowered the amount of product-specific code required, while backend filtering and caching reduced avoidable data transfer and repeated origin work.
+This case study does not claim a specific traffic increase, cache-hit rate, publishing-time reduction, or dollar saving because those records are not available. The implementation evidence supports a technical outcome. Shared contracts reduced product-specific code, while backend filtering and caching reduced data transfer and repeated origin work.
 
 ## Reflection
 
-The strongest part of this migration was not a single component. It was the separation of concerns between a shared content platform and a product-specific experience.
+The shared API handled CMS access while SimplyCodes controlled its presentation. That division mattered more than any single component.
 
-Keeping Contentful access, normalization, filtering, and caching behind the API made the frontend simpler and gave other products a reusable foundation. Keeping rendering and acquisition behavior in SimplyCodes let me build for its readers without forcing every product into the same interface.
+Keeping Contentful access, normalization, filtering, and caching behind the API made the frontend simpler and gave other products reusable code. Keeping rendering and acquisition behavior in SimplyCodes let me build for its readers without forcing every product into the same interface.
 
 If I approached the migration again, I would add explicit parity checks for URLs, metadata, embeds, and heading structure at the start of the cutover. Those checks would make migration safety as visible and repeatable as the typed contracts that supported the final experience.

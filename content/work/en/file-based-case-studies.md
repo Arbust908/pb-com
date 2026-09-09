@@ -3,7 +3,7 @@ slug: file-based-case-studies
 translationKey: file-based-case-studies
 locale: en
 title: Designing a file-based case-study system
-description: Simplifying a portfolio publishing model around Markdown, structured metadata, and predictable bilingual fallback.
+description: How I replaced a proposed database with Markdown, validated metadata, and an explicit bilingual fallback.
 project: Portfolio
 organization: Personal
 projectType: personal
@@ -31,7 +31,7 @@ draft: false
 
 ## Context
 
-My portfolio needed to explain more than finished screens. A useful case study has to preserve how a problem was understood, which constraints shaped the work, why a proof of concept was justified, and what changed after the first solution met reality.
+My portfolio needed to explain the work behind the finished screens. Each case study had to record the problem, constraints, reason for a proof of concept, and changes made after the first implementation.
 
 The first proposal used a database with fixed content blocks and several access levels. That design could support an admin interface and private links, but neither was necessary for the first release.
 
@@ -39,7 +39,7 @@ The first proposal used a database with fixed content blocks and several access 
 
 The publishing system needed enough structure to make projects searchable without forcing every story into the same template. It also had to support English and Spanish while allowing a case study to ship before both translations were complete.
 
-Those requirements pull in different directions: rigid schemas make filtering easy, while long-form narratives benefit from flexibility.
+Rigid schemas make filtering easy, but long-form case studies need flexibility.
 
 ## Options considered
 
@@ -53,7 +53,7 @@ Plain Markdown made writing easy, but offered no reliable fields for filters, ar
 
 ### Markdown with validated frontmatter
 
-Nuxt Content provided the useful middle ground. Markdown owns the narrative, while a small frontmatter schema owns the information the application needs to query.
+Nuxt Content provided both. Markdown stores the narrative, while a small frontmatter schema stores the fields the application needs to query.
 
 ## Decision
 
@@ -61,7 +61,7 @@ Each language is stored as a separate Markdown document. Translations share a st
 
 > Prefer the smallest publishing system that protects the quality of the story.
 
-English is the fallback language. When Spanish content is missing, the interface says so instead of silently presenting the wrong language. The article-level language control appears only when it has somewhere meaningful to go.
+English is the fallback language. When Spanish content is missing, the interface says so instead of silently presenting the wrong language. The article-level language control appears only when a translation exists.
 
 ## Outcome
 
@@ -69,4 +69,4 @@ Adding a case study now means adding a Markdown file. Adding its translation mea
 
 ## What comes later
 
-Private access remains a possible second version, not a hidden requirement inside the first one. If sensitive case studies become necessary, their access model can be designed from real recipients, expiration rules, and deployment constraints.
+Private access can wait until a case study requires it. At that point, I can design access around known recipients, expiration rules, and deployment constraints.

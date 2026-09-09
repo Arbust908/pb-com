@@ -54,7 +54,7 @@ useSeoMeta({
     <main class="relative content-container pb-18 lg:pb-28">
       <section class="grid border-t border-base py-10 lg:grid-cols-12 lg:gap-8 lg:py-16">
         <p class="mb-7 meta-label-primary lg:col-span-3 lg:mb-0">
-          01 / {{ $t('about.profile_title') }}
+          {{ $t('about.profile_title') }}
         </p>
         <div class="max-w-3xl text-body leading-relaxed lg:col-span-8 space-y-5">
           <p>{{ $t('about.profile') }}</p>
@@ -63,7 +63,7 @@ useSeoMeta({
               <dt class="meta-label-secondary">
                 {{ $t('about.location_label') }}
               </dt>
-              <dd class="mt-2 text-base">
+              <dd class="mt-2 text-base-color">
                 Buenos Aires, Argentina
               </dd>
             </div>
@@ -72,7 +72,7 @@ useSeoMeta({
                 {{ $t('about.email_label') }}
               </dt>
               <dd class="mt-2">
-                <a class="text-base transition hover:text-primary" :href="`mailto:${email}`">{{ email }}</a>
+                <a class="text-base-color transition hover:text-primary" :href="`mailto:${email}`">{{ email }}</a>
               </dd>
             </div>
           </dl>
@@ -82,7 +82,7 @@ useSeoMeta({
       <section class="grid border-t border-base py-10 lg:grid-cols-12 lg:gap-8 lg:py-16">
         <div class="mb-7 lg:col-span-3 lg:mb-0">
           <p class="meta-label-primary">
-            02 / {{ $t('about.contact_title') }}
+            {{ $t('about.contact_title') }}
           </p>
           <p class="mt-4 max-w-xs text-sm text-muted leading-relaxed">
             {{ $t('about.mail_notice') }}
