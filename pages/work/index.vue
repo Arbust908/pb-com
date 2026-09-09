@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { LayoutGroup, MotionConfig, motion } from 'motion-v'
-import { CvSkillKinds, PROJECT_COLORS } from '~/types'
+import { CvSkillKinds, MOTION_SPRINT_OPTIONS, PROJECT_COLORS } from '~/types'
 
 const { locale, t } = useI18n()
 const localePath = useLocalePath()
