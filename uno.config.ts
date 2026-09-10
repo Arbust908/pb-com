@@ -25,7 +25,7 @@ export default defineConfig({
     ['border-primary', 'border-rose-500/60 dark:border-rose-400/50'],
     ['surface-frosted', 'border border-slate-300/70 bg-slate-50/70 backdrop-blur-xl dark:border-slate-700/70 dark:bg-slate-800/40'],
     ['content-container', 'mx-auto w-full max-w-360 px-4 sm:px-6 lg:px-10'],
-    ['display-heading', '[word-spacing:0.04em] font-extrabold leading-[0.92] tracking-[-0.035em] font-mono'],
+    ['display-heading', 'font-extrabold leading-[0.9] tracking-[-0.035em] font-mono'],
     ['meta-label', 'text-[0.65rem] text-slate-500 tracking-[0.16em] font-mono uppercase dark:text-slate-400'],
     ['meta-label-primary', 'text-[0.65rem] text-rose-700 tracking-[0.16em] font-mono uppercase dark:text-rose-300'],
     ['meta-label-secondary', 'text-[0.65rem] text-purple-700 tracking-[0.16em] font-mono uppercase dark:text-purple-300'],

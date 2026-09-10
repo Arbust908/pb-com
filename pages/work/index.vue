@@ -121,22 +121,13 @@ usePageSeo({
             :animate="{ opacity: 1, y: 0 }"
             :transition="{ delay: 0.06 }"
           >
-            <h1 class="display-heading max-w-5xl text-[clamp(3.2rem,14vw,7rem)] leading-[0.88]">
+            <h1 class="display-heading max-w-5xl text-[clamp(3.2rem,14vw,7rem)] leading-[0.88] capitalize">
               {{ $t('case_studies.title') }}
             </h1>
             <p class="mt-2 max-w-2xl color-base text-body leading-relaxed lg:text-xl sm:text-lg">
               {{ $t('case_studies.introduction') }}
             </p>
           </motion.div>
-
-          <motion.figure
-            class="hidden h-44 overflow-hidden surface-frosted rounded-2xl lg:block"
-            :initial="{ opacity: 0, scale: 0.8 }"
-            :animate="{ opacity: 1, scale: 1 }"
-            :transition="{ delay: 0.14 }"
-          >
-            <img src="/work-placeholder.svg" alt="" class="h-full w-full object-cover" loading="eager">
-          </motion.figure>
         </div>
       </header>
 
@@ -160,7 +151,7 @@ usePageSeo({
 
           <div class="hidden gap-2 overflow-x-auto no-scrollbar sm:flex" role="group" :aria-label="$t('case_studies.filters_label')">
             <button
-              class="relative shrink-0 rounded-full px-4 py-2.5 text-xs font-mono transition-colors"
+              class="relative shrink-0 rounded-full px-4 py-1 text-xs font-mono transition-colors"
               :class="activeFilter === null ? 'text-slate-950' : 'pill-control text-body hover:border-primary hover:text-primary'"
               :aria-pressed="activeFilter === null"
               type="button"
@@ -172,7 +163,7 @@ usePageSeo({
             <button
               v-for="filter in filters"
               :key="filter"
-              class="relative shrink-0 rounded-full px-4 py-2.5 text-xs font-mono transition-colors"
+              class="relative shrink-0 rounded-full px-4 py-1 text-xs font-mono transition-colors"
               :class="activeFilter === filter ? 'text-slate-950' : 'pill-control text-body hover:border-primary hover:text-primary'"
               :aria-pressed="activeFilter === filter"
               type="button"
