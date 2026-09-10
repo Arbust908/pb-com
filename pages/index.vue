@@ -1,30 +1,34 @@
 <script setup lang="ts">
+import type { CvExperience, CvSkillGroup } from '~/types'
 import shuffleLetters from 'shuffle-letters'
-import type { MetaData } from '@/composables/ultimateProtocol'
-import { useUP } from '@/composables/ultimateProtocol'
-import { SITE_URL } from '~/constants'
-import type { CvExperience, CvLanguage, CvSkillGroup } from '~/types'
+import { usePageSeo } from '~/composables/usePageSeo'
+import { createPageGraph } from '~/utils/structuredData'
 
-// All this info should be i18n driven
-const meta: MetaData = {
-  base_url: SITE_URL,
-  title: 'Pancho Blanco :: Senior Front-End Developer',
-  description:
-          'Senior Front-End Developer specializing in Vue, Nuxt, and TypeScript, with backend experience across Node.js, Express, Laravel, APIs, and SQL DB.',
-}
-useHead(useUP(meta, useRoute().fullPath))
-
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 
 const globalStore = useGlobalStore()
+await useAsyncData('global-data', () => globalStore.fetchAll())
 const { experiences, skillsData, languages } = storeToRefs(globalStore)
 const skillGroups = computed(() => skillsData.value.groups)
+const skillBySlug = computed(() => new Map(skillsData.value.skills.map(skill => [skill.slug, skill.name])))
 
-// Get translation for current locale with fallback to 'en'
-function getTranslation(item: CvExperience | CvSkillGroup | CvLanguage, field: string): string {
-  const translations = item.translations as Record<string, Record<string, string>>
-  return translations[locale.value]?.[field] || translations.en?.[field] || ''
-}
+const { getTranslation } = useCvTranslation()
+
+usePageSeo({
+  title: () => t('home_meta.title'),
+  description: () => t('home_meta.description'),
+  structuredData: context => createPageGraph({
+    type: 'WebPage',
+    mainEntity: true,
+    url: context.canonicalUrl,
+    name: t('home_meta.title'),
+    description: t('home_meta.description'),
+    person: {
+      jobTitle: t('rol'),
+      knowsAbout: skillsData.value.skills.map(skill => skill.name),
+    },
+  }),
+})
 
 function getExperienceList(experience: CvExperience): string[] {
   const localizedList = experience.translations[locale.value]?.list?.filter(Boolean) ?? []
@@ -40,12 +44,7 @@ function getExperienceList(experience: CvExperience): string[] {
 }
 
 function getGroupSkillList(group: CvSkillGroup): string {
-  const skillBySlug = new Map(skillsData.value.skills.map(skill => [skill.slug, skill.name]))
-  return group.skillSlugs.map(slug => skillBySlug.get(slug)).filter(Boolean).join(', ')
-}
-
-function formatDate(date: string) {
-  return new Date(date).toLocaleDateString(locale.value, { year: 'numeric', month: 'short', day: '2-digit' })
+  return group.skillSlugs.map(slug => skillBySlug.value.get(slug)).filter(Boolean).join(', ')
 }
 
 // Get current experience + most recent ended experience
@@ -57,8 +56,8 @@ const recentExperiences = computed(() => {
 
   // Get all experiences with endDates, sorted by endDate descending
   const endedExps = expList
-    .filter(exp => exp.endDate !== null)
-    .sort((a, b) => new Date(b.endDate!).getTime() - new Date(a.endDate!).getTime())
+    .filter((exp): exp is CvExperience & { endDate: string } => exp.endDate !== null)
+    .sort((a, b) => new Date(b.endDate).getTime() - new Date(a.endDate).getTime())
 
   const result: typeof expList = []
   if (currentExp)
@@ -71,7 +70,7 @@ const recentExperiences = computed(() => {
 })
 
 // ✅ OPTIMIZED: Reactive DOM manipulation with proper ref
-const heroRef = ref<HTMLElement>()
+const heroRef = useTemplateRef<HTMLElement>('hero')
 
 onMounted(async () => {
   if (heroRef.value && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -94,7 +93,7 @@ onMounted(async () => {
           </span><br>
           Blanco
         </h1>
-        <h2 ref="heroRef" class="mt-5 min-h-8 text-lg text-body leading-snug sm:text-2xl">
+        <h2 ref="hero" class="mt-5 min-h-8 text-lg text-body leading-snug sm:text-2xl">
           {{ $t('rol') }}
         </h2>
       </div>
@@ -123,9 +122,9 @@ onMounted(async () => {
               </ul>
             </div>
             <p class="mt-8 border-t border-base pt-4 text-[0.65rem] text-muted font-mono">
-              {{ formatDate(experience.startDate) }} /
+              {{ formatDate(experience.startDate, locale) }} /
               <span v-if="!experience.endDate" class="text-primary">{{ $t('current') }}</span>
-              <span v-else>{{ formatDate(experience.endDate) }}</span>
+              <span v-else>{{ formatDate(experience.endDate, locale) }}</span>
             </p>
           </article>
         </div>

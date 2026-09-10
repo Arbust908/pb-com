@@ -1,14 +1,17 @@
 import { appDescription } from './constants/index'
 
+const jsonld = {
+  'nuxt-jsonld': {
+    disableOptionsAPI: true,
+  },
+}
+
 export default defineNuxtConfig({
+  ...jsonld,
   runtimeConfig: {
     public: {
-      appName: '',
       phKey: '',
     },
-    openRouterKey: '',
-    devUser: '',
-    devPass: '',
   },
 
   modules: [
@@ -17,6 +20,7 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/i18n',
+    'nuxt-jsonld',
   ],
 
   routeRules: {
@@ -62,7 +66,6 @@ export default defineNuxtConfig({
     build: {
       reportCompressedSize: false,
       chunkSizeWarningLimit: 500,
-      sourcemap: import.meta.env.NODE_ENV === 'development',
     },
   },
 

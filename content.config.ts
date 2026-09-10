@@ -1,6 +1,6 @@
 import { defineCollection, defineContentConfig } from '@nuxt/content'
 import { z } from 'zod'
-import { CvSkillKinds } from './types'
+import { CASE_STUDY_AREAS } from './constants'
 
 export default defineContentConfig({
   collections: {
@@ -22,7 +22,7 @@ export default defineContentConfig({
         period: z.string(),
         technologies: z.array(z.string()),
         skills: z.array(z.string()),
-        areas: z.array(z.enum(CvSkillKinds)),
+        areas: z.array(z.enum(CASE_STUDY_AREAS)),
         featured: z.boolean().default(false),
         draft: z.boolean().default(false),
       }),

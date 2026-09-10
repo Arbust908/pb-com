@@ -4,14 +4,14 @@ dist
 .output
 .nuxt
 .env
+.env.*
+!.env.example
 .idea/
 .unlighthouse
 .claude
 .agents
 .data
-.claude
 .agent
-.docs
 .yarn
 .DS_Store
-docs/
+.docs

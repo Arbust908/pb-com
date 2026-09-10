@@ -1,16 +1,10 @@
 <script setup lang="ts">
 import posthog from 'posthog-js'
-import { FAVICONS, appName } from '@/constants'
+import { appName, FAVICONS } from '@/constants'
 
 const isDark = useDark()
 const isDev = import.meta.dev
 const { locale } = useI18n()
-
-const globalStore = useGlobalStore()
-await useAsyncData('global-data', async () => {
-  await globalStore.fetchAll()
-  return true
-})
 
 onMounted(() => {
   const phKey = useRuntimeConfig().public.phKey as string
@@ -37,7 +31,6 @@ useHead(() => ({
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
-  <section class="modal__layer z-50" />
 </template>
 
 <style>

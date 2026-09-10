@@ -1,12 +1,8 @@
 <script setup lang="ts">
-const { locale } = useI18n()
 const globalStore = useGlobalStore()
 const { studies } = storeToRefs(globalStore)
 
-function getTranslation(study: typeof studies.value[number], field: string): string {
-  const translations = study.translations
-  return translations[locale.value]?.[field] || translations.en?.[field] || ''
-}
+const { getTranslation } = useCvTranslation()
 </script>
 
 <template>

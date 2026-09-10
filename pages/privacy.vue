@@ -1,9 +1,23 @@
 <script setup lang="ts">
+import { usePageSeo } from '~/composables/usePageSeo'
+import { CONTACT_EMAIL } from '~/constants'
+import { createPageGraph } from '~/utils/structuredData'
+
 const { t } = useI18n()
 
-useSeoMeta({
+usePageSeo({
   title: () => `${t('privacy.title')} :: Pancho Blanco`,
   description: () => t('privacy.introduction'),
+  structuredData: context => createPageGraph({
+    type: 'WebPage',
+    url: context.canonicalUrl,
+    name: t('privacy.title'),
+    description: t('privacy.introduction'),
+    breadcrumbs: [
+      { name: t('home'), url: context.localeUrl(context.locale) },
+      { name: t('privacy.title'), url: context.canonicalUrl },
+    ],
+  }),
 })
 </script>
 
@@ -42,7 +56,7 @@ useSeoMeta({
             {{ $t(`privacy.sections.${section}.body`) }}
           </p>
           <p v-if="section === 'operator'" class="mt-4">
-            <a class="text-primary transition hover:underline" href="mailto:me@panchoblanco.dev">me@panchoblanco.dev</a>
+            <a class="text-primary transition hover:underline" :href="`mailto:${CONTACT_EMAIL}`">{{ CONTACT_EMAIL }}</a>
           </p>
           <p v-if="section === 'analytics'" class="mt-4">
             <a class="text-primary transition hover:underline" href="https://posthog.com/privacy" rel="noreferrer" target="_blank">PostHog Privacy Policy</a>

@@ -59,21 +59,3 @@ export interface CvSkillsData {
   skills: CvSkill[]
   groups: CvSkillGroup[]
 }
-
-export const CvSkillKinds = ['frontend', 'backend', 'architecture', 'e2e', 'product', 'data', 'content', 'legacy'] as const
-
-export const PROJECT_COLORS = {
-  SimplyCodes: '#b4ff4b',
-  Dealspotr: '#2cd700',
-  Knoji: '#009ff4',
-  personal: '#f54842',
-} as const
-
-export const MOTION_SPRINT_OPTIONS = {
-  type: 'spring',
-  stiffness: 280,
-  damping: 28,
-}
-/* stiffness: 160,
-  damping: 30,
-  restDelta: 0.001, */

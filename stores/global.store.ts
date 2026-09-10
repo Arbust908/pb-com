@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
 import type { ApiResponse, CvExperience, CvLanguage, CvSkillsData, CvStudy } from '~/types'
+import { defineStore } from 'pinia'
 
 export const useGlobalStore = defineStore('global', () => {
   const experiences = ref<CvExperience[]>([])
@@ -31,7 +31,7 @@ export const useGlobalStore = defineStore('global', () => {
   }
 
   async function fetchAll() {
-    await Promise.all([
+    return await Promise.all([
       fetchExperiences(),
       fetchLanguages(),
       fetchSkills(),

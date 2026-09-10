@@ -8,19 +8,11 @@ const props = defineProps<Props>()
 
 const { locale } = useI18n()
 
+const { getTranslation } = useCvTranslation()
+
 const company = computed(() => props.experiences[0]?.company || '')
 const location = computed(() => props.experiences.find(experience => experience.location)?.location)
 const isCurrent = computed(() => props.experiences.some(experience => !experience.endDate))
-
-// Get translation for current locale with fallback to 'en'
-function getTranslation(experience: CvExperience, field: 'rol' | 'description'): string {
-  const translations = experience.translations
-  return translations[locale.value]?.[field] || translations.en?.[field] || ''
-}
-
-function formatDate(date: string) {
-  return new Date(date).toLocaleDateString(locale.value, { year: 'numeric', month: 'short', day: '2-digit' })
-}
 </script>
 
 <template>
@@ -48,7 +40,7 @@ function formatDate(date: string) {
           {{ getTranslation(experience, 'rol') }}
         </h4>
         <p class="meta-label leading-relaxed">
-          <span>{{ formatDate(experience.startDate) }}</span>
+          <span>{{ formatDate(experience.startDate, locale) }}</span>
           -
           <span
             v-if="!experience.endDate"
@@ -56,7 +48,7 @@ function formatDate(date: string) {
           >
             {{ $t('current') }}
           </span>
-          <span v-else>{{ formatDate(experience.endDate) }}</span>
+          <span v-else>{{ formatDate(experience.endDate, locale) }}</span>
         </p>
         <p class="text-sm text-body leading-relaxed">
           {{ getTranslation(experience, 'description') }}

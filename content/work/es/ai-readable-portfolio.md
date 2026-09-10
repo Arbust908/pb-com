@@ -72,10 +72,10 @@ El parser actual se mantiene pequeño de manera intencional, pero no es un parse
 
 Medido sobre la misma página de inicio compilada localmente el 21 de agosto de 2026:
 
-| Representación | Cuerpo de la respuesta | Contenido incluido |
-|---|---:|---|
-| HTML | 34.401 bytes | Documento visual, estilos, estado de la aplicación y contenido del CV |
-| Markdown | 1.732 bytes | 222 palabras que abarcan el perfil, dos roles recientes, cinco grupos de habilidades y dos idiomas |
+| Representación | Cuerpo de la respuesta | Contenido incluido                                                                                 |
+| -------------- | ---------------------: | -------------------------------------------------------------------------------------------------- |
+| HTML           |           34.401 bytes | Documento visual, estilos, estado de la aplicación y contenido del CV                              |
+| Markdown       |            1.732 bytes | 222 palabras que abarcan el perfil, dos roles recientes, cinco grupos de habilidades y dos idiomas |
 
 Esto representa un cuerpo de respuesta un 95,0 % más pequeño para la representación enfocada. La comparación es una medición local del payload, no una afirmación sobre latencia, precisión del modelo ni ahorro de ancho de banda en producción.
 

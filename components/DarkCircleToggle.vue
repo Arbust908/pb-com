@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { SEMANTIC_COLORS } from '~/constants'
+
 defineProps<{
   full?: boolean
   label?: string
@@ -13,7 +15,7 @@ useHead({
   meta: [{
     id: 'theme-color',
     name: 'theme-color',
-    content: () => isDark.value ? '#0f172a' : '#f1f5f9',
+    content: () => isDark.value ? SEMANTIC_COLORS.surfaceDark : SEMANTIC_COLORS.surface,
   }],
 })
 </script>
@@ -22,8 +24,8 @@ useHead({
   <button
     type="button"
     :class="full ? 'min-h-14 w-full flex items-center justify-between border border-base rounded-2xl px-4 py-2 text-sm font-mono transition hover:border-primary hover:text-primary' : 'icon-control'"
-    :aria-label="label || `Toggle ${isDark ? 'to Light' : 'to Dark'} mode`"
-    :title="`Toggle ${isDark ? 'to Light' : 'to Dark'} mode`"
+    :aria-label="label || $t('change_theme')"
+    :title="$t('change_theme')"
     @click="handleClick"
   >
     <span v-if="full" class="flex items-center gap-3">

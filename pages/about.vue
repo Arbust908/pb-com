@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { usePageSeo } from '~/composables/usePageSeo'
+import { AUTHOR_LOCATION, CONTACT_EMAIL } from '~/constants'
+import { createPageGraph } from '~/utils/structuredData'
+
 const { t } = useI18n()
 
-const email = 'me@panchoblanco.dev'
-
 function mailto(subject: string): string {
-  return `mailto:${email}?subject=${encodeURIComponent(subject)}`
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`
 }
 
 const contactActions = computed(() => [
@@ -28,9 +30,24 @@ const contactActions = computed(() => [
   },
 ])
 
-useSeoMeta({
+usePageSeo({
   title: () => `${t('about.title')} :: Pancho Blanco`,
   description: () => t('about.introduction'),
+  structuredData: context => createPageGraph({
+    type: 'ProfilePage',
+    url: context.canonicalUrl,
+    name: t('about.title'),
+    description: t('about.introduction'),
+    breadcrumbs: [
+      { name: t('home'), url: context.localeUrl(context.locale) },
+      { name: t('about.title'), url: context.canonicalUrl },
+    ],
+    person: {
+      description: t('about.profile'),
+      email: CONTACT_EMAIL,
+      jobTitle: t('rol'),
+    },
+  }),
 })
 </script>
 
@@ -51,7 +68,7 @@ useSeoMeta({
       </p>
     </header>
 
-    <main class="relative content-container pb-18 lg:pb-28">
+    <section class="relative content-container pb-18 lg:pb-28">
       <section class="grid border-t border-base py-10 lg:grid-cols-12 lg:gap-8 lg:py-16">
         <p class="mb-7 meta-label-primary lg:col-span-3 lg:mb-0">
           {{ $t('about.profile_title') }}
@@ -63,8 +80,8 @@ useSeoMeta({
               <dt class="meta-label-secondary">
                 {{ $t('about.location_label') }}
               </dt>
-              <dd class="mt-2 text-base-color">
-                Buenos Aires, Argentina
+              <dd class="mt-2 color-base">
+                {{ AUTHOR_LOCATION }}
               </dd>
             </div>
             <div>
@@ -72,7 +89,7 @@ useSeoMeta({
                 {{ $t('about.email_label') }}
               </dt>
               <dd class="mt-2">
-                <a class="text-base-color transition hover:text-primary" :href="`mailto:${email}`">{{ email }}</a>
+                <a class="color-base transition hover:text-primary" :href="`mailto:${CONTACT_EMAIL}`">{{ CONTACT_EMAIL }}</a>
               </dd>
             </div>
           </dl>
@@ -103,6 +120,6 @@ useSeoMeta({
           </a>
         </div>
       </section>
-    </main>
+    </section>
   </div>
 </template>

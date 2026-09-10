@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { CvLanguage } from '~/types'
+import { getTranslation } from '~/composables/useCvTranslation'
 
 interface Props {
   languages: CvLanguage[]
@@ -7,11 +8,6 @@ interface Props {
 }
 
 const { languages, locale } = defineProps<Props>()
-
-function getLangTranslation(lang: typeof languages[number], field: string): string {
-  const translations = lang.translations
-  return translations[locale]?.[field] || translations.en?.[field] || ''
-}
 </script>
 
 <template>
@@ -27,10 +23,10 @@ function getLangTranslation(lang: typeof languages[number], field: string): stri
         class="w-full px-4 text-sm"
       >
         <h4 class="font-bold">
-          {{ getLangTranslation(lang, 'name') }}
+          {{ getTranslation(lang, 'name', locale) }}
         </h4>
         <p class="mt-1 text-body">
-          {{ getLangTranslation(lang, 'level') }}
+          {{ getTranslation(lang, 'level', locale) }}
         </p>
       </div>
     </article>

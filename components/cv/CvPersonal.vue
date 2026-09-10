@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { AUTHOR_LOCATION, CONTACT_EMAIL } from '~/constants'
+
 const { t, locale } = useI18n()
 
 const globalStore = useGlobalStore()
@@ -6,10 +8,7 @@ const { languages, skillsData } = storeToRefs(globalStore)
 const skills = computed(() => skillsData.value.skills)
 const skillGroups = computed(() => skillsData.value.groups)
 
-function getSkillTranslation(group: typeof skillGroups.value[number], field: string): string {
-  const translations = group.translations
-  return translations[locale.value]?.[field] || translations.en?.[field] || ''
-}
+const { getTranslation } = useCvTranslation()
 
 function getSkillList(group: typeof skillGroups.value[number]): string {
   const skillBySlug = new Map(skills.value.map(skill => [skill.slug, skill.name]))
@@ -32,14 +31,14 @@ function getSkillList(group: typeof skillGroups.value[number]): string {
     <article class="my-7 border-y border-base py-5">
       <ul class="text-sm space-y-3">
         <li>
-          <a href="mailto:me@panchoblanco.dev" class="flex items-center gap-2 transition hover:text-primary">
+          <a :href="`mailto:${CONTACT_EMAIL}`" class="flex items-center gap-2 transition hover:text-primary">
             <i class="i-ph:envelope-simple size-5 text-primary" />
-            <span>me@panchoblanco.dev</span>
+            <span>{{ CONTACT_EMAIL }}</span>
           </a>
         </li>
         <li class="flex items-center gap-2">
           <i class="i-ph:map-pin-area size-5 text-primary" />
-          <span>Buenos Aires, Argentina</span>
+          <span>{{ AUTHOR_LOCATION }}</span>
         </li>
       </ul>
     </article>
@@ -50,7 +49,7 @@ function getSkillList(group: typeof skillGroups.value[number]): string {
       </h3>
       <article v-for="group in skillGroups" :key="group.slug" class="mb-4 pl-4">
         <h4 class="mb-1 text-secondary font-bold">
-          {{ getSkillTranslation(group, 'title') }}
+          {{ getTranslation(group, 'title') }}
         </h4>
         <p class="text-sm text-body leading-relaxed">
           {{ getSkillList(group) }}

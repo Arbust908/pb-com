@@ -1,12 +1,24 @@
 <script setup lang="ts">
-import { LayoutGroup, MotionConfig, motion } from 'motion-v'
-import { CvSkillKinds, MOTION_SPRINT_OPTIONS, PROJECT_COLORS } from '~/types'
+import { LayoutGroup, motion, MotionConfig } from 'motion-v'
+import { usePageSeo } from '~/composables/usePageSeo'
+import { CASE_STUDY_AREAS, MOTION_SPRINT_OPTIONS, PROJECT_COLORS } from '~/constants'
+import { createCollectionGraph } from '~/utils/structuredData'
 
 const { locale, t } = useI18n()
 const localePath = useLocalePath()
-const activeFilter = ref<string | null>(null)
-const filterDialog = ref<HTMLDialogElement | null>(null)
-const areaOrder = CvSkillKinds
+const activeFilter = shallowRef<string | null>(null)
+const filterDialog = useTemplateRef<HTMLDialogElement>('filterDialog')
+const isFiltersOpen = shallowRef(false)
+const lockTarget = shallowRef<HTMLElement | null>(null)
+const isLocked = useScrollLock(() => lockTarget.value)
+
+onMounted(() => {
+  lockTarget.value = document.documentElement
+})
+
+watch(isFiltersOpen, (open) => {
+  isLocked.value = open
+})
 
 const { data: documents } = await useAsyncData('case-study-index', () => {
   const query = queryCollection('caseStudies')
@@ -43,34 +55,30 @@ const studies = computed(() => {
 
 const filters = computed(() => {
   const availableAreas = new Set(studies.value.flatMap(study => study.areas ?? []))
-  return areaOrder.filter(area => availableAreas.has(area))
+  return CASE_STUDY_AREAS.filter(area => availableAreas.has(area))
 })
 
 const filteredStudies = computed(() => activeFilter.value
-  ? studies.value.filter(study => study.areas?.includes(activeFilter.value as typeof areaOrder[number]))
+  ? studies.value.filter(study => study.areas?.includes(activeFilter.value as typeof CASE_STUDY_AREAS[number]))
   : studies.value)
 
-function cardStyle(project: string, projectType: string) {
-  let color: string = PROJECT_COLORS.personal
-
-  if (project === 'SimplyCodes')
-    color = PROJECT_COLORS.SimplyCodes
-  else if (project === 'Dealspotr')
-    color = PROJECT_COLORS.Dealspotr
-  else if (project === 'Knoji')
-    color = PROJECT_COLORS.Knoji
-  else if (projectType === 'personal')
-    color = PROJECT_COLORS.personal
-
+function cardStyle(project: string) {
+  const color = PROJECT_COLORS[project as keyof typeof PROJECT_COLORS] ?? PROJECT_COLORS.personal
   return { '--card-color': color }
 }
 
 function openFilters() {
   filterDialog.value?.showModal()
+  isFiltersOpen.value = filterDialog.value?.open ?? false
 }
 
 function closeFilters() {
   filterDialog.value?.close()
+}
+
+function closeFiltersFromBackdrop(event: MouseEvent) {
+  if (event.target === event.currentTarget)
+    closeFilters()
 }
 
 function gridClass(index: number) {
@@ -81,15 +89,28 @@ function gridClass(index: number) {
   return 'xl:col-span-4'
 }
 
-useSeoMeta({
+usePageSeo({
   title: () => `${t('case_studies.title')} :: Pancho Blanco`,
   description: () => t('case_studies.introduction'),
+  structuredData: context => createCollectionGraph({
+    url: context.canonicalUrl,
+    name: t('case_studies.title'),
+    description: t('case_studies.introduction'),
+    breadcrumbs: [
+      { name: t('home'), url: context.localeUrl(context.locale) },
+      { name: t('case_studies.title'), url: context.canonicalUrl },
+    ],
+    items: studies.value.map(study => ({
+      name: study.title,
+      url: context.absoluteUrl(`${context.locale === 'es' ? '/es' : ''}/work/${study.slug}`),
+    })),
+  }),
 })
 </script>
 
 <template>
   <MotionConfig reduced-motion="user" :transition="MOTION_SPRINT_OPTIONS">
-    <div class="relative w-full overflow-hidden base-bg text-base-color layout-grid-full">
+    <div class="relative w-full overflow-hidden base-bg color-base layout-grid-full">
       <div aria-hidden="true" class="pointer-events-none absolute right--20 top--24 size-120 rounded-full ambient-secondary filter-blur-3xl" />
       <div aria-hidden="true" class="pointer-events-none absolute right-48 top-16 size-72 rounded-full ambient-primary filter-blur-3xl" />
 
@@ -103,14 +124,14 @@ useSeoMeta({
             <h1 class="display-heading max-w-5xl text-[clamp(3.2rem,14vw,7rem)] leading-[0.88]">
               {{ $t('case_studies.title') }}
             </h1>
-            <p class="mt-2 max-w-2xl text-base-color text-body leading-relaxed lg:text-xl sm:text-lg">
+            <p class="mt-2 max-w-2xl color-base text-body leading-relaxed lg:text-xl sm:text-lg">
               {{ $t('case_studies.introduction') }}
             </p>
           </motion.div>
 
           <motion.figure
             class="hidden h-44 overflow-hidden surface-frosted rounded-2xl lg:block"
-            :initial="{ opacity: 0, scale: 0.97 }"
+            :initial="{ opacity: 0, scale: 0.8 }"
             :animate="{ opacity: 1, scale: 1 }"
             :transition="{ delay: 0.14 }"
           >
@@ -119,15 +140,17 @@ useSeoMeta({
         </div>
       </header>
 
-      <section class="relative border-y border-base surface-strong-bg backdrop-blur-xl lg:sticky lg:top-0 lg:z-30">
+      <section class="relative border-y border-base surface-strong-bg backdrop-blur-xl lg:sticky lg:top-0 lg:z-sticky">
         <div class="content-container py-3">
           <button
             class="w-full pill-control justify-between text-body sm:hidden hover:border-primary hover:text-primary"
             type="button"
+            :aria-expanded="isFiltersOpen"
+            aria-controls="work-filter-dialog"
             @click="openFilters"
           >
             <span class="flex items-center gap-2">
-              <span class="i-ph-funnel-simple text-base-color" aria-hidden="true" />
+              <span class="i-ph-funnel-simple color-base" aria-hidden="true" />
               {{ $t('case_studies.filters_button') }}
             </span>
             <span class="text-primary">
@@ -144,7 +167,7 @@ useSeoMeta({
               @click="activeFilter = null"
             >
               <motion.span v-if="activeFilter === null" layout-id="active-work-filter" class="absolute inset-0 rounded-full bg-rose-400" />
-              <span class="relative z-1">{{ $t('case_studies.filter_all') }}</span>
+              <span class="relative z-above">{{ $t('case_studies.filter_all') }}</span>
             </button>
             <button
               v-for="filter in filters"
@@ -156,16 +179,19 @@ useSeoMeta({
               @click="activeFilter = filter"
             >
               <motion.span v-if="activeFilter === filter" layout-id="active-work-filter" class="absolute inset-0 rounded-full bg-rose-400" />
-              <span class="relative z-1">{{ $t(`case_studies.areas.${filter}`) }}</span>
+              <span class="relative z-above">{{ $t(`case_studies.areas.${filter}`) }}</span>
             </button>
           </div>
         </div>
       </section>
 
       <dialog
+        id="work-filter-dialog"
         ref="filterDialog"
-        class="work-filter-dialog fixed inset-x-0 bottom-0 top-auto m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl surface-strong-bg p-0 text-base-color sm:hidden"
+        class="work-filter-dialog fixed inset-x-0 bottom-0 top-auto m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl surface-strong-bg p-0 color-base sm:hidden"
         :aria-label="$t('case_studies.filters_label')"
+        @click="closeFiltersFromBackdrop"
+        @close="isFiltersOpen = false"
       >
         <div class="mx-auto mt-2 h-1 w-10 rounded-full bg-slate-300 dark:bg-slate-600" aria-hidden="true" />
         <div class="flex items-center justify-between px-5 pb-4 pt-3">
@@ -209,7 +235,7 @@ useSeoMeta({
         </div>
       </dialog>
 
-      <main class="relative content-container py-6 lg:py-14 sm:py-10">
+      <section class="relative content-container py-6 lg:py-14 sm:py-10">
         <div class="mb-5 flex items-center justify-between meta-label">
           <span>{{ $t('case_studies.showing') }}</span>
           <span>{{ filteredStudies.length.toString().padStart(2, '0') }}</span>
@@ -221,9 +247,9 @@ useSeoMeta({
               v-for="(study, index) in filteredStudies"
               :key="study.translationKey"
               layout
-              class="project-card group relative min-h-74 overflow-hidden border rounded-[1.5rem] backdrop-blur-xl transition duration-200 focus-within:z-10 hover:z-10"
+              class="project-card group relative min-h-74 overflow-hidden border rounded-[1.5rem] backdrop-blur-xl transition duration-200 focus-within:z-raised hover:z-raised"
               :class="gridClass(index)"
-              :style="cardStyle(study.project, study.projectType)"
+              :style="cardStyle(study.project)"
               :initial="{ opacity: 0, y: 24, scale: 0.98 }"
               :animate="{ opacity: 1, y: 0, scale: 1 }"
               :transition="{ delay: Math.min(index * 0.035, 0.2), scale: { delay: 0, duration: 0.16 }, layout: { duration: 0.35 } }"
@@ -257,7 +283,7 @@ useSeoMeta({
                   >
                     {{ study.title }}
                   </h2>
-                  <p class="mt-5 max-w-2xl text-sm text-body leading-relaxed sm:text-base-color">
+                  <p class="mt-5 max-w-2xl text-sm text-body leading-relaxed sm:color-base">
                     {{ study.description }}
                   </p>
                 </div>
@@ -278,7 +304,7 @@ useSeoMeta({
             </motion.article>
           </div>
         </LayoutGroup>
-      </main>
+      </section>
     </div>
   </MotionConfig>
 </template>

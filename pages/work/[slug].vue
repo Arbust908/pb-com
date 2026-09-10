@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { MotionConfig, motion, useDomRef, useScroll, useSpring } from 'motion-v'
-import { MOTION_SPRINT_OPTIONS } from '~/types'
+import { motion, MotionConfig, useDomRef, useScroll, useSpring } from 'motion-v'
+import { usePageSeo } from '~/composables/usePageSeo'
+import { MOTION_SPRINT_OPTIONS } from '~/constants'
+import { createArticleGraph } from '~/utils/structuredData'
 
 const route = useRoute()
 const { locale, t } = useI18n()
@@ -45,18 +47,39 @@ async function switchLanguage(language: 'en' | 'es') {
   await navigateTo(switchLocalePath(language))
 }
 
-useSeoMeta({
+usePageSeo({
   title: () => `${study.value?.title ?? t('case_studies.title')} :: Pancho Blanco`,
   description: () => study.value?.description,
+  type: 'article',
+  structuredData: (context) => {
+    const currentStudy = study.value
+    if (!currentStudy)
+      return null
+
+    const areas = currentStudy.areas?.map(area => t(`case_studies.areas.${area}`)) ?? []
+    return createArticleGraph({
+      url: context.canonicalUrl,
+      name: currentStudy.title,
+      description: currentStudy.description,
+      publishedAt: currentStudy.publishedAt,
+      section: areas,
+      keywords: [...new Set([...currentStudy.technologies, ...currentStudy.skills, ...areas])],
+      breadcrumbs: [
+        { name: t('home'), url: context.localeUrl(context.locale) },
+        { name: t('case_studies.title'), url: context.absoluteUrl(`${context.locale === 'es' ? '/es' : ''}/work`) },
+        { name: currentStudy.title, url: context.canonicalUrl },
+      ],
+    })
+  },
 })
 </script>
 
 <template>
   <MotionConfig reduced-motion="user" :transition="MOTION_SPRINT_OPTIONS">
-    <article v-if="study" ref="articleRef" class="relative w-full overflow-clip base-bg text-base-color layout-grid-full">
+    <article v-if="study" ref="articleRef" class="relative w-full overflow-clip base-bg color-base layout-grid-full">
       <motion.div
         aria-hidden="true"
-        class="fixed inset-x-0 top-0 z-60 h-1 origin-left bg-rose-400"
+        class="fixed inset-x-0 top-0 z-progress h-1 origin-left bg-rose-400"
         :style="{ scaleX: readingProgress }"
       />
 
@@ -64,7 +87,7 @@ useSeoMeta({
       <div aria-hidden="true" class="pointer-events-none absolute right-48 top-16 size-72 rounded-full ambient-primary filter-blur-3xl" />
 
       <motion.nav
-        class="relative z-20 content-container flex items-center justify-between gap-3 py-4 lg:py-6"
+        class="relative z-main content-container flex items-center justify-between gap-3 py-4 lg:py-6"
         :initial="{ opacity: 0, y: -12 }"
         :animate="{ opacity: 1, y: 0 }"
       >
@@ -91,7 +114,7 @@ useSeoMeta({
               @click="switchLanguage(language)"
             >
               <motion.span v-if="locale === language" layout-id="article-language" class="absolute inset-0 rounded-full bg-rose-400" />
-              <span class="relative z-1">{{ language }}</span>
+              <span class="relative z-above">{{ language }}</span>
             </button>
           </div>
         </div>
@@ -121,7 +144,7 @@ useSeoMeta({
               <span class="text-muted">{{ $t(`case_studies.${study.projectType}`) }}</span>
               <template v-if="study.publishedAt">
                 <span class="text-subtle">/</span>
-                <time class="text-muted">{{ new Date(study.publishedAt).toLocaleDateString(locale, { year: 'numeric', month: 'short' }) }}</time>
+                <time class="text-muted">{{ formatDate(study.publishedAt, locale, { year: 'numeric', month: 'short' }) }}</time>
               </template>
             </motion.p>
 
@@ -155,7 +178,7 @@ useSeoMeta({
               <dt class="meta-label">
                 {{ $t('case_studies.role') }}
               </dt>
-              <dd class="mt-2 text-sm text-body leading-snug sm:text-base-color">
+              <dd class="mt-2 text-sm text-body leading-snug sm:color-base">
                 {{ study.role }}
               </dd>
             </div>
@@ -163,7 +186,7 @@ useSeoMeta({
               <dt class="meta-label">
                 {{ $t('case_studies.period') }}
               </dt>
-              <dd class="mt-2 text-sm text-body sm:text-base-color">
+              <dd class="mt-2 text-sm text-body sm:color-base">
                 {{ study.period }}
               </dd>
             </div>
@@ -171,7 +194,7 @@ useSeoMeta({
         </div>
       </header>
 
-      <nav v-if="tocLinks.length" class="sticky top-0 z-30 border-y border-base surface-strong-bg backdrop-blur-xl lg:hidden">
+      <nav v-if="tocLinks.length" class="sticky top-0 z-sticky border-y border-base surface-strong-bg backdrop-blur-xl lg:hidden">
         <ol class="flex gap-6 overflow-x-auto px-4 py-4 no-scrollbar sm:px-6">
           <li v-for="(link, index) in tocLinks" :key="link.id" class="shrink-0">
             <a :href="`#${link.id}`" class="flex items-center gap-2 text-xs text-muted font-mono hover:text-primary">
@@ -226,9 +249,6 @@ useSeoMeta({
                 <li v-for="technology in study.technologies" :key="technology" class="rounded-full bg-rose-400 px-3 py-1.5 text-[0.65rem] text-slate-950 font-mono">
                   {{ technology }}
                 </li>
-                <li v-if="!study.technologies?.length" class="text-sm text-subtle">
-                  —
-                </li>
               </ul>
             </div>
             <div>
@@ -269,7 +289,7 @@ useSeoMeta({
 }
 
 .case-study-content :deep(h2) {
-  @apply text-base-color;
+  @apply color-base;
   font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 500;
   letter-spacing: -0.035em;

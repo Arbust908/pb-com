@@ -72,10 +72,10 @@ The current parser intentionally stays small, but it is not a standards-complete
 
 Measured against the same locally built homepage on 21 August 2026:
 
-| Representation | Response body | Content carried |
-|---|---:|---|
-| HTML | 34,401 bytes | Visual document, styles, application state, and CV content |
-| Markdown | 1,732 bytes | 222 words covering the profile, two recent roles, five skill groups, and two languages |
+| Representation | Response body | Content carried                                                                        |
+| -------------- | ------------: | -------------------------------------------------------------------------------------- |
+| HTML           |  34,401 bytes | Visual document, styles, application state, and CV content                             |
+| Markdown       |   1,732 bytes | 222 words covering the profile, two recent roles, five skill groups, and two languages |
 
 That is a 95.0% smaller response body for the focused representation. The comparison is a local payload measurement, not a claim about latency, model accuracy, or production bandwidth savings.
 

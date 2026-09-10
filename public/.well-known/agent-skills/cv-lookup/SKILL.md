@@ -19,10 +19,11 @@ The full API catalog is at `https://panchoblanco.dev/.well-known/api-catalog`.
 
 ## Markdown view
 
-The human pages also support `Accept: text/markdown` for a markdown-formatted version:
+Use the explicit Markdown endpoint for a concise site and CV summary:
 
-- `https://panchoblanco.dev/` — landing summary.
-- `https://panchoblanco.dev/cv` — full CV (HTML only at this time).
+- `https://panchoblanco.dev/index.md`
+
+The root URL and CV page return HTML.
 
 ## Notes
 

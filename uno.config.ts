@@ -8,16 +8,12 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
-// https://twitter.com/src_rip/status/1745407959562154230
-// https://twitter.com/souporserious/status/1746311121949356469
-
 export default defineConfig({
   shortcuts: [
     ['base-bg', 'bg-slate-100 dark:bg-slate-900'],
-    ['depth-bg', 'bg-slate-200 dark:bg-slate-950'],
     ['surface-bg', 'bg-slate-50/70 dark:bg-slate-800/40'],
     ['surface-strong-bg', 'bg-slate-50/90 dark:bg-slate-800/75'],
-    ['text-base-color', 'text-slate-950 dark:text-slate-50'],
+    ['color-base', 'text-slate-950 dark:text-slate-50'],
     ['text-body', 'text-slate-700 dark:text-slate-300'],
     ['text-muted', 'text-slate-500 dark:text-slate-400'],
     ['text-subtle', 'text-slate-400 dark:text-slate-500'],
@@ -28,7 +24,6 @@ export default defineConfig({
     ['border-subtle', 'border-slate-300/45 dark:border-slate-700/45'],
     ['border-primary', 'border-rose-500/60 dark:border-rose-400/50'],
     ['surface-frosted', 'border border-slate-300/70 bg-slate-50/70 backdrop-blur-xl dark:border-slate-700/70 dark:bg-slate-800/40'],
-    ['surface-recessed', 'border border-slate-300/60 bg-slate-200/80 dark:border-slate-700/60 dark:bg-slate-950/70'],
     ['content-container', 'mx-auto w-full max-w-360 px-4 sm:px-6 lg:px-10'],
     ['display-heading', '[word-spacing:0.04em] font-extrabold leading-[0.92] tracking-[-0.035em] font-mono'],
     ['meta-label', 'text-[0.65rem] text-slate-500 tracking-[0.16em] font-mono uppercase dark:text-slate-400'],
@@ -40,9 +35,16 @@ export default defineConfig({
     ['accent-line', 'from-rose-400 via-purple-400 to-rose-400 bg-gradient-to-r bg-[length:200%_100%]'],
     ['ambient-primary', 'bg-rose-400/15 dark:bg-rose-400/10'],
     ['ambient-secondary', 'bg-purple-400/15 dark:bg-purple-400/10'],
-    ['btn', 'control-primary cursor-pointer disabled:cursor-default disabled:opacity-50'],
-    ['icon-btn', 'inline-block cursor-pointer select-none text-muted transition duration-200 ease-in-out hover:text-primary'],
-    ['flex-middle', 'flex items-center justify-center'],
+    ['z-under', 'z-0'],
+    ['z-above', 'z-1'],
+    ['z-content', 'z-10'],
+    ['z-raised', 'z-10'],
+    ['z-main', 'z-20'],
+    ['z-sticky', 'z-30'],
+    ['z-nav', 'z-40'],
+    ['z-progress', 'z-60'],
+    ['z-skip-link', 'z-60'],
+    ['z-dialog', 'z-100'],
   ],
   rules: [
     [
@@ -77,8 +79,6 @@ export default defineConfig({
     [
       /^layout-grid-(\w+)$/,
       ([full, name]: any) => {
-        // Second param is ctx = { rawSelector, currentSelector, variantHandlers, theme }: any
-        // we could use either full, rawSelector or currentSelector
         const selector = `.layout-grid .${full}`
 
         return `
@@ -101,17 +101,7 @@ export default defineConfig({
         }`
       },
     ],
-    // https://twitter.com/ChromiumDev/status/1734742817812152796
-    /*
-    ['break-normal', { 'word-break': 'normal' }],
-    ['break-phrase', { 'word-break': 'auto-phrase' }],
-    ['text-balance', { 'text-wrap': 'balance;' }],
-    ['text-pretty', { 'text-wrap': 'pretty;' }],
-    ['text-stable', { 'text-wrap': 'stable;' }],
-    ['grid-cols-subgrid', { 'grid-template-columns': 'subgrid;' }],
-    */
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    [/^bg-checked$/, ([,], { rawSelector, currentSelector, variantHandlers, theme }) => {
+    [/^bg-checked$/, ([,], { currentSelector, theme }) => {
       const selector = `.${currentSelector}`
       const mainColor = theme.colors.slate[200]
       const darkColor = theme.colors.slate[700]
@@ -140,17 +130,6 @@ export default defineConfig({
          }
       `
     }],
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter
-    /*
-    ['scrollbar-gutter', { 'scrollbar-gutter': 'auto' }],
-    ['scrollbar-gutter-stable', { 'scrollbar-gutter': 'stable' }],
-    ['scrollbar-gutter-stable-both', { 'scrollbar-gutter': 'stable both-edges' }],
-    ['scrollbar-gutter-unset', { 'scrollbar-gutter': 'unset' }],
-    ['shadow-flat', { 'box-shadow': '0 0 0 rgba(0,0,0,0)' }],
-    ['shadow-harsh', { 'box-shadow': '4px 4px 0 rgba(0,0,0,1)' }],
-    ['shadow-inner-harsh', { 'box-shadow': 'inset 4px 4px 0 rgba(0,0,0,1)' }],
-    ['interpolate-size', { 'interpolate-size': 'allow-keywords' }],
-    */
   ],
   presets: [
     presetWind3(),

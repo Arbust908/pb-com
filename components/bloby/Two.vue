@@ -1,14 +1,21 @@
+<script setup lang="ts">
+import { SEMANTIC_COLORS } from '~/constants'
+
+const gradientColors = `${SEMANTIC_COLORS.secondary}; ${SEMANTIC_COLORS.accent}; ${SEMANTIC_COLORS.secondary}`
+const reverseGradientColors = `${SEMANTIC_COLORS.accent}; ${SEMANTIC_COLORS.secondary}; ${SEMANTIC_COLORS.accent}`
+</script>
+
 <template>
-  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="blob-two-gradient" x1="50%" y1="0%" x2="50%" y2="100%">
 
-        <stop offset="0%" stop-color="#c084fc">
-          <animate attributeName="stop-color" values="#c084fc; #fb7185; #c084fc" dur="7s" repeatCount="indefinite" />
+        <stop offset="0%" :stop-color="SEMANTIC_COLORS.secondary">
+          <animate attributeName="stop-color" :values="gradientColors" dur="7s" repeatCount="indefinite" />
         </stop>
 
-        <stop offset="100%" stop-color="#fb7185">
-          <animate attributeName="stop-color" values="#fb7185; #c084fc; #fb7185" dur="7s" repeatCount="indefinite" />
+        <stop offset="100%" :stop-color="SEMANTIC_COLORS.accent">
+          <animate attributeName="stop-color" :values="reverseGradientColors" dur="7s" repeatCount="indefinite" />
         </stop>
 
       </linearGradient>

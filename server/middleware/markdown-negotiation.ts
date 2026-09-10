@@ -1,23 +1,8 @@
-import { defineEventHandler, getHeader, getRequestURL, setHeader } from 'h3'
+import type { ApiResponse, CvExperience, CvLanguage, CvSkillsData } from '~/types'
+import { defineEventHandler, getRequestURL, setHeader } from 'h3'
+import { SITE_URL } from '../../constants'
 
-interface CvTranslations { [locale: string]: { [field: string]: string } }
-interface CvExperienceTranslations { [locale: string]: { rol: string, description: string, list: string[] } }
-interface CvExperience { id: number, company: string, startDate: string, endDate: string | null, translations: CvExperienceTranslations }
-interface CvSkill { slug: string, name: string }
-interface CvSkillGroup { skillSlugs: string[], translations: CvTranslations }
-interface CvLanguage { id: number, translations: CvTranslations }
-interface CvListResponse<T> { success: boolean, data: T[] }
-interface CvSkillsResponse { success: boolean, data: { skills: CvSkill[], groups: CvSkillGroup[] } }
-
-const SITE_URL = 'https://panchoblanco.dev'
-
-function acceptsMarkdown(accept: string): boolean {
-  // Return markdown only when the client explicitly asks for it. Browsers send
-  // `text/html,...` and never `text/markdown`, so we won't downgrade them.
-  return accept.toLowerCase().includes('text/markdown')
-}
-
-function tr(item: { translations: CvTranslations }, field: string, locale = 'en'): string {
+function tr(item: { translations: Record<string, Record<string, string>> }, field: string, locale = 'en'): string {
   return item.translations?.[locale]?.[field] ?? item.translations?.en?.[field] ?? ''
 }
 
@@ -33,9 +18,9 @@ async function safeFetch<T>(url: string): Promise<T | null> {
 
 async function renderHomepageMarkdown(): Promise<string> {
   const [experiences, skills, languages] = await Promise.all([
-    safeFetch<CvListResponse<CvExperience>>('/api/cv/experiences'),
-    safeFetch<CvSkillsResponse>('/api/cv/skills'),
-    safeFetch<CvListResponse<CvLanguage>>('/api/cv/languages'),
+    safeFetch<ApiResponse<CvExperience[]>>('/api/cv/experiences'),
+    safeFetch<ApiResponse<CvSkillsData>>('/api/cv/skills'),
+    safeFetch<ApiResponse<CvLanguage[]>>('/api/cv/languages'),
   ])
 
   const lines: string[] = []
@@ -110,31 +95,21 @@ async function renderHomepageMarkdown(): Promise<string> {
   return lines.join('\n')
 }
 
-const handlers: Record<string, () => Promise<string>> = {
-  '/': renderHomepageMarkdown,
-}
-
 export default defineEventHandler(async (event) => {
   if (event.method !== 'GET' && event.method !== 'HEAD')
-    return
-
-  const accept = getHeader(event, 'accept') ?? ''
-  if (!acceptsMarkdown(accept))
     return
 
   const path = getRequestURL(event).pathname
   const normalized = path !== '/' && path.endsWith('/') ? path.slice(0, -1) : path
 
-  const handler = handlers[normalized]
-  if (!handler)
+  if (normalized !== '/index.md')
     return
 
   setHeader(event, 'Content-Type', 'text/markdown; charset=utf-8')
-  setHeader(event, 'Vary', 'Accept')
   setHeader(event, 'Cache-Control', 'public, max-age=300, s-maxage=300')
 
   if (event.method === 'HEAD')
     return ''
 
-  return await handler()
+  return await renderHomepageMarkdown()
 })
