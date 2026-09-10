@@ -2,8 +2,8 @@
 slug: file-based-case-studies
 translationKey: file-based-case-studies
 locale: es
-title: Diseñando un sistema de casos de estudio basado en archivos
-description: Simplificar la publicación del portfolio usando Markdown, metadatos estructurados y un fallback bilingüe predecible.
+title: Casos de estudio publicados desde archivos
+description: Cómo descarté una base de datos propuesta y publiqué el portfolio con Markdown, metadatos validados y un fallback bilingüe explícito.
 project: Portfolio
 organization: Personal
 projectType: personal
@@ -31,7 +31,7 @@ draft: false
 
 ## Contexto
 
-Mi portfolio necesitaba explicar algo más que las pantallas terminadas. Un caso de estudio útil tiene que conservar cómo se entendió un problema, qué restricciones guiaron el trabajo, por qué se justificó una prueba de concepto y qué cambió cuando la primera solución se enfrentó con la realidad.
+Mi portfolio necesitaba explicar algo más que las pantallas terminadas. Un caso de estudio útil cuenta cómo entendí el problema, qué restricciones guiaron el trabajo, por qué hice una prueba de concepto y qué cambié cuando la primera solución chocó con la realidad.
 
 La primera propuesta usaba una base de datos con bloques de contenido fijos y varios niveles de acceso. Ese diseño podía sostener un panel de administración y enlaces privados, pero ninguna de esas cosas era necesaria para la primera versión.
 
@@ -39,13 +39,13 @@ La primera propuesta usaba una base de datos con bloques de contenido fijos y va
 
 El sistema de publicación necesitaba suficiente estructura para que los proyectos fueran filtrables, sin obligar a que todas las historias siguieran la misma plantilla. También tenía que funcionar en inglés y español, permitiendo publicar un caso antes de que ambas traducciones estuvieran listas.
 
-Estos requisitos compiten entre sí: los esquemas rígidos facilitan el filtrado, mientras que una narrativa extensa necesita flexibilidad.
+Los esquemas rígidos facilitan el filtrado, pero una historia extensa necesita flexibilidad.
 
 ## Opciones consideradas
 
 ### Registros de base de datos con bloques fijos
 
-Hacían explícitos los metadatos y las reglas de acceso, pero agregaban hosting, migraciones, una interfaz de edición y trabajo operativo antes de que existiera el primer artículo.
+Esta opción hacía explícitos los metadatos y las reglas de acceso, pero exigía hosting, migraciones, una interfaz de edición y trabajo operativo antes de publicar el primer artículo.
 
 ### Markdown sin estructura
 
@@ -53,11 +53,11 @@ Markdown hacía que escribir fuera simple, pero no ofrecía campos confiables pa
 
 ### Markdown con frontmatter validado
 
-Nuxt Content ofreció el punto medio. Markdown contiene la narrativa y un esquema pequeño de frontmatter contiene la información que la aplicación necesita consultar.
+Nuxt Content resolvió ambas necesidades. Markdown contiene el relato y un esquema pequeño de frontmatter guarda la información que consulta la aplicación.
 
 ## Decisión
 
-Cada idioma se guarda como un documento Markdown separado. Las traducciones comparten una clave estable y el mismo slug público. Las tecnologías y las habilidades permanecen separadas: unas describen las herramientas utilizadas y las otras, las capacidades que demuestra el trabajo.
+Cada idioma se guarda como un documento Markdown separado. Las traducciones comparten una clave estable y el mismo slug público. Las tecnologías y las habilidades permanecen separadas: unas enumeran las herramientas utilizadas y las otras describen las capacidades aplicadas en el trabajo.
 
 > Preferir el sistema de publicación más pequeño que proteja la calidad de la historia.
 
@@ -65,8 +65,8 @@ El inglés es el idioma de respaldo. Cuando falta el contenido en español, la i
 
 ## Resultado
 
-Agregar un caso de estudio ahora significa agregar un archivo Markdown. Agregar su traducción significa sumar otro archivo con la misma identidad. El filtrado y la selección de idioma funcionan desde metadatos validados, sin una base de datos ni una superficie de administración.
+Publicar un caso de estudio ahora requiere un archivo Markdown. Su traducción es otro archivo con la misma identidad. El filtrado y la selección de idioma funcionan con metadatos validados, sin una base de datos ni un panel de administración.
 
 ## Qué viene después
 
-El acceso privado sigue siendo una posible segunda versión, no un requisito oculto dentro de la primera. Si aparecen casos sensibles, el modelo de acceso podrá diseñarse a partir de destinatarios, vencimientos y restricciones de despliegue reales.
+El acceso privado puede quedar para una segunda versión. Si aparecen casos sensibles, diseñaré el acceso según sus destinatarios, vencimientos y restricciones reales de despliegue.

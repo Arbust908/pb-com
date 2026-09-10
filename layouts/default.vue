@@ -1,12 +1,16 @@
 <template>
   <div
-    class="mobile-nav-clearance grid grid-cols-[100%] grid-rows-[auto_1fr_auto] min-h-full base-bg text-base"
+    class="mobile-nav-clearance grid grid-cols-[100%] grid-rows-[auto_1fr_auto] min-h-full base-bg color-base"
   >
-    <GeneralNavBar class="relative z-40" />
-    <main class="relative z-20 layout-grid" style="align-content: flex-start;">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-skip-link focus:rounded-full focus:bg-rose-400 focus:px-4 focus:py-2 focus:text-xs focus:text-slate-950 focus:font-mono"
+    >{{ $t('skip_to_content') }}</a>
+    <GeneralNavBar class="relative z-nav" />
+    <main id="main" class="relative z-main content-start layout-grid">
       <slot />
     </main>
-    <GeneralFooter class="relative z-40" />
+    <GeneralFooter class="relative z-nav" />
     <GeneralMobileBottomNav />
   </div>
 </template>

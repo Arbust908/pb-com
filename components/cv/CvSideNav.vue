@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="mb-6 flex flex-row items-center gap-2 lg:justify-end"
+    class="flex flex-row items-center gap-2 lg:justify-end"
   >
     <a
       href="#exp"

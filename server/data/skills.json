@@ -1,65 +1,127 @@
 {
   "success": true,
-  "data": [
-    {
-      "id": 1,
-      "slug": "webcore",
-      "skillList": "TypeScript, JavaScript, HTML, CSS, PHP, REST, SQL, Git, Sass, SCSS",
-      "sortOrder": 0,
-      "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z",
-      "translations": {
-        "en": { "title": "Web Core" },
-        "es": { "title": "Fundamentos Web" }
+  "data": {
+    "skills": [
+      { "id": 1, "slug": "typescript", "name": "TypeScript" },
+      { "id": 2, "slug": "javascript", "name": "JavaScript" },
+      { "id": 3, "slug": "html", "name": "HTML" },
+      { "id": 4, "slug": "css", "name": "CSS" },
+      { "id": 5, "slug": "php", "name": "PHP" },
+      { "id": 6, "slug": "rest", "name": "REST" },
+      { "id": 7, "slug": "sql", "name": "SQL" },
+      { "id": 8, "slug": "git", "name": "Git" },
+      { "id": 9, "slug": "sass", "name": "Sass" },
+      { "id": 10, "slug": "scss", "name": "SCSS" },
+      { "id": 11, "slug": "react", "name": "React" },
+      { "id": 12, "slug": "nextjs", "name": "Next.js" },
+      { "id": 13, "slug": "vue", "name": "Vue" },
+      { "id": 14, "slug": "nuxt", "name": "Nuxt 4" },
+      { "id": 15, "slug": "react-native", "name": "React Native (Expo)" },
+      { "id": 16, "slug": "tanstack-query", "name": "TanStack (React) Query" },
+      { "id": 17, "slug": "pinia", "name": "Pinia" },
+      { "id": 18, "slug": "zustand", "name": "Zustand" },
+      { "id": 19, "slug": "redux", "name": "Redux" },
+      { "id": 20, "slug": "vuex", "name": "Vuex" },
+      { "id": 21, "slug": "tailwind-unocss", "name": "Tailwind/UnoCSS" },
+      { "id": 22, "slug": "nodejs", "name": "Node.js (Express, Handlebars, Nest)" },
+      { "id": 23, "slug": "elysiajs", "name": "ElysiaJS" },
+      { "id": 24, "slug": "prisma", "name": "Prisma ORM" },
+      { "id": 25, "slug": "drizzle", "name": "Drizzle" },
+      { "id": 26, "slug": "laravel", "name": "Laravel" },
+      { "id": 27, "slug": "chrome-extensions", "name": "Chrome Extensions (Manifest V3)" },
+      { "id": 28, "slug": "content-scripts", "name": "Content Scripts" },
+      { "id": 29, "slug": "service-workers", "name": "Service Workers" },
+      { "id": 30, "slug": "chrome-apis", "name": "chrome.storage / runtime / tabs / scripting" },
+      { "id": 31, "slug": "webextensions-api", "name": "WebExtensions API" },
+      { "id": 32, "slug": "cypress", "name": "Cypress" },
+      { "id": 33, "slug": "playwright", "name": "Playwright" },
+      { "id": 34, "slug": "vitest", "name": "Vitest" },
+      { "id": 35, "slug": "jest", "name": "Jest" },
+      { "id": 36, "slug": "storybook", "name": "Storybook" },
+      { "id": 37, "slug": "accessibility", "name": "Accessibility (WCAG AA)" },
+      { "id": 38, "slug": "auditability", "name": "Auditability" },
+      { "id": 39, "slug": "cicd", "name": "CI/CD Pipelines" },
+      { "id": 40, "slug": "vite", "name": "Vite" },
+      { "id": 41, "slug": "gtm", "name": "GTM" },
+      { "id": 42, "slug": "ga", "name": "GA" },
+      { "id": 43, "slug": "posthog", "name": "PostHog" },
+      { "id": 44, "slug": "ai-assisted-code", "name": "AI-assisted Code (Claude Code, Antigravity)" },
+      { "id": 45, "slug": "design-systems", "name": "Design Systems" },
+      { "id": 46, "slug": "agile-scrum", "name": "Agile/Scrum" },
+      { "id": 47, "slug": "seo", "name": "SEO" },
+      { "id": 48, "slug": "rendering", "name": "SSR/SSG/ISR" },
+      { "id": 49, "slug": "i18n", "name": "i18n" },
+      { "id": 50, "slug": "postgresql", "name": "PostgreSQL" },
+      { "id": 51, "slug": "docker", "name": "Docker" },
+      { "id": 52, "slug": "redis", "name": "Redis" }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "slug": "my-stack",
+        "kind": "collection",
+        "skillSlugs": ["typescript", "vue", "nuxt", "nodejs", "tailwind-unocss", "pinia", "vitest", "postgresql", "drizzle", "docker", "redis"],
+        "sortOrder": 0,
+        "translations": {
+          "en": { "title": "My Stack" },
+          "es": { "title": "Mi Stack" }
+        }
+      },
+      {
+        "id": 2,
+        "slug": "webcore",
+        "kind": "category",
+        "skillSlugs": ["typescript", "javascript", "html", "css", "php", "rest", "sql", "git", "sass", "scss"],
+        "sortOrder": 1,
+        "translations": {
+          "en": { "title": "Web Core" },
+          "es": { "title": "Fundamentos Web" }
+        }
+      },
+      {
+        "id": 3,
+        "slug": "frameworks",
+        "kind": "category",
+        "skillSlugs": ["react", "nextjs", "vue", "nuxt", "react-native", "tanstack-query", "pinia", "zustand", "redux", "vuex", "tailwind-unocss", "nodejs", "elysiajs", "prisma", "drizzle", "laravel"],
+        "sortOrder": 2,
+        "translations": {
+          "en": { "title": "Frameworks & Libraries" },
+          "es": { "title": "Frameworks y Librerias" }
+        }
+      },
+      {
+        "id": 4,
+        "slug": "browserapis",
+        "kind": "category",
+        "skillSlugs": ["chrome-extensions", "content-scripts", "service-workers", "chrome-apis", "webextensions-api"],
+        "sortOrder": 3,
+        "translations": {
+          "en": { "title": "Browser APIs" },
+          "es": { "title": "APIs del Navegador" }
+        }
+      },
+      {
+        "id": 5,
+        "slug": "testing",
+        "kind": "category",
+        "skillSlugs": ["cypress", "playwright", "vitest", "jest", "storybook", "accessibility", "auditability"],
+        "sortOrder": 4,
+        "translations": {
+          "en": { "title": "Testing & Quality" },
+          "es": { "title": "Testing y Calidad" }
+        }
+      },
+      {
+        "id": 6,
+        "slug": "tools",
+        "kind": "category",
+        "skillSlugs": ["cicd", "vite", "gtm", "ga", "posthog", "ai-assisted-code", "design-systems", "agile-scrum", "seo", "rendering", "i18n", "docker", "redis"],
+        "sortOrder": 5,
+        "translations": {
+          "en": { "title": "Tools" },
+          "es": { "title": "Herramientas" }
+        }
       }
-    },
-    {
-      "id": 2,
-      "slug": "frameworks",
-      "skillList": "React, Next.js, Vue, Nuxt 4, React Native (Expo), TanStack (React) Query, Pinia, Zustand, Redux, Vuex, Tailwind/UnoCSS, Node.js (Express, Handlebars, Nest), ElysiaJS, Prisma ORM, Drizzle, Laravel",
-      "sortOrder": 1,
-      "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z",
-      "translations": {
-        "en": { "title": "Frameworks & Libraries" },
-        "es": { "title": "Frameworks y Librerias" }
-      }
-    },
-    {
-      "id": 3,
-      "slug": "browserapis",
-      "skillList": "Chrome Extensions (Manifest V3), Content Scripts, Service Workers, chrome.storage / runtime / tabs / scripting, WebExtensions API",
-      "sortOrder": 2,
-      "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z",
-      "translations": {
-        "en": { "title": "Browser APIs" },
-        "es": { "title": "APIs del Navegador" }
-      }
-    },
-    {
-      "id": 4,
-      "slug": "testing",
-      "skillList": "Cypress, Playwright, Vitest, Jest, Storybook, Accessibility (WCAG AA), Auditability",
-      "sortOrder": 3,
-      "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z",
-      "translations": {
-        "en": { "title": "Testing & Quality" },
-        "es": { "title": "Testing y Calidad" }
-      }
-    },
-    {
-      "id": 5,
-      "slug": "tools",
-      "skillList": "CI/CD Pipelines, Vite, GTM, GA, PostHog, AI-assisted  Code (Claude Code, Antigravity), Design Systems, Agile/Scrum, SEO, SSR/SSG/ISR, i18n",
-      "sortOrder": 4,
-      "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z",
-      "translations": {
-        "en": { "title": "Tools" },
-        "es": { "title": "Herramientas" }
-      }
-    }
-  ]
+    ]
+  }
 }

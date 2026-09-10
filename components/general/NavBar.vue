@@ -10,7 +10,7 @@ const localePath = useLocalePath()
   >
     <div class="mx-auto max-w-360 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
       <NuxtLink :to="localePath({ name: 'index' })" class="rounded-full transition hover:text-primary focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset-4">
-        <div class="flex items-center gap-2 text-base font-bold tracking-[-0.02em]">
+        <div class="flex items-center gap-2 color-base font-bold tracking-[-0.02em]">
           <Logo class="h-8 w-8 fill-current" />
           <span>
             Pancho Blanco
@@ -18,10 +18,6 @@ const localePath = useLocalePath()
         </div>
       </NuxtLink>
       <nav class="flex items-center justify-between gap-2">
-        <GeneralLangToggle />
-        <ClientOnly>
-          <DarkCircleToggle />
-        </ClientOnly>
         <NuxtLink
           class="rounded-full px-3 py-2 text-xs font-mono transition hover:text-primary"
           active-class="text-primary"
@@ -36,6 +32,10 @@ const localePath = useLocalePath()
         >
           {{ $t('resume') }}
         </NuxtLink>
+        <GeneralLangToggle />
+        <ClientOnly>
+          <DarkCircleToggle />
+        </ClientOnly>
       </nav>
     </div>
   </header>

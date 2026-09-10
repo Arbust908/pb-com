@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { MotionConfig, motion, useDomRef, useScroll, useSpring } from 'motion-v'
+import { motion, MotionConfig, useDomRef, useScroll, useSpring } from 'motion-v'
+import { usePageSeo } from '~/composables/usePageSeo'
+import { MOTION_SPRINT_OPTIONS } from '~/constants'
+import { createArticleGraph } from '~/utils/structuredData'
 
 const route = useRoute()
 const { locale, t } = useI18n()
@@ -22,9 +25,8 @@ const { data: translations } = await useAsyncData(
   { watch: [slug] },
 )
 
-if (!translations.value?.length) {
-  throw createError({ statusCode: 404, statusMessage: 'Case study not found' })
-}
+if (!translations.value?.length)
+  throw createError({ statusCode: 404, statusMessage: t('case_studies.not_found') })
 
 const availableLocales = computed(() => translations.value?.map(document => document.locale) ?? [])
 const study = computed(() => translations.value?.find(document => document.locale === locale.value)
@@ -39,42 +41,59 @@ const { scrollYProgress } = useScroll({
   offset: ['start start', 'end end'],
   trackContentSize: true,
 })
-const readingProgress = useSpring(scrollYProgress, {
-  stiffness: 160,
-  damping: 30,
-  restDelta: 0.001,
-})
+const readingProgress = useSpring(scrollYProgress, MOTION_SPRINT_OPTIONS)
 
 async function switchLanguage(language: 'en' | 'es') {
   await navigateTo(switchLocalePath(language))
 }
 
-useSeoMeta({
+usePageSeo({
   title: () => `${study.value?.title ?? t('case_studies.title')} :: Pancho Blanco`,
   description: () => study.value?.description,
+  type: 'article',
+  structuredData: (context) => {
+    const currentStudy = study.value
+    if (!currentStudy)
+      return null
+
+    const areas = currentStudy.areas?.map(area => t(`case_studies.areas.${area}`)) ?? []
+    return createArticleGraph({
+      url: context.canonicalUrl,
+      name: currentStudy.title,
+      description: currentStudy.description,
+      publishedAt: currentStudy.publishedAt,
+      section: areas,
+      keywords: [...new Set([...currentStudy.technologies, ...currentStudy.skills, ...areas])],
+      breadcrumbs: [
+        { name: t('home'), url: context.localeUrl(context.locale) },
+        { name: t('case_studies.title'), url: context.absoluteUrl(`${context.locale === 'es' ? '/es' : ''}/work`) },
+        { name: currentStudy.title, url: context.canonicalUrl },
+      ],
+    })
+  },
 })
 </script>
 
 <template>
-  <MotionConfig reduced-motion="user" :transition="{ type: 'spring', stiffness: 260, damping: 28 }">
-    <article v-if="study" ref="articleRef" class="base-bg relative w-full overflow-clip text-base layout-grid-full">
+  <MotionConfig reduced-motion="user" :transition="MOTION_SPRINT_OPTIONS">
+    <article v-if="study" ref="articleRef" class="relative w-full overflow-clip base-bg color-base layout-grid-full">
       <motion.div
         aria-hidden="true"
-        class="fixed inset-x-0 top-0 z-60 h-1 origin-left bg-rose-400"
+        class="fixed inset-x-0 top-0 z-progress h-1 origin-left bg-rose-400"
         :style="{ scaleX: readingProgress }"
       />
 
-      <div aria-hidden="true" class="ambient-secondary pointer-events-none absolute right--20 top--24 size-120 rounded-full filter-blur-3xl" />
-      <div aria-hidden="true" class="ambient-primary pointer-events-none absolute right-48 top-16 size-72 rounded-full filter-blur-3xl" />
+      <div aria-hidden="true" class="pointer-events-none absolute right--20 top--24 size-120 rounded-full ambient-secondary filter-blur-3xl" />
+      <div aria-hidden="true" class="pointer-events-none absolute right-48 top-16 size-72 rounded-full ambient-primary filter-blur-3xl" />
 
       <motion.nav
-        class="content-container relative z-20 flex items-center justify-between gap-3 py-4 lg:py-6"
+        class="relative z-main content-container flex items-center justify-between gap-3 py-4 lg:py-6"
         :initial="{ opacity: 0, y: -12 }"
         :animate="{ opacity: 1, y: 0 }"
       >
         <NuxtLink
           :to="localePath({ name: 'work' })"
-          class="pill-control surface-bg text-body hover:border-primary hover:text-primary h-11 gap-2 backdrop-blur-md"
+          class="h-11 pill-control gap-2 surface-bg text-body backdrop-blur-md hover:border-primary hover:text-primary"
         >
           <span aria-hidden="true">←</span>
           <span class="xs:inline hidden">{{ $t('case_studies.back') }}</span>
@@ -85,7 +104,7 @@ useSeoMeta({
           <span v-if="study.draft" class="border border-amber-500/30 rounded-full bg-amber-400/10 px-3 py-2 text-[0.6rem] text-amber-800 tracking-wide font-mono uppercase dark:text-amber-200">
             {{ $t('case_studies.draft') }}
           </span>
-          <div v-if="hasBothLanguages" class="surface-bg flex rounded-full p-1" :aria-label="$t('case_studies.language')">
+          <div v-if="hasBothLanguages" class="flex rounded-full surface-bg p-1" :aria-label="$t('case_studies.language')">
             <button
               v-for="language in ['en', 'es'] as const"
               :key="language"
@@ -95,13 +114,13 @@ useSeoMeta({
               @click="switchLanguage(language)"
             >
               <motion.span v-if="locale === language" layout-id="article-language" class="absolute inset-0 rounded-full bg-rose-400" />
-              <span class="relative z-1">{{ language }}</span>
+              <span class="relative z-above">{{ language }}</span>
             </button>
           </div>
         </div>
       </motion.nav>
 
-      <header class="content-container relative pb-12 pt-8 lg:pb-24 sm:pb-16 sm:pt-12">
+      <header class="relative content-container pb-12 pt-8 lg:pb-24 sm:pb-16 sm:pt-12">
         <motion.div
           v-if="isFallback"
           class="mb-8 flex items-start gap-3 border border-amber-500/30 rounded-2xl bg-amber-400/10 p-4 text-sm text-amber-800 dark:text-amber-100"
@@ -115,7 +134,7 @@ useSeoMeta({
         <div class="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-8">
           <div class="lg:col-span-8 xl:col-span-9">
             <motion.p
-              class="meta-label-primary mb-6 flex flex-wrap items-center gap-2"
+              class="mb-6 flex flex-wrap items-center gap-2 meta-label-primary"
               :initial="{ opacity: 0, y: 10 }"
               :animate="{ opacity: 1, y: 0 }"
               :transition="{ delay: 0.04 }"
@@ -125,12 +144,12 @@ useSeoMeta({
               <span class="text-muted">{{ $t(`case_studies.${study.projectType}`) }}</span>
               <template v-if="study.publishedAt">
                 <span class="text-subtle">/</span>
-                <time class="text-muted">{{ new Date(study.publishedAt).toLocaleDateString(locale, { year: 'numeric', month: 'short' }) }}</time>
+                <time class="text-muted">{{ formatDate(study.publishedAt, locale, { year: 'numeric', month: 'short' }) }}</time>
               </template>
             </motion.p>
 
             <motion.h1
-              class="display-heading max-w-6xl text-[clamp(3rem,10vw,7.5rem)] leading-[0.9] text-balance lg:leading-[0.84]"
+              class="display-heading max-w-6xl text-balance text-[clamp(3rem,10vw,7.5rem)] leading-[0.9] lg:leading-[0.84]"
               :style="{ viewTransitionName: `study-title-${study.slug}` }"
               :initial="{ opacity: 0 }"
               :animate="{ opacity: 1 }"
@@ -140,7 +159,7 @@ useSeoMeta({
             </motion.h1>
 
             <motion.p
-              class="text-body mt-8 max-w-3xl text-lg leading-relaxed lg:text-2xl sm:text-xl"
+              class="mt-8 max-w-3xl text-lg text-body leading-relaxed lg:text-2xl sm:text-xl"
               :initial="{ opacity: 0, y: 18 }"
               :animate="{ opacity: 1, y: 0 }"
               :transition="{ delay: 0.14 }"
@@ -150,16 +169,16 @@ useSeoMeta({
           </div>
 
           <motion.dl
-            class="surface-frosted grid grid-cols-2 overflow-hidden rounded-2xl lg:col-span-4 xl:col-span-3 lg:grid-cols-1"
+            class="grid grid-cols-2 overflow-hidden surface-frosted rounded-2xl lg:col-span-4 xl:col-span-3 lg:grid-cols-1"
             :initial="{ opacity: 0, y: 20 }"
             :animate="{ opacity: 1, y: 0 }"
             :transition="{ delay: 0.18 }"
           >
-            <div class="border-base border-r p-4 lg:border-b lg:border-r-0 lg:p-5">
+            <div class="border-r border-base p-4 lg:border-b lg:border-r-0 lg:p-5">
               <dt class="meta-label">
                 {{ $t('case_studies.role') }}
               </dt>
-              <dd class="text-body mt-2 text-sm leading-snug sm:text-base">
+              <dd class="mt-2 text-sm text-body leading-snug sm:color-base">
                 {{ study.role }}
               </dd>
             </div>
@@ -167,7 +186,7 @@ useSeoMeta({
               <dt class="meta-label">
                 {{ $t('case_studies.period') }}
               </dt>
-              <dd class="text-body mt-2 text-sm sm:text-base">
+              <dd class="mt-2 text-sm text-body sm:color-base">
                 {{ study.period }}
               </dd>
             </div>
@@ -175,10 +194,10 @@ useSeoMeta({
         </div>
       </header>
 
-      <nav v-if="tocLinks.length" class="border-base surface-strong-bg sticky top-0 z-30 border-y backdrop-blur-xl lg:hidden">
+      <nav v-if="tocLinks.length" class="sticky top-0 z-sticky border-y border-base surface-strong-bg backdrop-blur-xl lg:hidden">
         <ol class="flex gap-6 overflow-x-auto px-4 py-4 no-scrollbar sm:px-6">
           <li v-for="(link, index) in tocLinks" :key="link.id" class="shrink-0">
-            <a :href="`#${link.id}`" class="text-muted hover:text-primary flex items-center gap-2 text-xs font-mono">
+            <a :href="`#${link.id}`" class="flex items-center gap-2 text-xs text-muted font-mono hover:text-primary">
               <span class="text-primary opacity-60">{{ (index + 1).toString().padStart(2, '0') }}</span>
               {{ link.text }}
             </a>
@@ -186,7 +205,7 @@ useSeoMeta({
         </ol>
       </nav>
 
-      <div class="content-container border-base relative grid gap-12 border-t py-12 lg:grid-cols-[13rem_minmax(0,46rem)] xl:grid-cols-[15rem_minmax(0,48rem)_10rem] lg:justify-center lg:gap-16 lg:py-24 sm:py-16">
+      <div class="relative grid content-container gap-12 border-t border-base py-12 lg:grid-cols-[13rem_minmax(0,46rem)] xl:grid-cols-[15rem_minmax(0,48rem)_10rem] lg:justify-center lg:gap-16 lg:py-24 sm:py-16">
         <motion.aside
           v-if="tocLinks.length"
           class="hidden lg:block"
@@ -195,12 +214,12 @@ useSeoMeta({
           :in-view-options="{ once: true, margin: '-10%' }"
         >
           <div class="sticky top-8">
-            <p class="meta-label mb-5">
+            <p class="mb-5 meta-label">
               {{ $t('case_studies.contents') }}
             </p>
-            <ol class="border-base border-l pl-5 space-y-4">
+            <ol class="border-l border-base pl-5 space-y-4">
               <li v-for="(link, index) in tocLinks" :key="link.id">
-                <a :href="`#${link.id}`" class="group text-muted hover:text-primary flex gap-3 text-xs leading-snug font-mono transition">
+                <a :href="`#${link.id}`" class="group flex gap-3 text-xs text-muted leading-snug font-mono transition hover:text-primary">
                   <span class="text-primary opacity-45 group-hover:opacity-100">{{ (index + 1).toString().padStart(2, '0') }}</span>
                   {{ link.text }}
                 </a>
@@ -217,30 +236,27 @@ useSeoMeta({
           <ContentRenderer :value="study" class="case-study-content" />
 
           <motion.footer
-            class="border-base grid mt-18 gap-8 border-t pt-10 sm:grid-cols-2"
+            class="grid mt-18 gap-8 border-t border-base pt-10 sm:grid-cols-2"
             :initial="{ opacity: 0, y: 20 }"
             :while-in-view="{ opacity: 1, y: 0 }"
             :in-view-options="{ once: true, margin: '-10%' }"
           >
             <div>
-              <h2 class="meta-label mb-4">
+              <h2 class="mb-4 meta-label">
                 {{ $t('case_studies.technologies') }}
               </h2>
               <ul class="flex flex-wrap gap-2">
                 <li v-for="technology in study.technologies" :key="technology" class="rounded-full bg-rose-400 px-3 py-1.5 text-[0.65rem] text-slate-950 font-mono">
                   {{ technology }}
                 </li>
-                <li v-if="!study.technologies?.length" class="text-subtle text-sm">
-                  —
-                </li>
               </ul>
             </div>
             <div>
-              <h2 class="meta-label mb-4">
+              <h2 class="mb-4 meta-label">
                 {{ $t('case_studies.skills') }}
               </h2>
               <ul class="flex flex-wrap gap-2">
-                <li v-for="skill in study.skills" :key="skill" class="pill-control text-body rounded-full">
+                <li v-for="skill in study.skills" :key="skill" class="pill-control rounded-full text-body">
                   {{ skill }}
                 </li>
               </ul>
@@ -249,10 +265,10 @@ useSeoMeta({
 
           <NuxtLink
             :to="localePath({ name: 'work' })"
-            class="surface-frosted hover:border-primary mt-16 min-h-28 flex items-center justify-between gap-5 rounded-3xl p-5 transition sm:p-7"
+            class="mt-16 min-h-28 flex items-center justify-between gap-5 surface-frosted rounded-3xl p-5 transition hover:border-primary sm:p-7"
           >
             <span>
-              <span class="meta-label-primary block">{{ $t('work') }}</span>
+              <span class="block meta-label-primary">{{ $t('work') }}</span>
               <span class="mt-2 block text-xl font-medium sm:text-2xl">{{ $t('case_studies.back') }}</span>
             </span>
             <span class="size-12 flex shrink-0 items-center justify-center rounded-full bg-rose-400 text-xl text-slate-950">←</span>
@@ -273,7 +289,7 @@ useSeoMeta({
 }
 
 .case-study-content :deep(h2) {
-  @apply text-base;
+  @apply color-base;
   font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 500;
   letter-spacing: -0.035em;

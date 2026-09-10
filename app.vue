@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import posthog from 'posthog-js'
-import { appName } from '@/constants'
+import { appName, FAVICONS } from '@/constants'
 
 const isDark = useDark()
 const isDev = import.meta.dev
@@ -21,7 +21,7 @@ useHead(() => ({
   link: [
     {
       rel: 'icon',
-      href: isDev ? '/pb-favicon-local.png' : isDark.value ? '/pb-favicon-dark.png' : '/pb-favicon-light.png',
+      href: isDev ? FAVICONS.local : isDark.value ? FAVICONS.dark : FAVICONS.light,
     },
   ],
 }))
@@ -31,19 +31,20 @@ useHead(() => ({
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
-  <section class="modal__layer z-50" />
 </template>
 
 <style>
-/* https://twitter.com/alirdev/status/1734136001671643465 for full height safe on device */
-::view-transition-old(root),
-::view-transition-new(root) {
+::view-transition-group(*) {
   animation: none;
 }
 
-html.dark {
+html {
   color-scheme: light dark;
 }
+html.dark {
+  color-scheme: dark light;
+}
+
 html,
 body,
 #__nuxt {
@@ -54,6 +55,11 @@ body,
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
   }
 }
 </style>

@@ -2,14 +2,14 @@
 slug: knoji-legacy-maintenance
 translationKey: knoji-legacy-maintenance
 locale: es
-title: Modernizando el código base de Knoji
-description: Cómo lideré una expansión incremental de datos estructurados dentro de una plataforma procedural en PHP sensible al SEO sin reescribir su pipeline de páginas
+title: Modernizar el código de Knoji sin reescribir la plataforma
+description: Cómo amplié por etapas los datos estructurados de una plataforma procedural en PHP sin alterar su generación de páginas ni poner en riesgo el SEO
 project: Knoji
 organization: Knoji · Demand.io
 projectType: professional
 sortOrder: 60
 role: Líder técnico e implementador principal
-period: "Octubre de 2024 - junio de 2025; seguimiento del equipo hasta noviembre de 2025"
+period: "Octubre de 2024 a junio de 2025; seguimiento del equipo hasta noviembre de 2025"
 technologies:
   - PHP
   - JSON-LD
@@ -41,13 +41,13 @@ Lideré el equipo responsable de evolucionar esta parte de la plataforma y fui e
 
 No era una aplicación greenfield. Las páginas de comercios se armaban a partir de grandes templates procedurales en PHP, variables compartidas, resultados directos de la base de datos y muchos módulos comerciales condicionales. Durante la primera fase, había dos layouts de comercios casi duplicados en uso. El orden de las promociones también era lógica de negocio: la posición de un código dependía de su estado, tipo, reglas de ubicación y los módulos que ya se habían renderizado por encima.
 
-Reescribir ese pipeline habría mezclado un cambio de SEO con una migración de producto mucho más grande. Por lo tanto, la restricción práctica era crear un camino más seguro y legible por máquinas, preservando al mismo tiempo la página visible y su comportamiento de ordenamiento existente.
+Reescribir ese proceso habría mezclado un cambio de SEO con una migración de producto mucho más grande. Tenía que mejorar la salida legible por máquinas sin alterar la página visible ni sus reglas de ordenamiento.
 
 ## El problema
 
 El problema inicial era la duplicación de la semántica de preguntas frecuentes. Los templates de comercios contenían preguntas frecuentes estáticas sobre cupones, mientras que las Merchant Information Questions (MIQ) dinámicas se consultaban y renderizaban por separado. El marcado estructurado reflejaba esos caminos separados en lugar de presentar una entidad de preguntas frecuentes coherente.
 
-El primer intento expuso el verdadero problema de mantenimiento. Agregar un wrapper `FAQPage` era fácil; determinar cuándo estaban disponibles todas las preguntas, mantener alineados ambos layouts y serializar de forma segura las respuestas dinámicas no lo era. El JSON interpolado a mano podía romperse por la puntuación o el HTML del contenido del comercio, y emitirlo demasiado pronto significaba que los registros MIQ todavía no se habían recopilado.
+El primer intento mostró el verdadero problema de mantenimiento. Agregar un wrapper `FAQPage` era fácil. Lo difícil era saber cuándo estaban disponibles todas las preguntas, mantener alineados ambos layouts y serializar las respuestas dinámicas de forma segura. La puntuación o el HTML del contenido podían romper el JSON armado a mano. Si lo emitíamos demasiado pronto, todavía faltaban los registros MIQ.
 
 Ese episodio reveló una brecha más amplia. Knoji ya emitía algo de schema a nivel de página, pero las políticas de los comercios, las ofertas normalizadas, las tablas de cupones y las instrucciones de checkout seguían desconectadas de la capa de datos estructurados.
 
@@ -60,7 +60,7 @@ Rastreé la página renderizada hacia atrás desde `views/header-head.php`, que 
 - Los grupos de promociones, como códigos vigentes, códigos antiguos, ofertas con enlace y ubicaciones sticky, se modificaban mientras se armaba la página.
 - Las políticas del comercio, los descuentos para clientes, las calificaciones, los productos de la barra lateral y los datos de las tablas de cupones usaban estructuras diferentes.
 
-La hipótesis de trabajo era que los datos estructurados debían adaptarse al pipeline de renderizado existente, no competir con él. Los registros compartidos de preguntas frecuentes podían alimentar tanto la salida visible como la legible por máquinas. Las promociones necesitaban una representación intermedia normalizada antes de poder mapearse a entidades `Offer`.
+Decidí adaptar los datos estructurados al proceso de renderizado existente. Los mismos registros de preguntas frecuentes podían alimentar la salida visible y la legible por máquinas. Antes de mapear las promociones a entidades `Offer`, necesitaba normalizarlas en una estructura intermedia.
 
 ```text
 Antes
@@ -85,12 +85,12 @@ tablas e instrucciones visibles ---------------------------------> Dataset / How
 Consideré tres límites para el trabajo:
 
 1. Modificar cada template de manera independiente. Esto minimizaba el movimiento inicial, pero preservaba la lógica duplicada de preguntas frecuentes y haría que cada agregado de schema fuera específico de cada layout.
-2. Reemplazar el pipeline de páginas de comercios. Esto podía producir una arquitectura más limpia, pero aumentaba drásticamente la superficie de regresión en torno al orden de las promociones, los módulos estacionales, los enlaces de tracking y la salida sensible al SEO.
+2. Reemplazar el pipeline de páginas de comercios. Esto podía producir una arquitectura más limpia, pero aumentaba mucho el riesgo de regresiones en el orden de las promociones, los módulos estacionales, los enlaces de tracking y la salida sensible al SEO.
 3. Agregar un punto de compatibilidad. Mantener el flujo de renderizado establecido, normalizar los datos necesarios para la salida estructurada y centralizar la serialización de JSON-LD.
 
 Elegí la tercera opción. Mejoraba un aspecto transversal sin fingir que el código base circundante ya se había modernizado.
 
-## Decisión de arquitectura
+## Decisión técnica
 
 La decisión tenía dos partes.
 
@@ -100,7 +100,7 @@ Segundo, introducir un paso de normalización para las promociones. `_code_sorte
 
 Todos los bloques pasaban por un helper `outputJsonLd()` respaldado por `json_encode`, en lugar de armar fragmentos de JSON mediante interpolación de strings. Un formateador numérico separado forzaba un punto como separador decimal y eliminaba de los precios del schema los separadores de miles dependientes del locale.
 
-El pipeline de renderizado visible, el acceso a la base de datos y las variables existentes de los comercios se mantuvieron deliberadamente. Esto limitó el radio de impacto, aunque también dejó un acoplamiento entre la generación del schema y las variables globales de los templates que una migración posterior debería eliminar.
+Mantuve sin cambios el renderizado visible, el acceso a la base de datos y las variables existentes de los comercios. Así reduje el riesgo, aunque la generación del schema siguió acoplada a las variables globales de los templates. Una migración posterior debería eliminar ese acoplamiento.
 
 ## Implementación y despliegue gradual
 
@@ -118,7 +118,7 @@ El layout experimental se eliminó más adelante cuando el equipo revirtió su s
 
 ### Fase 2: expansión del schema de comercios
 
-La [consolidación de mayo de 2025](https://github.com/demandio/knoji/commit/0530f80394a221499b5d62c315645d7a6c47562d) extendió el mismo enfoque más allá de las preguntas frecuentes. Las páginas de comercios incorporaron representaciones estructuradas para:
+La [consolidación de mayo de 2025](https://github.com/demandio/knoji/commit/0530f80394a221499b5d62c315645d7a6c47562d) aplicó la misma estrategia más allá de las preguntas frecuentes. Las páginas de comercios incorporaron representaciones estructuradas para:
 
 - el comercio como una `Organization`;
 - la disponibilidad de cupones como un `Product` con `AggregateOffer` y registros `Offer` individuales;
@@ -136,13 +136,13 @@ El trabajo continuó bajo la responsabilidad del equipo en lugar de terminar con
 
 ## Resultado
 
-El resultado fue una cobertura legible por máquinas más amplia y consistente de las páginas de comercios, sin reemplazar el sistema procedural de páginas. El trabajo estableció tres puntos de conexión útiles:
+Las páginas de comercios pasaron a ofrecer más información legible por máquinas y con reglas más consistentes, sin reemplazar el sistema procedural. El trabajo dejó estos puntos de conexión:
 
 - Las preguntas frecuentes podían actualizarse una vez y reflejarse en las representaciones visible y estructurada.
 - Las promociones heterogéneas pasaban por una estructura normalizada antes del mapeo al schema.
 - La codificación de JSON-LD y el formato decimal tenían reglas de salida compartidas.
 
-Este es un resultado de arquitectura y cobertura, no una afirmación sobre el rendimiento en buscadores. Todavía no tengo evidencia de Search Console, resultados enriquecidos, tráfico, conversión o ingresos que permita atribuir un resultado externo de SEO a estos cambios.
+El resultado se limita a la arquitectura y la cobertura. Todavía no tengo evidencia de Search Console, resultados enriquecidos, tráfico, conversión o ingresos que permita atribuirles un efecto en SEO.
 
 ## Qué no funcionó
 
@@ -165,6 +165,6 @@ Solo Search Console o evidencia comparable de producción podría respaldar afir
 
 ## Reflexión
 
-La parte difícil no era saber cómo producir JSON-LD. Era encontrar un límite que mejorara la salida legible por máquinas sin desestabilizar una página sensible a los ingresos y al SEO, armada a partir de años de reglas implícitas.
+Producir JSON-LD no era la parte difícil. Había que encontrar dónde intervenir para mejorar la salida legible por máquinas sin desestabilizar una página sensible a los ingresos y al SEO, construida sobre años de reglas implícitas.
 
-Un diseño greenfield probablemente empezaría con objetos de dominio tipados y derivaría de ellos tanto el HTML como los datos estructurados. Knoji requería el enfoque inverso: descubrir el modelo de dominio oculto en el estado de los templates, agregar normalización en el punto útil más acotado y preservar el comportamiento hasta poder verificar cada dependencia. Liderar el trabajo también implicaba tratar las correcciones posteriores del equipo como parte de la evolución del sistema, en lugar de reducir la historia solo a los commits bajo mi nombre.
+Un diseño greenfield probablemente empezaría con objetos de dominio tipados y derivaría de ellos tanto el HTML como los datos estructurados. En Knoji tuve que hacer lo contrario: descubrir el modelo de dominio oculto en los templates, normalizar los datos en el punto más acotado posible y preservar el comportamiento hasta verificar cada dependencia. Esta historia incluye mis commits y las correcciones posteriores del equipo.

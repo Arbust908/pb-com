@@ -5,6 +5,7 @@ import { appendHeader, defineEventHandler, getRequestURL } from 'h3'
 const linkedPaths = new Set<string>(['/', '/cv', '/work'])
 
 const links = [
+  '</index.md>; rel="alternate"; type="text/markdown"',
   '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
   '</sitemap.xml>; rel="sitemap"; type="application/xml"',
   '</.well-known/agent-skills/index.json>; rel="https://agentskills.io/rels/skills-index"; type="application/json"',

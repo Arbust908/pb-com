@@ -3,13 +3,13 @@ slug: dealspotr-legacy-maintenance
 translationKey: dealspotr-legacy-maintenance
 locale: en
 title: Keeping Dealspotr productive
-description: How I led the incremental evolution of a legacy PHP and jQuery product while protecting its established user and affiliate funnel.
+description: How I changed a legacy PHP and jQuery product without disrupting its users or affiliate funnel.
 project: Dealspotr
 organization: Dealspotr · Demand.io
 projectType: professional
 sortOrder: 50
-role: Technical Steward and Primary Implementer
-period: "2024 - 2025"
+role: Technical steward and primary implementer
+period: "2024 to 2025"
 technologies:
   - PHP
   - jQuery
@@ -35,13 +35,13 @@ featured: false
 draft: false
 ---
 
-## A mature product still earning its keep
+## An established product still in use
 
 Dealspotr was an established coupon community whose merchant pages helped shoppers find and use promotions. Those pages were also a key part of our monetization strategy: they handled code reveals, tracked interactions, outbound merchant visits, and commission-bearing offers.
 
 By this point, much of the application was nearly eight years old. It was primarily server-rendered PHP, with jQuery powering client-side interactions. Years of product decisions were embedded in templates, shared state, promotion ordering, and card-specific behavior.
 
-I led the effort to keep this system useful and productive. The goal was not to disguise it as greenfield software. It was to deliver the changes the business needed without turning each request into another patch that would make the next engineer's work harder.
+I led the work to keep this system useful. I did not try to disguise it as new software. I delivered the changes the business needed without adding patches that would make later work harder.
 
 ## A simple control over years of assumptions
 
@@ -51,9 +51,9 @@ The feed was not a conventional list. It mixed ordinary promotions with preferre
 
 A client-side filter could therefore hide the wrong offers, override carefully curated ranking, duplicate click behavior, or break the action that made a promotion valuable.
 
-## Mapping the invisible rules
+## Finding the implicit rules
 
-Before changing the interface, I traced the full path from server-side promotion preparation through card rendering and jQuery enhancement. The useful domain model was implicit: promotion health, type, placement, commercial priority, and fallback behavior emerged across several stages rather than from one authoritative object.
+Before changing the interface, I traced the full path from server-side promotion preparation through card rendering and jQuery enhancement. There was no authoritative promotion model. Health, type, placement, commercial priority, and fallback behavior emerged across several stages.
 
 ```text
 Before
@@ -82,13 +82,13 @@ That investigation established three rules for the change:
 
 With limited automated coverage around these interactions, staged exposure, analytics, and production follow-up also had to be part of the safety model.
 
-## Creating a seam instead of another patch
+## Isolating the promotion grid
 
 A direct patch inside the existing page would have been fastest, but it would deepen the coupling. Replacing the feed with a modern frontend would create the opposite problem: too much risk before delivering any value.
 
-I chose a middle path. We extracted the dense promotion grid into a dedicated boundary while preserving its existing ordering conditions and card renderers. The server continued deciding which offers existed and how they were presented; jQuery progressively enhanced the rendered pool.
+I chose a smaller change. We extracted the dense promotion grid while preserving its ordering conditions and card renderers. The server continued to decide which offers existed and how to present them. jQuery added filtering and sorting to the rendered pool.
 
-At the card boundary, I introduced a shared metadata contract for promotion type, discount, creation date, last-used date, sitewide status, and health. This gave the browser one consistent language without forcing every legacy promotion source into an immediate rewrite.
+I added shared card metadata for promotion type, discount, creation date, last-used date, sitewide status, and health. The browser could now handle each card consistently without an immediate rewrite of every legacy promotion source.
 
 ## Moving cards without breaking their actions
 
@@ -96,7 +96,7 @@ Filtering selected and reordered elements that were already rendered. Moving tho
 
 The first version did not solve every interaction. Follow-up work corrected click handling, filtering, display limits, and default ranking. I coordinated that hardening with the team so the untouched All + Best state continued to respect the server's curated order.
 
-That iteration is central to the story. Keeping an old product maintainable means owning what production teaches you, not treating the first merge as the finish line.
+The first merge was not the end of the work. We used production behavior to find and correct assumptions in the initial implementation.
 
 ## From controlled exposure to everyday use
 
@@ -104,9 +104,9 @@ The controls began behind weighted cohorts. We attached experiment context to an
 
 This limited the initial blast radius and gave us a way to observe behavior while correcting assumptions. It does not, by itself, prove a conversion lift, so I treat general availability as a delivery outcome rather than an experiment win.
 
-## A boundary that kept paying off
+## Reusing the extracted grid
 
-The extraction became useful beyond filtering. In 2025, I reused the same rendering boundary to collect promotion data for Offer and WebPage structured data. Existing card-specific values could feed machine-readable output without creating another independent interpretation of each promotion.
+The extraction proved useful beyond filtering. In 2025, I reused it to collect promotion data for Offer and WebPage structured data. Existing card values could feed machine-readable output without another implementation of promotion rules.
 
 I applied the same incremental principle at the infrastructure layer. A selective Nginx allowlist moved a defined group of merchant routes to SimplyCodes while the rest continued through Dealspotr. The team then aligned internal links and expanded the migration over time. We could move traffic deliberately without requiring an all-at-once replacement.
 
@@ -128,8 +128,8 @@ The system remained procedural PHP and jQuery. Shared state, inconsistent legacy
 
 I stopped short of broad cleanup because unrelated refactoring would increase risk without improving the immediate outcome. The next valuable investment would be characterization coverage around representative card combinations and critical actions, followed by moving promotion normalization into an explicit server-side model.
 
-## Stewardship over reinvention
+## Why I did not rewrite it
 
-Legacy leadership often means resisting the rewrite you would enjoy building. Dealspotr was old, but it still served users and supported the business. Its age made understanding and preserving behavior more important, not less.
+Dealspotr was old, but it still served users and supported the business. Rewriting it would have put working behavior and revenue at risk. I needed to understand and preserve that behavior before changing it.
 
-My role was to keep it productive: uncover implicit rules, choose the smallest useful boundary, coordinate incremental delivery, and return when production exposed assumptions we had missed. The system did not become modern all at once, but it stayed useful and became easier to change where the business needed it most.
+My role was to uncover implicit rules, isolate the smallest useful part, coordinate incremental delivery, and correct assumptions exposed in production. The system stayed useful and became easier to change in the areas the business still used.

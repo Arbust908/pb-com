@@ -3,13 +3,13 @@ slug: simplycodes-gamification
 translationKey: simplycodes-gamification
 locale: en
 title: Making random rewards trustworthy at SimplyCodes
-description: How I connected a server-authoritative reward flow to a multi-stage Lottie reveal and a broader loyalty-oriented web experience.
+description: How I connected server-managed rewards to a multi-stage Lottie reveal, missions, progress, and account activity.
 project: SimplyCodes
 organization: SimplyCodes · Demand.io
 projectType: professional
 sortOrder: 40
-role: Front-End Engineer
-period: June 2023–January 2024
+role: Front-end engineer
+period: June 2023 to January 2024
 technologies:
   - Nuxt
   - Vue
@@ -32,9 +32,9 @@ draft: false
 
 The SimplyCodes team wanted to reward useful shopping behavior beyond submitting coupon codes. Together with our manager, we developed an experience that could recognize purchase-related activity, including a path for users to claim missing Tokens when they had made a purchase without using a SimplyCodes coupon. The wider goal was to give people a reason to return by making earning, progress, and redemption visible.
 
-The product and design teams shaped the reward concept and its visual personality. My responsibility was implementing and evolving the frontend experience: progress, missions, recent activity, recent wins, token education, and the animated prize reveal.
+The product and design teams defined the reward concept and visual design. I implemented and extended the frontend for progress, missions, recent activity, recent wins, token education, and the animated prize reveal.
 
-This was not simply a matter of adding points to the interface. Once Tokens could be exchanged for a randomized reward, the experience had to feel playful without allowing presentation logic to decide, reveal early, or reroll the outcome.
+Once users could exchange Tokens for a random reward, the browser could not decide, reveal early, or reroll the outcome. The interface still had to make the reveal engaging.
 
 ## Designing around authority
 
@@ -52,7 +52,7 @@ User spends Tokens
   -> Lottie reveal presents the recorded result
 ```
 
-This separation protected an important invariant: animation controls could change how quickly someone saw a result, but not what result they received. Closing, replaying, or skipping presentation was not another chance to randomize the reward.
+Animation controls could change when someone saw a result, but not the result itself. Closing, replaying, or skipping the animation did not randomize the reward again.
 
 The remote service remained responsible for balances, eligibility, reward values, and random selection. I did not duplicate those rules in the interface or treat the browser as a second source of truth.
 
@@ -74,9 +74,9 @@ Closed bag
 
 `[Image: the prize-bag sequence from closed state through the Lottie reveal to the cash result]`
 
-The key engineering decision was to model animation as a view over already-authoritative state. Network state, modal state, animation state, and reward state were related, but they were not interchangeable. Keeping those concerns separate made it possible to disable duplicate actions during a request, prevent premature transitions, and support skipping the animation without changing the outcome.
+The animation presented state that the server had already recorded. I kept network, modal, animation, and reward state separate. This let the interface block duplicate actions during a request, prevent early transitions, and skip the animation without changing the outcome.
 
-## Building the wider reward journey
+## Building the rest of the reward experience
 
 The prize reveal worked as part of a larger web experience rather than as an isolated game. Over several releases, I connected the service's reward state to the places where users needed context:
 
@@ -87,9 +87,9 @@ The prize reveal worked as part of a larger web experience rather than as an iso
 - purchase-recovery forms that supported claims with or without a coupon;
 - token education explaining how Tokens could be earned and redeemed.
 
-I also helped migrate user-facing language from “Karma” to “Tokens.” This was more than a label replacement: dynamic reward values and clearer earning and redemption explanations reduced the amount of economic policy embedded in static interface copy.
+I also helped change user-facing language from "Karma" to "Tokens." Dynamic reward values and clearer earning and redemption explanations reduced the economic policy embedded in static interface copy.
 
-`[Image: reward progress, missions, recent activity, and token education shown as one connected journey]`
+`[Image: reward progress, missions, recent activity, and token education shown together]`
 
 ## System boundaries
 
@@ -112,7 +112,7 @@ SimplyCodes API and reward services
 
 That boundary also informed failure handling. The interface exposed loading, empty, completed, insufficient-balance, redeemed, and cash-out states, then refreshed remote data after mutations rather than predicting the resulting balance locally.
 
-## Evolution
+## Timeline
 
 ```text
 June 2023       Dynamic economy and progress presentation
@@ -123,16 +123,16 @@ September 2023  User-facing language moved from Karma to Tokens
 January 2024    Expanded token education
 ```
 
-This progression mattered. We first made account state legible, then gave users concrete earning paths, then connected those paths to activity and redemption. The animation added delight only after the interaction had a trustworthy authority boundary.
+We first made account state clear, then gave users concrete ways to earn Tokens and connected them to activity and redemption. We added the animation after the server controlled the result.
 
 ## Outcome
 
-The result was a coherent frontend for a server-managed reward ecosystem. Users could understand how to earn Tokens, see their progress and activity, recover missing purchase credit, spend Tokens, and experience a visually rich reveal whose presentation could not choose a better random result.
+The frontend let users learn how to earn Tokens, see progress and activity, recover missing purchase credit, spend Tokens, and watch a prize reveal. The presentation could not choose or improve the random result.
 
 The available evidence establishes the implementation and its staged rollout, but not a measurable change in retention, purchase frequency, or redemption. Those claims remain out of scope until cohort and funnel analytics can be recovered.
 
 ## Reflection
 
-Gamification becomes a systems problem as soon as virtual progress has tangible value. Delight depends on anticipation, but trust depends on making the server authoritative and the animation disposable. A user should be able to skip every flourish and still receive exactly the result already recorded for the transaction.
+Virtual progress becomes a systems problem when it has tangible value. The server must control the reward, and the animation must remain optional. A user can skip it and still receive the result already recorded for the transaction.
 
-The most durable part of this work was therefore not the animation alone. It was the contract between service-owned reward state and client-owned presentation: the service decided what happened, while the interface made that decision understandable, responsive, and enjoyable.
+The contract separated service-owned reward state from client-owned presentation. The service decided what happened. The interface showed that result and responded to the user's actions.

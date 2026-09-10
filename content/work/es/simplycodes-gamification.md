@@ -2,14 +2,14 @@
 slug: simplycodes-gamification
 translationKey: simplycodes-gamification
 locale: es
-title: Haciendo confiables las recompensas aleatorias en SimplyCodes
-description: Cómo conecté un flujo de recompensas cuya autoridad reside en el servidor con una revelación de Lottie en varias etapas y una experiencia web más amplia orientada a la fidelización.
+title: Recompensas aleatorias confiables en SimplyCodes
+description: Cómo conecté recompensas definidas por el servidor con una animación de Lottie por etapas y el resto de la experiencia web.
 project: SimplyCodes
 organization: SimplyCodes · Demand.io
 projectType: professional
 sortOrder: 40
 role: Ingeniero frontend
-period: Junio de 2023–enero de 2024
+period: Junio de 2023 a enero de 2024
 technologies:
   - Nuxt
   - Vue
@@ -34,13 +34,13 @@ El equipo de SimplyCodes quería recompensar comportamientos de compra útiles m
 
 Los equipos de producto y diseño definieron el concepto de las recompensas y su personalidad visual. Mi responsabilidad fue implementar y hacer evolucionar la experiencia frontend: progreso, misiones, actividad reciente, premios recientes, información sobre Tokens y la revelación animada del premio.
 
-No se trataba simplemente de agregar puntos a la interfaz. Una vez que los Tokens se podían canjear por una recompensa aleatoria, la experiencia tenía que resultar lúdica sin permitir que la lógica de presentación decidiera el resultado, lo revelara antes de tiempo ni volviera a sortearlo.
+No alcanzaba con agregar puntos a la interfaz. Cuando los Tokens pasaron a canjearse por una recompensa aleatoria, la presentación no podía decidir el resultado, mostrarlo antes de tiempo ni volver a sortearlo.
 
-## Diseñando en torno a la autoridad
+## El servidor decide la recompensa
 
 Un prototipo inicial podía elegir una bolsa y un monto de dinero en el navegador. Eso servía para demostrar la interacción, pero no era un límite seguro para producción. Cualquier persona que pudiera inspeccionar o manipular el cliente podía influir en la aleatoriedad generada por el navegador.
 
-El flujo de producción trataba al servicio de recompensas como autoridad. Una solicitud de canje devolvía la bolsa y el monto de la recompensa seleccionados antes de que avanzara la revelación. Luego, el cliente actualizaba el saldo y el historial de la persona usuaria, y usaba la respuesta únicamente para elegir la presentación correcta.
+En producción, el servicio de recompensas tomaba la decisión. Una solicitud de canje devolvía la bolsa y el monto seleccionados antes de iniciar la animación. Luego, el cliente actualizaba el saldo y el historial, y usaba la respuesta solamente para elegir la presentación correcta.
 
 ```text
 La persona usuaria gasta Tokens
@@ -56,7 +56,7 @@ Esta separación protegía una invariante importante: los controles de animació
 
 El servicio remoto seguía siendo responsable de los saldos, la elegibilidad, los valores de las recompensas y la selección aleatoria. No dupliqué esas reglas en la interfaz ni traté al navegador como una segunda fuente de verdad.
 
-## Convirtiendo archivos de Lottie en una interacción
+## Convertir archivos de Lottie en una interacción
 
 El equipo de diseño entregó animaciones de Lottie con distintos momentos correspondientes a las etapas de apertura de una bolsa de premios. No eran videos pasivos que simplemente podían reproducirse de principio a fin. La interfaz tenía que reaccionar en puntos específicos y, al mismo tiempo, mantenerse sincronizada con el resultado del servidor.
 
@@ -74,9 +74,9 @@ Bolsa cerrada
 
 `[Imagen: la secuencia de la bolsa de premios desde el estado cerrado, pasando por la revelación de Lottie, hasta el resultado en dinero]`
 
-La decisión de ingeniería clave fue modelar la animación como una vista de un estado que ya era autoritativo. El estado de red, el estado del modal, el estado de la animación y el estado de la recompensa estaban relacionados, pero no eran intercambiables. Mantener esas responsabilidades separadas permitió deshabilitar acciones duplicadas durante una solicitud, evitar transiciones prematuras y admitir que se omitiera la animación sin cambiar el resultado.
+Modelé la animación como una vista de un estado que el servidor ya había definido. El estado de red, el modal, la animación y la recompensa estaban relacionados, pero no eran intercambiables. Al mantenerlos separados pude deshabilitar acciones duplicadas durante una solicitud, evitar transiciones prematuras y permitir que se omitiera la animación sin cambiar el resultado.
 
-## Construyendo el recorrido más amplio de recompensas
+## Integrar la animación con el sistema de recompensas
 
 La revelación del premio funcionaba como parte de una experiencia web más amplia, no como un juego aislado. A lo largo de varios releases, conecté el estado de recompensas del servicio con los lugares donde las personas usuarias necesitaban contexto:
 
@@ -87,7 +87,7 @@ La revelación del premio funcionaba como parte de una experiencia web más ampl
 - formularios de recuperación de compras que admitían reclamos con o sin cupón;
 - información sobre Tokens que explicaba cómo se podían obtener y canjear.
 
-También ayudé a migrar el lenguaje visible para las personas usuarias de “Karma” a “Tokens”. Fue más que reemplazar una etiqueta: los valores dinámicos de las recompensas y las explicaciones más claras sobre obtención y canje redujeron la cantidad de política económica incorporada en textos estáticos de la interfaz.
+También ayudé a cambiar el nombre visible de "Karma" a "Tokens". No fue solo reemplazar una etiqueta. Los valores dinámicos y las explicaciones sobre obtención y canje sacaron parte de las reglas económicas de los textos estáticos de la interfaz.
 
 `[Imagen: el progreso de recompensas, las misiones, la actividad reciente y la información sobre Tokens como un único recorrido conectado]`
 
@@ -123,7 +123,7 @@ Septiembre de 2023 El lenguaje visible pasó de Karma a Tokens
 Enero de 2024      Ampliación de la información sobre Tokens
 ```
 
-Esta progresión fue importante. Primero hicimos comprensible el estado de la cuenta, luego les dimos a las personas usuarias caminos concretos para obtener recompensas y después conectamos esos caminos con la actividad y el canje. La animación agregó disfrute solo después de que la interacción tuvo un límite de autoridad confiable.
+El orden importó. Primero explicamos el estado de la cuenta. Después agregamos formas concretas de obtener recompensas y las conectamos con la actividad y el canje. La animación llegó cuando el servidor ya controlaba el resultado.
 
 ## Resultado
 
@@ -133,6 +133,6 @@ La evidencia disponible demuestra la implementación y su despliegue por etapas,
 
 ## Reflexión
 
-La gamificación se convierte en un problema de sistemas en cuanto el progreso virtual adquiere valor tangible. El disfrute depende de la expectativa, pero la confianza depende de hacer que el servidor sea la autoridad y que la animación sea prescindible. Una persona usuaria debería poder omitir cada detalle visual y aun así recibir exactamente el resultado ya registrado para la transacción.
+La gamificación se vuelve un problema de sistemas cuando el progreso virtual adquiere valor tangible. Para que el resultado sea confiable, el servidor debe decidir y la animación tiene que ser prescindible. Una persona debería poder omitir toda la presentación y recibir exactamente la recompensa ya registrada.
 
-Por lo tanto, la parte más duradera de este trabajo no fue solo la animación. Fue el contrato entre el estado de las recompensas controlado por el servicio y la presentación controlada por el cliente: el servicio decidía qué ocurría, mientras que la interfaz hacía que esa decisión fuera comprensible, responsiva y disfrutable.
+Lo más importante no fue la animación, sino el contrato entre el servicio y el cliente. El servicio decidía qué ocurría. La interfaz comunicaba esa decisión y respondía a las acciones de cada persona.

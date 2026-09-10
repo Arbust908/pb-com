@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { GITHUB_URL } from '~/constants'
+
 const localePath = useLocalePath()
 const route = useRoute()
 const moreDialog = useTemplateRef<HTMLDialogElement>('moreDialog')
@@ -6,14 +8,15 @@ const isMoreOpen = ref(false)
 
 const isMoreActive = computed(() => route.path === localePath({ name: 'privacy' }))
 
-watch(isMoreOpen, (open) => {
-  document.documentElement.classList.toggle('mobile-sheet-open', open)
-  document.body.classList.toggle('mobile-sheet-open', open)
-}, { flush: 'sync' })
+const lockTarget = shallowRef<HTMLElement | null>(null)
+const isLocked = useScrollLock(() => lockTarget.value)
 
-onUnmounted(() => {
-  document.documentElement.classList.remove('mobile-sheet-open')
-  document.body.classList.remove('mobile-sheet-open')
+onMounted(() => {
+  lockTarget.value = document.documentElement
+})
+
+watch(isMoreOpen, (open) => {
+  isLocked.value = open
 })
 
 function openMore() {
@@ -33,12 +36,12 @@ function closeFromBackdrop(event: MouseEvent) {
 
 <template>
   <nav
-    class="mobile-bottom-nav border-base surface-strong-bg fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t font-mono backdrop-blur-xl sm:hidden"
+    class="mobile-bottom-nav fixed inset-x-0 bottom-0 z-nav grid grid-cols-5 border-t border-base surface-strong-bg font-mono backdrop-blur-xl sm:hidden"
     :aria-label="$t('mobile_navigation')"
   >
     <NuxtLink
       :to="localePath({ name: 'index' })"
-      class="mobile-nav-item"
+      class="mobile-nav-item hover:text-primary focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4"
       exact-active-class="text-primary"
     >
       <i class="i-ph:house size-5" aria-hidden="true" />
@@ -46,7 +49,7 @@ function closeFromBackdrop(event: MouseEvent) {
     </NuxtLink>
     <NuxtLink
       :to="localePath({ name: 'work' })"
-      class="mobile-nav-item"
+      class="mobile-nav-item hover:text-primary focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4"
       active-class="text-primary"
     >
       <i class="i-ph:squares-four size-5" aria-hidden="true" />
@@ -54,7 +57,7 @@ function closeFromBackdrop(event: MouseEvent) {
     </NuxtLink>
     <NuxtLink
       :to="localePath({ name: 'cv' })"
-      class="mobile-nav-item"
+      class="mobile-nav-item hover:text-primary focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4"
       active-class="text-primary"
     >
       <i class="i-ph:file-text size-5" aria-hidden="true" />
@@ -62,7 +65,7 @@ function closeFromBackdrop(event: MouseEvent) {
     </NuxtLink>
     <NuxtLink
       :to="localePath({ name: 'about' })"
-      class="mobile-nav-item"
+      class="mobile-nav-item hover:text-primary focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4"
       active-class="text-primary"
     >
       <i class="i-ph:user-circle size-5" aria-hidden="true" />
@@ -70,7 +73,7 @@ function closeFromBackdrop(event: MouseEvent) {
     </NuxtLink>
     <button
       type="button"
-      class="mobile-nav-item"
+      class="mobile-nav-item hover:text-primary focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4"
       :class="{ 'text-primary': isMoreActive || isMoreOpen }"
       :aria-expanded="isMoreOpen"
       aria-controls="mobile-more-dialog"
@@ -84,7 +87,7 @@ function closeFromBackdrop(event: MouseEvent) {
   <dialog
     id="mobile-more-dialog"
     ref="moreDialog"
-    class="mobile-more-dialog z-almost-infinity fixed inset-x-0 bottom-0 top-auto m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl bg-slate-50 p-0 text-base sm:hidden dark:bg-slate-800"
+    class="mobile-more-dialog fixed inset-x-0 bottom-0 top-auto z-dialog m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl bg-slate-50 p-0 color-base sm:hidden dark:bg-slate-800"
     :aria-label="$t('more_menu')"
     @click="closeFromBackdrop"
     @close="isMoreOpen = false"
@@ -106,7 +109,7 @@ function closeFromBackdrop(event: MouseEvent) {
       </ClientOnly>
       <NuxtLink
         :to="localePath({ name: 'privacy' })"
-        class="border-base hover:border-primary hover:text-primary min-h-14 flex items-center justify-between border rounded-2xl px-4 py-2 text-sm font-mono transition"
+        class="min-h-14 flex items-center justify-between border border-base rounded-2xl px-4 py-2 text-sm font-mono transition hover:border-primary hover:text-primary"
         @click="closeMore"
       >
         <span class="flex items-center gap-3">
@@ -116,8 +119,8 @@ function closeFromBackdrop(event: MouseEvent) {
         <i class="i-ph:caret-right text-lg" aria-hidden="true" />
       </NuxtLink>
       <NuxtLink
-        href="https://github.com/Arbust908"
-        class="border-base hover:border-primary hover:text-primary min-h-14 flex items-center justify-between border rounded-2xl px-4 py-2 text-sm font-mono transition"
+        :href="GITHUB_URL"
+        class="min-h-14 flex items-center justify-between border border-base rounded-2xl px-4 py-2 text-sm font-mono transition hover:border-primary hover:text-primary"
         rel="noreferrer"
         external
       >
@@ -151,28 +154,9 @@ function closeFromBackdrop(event: MouseEvent) {
   transition: color 150ms ease;
 }
 
-.mobile-nav-item:hover {
-  color: var(--color-primary);
-}
-
-.mobile-nav-item:focus-visible {
-  outline: 2px solid rgb(251 113 133);
-  outline-offset: -4px;
-}
-
 .mobile-more-dialog::backdrop {
   background: rgb(15 23 42 / 0.55);
   backdrop-filter: blur(4px);
-}
-
-.z-almost-infinity {
-  z-index: calc(infinity - 1);
-}
-
-:global(html.mobile-sheet-open),
-:global(body.mobile-sheet-open) {
-  overflow: hidden;
-  overscroll-behavior: none;
 }
 
 .mobile-more-safe-area {

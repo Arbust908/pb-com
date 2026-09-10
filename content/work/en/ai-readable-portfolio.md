@@ -3,7 +3,7 @@ slug: ai-readable-portfolio
 translationKey: ai-readable-portfolio
 locale: en
 title: Negotiating Markdown for an AI-readable portfolio homepage
-description: Adding an opt-in, compact representation and a discovery layer without changing the browser experience.
+description: How I added an optional Markdown response and route discovery without changing the browser experience.
 project: Portfolio
 organization: Personal
 projectType: personal
@@ -31,9 +31,9 @@ draft: true
 
 ## Context
 
-A portfolio has two audiences with different needs. People benefit from navigation, typography, motion, and responsive layout. Automated clients need the same core facts in a representation that is easy to discover and parse.
+A portfolio must work for people and automated clients. People use its navigation, typography, motion, and responsive layout. Automated clients need the same facts in a format they can discover and parse.
 
-The goal was not to replace the website or maintain a second content system. It was to make the existing homepage more useful to clients that explicitly ask for Markdown.
+I did not want to replace the website or maintain a second content system. I wanted the homepage to return Markdown when a client explicitly requested it.
 
 ## Constraints
 
@@ -72,22 +72,22 @@ The current parser intentionally stays small, but it is not a standards-complete
 
 Measured against the same locally built homepage on 21 August 2026:
 
-| Representation | Response body | Content carried |
-|---|---:|---|
-| HTML | 34,401 bytes | Visual document, styles, application state, and CV content |
-| Markdown | 1,732 bytes | 222 words covering the profile, two recent roles, five skill groups, and two languages |
+| Representation | Response body | Content carried                                                                        |
+| -------------- | ------------: | -------------------------------------------------------------------------------------- |
+| HTML           |  34,401 bytes | Visual document, styles, application state, and CV content                             |
+| Markdown       |   1,732 bytes | 222 words covering the profile, two recent roles, five skill groups, and two languages |
 
 That is a 95.0% smaller response body for the focused representation. The comparison is a local payload measurement, not a claim about latency, model accuracy, or production bandwidth savings.
 
 ## Discovery
 
-Negotiation is one part of a broader discovery layer. The homepage, CV, and work index expose RFC 8288 `Link` headers that point clients to:
+Negotiation works alongside route discovery. The homepage, CV, and work index expose RFC 8288 `Link` headers that point clients to:
 
 - a linkset catalog describing the structured CV endpoints;
 - an agent-skill index with a content hash for its CV lookup instructions;
 - the XML sitemap.
 
-The site also serves crawler rules that distinguish search indexing, model training, and retrieval-time AI use. Together, these resources let a client move from a human-facing page to machine-oriented documentation and structured JSON without guessing route names.
+The site also serves crawler rules that distinguish search indexing, model training, and retrieval-time AI use. These resources let a client find the machine-readable documentation and structured JSON without guessing route names.
 
 `[Image: request flow from HTML or Markdown negotiation to CV data and discovery resources]`
 
@@ -99,6 +99,6 @@ For that reason, this case study remains a draft and the measured reduction is n
 
 ## Outcome
 
-The implementation demonstrates a narrow form of progressive enhancement: one URL can preserve its visual browser experience while offering a compact representation from the same underlying data. It also exposed an important systems lesson: correct application headers are insufficient when an edge cache does not vary on the negotiation header.
+In the local implementation, one URL serves the visual browser page or a compact Markdown response from the same data. Production verification also exposed a problem: correct application headers do not help when the edge cache ignores the negotiation header.
 
 The next steps are to correct production cache behavior and domain advertising, replace substring matching with proper `Accept` parsing, and then extend negotiation to file-based case studies without creating a second source of truth.

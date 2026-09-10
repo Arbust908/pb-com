@@ -2,8 +2,8 @@
 slug: simplycodes-ab-testing
 translationKey: simplycodes-ab-testing
 locale: en
-title: Building Data-Driven Engine
-description: How we made product experiments measurable across analytics, server rendering, hydration, and variant-aware page caching.
+title: Building an A/B testing system for cached Nuxt pages
+description: How we measured product experiments across analytics, server rendering, hydration, and variant-aware page caching.
 project: SimplyCodes
 organization: SimplyCodes · Demand.io
 projectType: professional
@@ -34,13 +34,13 @@ draft: false
 
 ## Context
 
-The SimplyCodes team wanted product decisions to come from user behavior rather than intuition. A/B testing could also give us a neutral way to resolve competing product opinions: define the expected behavior, expose comparable groups to a controlled change, and use the result to decide what shipped.
+The SimplyCodes team wanted user behavior to inform product decisions. A/B tests gave us a way to compare a controlled change against the current product and decide what to ship.
 
-The immediate opportunity was Peelie, the interaction used to reveal a coupon code on merchant pages. We hypothesized that a clearer, more deliberate slider would increase meaningful engagement while reducing accidental reveals. Coupon copy rate was the primary metric, but the interaction's prominence also made an unreliable experiment risky. As full-stack lead, I led the team building the delivery and measurement path needed to test it safely.
+We started with Peelie, the interaction used to reveal a coupon code on merchant pages. We hypothesized that a clearer, more deliberate slider would increase meaningful engagement while reducing accidental reveals. Coupon copy rate was the primary metric. As full-stack lead, I led the team building a reliable delivery and measurement path for the test.
 
 ## The first experiment
 
-We began with a third-party Nuxt split-testing module. The first Peelie test used weighted assignment to preserve the existing interface for most visitors while sending smaller groups to “Unlock” and “Show Code” treatments. We connected the selected variant to coupon impressions and copy interactions, then made the experiment identifier available to the wider analytics pipeline.
+We began with a third-party Nuxt split-testing module. The first Peelie test used weighted assignment to preserve the existing interface for most visitors while sending smaller groups to "Unlock" and "Show Code" treatments. We connected the selected variant to coupon impressions and copy interactions, then made the experiment identifier available to the wider analytics pipeline.
 
 That implementation gave us a fast way to test the UI and instrumentation, but it did not give us enough control over assignment in our production architecture. Merchant pages were server rendered and their HTML was cached. A variant selected only in the browser could disagree with the server response, change during hydration, or inherit markup generated for another group.
 
@@ -50,13 +50,13 @@ We reverted the treatment rather than collect data from an experiment whose deli
 
 The revert changed the next question. Before asking whether a new coupon interaction performed better, we needed to know whether assignment and analytics worked correctly when the visible experience did not change.
 
-We introduced hidden A/A-style groups and sent their assignment through the same analytics events planned for the treatment. This work exposed instrumentation defects, including event selection and the exact `test_variant` field name. Fixing those issues before evaluating the UI prevented reporting problems from becoming product conclusions.
+We introduced hidden A/A-style groups and sent their assignment through the same analytics events planned for the treatment. This work found instrumentation defects in event selection and the exact `test_variant` field name. We fixed them before evaluating the UI so reporting errors could not determine a product decision.
 
 The A/A step confirmed that experiment context reached analytics. It also established a team practice: validate the measurement path before trusting differences between treatments.
 
 ## Requirements exposed by the prototype
 
-The first implementation turned a UI experiment into a systems problem. A trustworthy tool needed to provide:
+The first implementation showed that the test affected the complete request path. Our tool needed to provide:
 
 - weighted allocation for controlled rollouts;
 - a stable assignment persisted between requests;
@@ -71,7 +71,7 @@ We replaced the dependency with a small local TypeScript implementation so those
 
 ## The page-cache constraint
 
-Caching was the requirement that changed the architecture most.
+Page caching drove the architecture.
 
 Store pages used Nitro and Redis to cache server-rendered HTML. Without variant-aware caching, the first rendered response for a URL could become the shared response for every visitor to that page. A visitor assigned to a control could receive challenger markup, or the analytics assignment could disagree with the interface that was actually shown. Either outcome would damage the experience and the experiment data.
 
@@ -102,13 +102,13 @@ Tests covered weighted boundaries, uneven allocations, missing analytics cookies
 
 The local pilot used four equally weighted groups: two controls and two slider treatments, one retaining the merchant logo and another simplifying the mobile presentation. The duplicate controls gave us another baseline comparison while the challengers tested whether a more explicit gesture produced clearer, higher-intent coupon engagement.
 
-We refined the treatments across desktop and mobile without changing the assignment contract underneath them. In parallel, another engineer on the team used split testing while developing PostClick V2, adding variant context to its impression, copy, and vote events. That work was a separate implementation path, but it reinforced that experimentation was becoming a team capability rather than one component's special case.
+We refined the treatments across desktop and mobile without changing the assignment contract underneath them. In parallel, another engineer on the team used split testing while developing PostClick V2, adding variant context to its impression, copy, and vote events. That work used a separate implementation path and showed that other parts of the team could use the testing approach.
 
 ## Outcome
 
-The control produced a statistically significant win on coupon copy rate, so we removed the Peelie treatments and retained the existing interaction. That was a successful product decision: the purpose of experimentation was not to justify shipping a redesign, but to make either changing or retaining the experience defensible with evidence.
+The control produced a statistically significant win on coupon copy rate, so we removed the Peelie treatments and kept the existing interaction. The test answered the product question even though the redesign lost.
 
-The reusable outcome was the testing capability itself. The team had an explicit path from hypothesis to weighted delivery, analytics validation, SSR-consistent rendering, variant-aware caching, and cleanup after a decision. Experiments could now inform disagreements with behavioral data instead of asking one opinion to win by default.
+The team also kept the testing system. It covered weighted delivery, analytics validation, consistent SSR and hydration, variant-aware caching, and cleanup after a decision. Product disagreements could now become measured tests.
 
 ```text
 Product question
@@ -129,6 +129,6 @@ Finally, varying cached HTML on every cookie was technically simple but operatio
 
 ## Reflection
 
-Being data-driven starts before reading a dashboard. If assignment changes across rendering boundaries, cached pages mix treatments, or exposure events describe a different interface from the one a visitor saw, more data only creates more confidence in the wrong conclusion.
+Reliable experiment data starts before the dashboard. If assignment changes between server rendering and hydration, cached pages mix treatments, or exposure events describe the wrong interface, the result cannot support a decision.
 
-The most important result of the Peelie experiment was therefore broader than its winning control. It gave the team a repeatable way to turn a product disagreement into a testable question, verify the measurement system, and accept the answer even when that answer was to keep what we already had.
+The Peelie experiment gave the team a repeatable way to turn a product disagreement into a testable question and verify the measurement before using the result. In this case, the evidence told us to keep the existing interaction.

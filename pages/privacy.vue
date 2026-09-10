@@ -1,20 +1,31 @@
 <script setup lang="ts">
+import { usePageSeo } from '~/composables/usePageSeo'
+import { CONTACT_EMAIL } from '~/constants'
+import { createPageGraph } from '~/utils/structuredData'
+
 const { t } = useI18n()
 
-useSeoMeta({
+usePageSeo({
   title: () => `${t('privacy.title')} :: Pancho Blanco`,
   description: () => t('privacy.introduction'),
+  structuredData: context => createPageGraph({
+    type: 'WebPage',
+    url: context.canonicalUrl,
+    name: t('privacy.title'),
+    description: t('privacy.introduction'),
+    breadcrumbs: [
+      { name: t('home'), url: context.localeUrl(context.locale) },
+      { name: t('privacy.title'), url: context.canonicalUrl },
+    ],
+  }),
 })
 </script>
 
 <template>
-  <div class="relative w-full overflow-hidden layout-grid-full">
+  <div class="relative w-full overflow-hidden layout-grid-full bg-checked">
     <div aria-hidden="true" class="pointer-events-none absolute right--28 top--28 size-120 rounded-full ambient-primary filter-blur-3xl" />
 
     <header class="relative content-container pb-10 pt-14 lg:pb-16 lg:pt-24 sm:pt-18">
-      <p class="mb-5 meta-label-primary">
-        {{ $t('privacy.eyebrow') }}
-      </p>
       <h1 class="display-heading max-w-5xl text-[clamp(3.2rem,12vw,7rem)]">
         {{ $t('privacy.title') }}
       </h1>
@@ -26,8 +37,8 @@ useSeoMeta({
       </p>
     </header>
 
-    <main class="relative content-container pb-18 lg:pb-28">
-      <aside class="border border-primary rounded-2xl bg-rose-400/8 p-5 sm:p-7">
+    <section class="relative content-container pb-18 lg:pb-28">
+      <aside class="border border-primary rounded-2xl bg-rose-800/50 p-5 sm:p-7">
         <p class="meta-label-primary">
           {{ $t('privacy.notice_title') }}
         </p>
@@ -45,7 +56,7 @@ useSeoMeta({
             {{ $t(`privacy.sections.${section}.body`) }}
           </p>
           <p v-if="section === 'operator'" class="mt-4">
-            <a class="text-primary transition hover:underline" href="mailto:me@panchoblanco.dev">me@panchoblanco.dev</a>
+            <a class="text-primary transition hover:underline" :href="`mailto:${CONTACT_EMAIL}`">{{ CONTACT_EMAIL }}</a>
           </p>
           <p v-if="section === 'analytics'" class="mt-4">
             <a class="text-primary transition hover:underline" href="https://posthog.com/privacy" rel="noreferrer" target="_blank">PostHog Privacy Policy</a>
@@ -58,6 +69,6 @@ useSeoMeta({
           </p>
         </section>
       </div>
-    </main>
+    </section>
   </div>
 </template>

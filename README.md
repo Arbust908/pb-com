@@ -1,98 +1,84 @@
 # PanchoBlanco.dev
 
-> Personal portfolio of **Fran "Pancho" Blanco** — full-stack developer and creative technologist based in Buenos Aires, Argentina.
+Personal portfolio and CV site for Fran "Pancho" Blanco, a front-end developer based in Buenos Aires, Argentina.
 
----
+Built with Nuxt 4, Vue 3, TypeScript, UnoCSS, Nuxt Content, Pinia, and `@nuxtjs/i18n`. The site supports English and Spanish, dark mode, case studies, a data-backed CV, and PostHog analytics.
 
-## ★ Pillars
+## Routes
 
-| Section | Route | Description |
-|----------|-------|-------------|
-| **Work** | `/work` | Case studies with problem→solution storytelling. Real projects, real constraints, real outcomes. |
-| **Lab** | `/lab` | Polished, finished component experiments. Animations, micro-interactions, CSS-only demos, and API explorations. No half-baked ideas. |
-| **CV** | `/cv` | Interactive, bilingual (EN/ES), mobile-first, print-friendly resume. |
+| Route         | Description                                                         |
+| ------------- | ------------------------------------------------------------------- |
+| `/`           | Home page with recent experience, skills, and languages             |
+| `/about`      | Profile and contact options                                         |
+| `/cv`         | Curriculum vitae                                                    |
+| `/work`       | Filterable case-study index                                         |
+| `/work/:slug` | Individual case study                                               |
+| `/privacy`    | Privacy notice                                                      |
+| `/index.md`   | Markdown representation of the home page for agents and CLI clients |
 
-## Tech Stack
+Spanish routes use the `/es` prefix, such as `/es/work`.
 
-**Nuxt 3** · Vue 3 · TypeScript · **UnoCSS** · i18n (`@nuxtjs/i18n`) · Pinia · PostHog · PWA (`@vite-pwa/nuxt`)
+The server also exposes health and CV data endpoints under `/api`, plus agent discovery metadata under `/.well-known`.
 
-**Rendering:** Hybrid (ISR + SSR) · **Deploy:** Vercel · **Fonts:** Plus Jakarta Sans, DM Serif Display, Google Sans Code
+## Structured Data
 
-## Standout Features
-
-- **View Transition API** — smooth animated transitions for theme toggle and language switch (circular clip-path reveal)
-- **Shuffle Letters** — text scrambling effect on the homepage hero
-- **AI-Ready** — Content-Signal headers (`ai-train=no`), RFC 8288 Link headers for agent discovery, markdown content negotiation (`Accept: text/markdown`)
-- **Print-Optimized CV** — dedicated print stylesheet, hidden navigation, clean layout
-- **PWA** — offline support, installable, multiple icon resolutions
-- **Dark Mode** — persisted preference with animated toggle
-- **Bilingual** — English and Spanish, with View Transition-animated language switch
+Valid HTML pages emit one server-rendered JSON-LD graph through `nuxt-jsonld`. The graph describes the site and its author, plus the current page as a profile, collection, article, or web page. Case studies include only explicit publication dates. Error pages emit no graph and are excluded from indexing.
 
 ## Getting Started
 
 ```bash
-git clone https://github.com/Arbust908/pb-com.git
-cd pb-com
 yarn install
-yarn dev      # requires portless (local dev with custom domain)
-yarn build    # production build
+yarn dev
 ```
 
-### Environment
+`yarn dev` runs Nuxt through `portless` using the local `pb-com` domain.
 
-Minimal env needed — only `NUXT_APP_NAME` is actively used:
+## Environment
+
+Copy `.env.example` to `.env` and set the public PostHog project key when analytics is enabled:
 
 ```env
-NUXT_APP_NAME=Pancho Blanco
+NUXT_PUBLIC_PH_KEY=
 ```
 
-Other integration keys may be present in `.env`, but they are currently unused by any live feature.
+Public Nuxt runtime configuration is exposed to the browser. Do not put secrets in variables beginning with `NUXT_PUBLIC_`.
 
-### Scripts
+## Scripts
 
-| Command | Purpose |
-|---------|---------|
-| `yarn dev` | Start dev server via `portless` |
-| `yarn build` | Production build |
-| `yarn start` | Run production server |
-| `yarn generate` | Static site generation |
-| `yarn lint` / `yarn lint:fix` | Lint with `@antfu/eslint-config` |
-| `yarn typecheck` | Type-check with `vue-tsc` |
+| Command               | Purpose                                         |
+| --------------------- | ----------------------------------------------- |
+| `yarn dev`            | Start the development server through `portless` |
+| `yarn build`          | Build the production application                |
+| `yarn start`          | Run the built Nuxt server                       |
+| `yarn generate`       | Generate a static build                         |
+| `yarn start:generate` | Serve the generated static output               |
+| `yarn lint`           | Lint the project                                |
+| `yarn lint:fix`       | Lint and apply fixes                            |
+| `yarn typecheck`      | Type-check with `vue-tsc`                       |
 
 ## Project Structure
 
 ```
 pb-com/
-├── components/      # Vue components (auto-imported)
-│   ├── bloby/       # Decorative SVG blob backgrounds
-│   ├── cv/          # CV section components
-│   └── general/     # NavBar, Footer, LangToggle, DarkToggle
-├── composables/     # Shared stateful logic (auto-imported)
-├── constants/       # App name, description
-├── content/         # Markdown case studies, grouped by language
-├── content.config.ts # Validated case-study frontmatter schema
-├── layouts/         # Page layouts (default, home, none)
-├── locales/         # i18n translations (en, es)
-├── middleware/       # Route middleware
-├── pages/           # File-based routing
-├── public/          # Static assets, PWA icons, favicons
+├── components/       # Reusable Vue components
+├── composables/      # Shared Composition API logic
+├── content/          # English and Spanish Markdown case studies
+├── i18n/             # Locale configuration and translations
+├── layouts/          # Application layouts
+├── pages/            # File-based routes
+├── public/           # Static assets and agent skill metadata
 ├── server/
-│   ├── api/         # API endpoints (CV data)
-│   ├── data/        # Static JSON (experiences, skills, languages, studies)
-│   ├── middleware/   # Agent discovery, markdown negotiation
-│   └── routes/       # robots.txt, sitemap.xml
-└── utils/           # Format helpers, ratio calculations
+│   ├── api/          # Health and CV data endpoints
+│   ├── data/         # CV JSON data
+│   ├── middleware/   # Markdown negotiation and agent link headers
+│   └── routes/       # robots.txt, sitemap.xml, and .well-known routes
+├── stores/           # Pinia stores
+├── types/            # Shared TypeScript types
+└── constants/        # Site and case-study constants
 ```
 
-CV data lives in `server/data/*.json` — edited directly, no database required. The admin panel and ORM layer (Turso/Drizzle) have been removed in favor of a slimmer, more maintainable approach.
+Case studies are authored in `content/work/{en,es}`. CV data is maintained in `server/data`.
 
 ## Author
 
-**Fran "Pancho" Blanco** — `me@panchoblanco.dev`
-
-- GitHub: [@Arbust908](https://github.com/Arbust908)
-- Web: [panchoblanco.dev](https://panchoblanco.dev)
-
-## License
-
-MIT
+Fran "Pancho" Blanco: [panchoblanco.dev](https://panchoblanco.dev) · [@Arbust908](https://github.com/Arbust908)

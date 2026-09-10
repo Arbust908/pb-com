@@ -1,6 +1,5 @@
 import { defineEventHandler, setHeader } from 'h3'
-
-const SITE_URL = 'https://panchoblanco.dev'
+import { SITE_URL } from '../../constants'
 
 export default defineEventHandler((event) => {
   setHeader(event, 'Content-Type', 'text/plain; charset=utf-8')
@@ -9,10 +8,6 @@ export default defineEventHandler((event) => {
   const lines = [
     'User-agent: *',
     'Allow: /',
-    'Disallow: /admin/',
-    'Disallow: /auth',
-    'Disallow: /widget/',
-    'Disallow: /api/',
     // Content Signals (https://contentsignals.org/)
     // search=yes  -> allow indexing for search results
     // ai-train=no -> do not use for training generative models

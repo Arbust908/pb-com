@@ -1,27 +1,48 @@
 <script setup lang="ts">
-import { useUP } from '~/composables/ultimateProtocol'
-import type { MetaData } from '~/composables/ultimateProtocol'
+import { usePageSeo } from '~/composables/usePageSeo'
+import { CONTACT_EMAIL } from '~/constants'
+import { createPageGraph } from '~/utils/structuredData'
 
-const meta: MetaData = {
-  base_url: 'https://panchoblanco.dev',
-  title: 'Curriculum Vitae :: Pancho Blanco',
-  description:
-          'Hola soy Pancho Blanco, un Desarrollador y Diseñador Grafico. Estas son mis habilidades y experiencias. Tengo mas de 4 años en la industria del desarrollo y tengo una pasion por enseñar y aprender.',
-}
-useHead(useUP(meta))
+const { locale, t } = useI18n()
+
+const globalStore = useGlobalStore()
+await useAsyncData('global-data', () => globalStore.fetchAll())
+const { languages, skillsData } = storeToRefs(globalStore)
+
+usePageSeo({
+  title: () => `${t('cv.meta.title')} :: Pancho Blanco`,
+  description: () => t('cv.meta.description'),
+  structuredData: context => createPageGraph({
+    type: 'ProfilePage',
+    url: context.canonicalUrl,
+    name: t('cv.meta.title'),
+    description: t('cv.meta.description'),
+    breadcrumbs: [
+      { name: t('home'), url: context.localeUrl(context.locale) },
+      { name: t('cv.meta.title'), url: context.canonicalUrl },
+    ],
+    person: {
+      email: CONTACT_EMAIL,
+      jobTitle: t('rol'),
+      knowsAbout: skillsData.value.skills.map(skill => skill.name),
+      knowsLanguage: languages.value
+        .map(language => language.translations[locale.value]?.name ?? language.translations.en?.name)
+        .filter((name): name is string => Boolean(name)),
+    },
+  }),
+})
 </script>
 
 <template>
   <section class="relative w-full overflow-hidden layout-grid-full">
-    <!-- eslint-disable vue/no-unused-refs -->
-    <BlobyOne class="pointer-events-none fixed z-0 w-90 opacity-45 filter-blur-2xl -right-8 -top-4 dark:opacity-30" />
-    <BlobyTwo class="pointer-events-none fixed z-0 w-100 opacity-45 filter-blur-2xl -bottom-7 -left-6 dark:opacity-30" />
-    <div class="cv-layout relative grid content-container pb-18 pt-8 lg:pb-28 lg:pt-12">
-      <CvSideNav class="lang relative z-10" />
-      <CvPersonal class="personal relative z-10 h-fit" />
-      <CvExperiences ref="exp" class="exp relative z-10" />
-      <CvStudies ref="study" class="study relative z-10" />
-      <BackToTopBtn class="z-20" />
+    <BlobyOne class="pointer-events-none fixed z-under w-90 opacity-45 filter-blur-2xl -right-8 -top-4 dark:opacity-30" />
+    <BlobyTwo class="pointer-events-none fixed z-under w-100 opacity-45 filter-blur-2xl -bottom-7 -left-6 dark:opacity-30" />
+    <div class="cv-layout relative grid content-container gap-6 pb-18 pt-8 md:gap-8 lg:pb-28 lg:pt-12">
+      <CvSideNav class="lang relative z-content" />
+      <CvPersonal class="personal relative z-content h-fit" />
+      <CvExperiences class="exp relative z-content" />
+      <CvStudies class="study relative z-content" />
+      <BackToTopBtn class="z-main" />
     </div>
   </section>
 </template>
@@ -36,7 +57,7 @@ useHead(useUP(meta))
       '. exp'
       '. study';
     grid-template-columns: 360px 1fr;
-    grid-template-rows: 64px 640px 1fr auto;
+    grid-template-rows: 34px 640px 1fr auto;
     @apply gap-x-4;
   }
   .lang {
@@ -51,9 +72,6 @@ useHead(useUP(meta))
   .study {
     grid-area: study;
   }
-  .cv-layout.print {
-    grid-template-rows: 20px 640px 1fr auto;
-  }
 }
 @screen lg {
   .cv-layout {
@@ -65,14 +83,5 @@ useHead(useUP(meta))
     grid-template-columns: 400px clamp(320px, 60%, 640px);
     grid-template-rows: 64px 640px 1fr auto;
   }
-}
-.cv-layout.print {
-  grid-template-areas:
-    '. . .'
-    '. personal .'
-    '. exp .'
-    '. study .';
-  grid-template-columns: 200px 640px 200px;
-  grid-template-rows: 60px repeat(3, auto);
 }
 </style>

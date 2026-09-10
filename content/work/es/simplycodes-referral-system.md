@@ -2,14 +2,14 @@
 slug: simplycodes-referral-system
 translationKey: simplycodes-referral-system
 locale: es
-title: Rediseñando el recorrido de referidos para ambas partes en SimplyCodes
-description: Cómo reformulé las experiencias de quien invita y de la persona invitada en torno a un pipeline existente de atribución y recompensas entre servicios.
+title: Rediseñar la experiencia de referidos en SimplyCodes
+description: Cómo rehice las experiencias de quien invita y de quien recibe la invitación sobre el sistema existente de atribución y recompensas.
 project: SimplyCodes
 organization: SimplyCodes · Demand.io
 projectType: professional
 sortOrder: 20
 role: Responsable principal del mantenimiento frontend y del rediseño
-period: Abril–julio de 2024
+period: Abril a julio de 2024
 technologies:
   - Nuxt
   - Vue
@@ -32,26 +32,26 @@ draft: false
 
 ## Contexto
 
-SimplyCodes ya tenía las bases de un programa de referidos: códigos de invitación únicos, validación de referidos, atribución a través de la autenticación, seguimiento de actividad y recompensas. La experiencia web todavía no comunicaba ese sistema como un recorrido coherente.
+SimplyCodes ya tenía un programa de referidos con códigos únicos, validación, atribución mediante la autenticación, seguimiento de actividad y recompensas. La experiencia web todavía no explicaba con claridad cómo funcionaba.
 
-Como principal responsable del mantenimiento frontend, estuve a cargo del rediseño desde la idea inicial de producto hasta la implementación. Definí la forma de las experiencias de quien invita y de la persona invitada, traduje la mecánica de recompensas en pasos comprensibles y coordiné con el equipo de backend para que el nuevo recorrido respetara los contratos de atribución existentes.
+Como principal responsable del mantenimiento frontend, estuve a cargo del rediseño desde la idea inicial hasta la implementación. Definí las experiencias de quien invita y de quien recibe la invitación, expliqué la mecánica de recompensas en pasos concretos y coordiné con el equipo de backend para respetar los contratos de atribución existentes.
 
-El objetivo no era reemplazar la infraestructura de referidos. Era hacer que esa infraestructura fuera comprensible y útil para ambas partes de la invitación.
+No necesitábamos reemplazar la infraestructura de referidos. Necesitábamos hacerla comprensible y útil para ambas partes.
 
 ## Dos audiencias, dos preguntas
 
 Un flujo de referidos sirve a dos personas con motivaciones diferentes.
 
-Quien invita necesita entender por qué vale la pena compartir, dónde encontrar su enlace, cómo enviarlo y si sus amigos completaron el recorrido. La persona invitada llega con menos contexto. Necesita entender quién la invitó, por qué debería confiar en la oferta y qué tiene que hacer después.
+Quien invita necesita entender por qué vale la pena compartir, dónde encontrar su enlace, cómo enviarlo y si sus amigos completaron los pasos. La persona invitada llega con menos contexto. Necesita saber quién la invitó, por qué confiar en la oferta y qué hacer después.
 
-Tratar a ambas audiencias como una única página genérica de adquisición habría hecho que el programa fuera más difícil de explicar. Separé la experiencia en dos recorridos conectados:
+Una sola página genérica de adquisición no podía responder bien a las dos situaciones. Separé la experiencia en dos partes conectadas:
 
 - una página para quien invita, donde puede descubrir el programa, desbloquear un código de referido, compartirlo y ver su progreso;
 - una landing page para la persona invitada que convierte un enlace compartido en un camino claro de registro, instalación y compra.
 
 `[Imagen: las páginas de quien invita y de la persona invitada, una al lado de la otra, en desktop y mobile]`
 
-## Diseñando el recorrido de quien invita
+## La experiencia de quien invita
 
 La página de quien invita se adapta al estado de autenticación. Quienes no iniciaron sesión primero ven la explicación del programa y un llamado a la acción que los devuelve a la página de referidos después de iniciar sesión. Quienes ya iniciaron sesión ven su enlace único, los controles para compartir y el progreso de los referidos completados.
 
@@ -61,9 +61,9 @@ Revisé el mensaje para cada canal y agregué parámetros de origen a los enlace
 
 La presentación del progreso muestra cinco posiciones visuales, pero la interfaz por sí sola no es la autoridad respecto de la elegibilidad de los referidos ni de los límites de las recompensas. Esas reglas pertenecen al servicio de recompensas y a su configuración de actividades.
 
-## Diseñando el recorrido de la persona invitada
+## La experiencia de la persona invitada
 
-La página de la persona invitada tenía que convertir la recomendación de otra persona en un próximo paso creíble. La organicé en torno a una propuesta de valor concisa, seguida de una explicación específica para cada dispositivo sobre cómo completar el recorrido.
+La página de la persona invitada tenía que explicar qué hacer después de recibir la recomendación. La organicé con una propuesta breve y pasos específicos para cada dispositivo.
 
 En mobile, los pasos hacen énfasis en crear una cuenta, descargar la app y hacer una compra. En desktop, hacen énfasis en crear una cuenta, instalar la extensión del navegador, comprar con la extensión y activar las recompensas antes de la compra. Los llamados a la acción aparecen al principio y al final de la página, con una acción adicional en mobile junto al primer paso instructivo.
 
@@ -73,7 +73,7 @@ También revisé los metadatos de la página y la presentación al compartir en 
 
 ## Límites del sistema
 
-El recorrido completo atravesaba varios servicios a cargo de distintos equipos. Mi alcance incluía el concepto de producto, los recorridos web responsivos, las interacciones para compartir, el traspaso a autenticación con contexto de referidos, los metadatos y la integración frontend. Los servicios de backend existentes seguían siendo responsables de la identidad, la persistencia, la calificación, la moderación y las recompensas.
+La experiencia completa atravesaba varios servicios a cargo de distintos equipos. Mi trabajo incluía el concepto de producto, las vistas web responsivas, las interacciones para compartir, el traspaso a autenticación con contexto de referidos, los metadatos y la integración frontend. Los servicios de backend existentes seguían a cargo de la identidad, la persistencia, la calificación, la moderación y las recompensas.
 
 ```text
 Mi alcance frontend
@@ -98,7 +98,7 @@ Karma
   -> crear actividades de recompensa pendientes de moderación
 ```
 
-Este límite fue importante durante el diseño. El frontend podía explicar los pasos probables y presentar información sobre las recompensas, pero no podía convertirse en una segunda fuente de verdad para las reglas de calificación o pago. La coordinación con el equipo de backend mantuvo el recorrido de la persona usuaria alineado con los contratos que ya eran responsables de esas decisiones.
+Esta división de responsabilidades guio el diseño. El frontend podía explicar los pasos y mostrar información sobre las recompensas, pero no debía duplicar las reglas de calificación o pago. Con el equipo de backend verificamos que la experiencia respetara los contratos que tomaban esas decisiones.
 
 ## Decisiones de implementación
 
@@ -112,16 +112,16 @@ La comunicación de las recompensas puso de manifiesto otra restricción importa
 
 Después de la primera implementación hubo varias correcciones puntuales. Ajusté la navegación de la persona invitada a partir del feedback, restauré el comportamiento estándar de búsqueda en la página de quien invita y revisé los textos para compartir y la presentación en redes sociales a medida que evolucionaba el mensaje del producto.
 
-No fueron cambios en la atribución en sí. Fueron mejoras en la confianza y la continuidad: un encabezado que se comportaba como el resto del producto, mensajes apropiados para cada canal y una vista previa compartida que presentaba el destino con precisión.
+No cambiaron la atribución. Corregí un encabezado para que se comportara como en el resto del producto, adapté los mensajes a cada canal y ajusté la vista previa compartida para que mostrara el destino correcto.
 
 ## Resultado
 
-El resultado fue un recorrido web coherente para ambas partes, construido en torno al sistema de referidos existente. Quienes invitaban recibieron formas de compartir apropiadas para cada dispositivo y una vista más clara del progreso. Las personas invitadas recibieron un camino enfocado desde la recomendación hasta la creación de la cuenta y la instalación del producto. El rediseño también estableció límites explícitos de integración entre el frontend, la autenticación, SimplyCodes API y los servicios de Karma.
+El resultado fue una experiencia web conectada para ambas partes sobre el sistema de referidos existente. Quienes invitaban recibieron opciones para compartir según el dispositivo y una vista más clara del progreso. Las personas invitadas recibieron pasos concretos desde la recomendación hasta la creación de la cuenta y la instalación del producto. El rediseño también fijó los límites entre el frontend, la autenticación, SimplyCodes API y los servicios de Karma.
 
 La evidencia analítica y de despliegue disponible para este caso de estudio no demuestra un aumento de la conversión, adquisición incremental ni tasas de finalización de recompensas. Esos resultados siguen abiertos hasta que se puedan recuperar y validar los dashboards correspondientes del funnel.
 
 ## Reflexión
 
-Los productos de referidos no son solo generadores de enlaces. Son recorridos de confianza que abarcan a dos personas usuarias y varios sistemas. La interfaz tiene que conservar la atribución sin exponer la complejidad técnica, explicar los incentivos sin convertir los textos promocionales en políticas y seguir siendo útil cuando la autenticación o la calificación ocurren en otro lugar.
+Un producto de referidos no se reduce a generar enlaces. Tiene que conectar a dos personas y varios sistemas sin perder la atribución. La interfaz debe explicar los incentivos sin convertir un texto promocional en la regla del negocio, incluso cuando la autenticación o la calificación ocurren en otro servicio.
 
-Estar a cargo del rediseño implicó dar forma a esa experiencia completa y, al mismo tiempo, respetar dónde terminaba la responsabilidad del frontend. La solución más sólida no fue un nuevo backend de referidos, sino un contrato más claro entre la intención de la persona usuaria, el estado de la interfaz y los servicios que ya eran responsables de hacer realidad el referido.
+Estar a cargo del rediseño implicó resolver la experiencia completa sin exceder la responsabilidad del frontend. No hacía falta un nuevo backend de referidos. Hacía falta un contrato más claro entre la intención de la persona, el estado de la interfaz y los servicios que procesaban el referido.

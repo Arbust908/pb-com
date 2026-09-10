@@ -1,14 +1,17 @@
 import { appDescription } from './constants/index'
 
+const jsonld = {
+  'nuxt-jsonld': {
+    disableOptionsAPI: true,
+  },
+}
+
 export default defineNuxtConfig({
+  ...jsonld,
   runtimeConfig: {
     public: {
-      appName: '',
+      phKey: '',
     },
-    openRouterKey: '',
-    devUser: '',
-    devPass: '',
-    phKey: '',
   },
 
   modules: [
@@ -17,12 +20,10 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/i18n',
+    'nuxt-jsonld',
   ],
 
   routeRules: {
-    '/portfolio': { redirect: '/work' },
-    '/es/portfolio': { redirect: '/es/work' },
-
     // Homepage and CV can be edited via admin - use ISR instead of prerender
     '/': { isr: 3600 }, // Revalidate every hour
     '/cv': { isr: 3600 }, // Revalidate every hour
@@ -30,10 +31,6 @@ export default defineNuxtConfig({
     // File-based case studies are rebuilt from Markdown and cached at the edge
     '/work': { isr: 3600 },
     '/work/**': { isr: 3600 },
-
-    // Blog - content may be updated occasionally
-    // '/blog': { isr: 86400 }, // Revalidate daily
-    // '/blog/**': { isr: 86400 },
 
     // ✅ OPTIMIZED: API routes with proper caching & security headers
     '/api/**': {
@@ -63,21 +60,16 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
-    '@fontsource/bitter/latin-800.css',
   ],
 
   vite: {
-    // ✅ OPTIMIZED: Vite performance configuration (antfu preferences)
     build: {
       reportCompressedSize: false,
-      // ✅ PERF BUDGET: Warn if individual chunks exceed 500KB
       chunkSizeWarningLimit: 500,
-      sourcemap: import.meta.env.NODE_ENV === 'development',
     },
   },
 
   nitro: {
-    // ✅ OPTIMIZED: Enable compression and minification for production
     compressPublicAssets: {
       brotli: true,
       gzip: true,
@@ -89,17 +81,6 @@ export default defineNuxtConfig({
         target: 'esnext',
       },
     },
-
-    // ✅ OPTIMIZED: Better performance for large apps
-    experimental: {
-      wasm: true,
-    },
-
-    /* prerender: {
-      crawlLinks: false,
-      routes: ['/'],
-      ignore: ['/hi'],
-    }, */
   },
 
   app: {
@@ -124,7 +105,6 @@ export default defineNuxtConfig({
         /*  { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }, */
       ],
       meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
         { name: 'description', content: appDescription },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
       ],

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { GITHUB_URL } from '~/constants'
+
 const currentYear = new Date().getFullYear()
 const localePath = useLocalePath()
 </script>
@@ -25,7 +27,7 @@ const localePath = useLocalePath()
           {{ $t('privacy_link') }}
         </NuxtLink>
         <NuxtLink
-          href="https://github.com/Arbust908"
+          :href="GITHUB_URL"
           class="icon-control"
           :aria-label="$t('github_profile')"
           rel="noreferrer"
