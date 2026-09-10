@@ -35,8 +35,8 @@ async function loadSkills(): Promise<SkillEntry[]> {
 
   const skills = await Promise.all(
     skillFiles.map(async (s) => {
-      // Pull the raw markdown via internal $fetch so we don't depend on filesystem
-      // layout in the build output. Returns string for text responses.
+      // Read static markdown through the request-bound internal fetch so it works
+      // without depending on the filesystem layout in the build output.
       const body = await $fetch<string>(s.path, { responseType: 'text' })
       const sha256 = createHash('sha256').update(body).digest('hex')
       return {

@@ -1,6 +1,6 @@
-import type { ApiResponse, CvExperience, CvLanguage, CvSkillsData } from '~/types'
+import type { ApiResponse, CvExperience, CvLanguage, CvSkillsData } from '#shared/types'
 import { defineEventHandler, getRequestURL, setHeader } from 'h3'
-import { SITE_URL } from '../../constants'
+import { SITE_URL } from '#shared/constants'
 
 function tr(item: { translations: Record<string, Record<string, string>> }, field: string, locale = 'en'): string {
   return item.translations?.[locale]?.[field] ?? item.translations?.en?.[field] ?? ''
@@ -8,8 +8,7 @@ function tr(item: { translations: Record<string, Record<string, string>> }, fiel
 
 async function safeFetch<T>(url: string): Promise<T | null> {
   try {
-    const fetcher = $fetch as unknown as (input: string) => Promise<unknown>
-    return (await fetcher(url)) as T
+    return await $fetch<T>(url)
   }
   catch {
     return null

@@ -1,7 +1,7 @@
 import type { H3Event } from 'h3'
 import { queryCollection } from '@nuxt/content/server'
 import { defineEventHandler, setHeader } from 'h3'
-import { SITE_URL } from '../../constants'
+import { SITE_URL } from '#shared/constants'
 
 interface SitemapEntry {
   loc: string

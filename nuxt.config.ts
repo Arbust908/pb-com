@@ -1,4 +1,4 @@
-import { appDescription } from './constants/index'
+import { appDescription } from './shared/constants/index.ts'
 
 const jsonld = {
   'nuxt-jsonld': {
@@ -32,21 +32,18 @@ export default defineNuxtConfig({
     '/work': { isr: 3600 },
     '/work/**': { isr: 3600 },
 
-    // ✅ OPTIMIZED: API routes with proper caching & security headers
     '/api/**': {
       headers: {
         'cache-control': 'private,max-age=300', // 5 min cache for API responses
       },
     },
 
-    // ✅ OPTIMIZED: Static assets caching
     '/_nuxt/**': {
       headers: {
-        'cache-control': 'public,max-age=31536000,s-maxage=31536000', // 1 year cache
+        'cache-control': 'public,max-age=31536000,s-maxage=31536000',
       },
     },
 
-    // Catch-all - fallback to SSR
     '/[...all]': { ssr: true },
   },
 
@@ -100,9 +97,9 @@ export default defineNuxtConfig({
         },
       ],
       link: [
-        /* { rel: 'icon', href: '/favicon.ico', sizes: 'any' }, */
-        /* { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }, */
-        /*  { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }, */
+        { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
       ],
       meta: [
         { name: 'description', content: appDescription },
@@ -116,6 +113,9 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
     vueI18n: 'locales/i18n.config.ts',
+  },
+  future: {
+    compatibilityVersion: 5,
   },
 
   compatibilityDate: '2024-09-10',
