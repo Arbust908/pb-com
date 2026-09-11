@@ -19,6 +19,7 @@ export interface CvExperience {
   sortOrder: number
   createdAt: string
   updatedAt: string
+  skillSlugs?: string[]
   translations: Record<string, CvExperienceTranslation>
 }
 export interface CvLanguage {
@@ -44,6 +45,15 @@ export interface CvSkill {
   id: number
   slug: string
   name: string
+  icon: string
+  color: string
+  aliases: string[]
+  translations: Record<string, CvSkillTranslation>
+  status?: 'disabled' | 'enabled'
+}
+
+export interface CvSkillTranslation {
+  description: string
 }
 
 export interface CvSkillGroup {

@@ -25,7 +25,7 @@ const { languages, locale } = defineProps<Props>()
         <h4 class="font-bold">
           {{ getTranslation(lang, 'name', locale) }}
         </h4>
-        <p class="mt-1 text-body">
+        <p class="mt-1 text-slate-700 dark:text-slate-300">
           {{ getTranslation(lang, 'level', locale) }}
         </p>
       </div>

@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { ApiResponse, CvSkillsData } from '#shared/types'
 import { LayoutGroup, motion, MotionConfig } from 'motion-v'
 import { CASE_STUDY_AREAS, MOTION_SPRINT_OPTIONS, PROJECT_COLORS } from '#shared/constants'
 import { usePageSeo } from '@/composables/usePageSeo'
+import { resolveCaseStudySkills } from '~/utils/skills'
 import { createCollectionGraph } from '~/utils/structuredData'
 
 const { locale, t } = useI18n()
@@ -11,6 +13,8 @@ const filterDialog = useTemplateRef<HTMLDialogElement>('filterDialog')
 const isFiltersOpen = shallowRef(false)
 const lockTarget = shallowRef<HTMLElement | null>(null)
 const isLocked = useScrollLock(() => lockTarget.value)
+const { data: skillsResponse } = await useFetch<ApiResponse<CvSkillsData>>('/api/cv/skills', { key: 'cv-skills' })
+const catalogSkills = computed(() => skillsResponse.value?.data?.skills ?? [])
 
 onMounted(() => {
   lockTarget.value = document.documentElement
@@ -62,6 +66,11 @@ const filteredStudies = computed(() => activeFilter.value
   ? studies.value.filter(study => study.areas?.includes(activeFilter.value as typeof CASE_STUDY_AREAS[number]))
   : studies.value)
 
+function getPreviewSkills(study: NonNullable<typeof studies.value>[number]) {
+  const labels = study.technologies.length ? study.technologies : study.skills
+  return resolveCaseStudySkills(labels, catalogSkills.value).slice(0, 4)
+}
+
 function cardStyle(project: string) {
   const color = PROJECT_COLORS[project as keyof typeof PROJECT_COLORS] ?? PROJECT_COLORS.personal
   return { '--card-color': color }
@@ -110,41 +119,41 @@ usePageSeo({
 
 <template>
   <MotionConfig reduced-motion="user" :transition="MOTION_SPRINT_OPTIONS">
-    <div class="relative w-full overflow-hidden base-bg color-base layout-grid-full">
-      <div aria-hidden="true" class="pointer-events-none absolute right--20 top--24 size-120 rounded-full ambient-secondary filter-blur-3xl" />
-      <div aria-hidden="true" class="pointer-events-none absolute right-48 top-16 size-72 rounded-full ambient-primary filter-blur-3xl" />
+    <div class="relative w-full overflow-hidden bg-slate-100 text-slate-950 layout-grid-full dark:bg-slate-900 dark:text-slate-50">
+      <div aria-hidden="true" class="pointer-events-none absolute right--20 top--24 size-120 rounded-full bg-purple-400/15 filter-blur-3xl dark:bg-purple-400/10" />
+      <div aria-hidden="true" class="pointer-events-none absolute right-48 top-16 size-72 rounded-full bg-rose-400/15 filter-blur-3xl dark:bg-rose-400/10" />
 
-      <header class="relative content-container pb-10 pt-12 lg:pb-18 lg:pt-24 sm:pb-16 sm:pt-16">
+      <header class="relative mx-auto max-w-360 w-full px-4 pb-10 pt-12 lg:px-10 sm:px-6 lg:pb-18 lg:pt-24 sm:pb-16 sm:pt-16">
         <div class="grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
           <motion.div
             :initial="{ opacity: 0, y: 24 }"
             :animate="{ opacity: 1, y: 0 }"
             :transition="{ delay: 0.06 }"
           >
-            <h1 class="max-w-5xl text-[clamp(3.2rem,14vw,7rem)] display-heading leading-[0.88] capitalize">
+            <h1 class="max-w-5xl text-[clamp(3.2rem,14vw,7rem)] font-extrabold leading-[0.88] tracking-[-0.035em] font-mono capitalize">
               {{ $t('case_studies.title') }}
             </h1>
-            <p class="mt-2 max-w-2xl color-base text-body leading-relaxed lg:text-xl sm:text-lg">
+            <p class="mt-2 max-w-2xl text-slate-700 leading-relaxed lg:text-xl sm:text-lg dark:text-slate-300">
               {{ $t('case_studies.introduction') }}
             </p>
           </motion.div>
         </div>
       </header>
 
-      <section class="relative border-y border-base surface-strong-bg backdrop-blur-xl lg:sticky lg:top-0 lg:z-sticky">
-        <div class="content-container py-3">
+      <section class="relative border-y border-slate-300/70 bg-slate-50/90 backdrop-blur-xl lg:sticky lg:top-0 lg:z-sticky dark:border-slate-700/70 dark:bg-slate-800/75">
+        <div class="mx-auto max-w-360 w-full px-4 py-3 lg:px-10 sm:px-6">
           <button
-            class="w-full pill-control justify-between text-body sm:hidden hover:border-primary hover:text-primary"
+            class="w-full inline-flex items-center justify-between border border-slate-300/70 rounded-full px-4 py-2 text-xs text-slate-700 font-mono transition sm:hidden dark:border-slate-700/70 hover:border-rose-500/60 dark:text-slate-300 hover:text-rose-700 dark:hover:border-rose-400/50 dark:hover:text-rose-300"
             type="button"
             :aria-expanded="isFiltersOpen"
             aria-controls="work-filter-dialog"
             @click="openFilters"
           >
             <span class="flex items-center gap-2">
-              <span class="i-ph-funnel-simple color-base" aria-hidden="true" />
+              <span class="i-ph-funnel-simple text-slate-950 dark:text-slate-50" aria-hidden="true" />
               {{ $t('case_studies.filters_button') }}
             </span>
-            <span class="text-primary">
+            <span class="text-rose-700 dark:text-rose-300">
               {{ activeFilter ? $t(`case_studies.areas.${activeFilter}`) : $t('case_studies.filter_all') }}
             </span>
           </button>
@@ -152,7 +161,7 @@ usePageSeo({
           <div class="hidden gap-2 overflow-x-auto no-scrollbar sm:flex" role="group" :aria-label="$t('case_studies.filters_label')">
             <button
               class="relative shrink-0 rounded-full px-4 py-1 text-xs font-mono transition-colors"
-              :class="activeFilter === null ? 'text-slate-950' : 'pill-control text-body hover:border-primary hover:text-primary'"
+              :class="activeFilter === null ? 'text-slate-950' : 'inline-flex items-center border border-slate-300/70 text-slate-700 dark:border-slate-700/70 dark:text-slate-300 hover:border-rose-500/60 hover:text-rose-700 dark:hover:border-rose-400/50 dark:hover:text-rose-300'"
               :aria-pressed="activeFilter === null"
               type="button"
               @click="activeFilter = null"
@@ -164,7 +173,7 @@ usePageSeo({
               v-for="filter in filters"
               :key="filter"
               class="relative shrink-0 rounded-full px-4 py-1 text-xs font-mono transition-colors"
-              :class="activeFilter === filter ? 'text-slate-950' : 'pill-control text-body hover:border-primary hover:text-primary'"
+              :class="activeFilter === filter ? 'text-slate-950' : 'inline-flex items-center border border-slate-300/70 text-slate-700 dark:border-slate-700/70 dark:text-slate-300 hover:border-rose-500/60 hover:text-rose-700 dark:hover:border-rose-400/50 dark:hover:text-rose-300'"
               :aria-pressed="activeFilter === filter"
               type="button"
               @click="activeFilter = filter"
@@ -179,25 +188,25 @@ usePageSeo({
       <dialog
         id="work-filter-dialog"
         ref="filterDialog"
-        class="work-filter-dialog fixed inset-x-0 bottom-0 top-auto m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl surface-strong-bg p-0 color-base sm:hidden"
+        class="work-filter-dialog fixed inset-x-0 bottom-0 top-auto m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl bg-slate-50/90 p-0 text-slate-950 sm:hidden dark:bg-slate-800/75 dark:text-slate-50"
         :aria-label="$t('case_studies.filters_label')"
         @click="closeFiltersFromBackdrop"
         @close="isFiltersOpen = false"
       >
         <div class="mx-auto mt-2 h-1 w-10 rounded-full bg-slate-300 dark:bg-slate-600" aria-hidden="true" />
         <div class="flex items-center justify-between px-5 pb-4 pt-3">
-          <h2 class="text-xl display-heading">
+          <h2 class="text-xl font-extrabold leading-[0.9] tracking-[-0.035em] font-mono">
             {{ $t('case_studies.filters_button') }}
           </h2>
-          <button class="icon-control" type="button" :aria-label="$t('case_studies.close_filters')" @click="closeFilters">
+          <button class="size-9 inline-flex items-center justify-center border border-slate-300/70 rounded-full text-slate-700 transition dark:border-slate-700/70 hover:border-rose-500/60 dark:text-slate-300 hover:text-rose-700 dark:hover:border-rose-400/50 dark:hover:text-rose-300" type="button" :aria-label="$t('case_studies.close_filters')" @click="closeFilters">
             <span class="i-ph-x text-lg" aria-hidden="true" />
           </button>
         </div>
 
         <div class="grid max-h-[calc(85dvh-8rem)] gap-2 overflow-y-auto px-4 pb-4" role="group" :aria-label="$t('case_studies.filters_label')">
           <button
-            class="w-full flex items-center justify-between border border-base rounded-2xl px-4 py-3 text-left text-sm font-mono transition-colors"
-            :class="activeFilter === null ? 'bg-rose-400 text-slate-950' : 'text-body hover:border-primary hover:text-primary'"
+            class="w-full flex items-center justify-between border border-slate-300/70 rounded-2xl px-4 py-3 text-left text-sm font-mono transition-colors dark:border-slate-700/70"
+            :class="activeFilter === null ? 'bg-rose-400 text-slate-950' : 'text-slate-700 dark:text-slate-300 hover:border-rose-500/60 dark:hover:border-rose-400/50 hover:text-rose-700 dark:hover:text-rose-300'"
             :aria-pressed="activeFilter === null"
             type="button"
             @click="activeFilter = null"
@@ -208,8 +217,8 @@ usePageSeo({
           <button
             v-for="filter in filters"
             :key="filter"
-            class="w-full flex items-center justify-between border border-base rounded-2xl px-4 py-3 text-left text-sm font-mono transition-colors"
-            :class="activeFilter === filter ? 'bg-rose-400 text-slate-950' : 'text-body hover:border-primary hover:text-primary'"
+            class="w-full flex items-center justify-between border border-slate-300/70 rounded-2xl px-4 py-3 text-left text-sm font-mono transition-colors dark:border-slate-700/70"
+            :class="activeFilter === filter ? 'bg-rose-400 text-slate-950' : 'text-slate-700 dark:text-slate-300 hover:border-rose-500/60 dark:hover:border-rose-400/50 hover:text-rose-700 dark:hover:text-rose-300'"
             :aria-pressed="activeFilter === filter"
             type="button"
             @click="activeFilter = filter"
@@ -219,14 +228,14 @@ usePageSeo({
           </button>
         </div>
 
-        <div class="work-filter-actions border-t border-base p-4">
-          <button class="w-full control-primary justify-center py-3" type="button" @click="closeFilters">
+        <div class="work-filter-actions border-t border-slate-300/70 p-4 dark:border-slate-700/70">
+          <button class="w-full inline-flex items-center justify-center rounded-full bg-rose-400 px-4 py-3 text-xs text-slate-950 font-mono transition active:bg-rose-500 hover:bg-rose-300 focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset-2" type="button" @click="closeFilters">
             {{ $t('case_studies.show_projects') }}
           </button>
         </div>
       </dialog>
 
-      <section class="relative content-container py-6 lg:py-14 sm:py-10">
+      <section class="relative mx-auto max-w-360 w-full px-4 py-6 lg:px-10 lg:py-14 sm:px-6 sm:py-10">
         <div class="mb-5 flex items-center justify-between meta-label">
           <span>{{ $t('case_studies.showing') }}</span>
           <span>{{ filteredStudies.length.toString().padStart(2, '0') }}</span>
@@ -259,8 +268,8 @@ usePageSeo({
                     <span
                       :style="{ color: 'var(--card-color)' }"
                     >{{ study.organization }}</span>
-                    <span class="text-subtle">/</span>
-                    <span class="text-muted">{{ $t(`case_studies.${study.projectType}`) }}</span>
+                    <span class="text-slate-400 dark:text-slate-500">/</span>
+                    <span class="text-slate-500 dark:text-slate-400">{{ $t(`case_studies.${study.projectType}`) }}</span>
                   </div>
                   <span v-if="study.draft" class="shrink-0 border border-amber-300/50 rounded-full px-2 py-1 text-[0.58rem] text-amber-300 tracking-wide font-mono uppercase">
                     {{ $t('case_studies.draft') }}
@@ -269,23 +278,20 @@ usePageSeo({
 
                 <div class="relative self-start py-8 sm:pb-10">
                   <h2
-                    class="max-w-4xl text-balance text-[clamp(1.8rem,5vw,3.4rem)] display-heading leading-[0.94] tracking-[-0.025em]"
+                    class="max-w-4xl text-balance text-[clamp(1.8rem,5vw,3.4rem)] font-extrabold leading-[0.94] tracking-[-0.025em] font-mono"
                     :style="{ viewTransitionName: `study-title-${study.slug}` }"
                   >
                     {{ study.title }}
                   </h2>
-                  <p class="mt-5 max-w-2xl text-sm text-body leading-relaxed sm:color-base">
+                  <p class="mt-5 max-w-2xl text-sm text-slate-700 leading-relaxed dark:text-slate-300 sm:text-slate-950 sm:dark:text-slate-50">
                     {{ study.description }}
                   </p>
                 </div>
 
-                <div class="relative mt-auto flex items-center justify-between gap-4 border-t border-subtle pt-2">
-                  <ul class="flex flex-wrap gap-x-3 gap-y-1.5">
-                    <li v-for="technology in study.technologies?.slice(0, 4)" :key="technology" class="text-2.5 text-muted font-mono">
-                      {{ technology }}
-                    </li>
-                    <li v-if="!study.technologies?.length" class="text-2.5 text-subtle font-mono">
-                      {{ study.skills?.[0] }}
+                <div class="relative mt-auto flex items-center justify-between gap-4 border-t border-slate-300/45 pt-2 dark:border-slate-700/45">
+                  <ul class="flex flex-wrap gap-1.5">
+                    <li v-for="skill in getPreviewSkills(study)" :key="skill.slug">
+                      <SkillIcon :skill="skill" :size="32" />
                     </li>
                   </ul>
                   <span aria-hidden="true" class="shrink-0 scale-0 text-lg opacity-0 transition duration-300 group-focus-within:(scale-120 opacity-100 drop-shadow-[0_0_6px_var(--card-color)]) group-hover:(scale-120 opacity-100 drop-shadow-[0_0_6px_var(--card-color)])" :style="{ color: 'var(--card-color)' }">↗</span>

@@ -10,7 +10,7 @@ const descId = useId()
 </script>
 
 <template>
-  <article class="surface-frosted rounded-lg p-3 transition hover:border-primary sm:p-4">
+  <article class="border border-slate-300/70 rounded-lg bg-slate-50/70 p-3 backdrop-blur-xl transition dark:border-slate-700/70 hover:border-rose-500/60 dark:bg-slate-800/40 sm:p-4 dark:hover:border-rose-400/50">
     <h3>
       <button
         type="button"
@@ -23,7 +23,7 @@ const descId = useId()
         <span class="meta-label">{{ date }}</span>
       </button>
     </h3>
-    <p v-if="isExtended" :id="descId" class="mt-4 border-t border-base pt-4 text-sm text-body leading-relaxed">
+    <p v-if="isExtended" :id="descId" class="mt-4 border-t border-slate-300/70 pt-4 text-sm text-slate-700 leading-relaxed dark:border-slate-700/70 dark:text-slate-300">
       {{ description }}
     </p>
   </article>

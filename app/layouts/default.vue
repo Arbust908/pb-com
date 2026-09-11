@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mobile-nav-clearance grid grid-cols-[100%] grid-rows-[auto_1fr_auto] min-h-full base-bg color-base"
+    class="mobile-nav-clearance grid grid-cols-[100%] grid-rows-[auto_1fr_auto] min-h-full bg-slate-100 text-slate-950 dark:bg-slate-900 dark:text-slate-50"
   >
     <a
       href="#main"

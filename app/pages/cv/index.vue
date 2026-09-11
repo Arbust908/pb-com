@@ -37,7 +37,7 @@ usePageSeo({
   <section class="relative w-full overflow-hidden layout-grid-full">
     <BlobyOne class="pointer-events-none fixed z-under w-90 opacity-45 filter-blur-2xl -right-8 -top-4 dark:opacity-30" />
     <BlobyTwo class="pointer-events-none fixed z-under w-100 opacity-45 filter-blur-2xl -bottom-7 -left-6 dark:opacity-30" />
-    <div class="cv-layout relative grid content-container gap-6 pb-18 pt-8 md:gap-8 lg:pb-28 lg:pt-12">
+    <div class="cv-layout relative grid mx-auto max-w-360 w-full gap-6 px-4 pb-18 pt-8 md:gap-8 lg:px-10 sm:px-6 lg:pb-28 lg:pt-12">
       <CvSideNav class="lang relative z-content" />
       <CvPersonal class="personal relative z-content h-fit" />
       <CvExperiences class="exp relative z-content" />

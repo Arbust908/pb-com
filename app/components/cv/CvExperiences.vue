@@ -18,7 +18,7 @@ const groupedExperiences = computed(() => experiences.value.reduce<CvExperience[
 
 <template>
   <section class="space-y-6">
-    <h2 id="exp" class="text-[clamp(2.5rem,7vw,4.5rem)] display-heading">
+    <h2 id="exp" class="text-[clamp(2.5rem,7vw,4.5rem)] font-extrabold leading-[0.9] tracking-[-0.035em] font-mono">
       {{ $t('exp_title') }}
     </h2>
     <CvCardExperience

@@ -36,45 +36,45 @@ function closeFromBackdrop(event: MouseEvent) {
 
 <template>
   <nav
-    class="mobile-bottom-nav fixed inset-x-0 bottom-0 z-nav grid grid-cols-5 border-t border-base surface-strong-bg font-mono backdrop-blur-xl sm:hidden"
+    class="mobile-bottom-nav fixed inset-x-0 bottom-0 z-nav grid grid-cols-5 border-t border-slate-300/70 bg-slate-50/90 font-mono backdrop-blur-xl sm:hidden dark:border-slate-700/70 dark:bg-slate-800/75"
     :aria-label="$t('mobile_navigation')"
   >
     <NuxtLink
       :to="localePath({ name: 'index' })"
-      class="mobile-nav-item hover:text-primary focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4"
-      exact-active-class="text-primary"
+      class="mobile-nav-item hover:text-rose-700 focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4 dark:hover:text-rose-300"
+      exact-active-class="text-rose-700 dark:text-rose-300"
     >
       <i class="i-ph:house size-5" aria-hidden="true" />
       <span>{{ $t('home') }}</span>
     </NuxtLink>
     <NuxtLink
       :to="localePath({ name: 'work' })"
-      class="mobile-nav-item hover:text-primary focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4"
-      active-class="text-primary"
+      class="mobile-nav-item hover:text-rose-700 focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4 dark:hover:text-rose-300"
+      active-class="text-rose-700 dark:text-rose-300"
     >
       <i class="i-ph:squares-four size-5" aria-hidden="true" />
       <span>{{ $t('work') }}</span>
     </NuxtLink>
     <NuxtLink
       :to="localePath({ name: 'cv' })"
-      class="mobile-nav-item hover:text-primary focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4"
-      active-class="text-primary"
+      class="mobile-nav-item hover:text-rose-700 focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4 dark:hover:text-rose-300"
+      active-class="text-rose-700 dark:text-rose-300"
     >
       <i class="i-ph:file-text size-5" aria-hidden="true" />
       <span>{{ $t('resume') }}</span>
     </NuxtLink>
     <NuxtLink
       :to="localePath({ name: 'about' })"
-      class="mobile-nav-item hover:text-primary focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4"
-      active-class="text-primary"
+      class="mobile-nav-item hover:text-rose-700 focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4 dark:hover:text-rose-300"
+      active-class="text-rose-700 dark:text-rose-300"
     >
       <i class="i-ph:user-circle size-5" aria-hidden="true" />
       <span>{{ $t('about_nav') }}</span>
     </NuxtLink>
     <button
       type="button"
-      class="mobile-nav-item hover:text-primary focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4"
-      :class="{ 'text-primary': isMoreActive || isMoreOpen }"
+      class="mobile-nav-item hover:text-rose-700 focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset--4 dark:hover:text-rose-300"
+      :class="{ 'text-rose-700 dark:text-rose-300': isMoreActive || isMoreOpen }"
       :aria-expanded="isMoreOpen"
       aria-controls="mobile-more-dialog"
       @click="openMore"
@@ -87,17 +87,17 @@ function closeFromBackdrop(event: MouseEvent) {
   <dialog
     id="mobile-more-dialog"
     ref="moreDialog"
-    class="mobile-more-dialog fixed inset-x-0 bottom-0 top-auto z-dialog m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl bg-slate-50 p-0 color-base sm:hidden dark:bg-slate-800"
+    class="mobile-more-dialog fixed inset-x-0 bottom-0 top-auto z-dialog m-0 max-h-[85dvh] max-w-none w-full overflow-hidden border-x-0 border-b-0 rounded-t-3xl bg-slate-50 p-0 text-slate-950 sm:hidden dark:bg-slate-800 dark:text-slate-50"
     :aria-label="$t('more_menu')"
     @click="closeFromBackdrop"
     @close="isMoreOpen = false"
   >
     <div class="mx-auto mt-2 h-1 w-10 rounded-full bg-slate-300 dark:bg-slate-600" aria-hidden="true" />
     <div class="flex items-center justify-between px-5 pb-4 pt-3">
-      <h2 class="text-xl display-heading">
+      <h2 class="text-xl font-extrabold leading-[0.9] tracking-[-0.035em] font-mono">
         {{ $t('more') }}
       </h2>
-      <button class="icon-control" type="button" :aria-label="$t('close_more_menu')" @click="closeMore">
+      <button class="size-9 inline-flex items-center justify-center border border-slate-300/70 rounded-full text-slate-700 transition dark:border-slate-700/70 hover:border-rose-500/60 dark:text-slate-300 hover:text-rose-700 dark:hover:border-rose-400/50 dark:hover:text-rose-300" type="button" :aria-label="$t('close_more_menu')" @click="closeMore">
         <i class="i-ph:x text-lg" aria-hidden="true" />
       </button>
     </div>
@@ -109,7 +109,7 @@ function closeFromBackdrop(event: MouseEvent) {
       </ClientOnly>
       <NuxtLink
         :to="localePath({ name: 'privacy' })"
-        class="min-h-14 flex items-center justify-between border border-base rounded-2xl px-4 py-2 text-sm font-mono transition hover:border-primary hover:text-primary"
+        class="min-h-14 flex items-center justify-between border border-slate-300/70 rounded-2xl px-4 py-2 text-sm font-mono transition dark:border-slate-700/70 hover:border-rose-500/60 hover:text-rose-700 dark:hover:border-rose-400/50 dark:hover:text-rose-300"
         @click="closeMore"
       >
         <span class="flex items-center gap-3">
@@ -120,7 +120,7 @@ function closeFromBackdrop(event: MouseEvent) {
       </NuxtLink>
       <NuxtLink
         :href="GITHUB_URL"
-        class="min-h-14 flex items-center justify-between border border-base rounded-2xl px-4 py-2 text-sm font-mono transition hover:border-primary hover:text-primary"
+        class="min-h-14 flex items-center justify-between border border-slate-300/70 rounded-2xl px-4 py-2 text-sm font-mono transition dark:border-slate-700/70 hover:border-rose-500/60 hover:text-rose-700 dark:hover:border-rose-400/50 dark:hover:text-rose-300"
         rel="noreferrer"
         external
       >

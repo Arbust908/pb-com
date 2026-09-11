@@ -8,7 +8,7 @@ function backToTop() {
   <button
     type="button"
     :aria-label="$t('back_to_top')"
-    class="back-to-top absolute right-4 icon-control surface-strong-bg backdrop-blur-xl hover:-translate-y-1"
+    class="back-to-top absolute right-4 size-9 inline-flex items-center justify-center border border-slate-300/70 rounded-full bg-slate-50/90 text-slate-700 backdrop-blur-xl transition dark:border-slate-700/70 hover:border-rose-500/60 dark:bg-slate-800/75 dark:text-slate-300 hover:text-rose-700 hover:-translate-y-1 dark:hover:border-rose-400/50 dark:hover:text-rose-300"
     @click="backToTop"
   >
     <i class="i-ph:arrow-up size-4" aria-hidden="true" />
