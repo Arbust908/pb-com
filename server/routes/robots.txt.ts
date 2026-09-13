@@ -1,5 +1,5 @@
 import { defineEventHandler, setHeader } from 'h3'
-import { SITE_URL } from '../../constants'
+import { SITE_URL } from '#shared/constants'
 
 export default defineEventHandler((event) => {
   setHeader(event, 'Content-Type', 'text/plain; charset=utf-8')

@@ -10,6 +10,7 @@
       "sortOrder": 0,
       "createdAt": "2026-08-19T00:00:00.000Z",
       "updatedAt": "2026-08-19T00:00:00.000Z",
+      "skillSlugs": ["typescript", "nodejs", "redis", "postgresql", "docker", "cicd"],
       "translations": {
         "en": {
           "rol": "Full-Stack Developer",
@@ -43,6 +44,7 @@
       "sortOrder": 1,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-01-01T00:00:00.000Z",
+      "skillSlugs": ["chrome-extensions", "content-scripts", "vue", "nuxt", "vite", "redis"],
       "translations": {
         "en": {
           "rol": "Front-End Developer",
@@ -78,6 +80,7 @@
       "sortOrder": 1,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-01-01T00:00:00.000Z",
+      "skillSlugs": ["react", "nextjs", "redux", "zod", "nodejs", "sql"],
       "translations": {
         "en": {
           "rol": "Senior Front-End Developer",
@@ -113,6 +116,7 @@
       "sortOrder": 2,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-01-01T00:00:00.000Z",
+      "skillSlugs": ["vue", "vuex", "legacy-modernization"],
       "translations": {
         "en": {
           "rol": "Front-End Developer",
@@ -146,6 +150,7 @@
       "sortOrder": 3,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-01-01T00:00:00.000Z",
+      "skillSlugs": ["vue", "typescript", "vuex", "accessibility"],
       "translations": {
         "en": {
           "rol": "Senior Front-End Developer",
@@ -179,6 +184,7 @@
       "sortOrder": 4,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-01-01T00:00:00.000Z",
+      "skillSlugs": ["vue", "nuxt", "nextjs", "react", "rest", "sql"],
       "translations": {
         "en": {
           "rol": "Senior Full-Stack Developer",
@@ -214,6 +220,7 @@
       "sortOrder": 5,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-01-01T00:00:00.000Z",
+      "skillSlugs": ["laravel", "rest", "vue", "nodejs", "nuxt", "tailwind"],
       "translations": {
         "en": {
           "rol": "Semi-Senior Full-Stack Developer",
@@ -249,6 +256,7 @@
       "sortOrder": 6,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-01-01T00:00:00.000Z",
+      "skillSlugs": ["html", "css", "javascript", "php", "mysql", "laravel"],
       "translations": {
         "en": {
           "rol": "Coding Teacher",

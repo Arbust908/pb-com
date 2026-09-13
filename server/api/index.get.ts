@@ -1,5 +1,6 @@
-import en from '~/i18n/locales/en'
-import es from '~/i18n/locales/es'
+import { createError, defineEventHandler, getQuery } from 'h3'
+import en from '~~/i18n/locales/en'
+import es from '~~/i18n/locales/es'
 
 const messages = { en, es } as const
 

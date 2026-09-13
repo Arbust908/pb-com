@@ -1,3 +1,5 @@
+import { defineEventHandler } from 'h3'
+
 const startAt = Date.now()
 
 export default defineEventHandler(() => ({

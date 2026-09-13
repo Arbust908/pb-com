@@ -10,31 +10,6 @@ import {
 
 export default defineConfig({
   shortcuts: [
-    ['base-bg', 'bg-slate-100 dark:bg-slate-900'],
-    ['surface-bg', 'bg-slate-50/70 dark:bg-slate-800/40'],
-    ['surface-strong-bg', 'bg-slate-50/90 dark:bg-slate-800/75'],
-    ['color-base', 'text-slate-950 dark:text-slate-50'],
-    ['text-body', 'text-slate-700 dark:text-slate-300'],
-    ['text-muted', 'text-slate-500 dark:text-slate-400'],
-    ['text-subtle', 'text-slate-400 dark:text-slate-500'],
-    ['text-depth', 'text-slate-200 dark:text-slate-950'],
-    ['text-primary', 'text-rose-700 dark:text-rose-300'],
-    ['text-secondary', 'text-purple-700 dark:text-purple-300'],
-    ['border-base', 'border-slate-300/70 dark:border-slate-700/70'],
-    ['border-subtle', 'border-slate-300/45 dark:border-slate-700/45'],
-    ['border-primary', 'border-rose-500/60 dark:border-rose-400/50'],
-    ['surface-frosted', 'border border-slate-300/70 bg-slate-50/70 backdrop-blur-xl dark:border-slate-700/70 dark:bg-slate-800/40'],
-    ['content-container', 'mx-auto w-full max-w-360 px-4 sm:px-6 lg:px-10'],
-    ['display-heading', 'font-extrabold leading-[0.9] tracking-[-0.035em] font-mono'],
-    ['meta-label', 'text-[0.65rem] text-slate-500 tracking-[0.16em] font-mono uppercase dark:text-slate-400'],
-    ['meta-label-primary', 'text-[0.65rem] text-rose-700 tracking-[0.16em] font-mono uppercase dark:text-rose-300'],
-    ['meta-label-secondary', 'text-[0.65rem] text-purple-700 tracking-[0.16em] font-mono uppercase dark:text-purple-300'],
-    ['pill-control', 'inline-flex items-center border border-slate-300/70 rounded-full px-4 py-2 text-xs font-mono transition dark:border-slate-700/70'],
-    ['control-primary', 'inline-flex items-center rounded-full bg-rose-400 px-4 py-2 text-xs text-slate-950 font-mono transition hover:bg-rose-300 active:bg-rose-500 focus-visible:outline-2 focus-visible:outline-rose-400 focus-visible:outline-offset-2'],
-    ['icon-control', 'size-9 inline-flex items-center justify-center border border-slate-300/70 rounded-full text-slate-700 transition hover:border-rose-500/60 hover:text-rose-700 dark:border-slate-700/70 dark:text-slate-300 dark:hover:border-rose-400/50 dark:hover:text-rose-300'],
-    ['accent-line', 'from-rose-400 via-purple-400 to-rose-400 bg-gradient-to-r bg-[length:200%_100%]'],
-    ['ambient-primary', 'bg-rose-400/15 dark:bg-rose-400/10'],
-    ['ambient-secondary', 'bg-purple-400/15 dark:bg-purple-400/10'],
     ['z-under', 'z-0'],
     ['z-above', 'z-1'],
     ['z-content', 'z-10'],
@@ -128,6 +103,34 @@ export default defineConfig({
                 ${darkColor} ${sqSize}px
               );
          }
+      `
+    }],
+    [/^meta-label-(\w+)$/, ([, colorType], { currentSelector, theme }) => {
+      const selector = `.${currentSelector}`
+      let color = 'slate'
+      switch (colorType) {
+        case 'primary':
+          color = 'rose'
+          break
+        case 'secondary':
+          color = 'purple'
+          break
+      }
+      const textColor = theme.colors[color][700]
+      const darkTextColor = theme.colors[color][300]
+
+      return `
+        ${selector} {
+          color: ${textColor};
+          text-transform: uppercase;
+          font-family: ${theme.fontFamily.mono};
+          font-size: 0.65rem;
+          letter-spacing: 0.16em;
+        }
+
+        .dark ${selector} {
+          color: ${darkTextColor};
+        }
       `
     }],
   ],

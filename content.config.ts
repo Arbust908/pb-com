@@ -1,6 +1,6 @@
 import { defineCollection, defineContentConfig } from '@nuxt/content'
 import { z } from 'zod'
-import { CASE_STUDY_AREAS } from './constants'
+import { CASE_STUDY_AREAS } from './shared/constants/index.ts'
 
 export default defineContentConfig({
   collections: {
