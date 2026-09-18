@@ -5,7 +5,7 @@ locale: en
 title: Making random rewards trustworthy at SimplyCodes
 description: How I connected server-managed rewards to a multi-stage Lottie reveal, missions, progress, and account activity.
 project: SimplyCodes
-organization: SimplyCodes · Demand.io
+organization: SimplyCodes · Product.ai
 projectType: professional
 sortOrder: 40
 role: Front-end engineer

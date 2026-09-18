@@ -5,7 +5,7 @@ locale: es
 title: Recompensas aleatorias confiables en SimplyCodes
 description: Cómo conecté recompensas definidas por el servidor con una animación de Lottie por etapas y el resto de la experiencia web.
 project: SimplyCodes
-organization: SimplyCodes · Demand.io
+organization: SimplyCodes · Product.ai
 projectType: professional
 sortOrder: 40
 role: Ingeniero frontend

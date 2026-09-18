@@ -5,7 +5,7 @@ locale: es
 title: Rediseñar la experiencia de referidos en SimplyCodes
 description: Cómo rehice las experiencias de quien invita y de quien recibe la invitación sobre el sistema existente de atribución y recompensas.
 project: SimplyCodes
-organization: SimplyCodes · Demand.io
+organization: SimplyCodes · Product.ai
 projectType: professional
 sortOrder: 20
 role: Responsable principal del mantenimiento frontend y del rediseño

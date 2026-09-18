@@ -5,7 +5,7 @@ locale: en
 title: Building the SimplyCodes blog on a shared Contentful platform
 description: How I built the SimplyCodes blog frontend on a shared Contentful API, with server-rendered articles, typed data, and cached requests.
 project: SimplyCodes
-organization: SimplyCodes · Demand.io
+organization: SimplyCodes · Product.ai
 projectType: professional
 sortOrder: 30
 role: Primary front-end implementer

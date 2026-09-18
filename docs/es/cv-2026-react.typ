@@ -17,7 +17,7 @@
 
 #section[Perfil]
 #descript[
-  Ingeniero frontend y de producto senior con más de 10 años de experiencia, especializado en Vue, Nuxt y TypeScript. Uso analítica de producto para decidir qué construir, desarrollo interfaces con criterios de accesibilidad y trabajo tanto en frontend como en backend cuando el producto lo requiere. Empecé construyendo productos y enseñando programación; con el tiempo asumí el liderazgo de equipos, plataformas frontend y entregas full stack.
+  Desarrollador full stack senior con más de 10 años de experiencia, especializado en desarrollo frontend con React, Vue y TypeScript. He liderado migraciones a React y Next.js y contribuido a la aplicación móvil de SimplyCodes con React Native. Uso analítica de producto para decidir qué construir, desarrollo interfaces con criterios de accesibilidad y trabajo en backend con Node.js y bases de datos SQL. Mi trayectoria incluye liderazgo de equipos, plataformas frontend y entregas full stack.
 ]
 
 #v(6pt)
@@ -32,7 +32,9 @@
   description: [
     - Estuve a cargo de la aplicación web y la extensión de SimplyCodes, incluida la interfaz de checkout y la lógica central usada por más de 70.000 usuarios en Chrome Web Store, con una calificación de 4,6/5.
 
-    - Lideré la migración de Vue 2 a Vue 3, Nuxt 3 y Vite, que redujo el bundle un 28% y llevó el First Contentful Paint a menos de 1,2 segundos.
+    - Contribuí al desarrollo de la aplicación móvil de cupones de SimplyCodes con React Native, como parte de un equipo de dos desarrolladores.
+
+    - Lideré la migración de la plataforma Vue y Nuxt con Vite, que redujo el bundle un 28% y llevó el First Contentful Paint a menos de 1,2 segundos.
 
     - Construí un motor de pruebas A/B compatible con SSR y caché en Redis que nos aportó los datos para decidir qué funcionalidades lanzar, con controles simples de buckets para que los POs ajustaran los experimentos sin intervención de ingeniería.
 
@@ -49,9 +51,9 @@
   institution: "BitPatagonia",
   date: "Jul 2020 a Oct 2022",
   description: [
-    - Hice crecer la función de frontend de 1 a 5 desarrolladores mientras entregábamos una PWA logística multilingüe que procesaba cerca de 1.000 envíos diarios con más de 99% de disponibilidad.
+    - Lideré la migración a React y Next.js desde Vue y Nuxt, con Redux y Zod, mientras el equipo continuaba entregando producto.
 
-    - Lideré la migración de Vue y Nuxt a React y Next.js con Redux y Zod mientras el equipo continuaba entregando producto.
+    - Hice crecer la función de frontend de 1 a 5 desarrolladores mientras entregábamos una PWA logística multilingüe que procesaba cerca de 1.000 envíos diarios con más de 99% de disponibilidad.
 
     - Construí paneles de gestión, los conecté con servicios en Express y SQL, e incorporé analítica para reportes operativos y de producto.
   ],
@@ -94,7 +96,7 @@
   description: [
     - Cofundé la agencia con 3 exdesarrolladores de Digital House y fui el desarrollador frontend principal en aplicaciones de comercio electrónico y gestión para clientes.
 
-    - Entregué aplicaciones SSR con Nuxt y Next.js, integré APIs y diseñé bibliotecas de componentes e interfaces cuando los clientes no tenían un sistema existente.
+    - Entregué aplicaciones SSR con Next.js y Nuxt, integré APIs y diseñé bibliotecas de componentes e interfaces cuando los clientes no tenían un sistema existente.
   ],
 )
 
@@ -107,7 +109,7 @@
   description: [
     - Trabajé como único desarrollador frontend en una plataforma de contenido en Laravel con integraciones externas y una API REST interna.
 
-    - Evolucioné la interfaz de forma incremental desde plantillas Blade a componentes reutilizables y luego a Vue, Nuxt y Tailwind; migré el CMS a Vue y Node y enseñé Vue al equipo durante la transición.
+    - Evolucioné la interfaz desde plantillas Blade a componentes reutilizables con Vue, Nuxt y Tailwind; modernicé el CMS con Vue y Node y capacité al equipo durante la transición.
 
     - Diseñé componentes de la aplicación y, en paralelo al trabajo de producto, dicté 5 meses de clases de programación sobre frontend, PHP, Laravel y SQL.
   ],
@@ -126,8 +128,8 @@
 #oneline-title-item(
   title: "Frontend",
   content: [
-    TypeScript, JavaScript, Vue 3, Nuxt, Pinia, React, Next.js, HTML, CSS,
-    Tailwind, UnoCSS, Vite
+    TypeScript, JavaScript, React, Next.js, React Native, Redux, Vue 3, Nuxt,
+    Pinia, HTML, CSS, Tailwind, UnoCSS, Vite
   ],
 )
 

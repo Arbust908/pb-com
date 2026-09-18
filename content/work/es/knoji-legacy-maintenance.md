@@ -5,7 +5,7 @@ locale: es
 title: Modernizar el código de Knoji sin reescribir la plataforma
 description: Cómo amplié por etapas los datos estructurados de una plataforma procedural en PHP sin alterar su generación de páginas ni poner en riesgo el SEO
 project: Knoji
-organization: Knoji · Demand.io
+organization: Knoji · Product.ai
 projectType: professional
 sortOrder: 60
 role: Líder técnico e implementador principal

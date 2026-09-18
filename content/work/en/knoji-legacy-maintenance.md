@@ -5,7 +5,7 @@ locale: en
 title: Adding structured data to Knoji's legacy codebase
 description: How I expanded structured data in an SEO-sensitive procedural PHP platform without rewriting its page pipeline
 project: Knoji
-organization: Knoji · Demand.io
+organization: Knoji · Product.ai
 projectType: professional
 sortOrder: 60
 role: Technical lead and primary implementer

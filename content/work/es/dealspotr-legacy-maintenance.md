@@ -5,7 +5,7 @@ locale: es
 title: Mantener productivo a Dealspotr
 description: Cómo mejoré por etapas un producto legado en PHP y jQuery sin poner en riesgo su circuito de usuarios y afiliados.
 project: Dealspotr
-organization: Dealspotr · Demand.io
+organization: Dealspotr · Product.ai
 projectType: professional
 sortOrder: 50
 role: Responsable técnico e implementador principal

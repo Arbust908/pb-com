@@ -5,7 +5,7 @@ locale: es
 title: El blog de SimplyCodes sobre una plataforma compartida de Contentful
 description: Cómo construí el frontend del blog sobre una API compartida de Contentful, con artículos renderizados en el servidor, datos tipados y solicitudes cacheadas.
 project: SimplyCodes
-organization: SimplyCodes · Demand.io
+organization: SimplyCodes · Product.ai
 projectType: professional
 sortOrder: 30
 role: Responsable principal de la implementación frontend

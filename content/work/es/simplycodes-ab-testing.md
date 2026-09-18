@@ -5,7 +5,7 @@ locale: es
 title: Un sistema confiable para tests A/B
 description: Cómo medimos experimentos de producto sin perder la variante entre analytics, renderizado en el servidor, hidratación y caché de páginas.
 project: SimplyCodes
-organization: SimplyCodes · Demand.io
+organization: SimplyCodes · Product.ai
 projectType: professional
 sortOrder: 10
 role: Líder full-stack

@@ -5,7 +5,7 @@ locale: en
 title: Building an A/B testing system for cached Nuxt pages
 description: How we measured product experiments across analytics, server rendering, hydration, and variant-aware page caching.
 project: SimplyCodes
-organization: SimplyCodes · Demand.io
+organization: SimplyCodes · Product.ai
 projectType: professional
 sortOrder: 10
 role: Full-stack lead

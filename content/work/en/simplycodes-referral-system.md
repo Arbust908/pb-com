@@ -5,7 +5,7 @@ locale: en
 title: Redesigning referrals for inviters and invitees
 description: How I redesigned the inviter and invitee pages around the existing attribution and rewards services.
 project: SimplyCodes
-organization: SimplyCodes · Demand.io
+organization: SimplyCodes · Product.ai
 projectType: professional
 sortOrder: 20
 role: Lead front-end maintainer and redesign owner

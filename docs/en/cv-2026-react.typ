@@ -17,7 +17,7 @@
 
 #section[Profile]
 #descript[
-  Senior frontend and product engineer with 10+ years of experience, focused on Vue, Nuxt, and TypeScript. I use product analytics to decide what to ship, build accessibility-aware interfaces, and work across frontend and backend when the product needs it. I started by building products and teaching developers, then moved into team leadership, platform ownership, and full-stack delivery.
+  Senior full-stack developer with 10+ years of experience, specializing in frontend development with React, Vue, and TypeScript. I have led migrations to React and Next.js and contributed to the SimplyCodes mobile app with React Native. I use product analytics to decide what to ship, build accessibility-aware interfaces, and work on backends with Node.js and SQL databases. My experience includes team leadership, frontend platform ownership, and full-stack delivery.
 ]
 
 #v(6pt)
@@ -32,10 +32,11 @@
   description: [
     - Owned the SimplyCodes web app and browser extension, including checkout UI and core extension logic used by 70,000+ Chrome Web Store users with a 4.6/5 rating.
 
-    - Led the Vue 2 to Vue 3, Nuxt 3, and Vite migration, which reduced the bundle by 28% and brought First Contentful Paint below 1.2 seconds.
+    - Contributed to the SimplyCodes mobile coupon app with React Native as part of a two-developer team.
 
-    - Built an A/B testing engine (SSR and Redis-aware) that gave us data for data-driven feature decisions, with simple bucketting controls for POs to tweak experiments without engineering intervention.
+    - Led the Vue and Nuxt platform migration with Vite, reducing the bundle by 28% and bringing First Contentful Paint below 1.2 seconds.
 
+    - Built an A/B testing engine (SSR and Redis-aware) that gave us data for data-driven feature decisions, with simple bucketting contros for POs to tweak experiments without engineering intervention. 
     - Built referral, reward, and CMS integrations for SimplyCodes. On Dealspotr and Knoji, I isolated existing business rules so we could change legacy products without broad rewrites.
 
     - Expanded into Node.js and TypeScript backend delivery features end to end, working with Docker, Redis, PostgreSQL, and CI/CD to ship.
@@ -49,9 +50,9 @@
   institution: "BitPatagonia",
   date: "Jul 2020 to Oct 2022",
   description: [
-    - Grew the frontend team from 1 to 5 developers while delivering a multilingual logistics PWA that processed around 1,000 shipments per day at more than 99% uptime.
+    - Led the migration to React and Next.js from Vue and Nuxt, using Redux and Zod while the team continued product delivery.
 
-    - Led the Vue and Nuxt to React and Next.js migration with Redux and Zod while the team continued product delivery.
+    - Grew the frontend team from 1 to 5 developers while delivering a multilingual logistics PWA that processed around 1,000 shipments per day at more than 99% uptime.
 
     - Built management dashboards, connected them to Express and SQL services, and added analytics for operational and product reporting.
   ],
@@ -94,7 +95,7 @@
   description: [
     - Co-founded the agency with 3 former Digital House developers and served as lead frontend developer on client e-commerce and management applications.
 
-    - Delivered Nuxt and Next.js SSR applications, integrated APIs, and designed component libraries and interfaces when clients had no existing system.
+    - Delivered SSR applications with Next.js and Nuxt, integrated APIs, and designed component libraries and interfaces when clients had no existing system.
   ],
 )
 
@@ -107,7 +108,7 @@
   description: [
     - Worked as the sole frontend developer on a Laravel content platform with external integrations and an internal REST API.
 
-    - Evolved the UI incrementally from Blade templates to reusable components, then to Vue, Nuxt, and Tailwind; moved the CMS to Vue and Node and taught the team Vue during the transition.
+    - Evolved the UI from Blade templates to reusable components with Vue, Nuxt, and Tailwind; modernized the CMS with Vue and Node and trained the team during the transition.
 
     - Designed application components and, alongside product work, taught 5 months of coding classes covering frontend, PHP, Laravel, and SQL.
   ],
@@ -126,8 +127,8 @@
 #oneline-title-item(
   title: "Frontend",
   content: [
-    TypeScript, JavaScript, Vue 3, Nuxt, Pinia, React, Next.js, HTML, CSS,
-    Tailwind, UnoCSS, Vite
+    TypeScript, JavaScript, React, Next.js, React Native, Redux, Vue 3, Nuxt,
+    Pinia, HTML, CSS, Tailwind, UnoCSS, Vite
   ],
 )
 

@@ -5,7 +5,7 @@ locale: en
 title: Keeping Dealspotr productive
 description: How I changed a legacy PHP and jQuery product without disrupting its users or affiliate funnel.
 project: Dealspotr
-organization: Dealspotr · Demand.io
+organization: Dealspotr · Product.ai
 projectType: professional
 sortOrder: 50
 role: Technical steward and primary implementer
